@@ -13,7 +13,7 @@ import com.schoolo2o.pojo.Admininfo;
  * 
  */
 
-public class AdmininfoDaoImpl extends HibernateDaoSupport implements AdminInfoDao {
+public class AdminInfoDaoImpl extends HibernateDaoSupport implements AdminInfoDao {
 
 	//增加一个管理员，当查找不存在此管理员时，进行增加
 	@Override
