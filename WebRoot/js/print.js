@@ -13,6 +13,16 @@ $(document).ready(function() {
 		}, 1000);
 	});
 
+	//将浏览按钮的事件清除
+	var fileInput = $("#fileInput");//文件输入框
+	var browseBtn = document.getElementById("browseBtn");//浏览按钮
+	browseBtn.addEventListener("click", function (e) {
+		if (fileInput) {
+			fileInput.click();
+		}
+		e.preventDefault(); // prevent navigation to "#"
+	}, false);
+	
 	SCREEN_WIDTH = document.body.offsetWidth;
 	SCREEN_HEIGHT = document.body.offsetHeight;
 	GAP = (SCREEN_WIDTH - FILE_UPLOAD_WIDTH - SHOW_FILE_WIDTH) / 3;
