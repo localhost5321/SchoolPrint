@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.schoolo2o.dao.ShopinfoDao;
 import com.schoolo2o.dao.impl.ShopInfoDaoImpl;
+import com.schoolo2o.pojo.Priceinfo;
 import com.schoolo2o.pojo.ShopComment;
 import com.schoolo2o.pojo.Shopinfo;
 
@@ -57,8 +58,8 @@ public class TestHiberate {
 			System.out.println("用户为:"  + shop.getShopNick());
 		}
 	}
-	public void  testAddComment(ShopComment comment){
-		if (shopInfo.addComment(comment)){
+	public void  testAddComment(ShopComment comment, String name){
+		if (shopInfo.addComment(comment,name)){
 			System.out.println("添加评论成功");
 		}else{
 			System.out.println("添加评论失败");
@@ -72,7 +73,33 @@ public class TestHiberate {
 			System.out.println(comment.getCommentContent());
 		}
 	}
-	public void testUpdateComment(ShopComment comment){
-		
+	public void testUpdateComment(ShopComment comment, String name){
+		if(shopInfo.updateComment(comment , name)){
+			System.out.println("更新成功");
+		}else{
+			System.out.println("更新失败");
+		}
+	}
+	public void testDeleteComment(Long commentId){
+		if(shopInfo.daleteComment(commentId)){
+			System.out.println("删除成功");
+		}else{
+			System.out.println("删除失败");
+		}
+	}
+	public void testAddPriceType(Priceinfo priceinfo, String shopName){
+		if(shopInfo.addTypePrice(priceinfo, shopName)){
+			System.out.println("类型添加成功");
+		}else{
+			System.out.println("类型添加失败");
+		}
+	}
+	public void testgetTypePrice(String shopName){
+		List<Priceinfo> priceList= shopInfo.getTypePrice(shopName);
+		Iterator<Priceinfo> it = priceList.iterator();
+		while(it.hasNext()){
+			Priceinfo pf = it.next();
+			System.out.println(pf.getPrintType());
+		}
 	}
 }

@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
@@ -106,11 +107,19 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 		List<ShopComment> commentList = this.getHibernateTemplate().find(hql); 
 		return commentList;
 	}
+	/*添加评论*/
 	@Override
-	public boolean addComment(ShopComment comment) {   //添加评论
+	public boolean addComment(ShopComment comment ,String name) { 
 		try {
-			this.getHibernateTemplate().save(comment);
-			return true;
+			String hql = "from Shopinfo where shopName = " +
+				"'"+name+"'";
+			List<Shopinfo> shopList = this.getHibernateTemplate().find(hql);
+			if( !shopList.isEmpty()){
+				Shopinfo shop = shopList.get(0);
+				comment.setShopinfo(shop);
+				this.getHibernateTemplate().save(comment);
+				return true;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -118,9 +127,13 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 	}
 
 	@Override
-	public boolean updateComment(ShopComment comment) {   //更新评论信息
+	public boolean updateComment(ShopComment comment, String name) {   //更新评论信息
 		try {
-			String hql = " from ";
+			String hql = "from Shopinfo where shopName = " +
+					"'"+name+"'";
+			List<Shopinfo> shopList = this.getHibernateTemplate().find(hql);
+			comment.setShopinfo(shopList.get(0));
+			this.getHibernateTemplate().update(comment);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -128,21 +141,47 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 		return false;
 	}
 
+	/*删除评论信息*/
 	@Override
-	public boolean daleteComment(ShopComment comment) {
-		// TODO Auto-generated method stub
+	public boolean daleteComment(Long commentId) {
+		try {
+			String hql = " from ShopComment where commentId = '"+commentId+"'";
+			List<ShopComment>  commentList = this.getHibernateTemplate().find(hql);
+			this.getHibernateTemplate().delete(commentList.get(0));
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return false;
 	}
-
+	/*获取一个商店所有的打印类型*/
 	@Override
-	public List<Priceinfo> getTypePrice(Long shopId) {
-		// TODO Auto-generated method stub
+	public List<Priceinfo> getTypePrice(String shopName) {
+		try {
+			String hql = "from Priceinfo where shopinfo.shopName = '"+shopName+"'";
+			List<Priceinfo> priceList = this.getHibernateTemplate().find(hql);
+			return priceList;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 
+	/*添加一个商店的类目*/
 	@Override
-	public boolean addTypePrice(Priceinfo priceinfo) {
-		// TODO Auto-generated method stub
+	public boolean addTypePrice(Priceinfo priceinfo, String shopName) {
+		try {
+			String hql = "from Shopinfo where shopName = " +
+					"'"+shopName+"'";
+			List<Shopinfo> priceList = this.getHibernateTemplate().find(hql);
+			if(!priceList.isEmpty()){
+				priceinfo.setShopinfo(priceList.get(0));
+				this.getHibernateTemplate().save(priceinfo);
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return false;
 	}
 
