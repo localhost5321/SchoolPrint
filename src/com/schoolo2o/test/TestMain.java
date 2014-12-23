@@ -28,12 +28,12 @@ public class TestMain {
 				("applicationContext.xml");
 		
 		TestHiberate test = (TestHiberate) context.getBean("TestHiberate");
-//		test.TestAdd(shop);
+		test.TestAdd(shop);
 //		test.testAddComment(comment);
 //		test.testSearchComment(shop.getShopName());
-		comment.setShopReply("谢谢");
+	//	comment.setShopReply("谢谢");
 //		comment.setCommentId(1L);
-		test.testUpdateComment(comment);
+//		test.testUpdateComment(comment);
 	}
 
 }

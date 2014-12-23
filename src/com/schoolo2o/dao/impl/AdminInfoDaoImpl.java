@@ -18,16 +18,18 @@ public class AdminInfoDaoImpl extends HibernateDaoSupport implements AdminInfoDa
 	//增加一个管理员，当查找不存在此管理员时，进行增加
 	@Override
 	public boolean add(Admininfo admin) {
-		if(search(admin.getAdminName())==null){
+		if(admin!=null){
 			try{
 				this.getHibernateTemplate().save(admin);
+				System.out.println(admin.getAdminName()+"+++++++++++++");
 				return true;
 			}catch(Exception e){
+				System.out.println(admin.getAdminPwd()+"~~~~~~~~~~~~");
 				e.printStackTrace();
 				return false;
 			}
 		}else{
-			System.out.println("此管理员经存在");
+			
 			return false;
 		}
 	}
@@ -82,9 +84,10 @@ public class AdminInfoDaoImpl extends HibernateDaoSupport implements AdminInfoDa
 		@Override
 		public List<Admininfo> search(String adminName) {
 			if(adminName!=null){
-				String hql="from Admininfo where adminName=?";
+				String hql="from Admininfo where adminName='"+adminName+"'";
 				try{
-					List<Admininfo> list=this.getHibernateTemplate().find(hql,new String[]{adminName});
+					System.out.println(this.getHibernateTemplate());
+					List<Admininfo> list=this.getHibernateTemplate().find(hql);
 					return list;
 				}catch(Exception e){
 					e.printStackTrace();

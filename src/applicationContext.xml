@@ -9,9 +9,9 @@
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="url"
-			value="jdbc:mysql://localhost:3306/schoolo2o">
+			value="jdbc:mysql://192.168.1.104:3306/schoolo2o">
 		</property>
-		<property name="username" value="hua"></property>
+		<property name="username" value="zl"></property>
 		<property name="password" value="123456"></property>
 	</bean>
 	<bean id="sessionFactory"
@@ -44,6 +44,12 @@
 		</bean>
 		<bean id="TestHiberate" class="com.schoolo2o.test.TestHiberate">
 			<property name="shopInfo" ref="ShopinfoDao"></property>
+		</bean>
+		<bean id = "AdminInfoDao" class="com.schoolo2o.dao.impl.AdminInfoDaoImpl">
+				<property name="sessionFactory" ref="sessionFactory"></property>
+		</bean>
+		<bean id="TestAdminInfoDaoImpl" class="com.schoolo2o.test.TestAdmininfoDaoImpl">
+			<property name="adminInfoDao" ref="AdminInfoDao"></property>
 		</bean>
 		
 
