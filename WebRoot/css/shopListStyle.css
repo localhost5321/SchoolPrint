@@ -1,0 +1,42 @@
+.shopContainer {
+	width: 1200px;
+	margin: 10px auto;
+}
+
+.shopInfo {
+	width:370px;
+	height:190px;
+	float:left;
+	overflow: hidden;
+	border: 1px solid #ccc;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	background-color:#ccc;
+	margin: 5px;
+}
+
+.shopInfo:hover{
+	background-color:#aaa;
+	border: 1px solid #f00;
+}
+
+.shopInfo h2 {
+	margin-top: 20px;
+	font-weight: bold;
+}
+
+.shopInfo img {
+	border: 1px solid #000; 
+	margin: auto 10px;
+	float: left;
+}
+
+.shopInfo .shopDetail {
+	float: left;
+}
+
+.shopInfo .enterShop {
+	float: right;
+	margin-right: 10px;
+}
