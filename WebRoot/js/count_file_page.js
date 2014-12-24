@@ -3,8 +3,10 @@
  */
 
  function count_page(filePath){
-	 var word_obj = new ActiveXObject('Word.Application');
-	 word_obj.Document.Open("filePath");
-	 return word_obj.ActiveDocument.ComputeStatistics(2);
+	 var w=new ActiveXObject('Word.Application'); 
+	 w.Documents.Open("filepath");
+	 obj=w.visible=false; 
+	 obj.Content;
+	 return w.ActiveDocument.ComputeStatistics(2); 
  }
  
