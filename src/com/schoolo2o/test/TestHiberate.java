@@ -102,4 +102,5 @@ public class TestHiberate {
 			System.out.println(pf.getPrintType());
 		}
 	}
+	public void testUpdateTypePrice();
 }

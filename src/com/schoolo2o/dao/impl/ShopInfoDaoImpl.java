@@ -109,10 +109,10 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 	}
 	/*添加评论*/
 	@Override
-	public boolean addComment(ShopComment comment ,String name) { 
+	public boolean addComment(ShopComment comment ,String ShopName) { 
 		try {
 			String hql = "from Shopinfo where shopName = " +
-				"'"+name+"'";
+				"'"+ShopName+"'";
 			List<Shopinfo> shopList = this.getHibernateTemplate().find(hql);
 			if( !shopList.isEmpty()){
 				Shopinfo shop = shopList.get(0);
@@ -127,10 +127,10 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 	}
 
 	@Override
-	public boolean updateComment(ShopComment comment, String name) {   //更新评论信息
+	public boolean updateComment(ShopComment comment, String ShopName) { //更新评论信息
 		try {
 			String hql = "from Shopinfo where shopName = " +
-					"'"+name+"'";
+					"'"+ShopName+"'";
 			List<Shopinfo> shopList = this.getHibernateTemplate().find(hql);
 			comment.setShopinfo(shopList.get(0));
 			this.getHibernateTemplate().update(comment);
@@ -186,14 +186,30 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 	}
 
 	@Override
-	public boolean deleteTypePrice(Priceinfo priceinfo) {
-		// TODO Auto-generated method stub
+	public boolean deleteTypePrice(Long priceId) {
+		try {
+			String hql = "delete from Priceinfo where priceId = '"+priceId+"'";
+			this.getHibernateTemplate().find(hql);
+			return true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return false;
 	}
 
 	@Override
-	public boolean updateTypePrice(Priceinfo priceinfo) {
-		// TODO Auto-generated method stub
+	public boolean updateTypePrice(Priceinfo priceinfo, String shopName) {
+		try {
+			String hql = "from Shopinfo where shopName = '"+shopName+"' ";
+			List<Shopinfo> shopList = this.getHibernateTemplate().find(hql);
+			if(!shopList.isEmpty()){
+				priceinfo.setShopinfo(shopList.get(0));
+				this.getHibernateTemplate().update(priceinfo);
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return false;
 	}
 
