@@ -2,6 +2,8 @@ package com.schoolo2o.dao.impl;
 
 import java.util.List;
 
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+
 import com.schoolo2o.dao.OrderInfoDao;
 import com.schoolo2o.pojo.Orderinfo;
 /**
@@ -9,29 +11,36 @@ import com.schoolo2o.pojo.Orderinfo;
  * @author hua
  *
  */
-public class OrderInfoDaoImpl implements OrderInfoDao {
+public class OrderInfoDaoImpl extends HibernateDaoSupport implements OrderInfoDao {
 
+	/*增加一条订单*/
 	@Override
 	public boolean addOrder(Orderinfo order) {
-		// TODO Auto-generated method stub
+		try {
+			if(!order.getOrderstatuses().isEmpty() && !order.getOrderitems().isEmpty()){
+				this.getHibernateTemplate().save(order);
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return false;
 	}
-
+	/*更新订单状态*/
 	@Override
 	public boolean updateStatus(Long orderId) {
-		// TODO Auto-generated method stub
 		return false;
 	}
 
+	/*根据用户ID来获取用户订单*/
 	@Override
 	public List<Orderinfo> userSearch(Long userId) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/*根据商店Id来获取商店订单*/
 	@Override
 	public List<Orderinfo> shopSearch(Long shopId) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

@@ -5,6 +5,7 @@ import java.util.Date;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import com.schoolo2o.pojo.Priceinfo;
 import com.schoolo2o.pojo.ShopComment;
 import com.schoolo2o.pojo.Shopinfo;
 
@@ -19,21 +20,31 @@ public class TestMain {
 		shop.setShopDesc("我们是洪辰最好的打印店");
 		shop.setDelivery(2.5);
 		ShopComment comment = new ShopComment();
+		comment.setCommentId(2L);
 		comment.setCommentContent("这个打印店很好");
 		comment.setCommentDate(new Date());
 		comment.setCommentUser("huazai");
 		comment.setShopScore(5);
-		comment.setShopinfo(shop);
 		ApplicationContext context = new ClassPathXmlApplicationContext
 				("applicationContext.xml");
 		
 		TestHiberate test = (TestHiberate) context.getBean("TestHiberate");
+
 		test.TestAdd(shop);
 //		test.testAddComment(comment);
 //		test.testSearchComment(shop.getShopName());
 	//	comment.setShopReply("谢谢");
 //		comment.setCommentId(1L);
 //		test.testUpdateComment(comment);
+		comment.setShopReply("你好");
+		Priceinfo pf = new Priceinfo();
+		pf.setPrintType("双面打印");
+		pf.setPrice(0.3);
+//		test.testAddPriceType(pf, shop.getShopName());
+//		test.testgetTypePrice(shop.getShopName());
+//		pf.setPriceId(1L);
+//		test.testUpdateTypePrice(pf, shop.getShopName());
+//		test.testDeleteTypePrice(2L);
 	}
 
 }

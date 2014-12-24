@@ -12,7 +12,8 @@
 			value="jdbc:mysql://localhost:3306/schoolo2o">
 		</property>
 		<property name="username" value="root"></property>
-		<property name="password" value="1014187702"></property>
+		<!--  <property name="password" value="1014187702"></property>-->
+		<property name="password" value="123456"></property>
 	</bean>
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
@@ -45,6 +46,7 @@
 		<bean id="TestHiberate" class="com.schoolo2o.test.TestHiberate">
 			<property name="shopInfo" ref="ShopinfoDao"></property>
 		</bean>
+
 		<bean id = "AdminInfoDao" class="com.schoolo2o.dao.impl.AdminInfoDaoImpl">
 				<property name="sessionFactory" ref="sessionFactory"></property>
 		</bean>
@@ -70,5 +72,23 @@
 		</bean>
 		
 
-		
+
+		<bean id = "transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+				<property name="sessionFactory" ref="sessionFactory"></property>
+		</bean>
+		<bean id = "transactionInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor">
+				<property name="transactionManager" ref="transactionManager"></property>
+				<property name="transactionAttributes">
+						<props>
+								<prop key="find* , get*">PROPAGATION_REQUIRED, readOnly</prop>
+								<prop key="save*, update*, delete*">PROPAGATION_REQUIRED</prop>
+						</props>
+				</property>
+		</bean>
+		<bean id = "OrderInfoDao" class="com.schoolo2o.dao.impl.OrderInfoDaoImpl">
+				<property name="sessionFactory" ref="sessionFactory"></property>
+		</bean>
+		<bean id = "TestOrderInfoDao" class="com.schoolo2o.test.TestOrderInfoDao">
+				<property name="Orderinfo" ref="OrderInfoDao"></property>
+		</bean>
 		</beans>
