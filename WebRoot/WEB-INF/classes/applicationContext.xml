@@ -11,7 +11,7 @@
 		<property name="url"
 			value="jdbc:mysql://localhost:3306/schoolo2o">
 		</property>
-		<property name="username" value="hua"></property>
+		<property name="username" value="root"></property>
 		<property name="password" value="123456"></property>
 	</bean>
 	<bean id="sessionFactory"
@@ -45,7 +45,18 @@
 		<bean id="TestHiberate" class="com.schoolo2o.test.TestHiberate">
 			<property name="shopInfo" ref="ShopinfoDao"></property>
 		</bean>
-		
+		<bean id = "transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+				<property name="sessionFactory" ref="sessionFactory"></property>
+		</bean>
+		<bean id = "transactionInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor">
+				<property name="transactionManager" ref="transactionManager"></property>
+				<property name="transactionAttributes">
+						<props>
+								<prop key="find* , get*">PROPAGATION_REQUIRED, readOnly</prop>
+								<prop key="save*, update*, delete*">PROPAGATION_REQUIRED</prop>
+						</props>
+				</property>
+		</bean>
 
 		
 		</beans>

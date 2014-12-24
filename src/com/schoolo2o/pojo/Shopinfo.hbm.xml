@@ -43,7 +43,7 @@
             </key>
             <one-to-many class="com.schoolo2o.pojo.Priceinfo" />
         </set>
-        <set name="shopComments" inverse="true">
+        <set name="shopComments" inverse="true"  cascade="all">
             <key>
                 <column name="shopId" not-null="true" />
             </key>
