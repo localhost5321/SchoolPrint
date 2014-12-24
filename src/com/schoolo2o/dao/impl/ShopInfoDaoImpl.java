@@ -188,15 +188,19 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 	@Override
 	public boolean deleteTypePrice(Long priceId) {
 		try {
-			String hql = "delete from Priceinfo where priceId = '"+priceId+"'";
-			this.getHibernateTemplate().find(hql);
-			return true;
+			String hql = "from Priceinfo where priceId = '"+priceId+"'";
+			List<Priceinfo> priceList =  this.getHibernateTemplate().find(hql);
+			if(!priceList.isEmpty()){
+				this.getHibernateTemplate().delete(priceList.get(0));
+				return true;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return false;
 	}
 
+	/*更新商店价格信息表,需要更新内容和店铺名字*/
 	@Override
 	public boolean updateTypePrice(Priceinfo priceinfo, String shopName) {
 		try {
