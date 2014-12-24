@@ -57,6 +57,10 @@
 						</props>
 				</property>
 		</bean>
-
-		
+		<bean id = "OrderInfoDao" class="com.schoolo2o.dao.impl.OrderInfoDaoImpl">
+				<property name="sessionFactory" ref="sessionFactory"></property>
+		</bean>
+		<bean id = "TestOrderInfoDao" class="com.schoolo2o.test.TestOrderInfoDao">
+				<property name="Orderinfo" ref="OrderInfoDao"></property>
+		</bean>
 		</beans>

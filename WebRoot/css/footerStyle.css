@@ -1,0 +1,26 @@
+
+.footer {
+	text-align: center;
+	background-color: black;
+	height: 100px;
+	line-height: 100px;
+	margin-bottom: 0px;
+}
+
+.footer a {
+	text-decoration: none;
+	color: #fff;
+}
+
+.footer a:hover {
+	color: #ccc;
+}
+
+.footer ul {
+	margin: auto;
+}
+
+.footer li {
+	margin-left: 35px;
+	margin-right: 35px;
+}
