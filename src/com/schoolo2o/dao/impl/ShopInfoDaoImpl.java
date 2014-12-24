@@ -200,6 +200,7 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 		return false;
 	}
 
+	/*更新商店价格信息表,需要更新内容和店铺名字*/
 	@Override
 	public boolean updateTypePrice(Priceinfo priceinfo, String shopName) {
 		try {

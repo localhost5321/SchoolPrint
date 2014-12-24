@@ -37,7 +37,7 @@ public class TestMain {
 //		test.testgetTypePrice(shop.getShopName());
 //		pf.setPriceId(1L);
 //		test.testUpdateTypePrice(pf, shop.getShopName());
-		test.testDeleteTypePrice(2L);
+//		test.testDeleteTypePrice(2L);
 	}
 
 }
