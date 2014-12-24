@@ -1,23 +1,36 @@
 package com.schoolo2o.test;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.schoolo2o.pojo.Admininfo;
+import com.schoolo2o.pojo.Docinfo;
+import com.schoolo2o.pojo.Userinfo;
 
-public class TestAdminInfoDaoMain {
+public class TestDocInfoDaoMain {
 
 	public static void main(String[] args) {
-		Admininfo ai=new Admininfo();
-		ai.setAdminName("zhaolong");
-		ai.setAdminPwd("1014187702");
+		Userinfo user=new Userinfo();
+		user.setEmail("10145@qqrew.com");
+		user.setRegTime(new Date());
+		user.setUserName("zhaolong");
+		user.setUserPwd("1212434343");
+		user.setUserId(2l);
+		Docinfo di=new Docinfo();
+		di.setBrowseNum(11L);
+		di.setDownNum(20l);
+		di.setFileName("test4.doc");
+		di.setFilePath("F:/hh/tt");
+		di.setIsShare(1);
+		di.setUserinfo(user);
 		ApplicationContext context = new ClassPathXmlApplicationContext
 				("applicationContext.xml");
-		TestAdmininfoDaoImpl tid=(TestAdmininfoDaoImpl) context.getBean("TestAdminInfoDaoImpl");
+		TestDocInfoDaoImpl tid=(TestDocInfoDaoImpl) context.getBean("TestDocInfoDaoImpl");
 		//测试添加
-		//		tid.addTest(ai);
+		System.out.println(tid.addTest(di));
 		
 		//测试查询
 //		List<Admininfo>list=tid.searchTest("wangli");

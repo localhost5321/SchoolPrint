@@ -15,7 +15,7 @@ import com.schoolo2o.pojo.Admininfo;
 
 public class AdminInfoDaoImpl extends HibernateDaoSupport implements AdminInfoDao {
 
-	//增加一个管理员，当查找不存在此管理员时，进行增加
+	//增加一个管理员，添加成功返回true,添加失败返回false
 	@Override
 	public boolean add(Admininfo admin) {
 		if(admin!=null){
@@ -65,7 +65,7 @@ public class AdminInfoDaoImpl extends HibernateDaoSupport implements AdminInfoDa
 			try{
 				for(Admininfo a:adminList){
 					if(a.getAdminName().equals(adminName)){
-						this.getHibernateTemplate().update(a);
+						this.getHibernateTemplate().delete(a);
 						return true;
 					}
 				}

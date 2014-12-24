@@ -34,7 +34,7 @@
             </key>
             <one-to-many class="com.schoolo2o.pojo.Orderinfo" />
         </set>
-        <set name="docinfos" inverse="true">
+        <set name="docinfos" inverse="true" >
             <key>
                 <column name="userId" not-null="true" />
             </key>
