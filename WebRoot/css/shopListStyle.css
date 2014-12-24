@@ -27,9 +27,17 @@
 }
 
 .shopInfo img {
+	width: 140px;
+	height: 140px;
 	border: 1px solid #000; 
-	margin: auto 10px;
+	margin: 25px 10px;;
 	float: left;
+}
+
+.shopInfo p{
+	word-break:break-all;
+	margin-top: 5px;
+	margin-bottom: 5px;
 }
 
 .shopInfo .shopDetail {
