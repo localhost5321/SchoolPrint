@@ -32,9 +32,12 @@ public class TestMain {
 		comment.setShopReply("你好");
 		Priceinfo pf = new Priceinfo();
 		pf.setPrintType("双面打印");
-		pf.setPrice(0.2);
-		//test.testAddPriceType(pf, shop.getShopName());
-		test.testgetTypePrice(shop.getShopName());
+		pf.setPrice(0.3);
+//		test.testAddPriceType(pf, shop.getShopName());
+//		test.testgetTypePrice(shop.getShopName());
+//		pf.setPriceId(1L);
+//		test.testUpdateTypePrice(pf, shop.getShopName());
+		test.testDeleteTypePrice(2L);
 	}
 
 }

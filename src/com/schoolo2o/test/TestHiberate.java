@@ -102,5 +102,18 @@ public class TestHiberate {
 			System.out.println(pf.getPrintType());
 		}
 	}
-	public void testUpdateTypePrice();
+	public void testUpdateTypePrice(Priceinfo priceinfo, String shopName){
+		if(shopInfo.updateTypePrice(priceinfo, shopName)){
+			System.out.println("更新更改");
+		}else{
+			System.out.println("更新失败");
+		}
+	}
+	public void testDeleteTypePrice(Long priceId){
+		if(shopInfo.deleteTypePrice(priceId)){
+			System.out.println("删除成功");
+		}else{
+			System.out.println("删除失败");
+		}
+	}
 }
