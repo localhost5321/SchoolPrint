@@ -29,6 +29,13 @@ public class TestMain {
 				("applicationContext.xml");
 		
 		TestHiberate test = (TestHiberate) context.getBean("TestHiberate");
+
+		test.TestAdd(shop);
+//		test.testAddComment(comment);
+//		test.testSearchComment(shop.getShopName());
+	//	comment.setShopReply("谢谢");
+//		comment.setCommentId(1L);
+//		test.testUpdateComment(comment);
 		comment.setShopReply("你好");
 		Priceinfo pf = new Priceinfo();
 		pf.setPrintType("双面打印");

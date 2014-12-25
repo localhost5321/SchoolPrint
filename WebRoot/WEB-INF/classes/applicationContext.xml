@@ -12,6 +12,7 @@
 			value="jdbc:mysql://localhost:3306/schoolo2o">
 		</property>
 		<property name="username" value="root"></property>
+		<!--  <property name="password" value="1014187702"></property>-->
 		<property name="password" value="123456"></property>
 	</bean>
 	<bean id="sessionFactory"
@@ -45,6 +46,33 @@
 		<bean id="TestHiberate" class="com.schoolo2o.test.TestHiberate">
 			<property name="shopInfo" ref="ShopinfoDao"></property>
 		</bean>
+
+		<bean id = "AdminInfoDao" class="com.schoolo2o.dao.impl.AdminInfoDaoImpl">
+				<property name="sessionFactory" ref="sessionFactory"></property>
+		</bean>
+		<bean id="TestAdminInfoDaoImpl" class="com.schoolo2o.test.TestAdmininfoDaoImpl">
+			<property name="adminInfoDao" ref="AdminInfoDao"></property>
+		</bean>
+		
+		
+		<bean id = "UserInfoDao" class="com.schoolo2o.dao.impl.UserInfoDaoImpl">
+				<property name="sessionFactory" ref="sessionFactory"></property>
+		</bean>
+		<bean id="TestUserInfoDaoImpl" class="com.schoolo2o.test.TestUserInfoDaoImpl">
+			<property name="userinfoDao" ref="UserInfoDao"></property>
+		</bean>
+		
+		
+		
+		<bean id = "DocInfoDao" class="com.schoolo2o.dao.impl.DocInfoDaoImpl">
+				<property name="sessionFactory" ref="sessionFactory"></property>
+		</bean>
+		<bean id="TestDocInfoDaoImpl" class="com.schoolo2o.test.TestDocInfoDaoImpl">
+			<property name="docInfoDao" ref="DocInfoDao"></property>
+		</bean>
+		
+
+
 		<bean id = "transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 				<property name="sessionFactory" ref="sessionFactory"></property>
 		</bean>
