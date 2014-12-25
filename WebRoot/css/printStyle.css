@@ -55,3 +55,7 @@ th{
 #fileListTable a{
 	text-decoration:none;
 }
+
+.fileInfo{
+	text-align: right;
+}
