@@ -22,7 +22,6 @@ $(document).ready(function() {
 		}
 		e.preventDefault(); // prevent navigation to "#"
 	}, false);
-	
 	SCREEN_WIDTH = document.body.offsetWidth;
 	SCREEN_HEIGHT = document.body.offsetHeight;
 	GAP = (SCREEN_WIDTH - FILE_UPLOAD_WIDTH - SHOW_FILE_WIDTH) / 3;
@@ -48,7 +47,7 @@ function initDrag() {
 		return false;
 	};
 	holder.ondragend = function() {
-		this.className = '';
+		this.className = "";
 		return false;
 	};
 	//松开鼠标
@@ -162,9 +161,9 @@ function addFileToTable(file, progressBar) {
 
 	//添加
 	tr.appendChild(tdName);
-	tr.appendChild(tdProgressBar)
-	tr.appendChild(tdPageCounts)
-	tr.appendChild(tdSetting)
+	tr.appendChild(tdProgressBar);
+	tr.appendChild(tdPageCounts);
+	tr.appendChild(tdSetting);
 	tr.appendChild(tdPrintCounts);
 	tr.appendChild(tdControl);
 	table.tBodies[0].appendChild(tr);
@@ -182,12 +181,10 @@ function removeRow(obj) {
 	//当表格没有文件时，隐藏表格区域
 	if (document.getElementById("fileListTable").rows.length == 1) {
 		//移动两个div
-		var fileUploadContent = document.getElementById("fileUploadContent");
 		var move_dist = SCREEN_WIDTH / 2 - FILE_UPLOAD_WIDTH / 2;
 		$("#fileUploadContent").animate({
 			left : move_dist + "px"
 		}, 500);
-		var showFilesContent = document.getElementById("showFilesContent");
 		$("#showFilesContent").fadeOut();
 	}
 }
@@ -200,7 +197,7 @@ function printSetting(obj){
 		var sideType = $("#sideType option:selected").text();
 		var sizeType = $("#sizeType option:selected").text();
 		obj.innerHTML = colorType + "、" + sideType + "、" + sizeType;
-	}
+	};
 }
 
 //文件判重

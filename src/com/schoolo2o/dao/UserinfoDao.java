@@ -13,8 +13,9 @@ import com.schoolo2o.pojo.Userinfo;
 public interface UserinfoDao {
 	public boolean addUser(Userinfo user);//添加一个user
 	public boolean updateUser(Userinfo user);//更新一个user
-	public Userinfo searchUser(Userinfo user);//验证登陆，返回查找对象，如果没有找到就返回空
+	public Userinfo searchUser(String userName);//验证登陆，返回查找对象，如果没有找到就返回空
 	
+	public boolean checkEmail(String email);//check the user's email used or not;return true is used,false is not used
 	public boolean addAddress(Addressinfo address);  //添加地址信息
 	public boolean updateAddress(Addressinfo address); //更新地址信息
 	public boolean deleteAddress(Addressinfo address); //删除地址信息
