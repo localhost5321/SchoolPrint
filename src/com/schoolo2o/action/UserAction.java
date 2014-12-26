@@ -35,6 +35,7 @@ public class UserAction extends ActionSupport{
 	public String userLogin(){
 		Userinfo us =	this.userService.searchUser(user.getUserName());
 		String MD5Psw = MD5.md5(user.getUserPwd().getBytes());
+		System.out.println(MD5Psw);
 		if(us == null){
 			return ERROR;
 		}else if(us.getUserPwd().equals(MD5Psw)){
@@ -48,7 +49,7 @@ public class UserAction extends ActionSupport{
 		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 	}
 	public String userRegist(){
-		user.setUserPwd(MD5.md5(user.getUserPwd().getBytes()));
+		//user.setUserPwd(MD5.md5(user.getUserPwd().getBytes()));
 		user.setRegTime(new Date());
 		System.out.println(this.userService);
 		if(this.userService.addUser(this.user)){
