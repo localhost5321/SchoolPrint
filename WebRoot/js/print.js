@@ -25,6 +25,7 @@ $(document)
 					// 给店铺的订单详情按钮添加对应监听
 					$("#shopDetail_1").click(function(){
 						showOrder(this);
+						$("#orderModal").modal();
 					});
 
 					// 将浏览按钮的事件清除
@@ -137,12 +138,15 @@ function updateProgressBar(progressBar, pro) {
  */
 function updateFileInfo() {
 	var num = userFiles.length;
-	var printCount = $("#fileListTable").find(".printCounts");
+	var printCount = $("#fileListTable").find(".printCounts");//份数
+	var pageCount = $("#fileListTable").find(".pageCounts");//页数
 	var count = 0;
+	var allPage = 0;
 	for (var i = 0; i < printCount.length; i++) {
 		count += Number(printCount.get(i).value);
+		allPage += (Number(printCount.get(i).value) * Number(pageCount.get(i).innerHTML));
 	}
-	$(".fileInfo").text("共" + num + "个文件, 总份数:" + count + ", 总页数**");
+	$(".fileInfo").text("共" + num + "个文件, 总份数:" + count + ", 总页数:" + allPage);
 }
 
 /**
@@ -181,7 +185,7 @@ function addFileToTable(file, progressBar) {
 	var tdPageCounts = document.createElement("td");
 	tdPageCounts.className = "pageCounts";
 	tdPageCounts.style.verticalAlign = "middle";
-	tdPageCounts.innerHTML = "**页";
+	tdPageCounts.innerHTML = "5";
 	// 创建打印设置列
 	var tdSetting = document.createElement("td");
 	var settingBtn = document.createElement("a");
@@ -297,7 +301,7 @@ function judgeRepeat(file, files) {
  */
 function showUserFile() {
 	var json = {
-		data : []
+			data : []
 	};
 	var pageCounts = $("#fileListTable").find(".pageCounts");
 	var setting = $("#fileListTable").find(".setting");
@@ -310,19 +314,59 @@ function showUserFile() {
 		file.printCounts = $(printCounts[i]).val();
 		json.data.push(file);
 	}
-	var t = JSON.stringify(json);
-	alert(t);
-
+	return json
 }
 
 /**
  * 显示订单详情
  */
 function showOrder(obj){
-	for(var i = 0; i < userFiles.length; i++){
-		$("#orderTable").append("");
-		$("orderTable").append("<td></td>");
+	var json = showUserFile();
+	var table = document.getElementById("orderTable");
+	//清空表格
+	table.tBodies[0].innerHTML = "";
+	if(json.data.length == 0){
+		alert("请先选择文件");
 	}
+	for(var i = 0; i < json.data.length; i++){
+		var tr = document.createElement("tr");
+		tr.style.textAlign = "center";
+		//创建文件名列
+		var tdFileName = document.createElement("td");
+		tdFileName.innerHTML = json.data[i].fileName;
+		tr.appendChild(tdFileName);
+		//创建页数列
+		var tdPrintCount = document.createElement("td");
+		tdPrintCount.innerHTML = json.data[i].pageCounts;
+		tr.appendChild(tdPrintCount);
+		//创建打印设置列
+		var tdSetting = document.createElement("td");
+		tdSetting.innerHTML = json.data[i].setting;
+		tr.appendChild(tdSetting);
+		//创建份数列
+		var tdPrintCounts = document.createElement("td");
+		tdPrintCounts.innerHTML = json.data[i].printCounts;
+		tr.appendChild(tdPrintCounts);
+		//创建单价列
+		var tdPrice = document.createElement("td");
+		tdPrice.innerHTML = 0.1;
+		tr.appendChild(tdPrice);
+		//创建总价列
+		var sumPrice = document.createElement("td");
+		sumPrice.className="sumPrice"
+		sumPrice.innerHTML = Number(tdPrintCount.innerHTML) * Number(tdPrintCounts.innerHTML) * Number(tdPrice.innerHTML);
+		tr.appendChild(sumPrice);
+		
+		//添加此行
+		table.tBodies[0].appendChild(tr);
+	}
+	
+	var sumPrice = 0;
+	var tdSumPrice = $("#orderTable").find(".sumPrice");
+	for (var i = 0; i < tdSumPrice.length; i++) {
+		sumPrice += Number($(tdSumPrice.get(i)).text());
+	}
+	$(".orderInfo").text("总价：" + sumPrice + "元 ");
 }
 
 /**
