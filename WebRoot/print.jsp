@@ -151,7 +151,7 @@
 			<h3 class="shopName">打印店名八字以内</h3>
 			<p class="shopAdd">地址：弘辰桥洞小巷内10米左拐急急急急急急积极</p>
 			<p class="shopTel">联系电话：0728-8259807</p>
-			<button id="shopDetail_1" class="btn btn-info shopDetail" data-toggle="modal" data-target="#orderModa">查看订单</button>
+			<button id="shopDetail_1" class="btn btn-info shopDetail" >查看订单</button>
 			<button class="btn btn-primary enterShop">进入店铺</button>
 		</div>
 
@@ -203,9 +203,9 @@
 							id="orderTable">
 							<thead>
 								<tr>
-									<th width="20%">文件名</th>
+									<th width="30%">文件名</th>
 									<th width="10%">页数</th>
-									<th width="40%">打印设置</th>
+									<th width="30%">打印设置</th>
 									<th width="10%">份数</th>
 									<th width="10%">单价</th>
 									<th width="10%">总价</th>
@@ -214,6 +214,8 @@
 							<tbody></tbody>
 						</table>
 					</div>
+					<!-- 订单总信息 -->
+				<div class="orderInfo"><span>总价：</span></div>
 				</div>
 				<!--窗口底部-->
 				<div class="modal-footer">
