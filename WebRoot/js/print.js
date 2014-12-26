@@ -8,7 +8,6 @@ var userFiles = new Array();
 $(document)
 		.ready(
 				function() {
-
 					$("#selectPrint").click(
 							function() {
 								var targetOffset = $("#printShopContent")
@@ -17,7 +16,6 @@ $(document)
 									scrollTop : targetOffset
 								}, 1000);
 							});
-
 					// 将打印页面的导航高亮改变
 					$("#navBarIndex").attr("class", "");
 					$("#navBarIndex").children("a").attr("href", "index.jsp");
@@ -25,6 +23,9 @@ $(document)
 					$("#navBarPrint").children("a").attr("href", "");
 
 					// 给店铺的订单详情按钮添加对应监听
+					$("#shopDetail_1").click(function(){
+						showOrder(this);
+					});
 
 					// 将浏览按钮的事件清除
 					var fileInput = $("#fileInput");// 文件输入框
@@ -312,6 +313,16 @@ function showUserFile() {
 	var t = JSON.stringify(json);
 	alert(t);
 
+}
+
+/**
+ * 显示订单详情
+ */
+function showOrder(obj){
+	for(var i = 0; i < userFiles.length; i++){
+		$("#orderTable").append("");
+		$("orderTable").append("<td></td>");
+	}
 }
 
 /**
