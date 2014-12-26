@@ -1,5 +1,6 @@
 package com.schoolo2o.service.impl;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import com.schoolo2o.dao.DocInfoDao;
@@ -29,6 +30,11 @@ public class DocServiceImpl implements DocService{
 	@Override
 	public List<Docinfo> search(Long userId) {
 		return docInfoDao.search(userId);
+	}
+
+	@Override
+	public boolean delete(BigInteger id) {
+		return docInfoDao.delete(id);
 	}
 
 }
