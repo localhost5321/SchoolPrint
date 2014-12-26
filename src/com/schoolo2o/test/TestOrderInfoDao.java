@@ -2,6 +2,7 @@ package com.schoolo2o.test;
 
 import java.util.Date;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.context.ApplicationContext;
@@ -17,6 +18,15 @@ import com.schoolo2o.pojo.Userinfo;
 public class TestOrderInfoDao {
 	
 	private OrderInfoDao orderInfo = null;
+	
+	public OrderInfoDao getOrderInfo() {
+		return orderInfo;
+	}
+
+	public void setOrderInfo(OrderInfoDao orderInfo) {
+		this.orderInfo = orderInfo;
+	}
+
 	public static void main(String[] args){
 		Orderinfo order = new Orderinfo();
 		order.setAddressId(1L);
@@ -64,7 +74,12 @@ public class TestOrderInfoDao {
 		ApplicationContext context = new ClassPathXmlApplicationContext
 				("applicationContext.xml");
 		TestOrderInfoDao  test = (TestOrderInfoDao) context.getBean("TestOrderInfoDao");
-		System.out.println(test.orderInfo.addOrder(order));
+		//System.out.println(test.orderInfo.addOrder(order));
+//		status.setStatus(3);
+//		status.setChangeTime(new Date());
+//		System.out.println(test.orderInfo.updateStatus(3L, status));
+		List<Orderinfo> orderList = test.orderInfo.userSearch(shop.getShopName());
+		System.out.println(orderList.size());
 	}
 	
 }

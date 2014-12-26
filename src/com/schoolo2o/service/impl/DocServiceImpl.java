@@ -1,29 +1,41 @@
-package com.schoolo2o.test;
+package com.schoolo2o.service.impl;
 
 import java.math.BigInteger;
 import java.util.List;
 
 import com.schoolo2o.dao.DocInfoDao;
 import com.schoolo2o.pojo.Docinfo;
+import com.schoolo2o.service.DocService;
 
-public class TestDocInfoDaoImpl {
+public class DocServiceImpl implements DocService{
 	DocInfoDao docInfoDao;
 	public DocInfoDao getDocInfoDao() {
 		return docInfoDao;
 	}
+
 	public void setDocInfoDao(DocInfoDao docInfoDao) {
 		this.docInfoDao = docInfoDao;
 	}
-	public boolean addTest(Docinfo doc){
+
+	@Override
+	public boolean add(Docinfo doc) {
 		return docInfoDao.add(doc);
-	}     /*添加文档*/
-	public boolean deleteTest(Long id){
-		return docInfoDao.delete(id);
-	} /*根据文档ID删除文档*/
-	public boolean updateTest(Docinfo doc){
+	}
+
+	@Override
+	public boolean update(Docinfo doc) {
 		return docInfoDao.update(doc);
-	} /*修改文档信息*/
-	public List<Docinfo> searchTest(Long userId){
+	}
+
+	@Override
+	public List<Docinfo> search(Long userId) {
 		return docInfoDao.search(userId);
-	}/*根据用户ID来查询文档*/
+	}
+
+	@Override
+	public boolean delete(Long id) {
+		return docInfoDao.delete(id);
+	}
+
+
 }

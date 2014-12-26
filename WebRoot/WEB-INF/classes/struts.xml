@@ -3,11 +3,15 @@
 <struts>
 	
 	<include file="struts-default.xml"></include>
-	
-	<package name="action" extends="struts-default" namespace="/">
-		
+		<package name="user" extends="struts-default" namespace="/">
 		<action name="fileUpLoad" class="com.schoolo2o.test.TestFileAction" >
 			<result name="success">/print.jsp</result>
 		</action>
-	</package>
+				<action name="userLogin" class="com.schoolo2o.action.UserAction" method="userLogin">
+						
+				</action>
+				<action name="userRegist" class="com.schoolo2o.action.UserAction" method="userRegist">
+				
+				</action>
+		</package>
 </struts>    

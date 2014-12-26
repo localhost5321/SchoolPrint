@@ -36,23 +36,19 @@ public class AdminInfoDaoImpl extends HibernateDaoSupport implements AdminInfoDa
 	//更新一个管理员信息，更新成功返回
 	@Override
 	public boolean update(Admininfo admin) {
-		List <Admininfo> adminList=search(admin.getAdminName());
-		if(adminList!=null){
+		if(admin==null)
+			return false;
+		Admininfo myAdmin=search(admin.getAdminName());
+		if(myAdmin!=null){
 			try{
-				for(Admininfo a:adminList){
-					if(a.getAdminName().equals(admin.getAdminName())){
-						admin.setAdminId(a.getAdminId());
-						this.getHibernateTemplate().update(admin);
-						return true;
-					}
-				}
-				return false;//循环走完没有找到
+				admin.setAdminId(myAdmin.getAdminId());
+				this.getHibernateTemplate().update(admin);
+				return true;
 			}catch(Exception e){
 				e.printStackTrace();
 				return false;
 			}
 		}else{
-			System.out.println("此管理员不存在");
 			return false;
 		}
 	}
@@ -60,16 +56,11 @@ public class AdminInfoDaoImpl extends HibernateDaoSupport implements AdminInfoDa
 	//删除一个管理元信息
 	@Override
 	public boolean delete(String adminName) {
-		List <Admininfo> adminList=search(adminName);
-		if(adminList!=null){
+		Admininfo admin=search(adminName);
+		if(admin!=null){
 			try{
-				for(Admininfo a:adminList){
-					if(a.getAdminName().equals(adminName)){
-						this.getHibernateTemplate().delete(a);
-						return true;
-					}
-				}
-				return false;//循环走完没有找到
+				this.getHibernateTemplate().delete(admin);
+				return true;
 			}catch(Exception e){
 				e.printStackTrace();
 				return false;
@@ -80,15 +71,20 @@ public class AdminInfoDaoImpl extends HibernateDaoSupport implements AdminInfoDa
 		}
 	}
 
-	//检查管理员名是否存在，如果不存在返回null.如果存在返回一个用此名的管理员列表
+	//检查管理员名是否存在，如果不存在返回null.如果存在返回一个管理员
 		@Override
-		public List<Admininfo> search(String adminName) {
+		public Admininfo search(String adminName) {
 			if(adminName!=null){
 				String hql="from Admininfo where adminName='"+adminName+"'";
 				try{
 					System.out.println(this.getHibernateTemplate());
 					List<Admininfo> list=this.getHibernateTemplate().find(hql);
-					return list;
+					if(list!=null&&!list.isEmpty()){
+						Admininfo admin=list.iterator().next();
+						return admin;
+					}else{
+						return null;
+					}
 				}catch(Exception e){
 					e.printStackTrace();
 					return null;

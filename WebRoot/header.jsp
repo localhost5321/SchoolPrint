@@ -48,13 +48,13 @@
 				<!--登陆窗口内容-->
 				<!--登陆表单-->
 				<form class="form-horizontal" role="form"
-					action="http://www.baidu.com">
+					action="userLogin.action" method="post">
 					<div class="modal-body">
 						<!--输入用户名-->
 						<div class="form-group">
 							<label for="loginUsername" class="col-sm-2 control-label">用户名：</label>
 							<div class="col-sm-10">
-								<input type="text" class="form-control" id="loginUsername"
+								<input type="text" class="form-control" id="loginUsername" name="user.userName"
 									placeholder="输入用户名">
 							</div>
 						</div>
@@ -62,7 +62,7 @@
 						<div class="form-group">
 							<label for="loginPassword" class="col-sm-2 control-label">密码：</label>
 							<div class="col-sm-10">
-								<input type="password" class="form-control" id="loginPassword"
+								<input type="password" class="form-control" id="loginPassword" name="user.userPwd"
 									placeholder="输入密码">
 							</div>
 						</div>
@@ -101,13 +101,13 @@
 				<!--注册窗口内容-->
 				<!--注册表单-->
 				<form class="form-horizontal" role="form"
-					action="http://www.baidu.com">
+					action="userRegist.action" method="post">
 					<div class="modal-body">
 						<!--输入用户名-->
 						<div class="form-group">
 							<label for="loginUsername" class="col-sm-3 control-label">用户名：</label>
 							<div class="col-sm-7">
-								<input type="text" class="form-control" id="loginUsername"
+								<input type="text" class="form-control" id="loginUsername" name="user.userName"
 									placeholder="输入用户名">
 							</div>
 						</div>
@@ -123,8 +123,16 @@
 						<div class="form-group">
 							<label for="loginPassword" class="col-sm-3 control-label">确认密码：</label>
 							<div class="col-sm-7">
-								<input type="password" class="form-control" id="loginPassword"
+								<input type="password" class="form-control" id="loginPassword" name="user.userPwd"
 									placeholder="再次输入密码">
+							</div>
+						</div>
+						<!--邮箱-->
+						<div class="form-group">
+							<label for="loginEmail" class="col-sm-3 control-label">注册邮箱：</label>
+							<div class="col-sm-7">
+								<input type="email" class="form-control" id="loginEmail" name="user.email"
+									placeholder="输入邮箱">
 							</div>
 						</div>
 					</div>
