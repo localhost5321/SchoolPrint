@@ -1,32 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <head>
-	<meta charset=UTF-8/>
-    <meta name="keywords" content="keyword1,keyword2,keyword3">
-    <meta name="description" content="this is my page">
-    <meta name="content-type" content="text/html; charset=UTF-8">
-    
-    <title>校园云打印商家端</title>
-    
-    <link href="css/index_shopStyle.css" rel="stylesheet">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    
-    
-    <!--[if lt IE 9]>
-		<script src="js/html5shiv.js"></script>
-		<script src="js/respond.js"></script>
-		<![endif]-->
-    
-    <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
-
-  </head>
-  
-  <body>
-    <div id="container">
-    
-       <div id="index_shop_head">
-       
-             <!-- 顶部导航 -->
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+      <!-- 顶部导航 -->
 		<div class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="menu-nav">
 			<div class="container">
 				<!--导航头-->
@@ -37,19 +10,19 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="index_shop.html">校园云打印(商家版)</a>
+					<a class="navbar-brand" href="index.html">校园云打印(商家版)</a>
 				</div>
 				<!--导航体-->
 				<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
-						<li class="active">
+						<li>
 							<a href="">首页</a>
 						</li>
-						<li>
+						<li class="active">
 							<a href="control_shop.html">控制中心</a>
 						</li>
-						<li>
-							<a href="order_history.html">历史订单</a>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">历史订单</a>
 							 
 						</li>
 						<li>
@@ -174,121 +147,3 @@
 			</div>
 		</div>
        
-       </div> <!-- 首页头部  导航条 -->
-       
-       <div id="index_shop_body">
-       
-            <div id="shop_msg_detail">
-            
-                <h3  align="center">弘辰桥洞打印</h3>
-                
-                <table align="center">
-                
-                   <tr>
-                      <td>单面打印：</td>
-                      <td>0.1元/页</td>
-                      <td>双面打印：</td>
-                      <td>0.15元/页</td>
-                   </tr>
-                   <tr>
-                      <td>单面彩印：</td>
-                      <td>1.0元/页</td>
-                      <td>双面彩印：</td>
-                      <td>1.5元/页</td>
-                   </tr>
-                   <tr>
-                      <td>最新优惠信息：</td>
-                      <td>本店开张大吉，凡打印满二十元免费送货上门</td>
-                   </tr>
-                
-                </table><!-- 店铺当天商品单价信息和优惠信息 -->
-            
-            </div><!-- 商店当天信息 -->
-       
-       
-            <div id="order_div" align="center">
-            
-                 <table class="order_table" align="center">
-            
-                      <tr>
-               
-                         <td  width="250" align="center">时间</td>
-                  
-                         <td  width="250" align="center">订单信息</td>
-                  
-                         <td  width="250" align="center">操作</td>
-               
-                     </tr>
-               
-               <tr>
-               
-                  <td align="center">2014.12.25 17:05:30</td>
-                  
-                  <td align="center"><a href="javascript:void(0)" id="order_details">订单详情</a></td>
-                  
-                  <td align="center">
-                      <ul>
-                          <a href="">接收订单</a>
-                          <a href="">下载文档</a>
-                      
-                      </ul>
-                      
-                      
-                  </td>
-                  <ul id="details_ul">
-                     <li>文件名：</li>
-                     <li>某某某毕业论文</li><br>
-                     <li>文件名：</li>
-                     <li>某某某毕业论文</li><br>
-                     <li>文件名：</li>
-                     <li>某某某毕业论文</li><br>
-                  </ul>
-               
-               </tr>
-               
-               <tr>
-               
-                  <td align="center">2014.12.25 17:05:30</td>
-                  
-                  <td align="center"><a href="javascript:void(0)" id="order_details">订单详情</a></td>
-                  
-                  <td align="center">
-                      <ul>
-                          <a href="">接收订单</a>
-                          <a href="">下载文档</a>
-                      
-                      </ul>
-                  </td>
-                 
-               
-               </tr>
-               
-                <ul id="details_ul" display="none">
-                     <li>文件名：</li>
-                     <li>某某某毕业论文2</li><br>
-                     <li>文件名：</li>
-                     <li>某某某毕业论文2</li><br>
-                     <li>文件名：</li>
-                     <li>某某某毕业论文2</li><br>
-                  </ul>
-               
-               
-            </table>
-            
-            </div>
-           
-       
-       
-       </div> <!-- 首页主体  body -->
-    
-       <div id="index_shop_footer"></div> <!-- 首页底部  footer -->
-       
-    </div><!-- 最外层容器div  container -->
-    
-        <script src="js/jquery-2.1.1.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<!-- <script type="text/javascript" src="js/index_shop.js"></script> -->
-		
-    
-  </body>
-</html>
