@@ -32,7 +32,7 @@ public class DocInfoDaoImpl extends HibernateDaoSupport implements DocInfoDao {
 
 	//删除一个文档
 	@Override
-	public boolean delete(BigInteger id) {
+	public boolean delete(Long id) {
 		try{
 			String hql="from Docinfo where docId="+id;
 			List<Docinfo> list=this.getHibernateTemplate().find(hql);

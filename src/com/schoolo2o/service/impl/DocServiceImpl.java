@@ -33,8 +33,9 @@ public class DocServiceImpl implements DocService{
 	}
 
 	@Override
-	public boolean delete(BigInteger id) {
+	public boolean delete(Long id) {
 		return docInfoDao.delete(id);
 	}
+
 
 }

@@ -17,7 +17,7 @@ public class TestDocInfoDaoImpl {
 	public boolean addTest(Docinfo doc){
 		return docInfoDao.add(doc);
 	}     /*添加文档*/
-	public boolean deleteTest(BigInteger id){
+	public boolean deleteTest(Long id){
 		return docInfoDao.delete(id);
 	} /*根据文档ID删除文档*/
 	public boolean updateTest(Docinfo doc){
