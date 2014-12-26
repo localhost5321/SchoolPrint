@@ -327,6 +327,7 @@ function showOrder(obj){
 	table.tBodies[0].innerHTML = "";
 	if(json.data.length == 0){
 		alert("请先选择文件");
+		return;
 	}
 	for(var i = 0; i < json.data.length; i++){
 		var tr = document.createElement("tr");
