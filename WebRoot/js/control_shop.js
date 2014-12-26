@@ -4,7 +4,7 @@
 
 $(document).ready(function(){
 	$("#editInfo").click(function (e) {
-		alert("*****");
+		$("input[disabled]").removeAttr("disabled");
 	});
 	
 			
