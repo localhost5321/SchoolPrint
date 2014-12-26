@@ -1,4 +1,4 @@
-package com.schoolo20.utils;
+package com.schoolo2o.utils;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;

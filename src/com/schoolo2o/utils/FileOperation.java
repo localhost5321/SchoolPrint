@@ -1,4 +1,4 @@
-package com.schoolo20.utils;
+package com.schoolo2o.utils;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
