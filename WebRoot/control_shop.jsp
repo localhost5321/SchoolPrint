@@ -22,6 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/shopControlStyle.css" rel="stylesheet">
+    <link href="css/footerStyle.css" rel="stylesheet">
 
   </head>
   
@@ -30,6 +31,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<div id="container">
   	<div id="shop_control_head">
     <div id="shop_control_body" class="shopInfoDiv" >
+    <br>
+    <br>
  	<form action="" role="form">
        <table id="shopInfo" class="table shopInfoTable" >
 			<tr>
@@ -43,10 +46,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     </div><!-- 最外层容器div  container -->
     
+    <%@include file="footer.jsp" %>
     <script src="js/jquery-2.1.1.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/control_shop.js"></script>
 	
-	<%@include file="footer.jsp" %>
+	
   </body>
 </html>

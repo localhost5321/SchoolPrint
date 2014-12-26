@@ -23,15 +23,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<link href="css/index_shopStyle.css" rel="stylesheet">
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/shopControlStyle.css" rel="stylesheet">
+    <link href="css/footerStyle.css" rel="stylesheet">
 
   </head>
   
   <body>
   	<%@ include file="header_shop.jsp" %>
   	
+  	<div id="container">
   	<div id="index_shop_head">
     <div id="index_shop_body" class="shopInfoDiv" >
-<div id="index_shop_body">
        
             <div id="shop_msg_detail">
             
@@ -138,13 +139,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    
     </div> <!-- 首页主体  body -->
     
+  
        
     </div><!-- 最外层容器div  container -->
     
+	<%@include file="footer.jsp" %>
+	
     <script src="js/jquery-2.1.1.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/control_shop.js"></script>
 	
-	<%@include file="footer.jsp" %>
   </body>
 </html>
