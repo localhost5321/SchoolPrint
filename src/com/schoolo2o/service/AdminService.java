@@ -1,16 +1,10 @@
-package com.schoolo2o.dao;
+package com.schoolo2o.service;
 
 import java.util.List;
 
 import com.schoolo2o.pojo.Admininfo;
-/**
- * 管理员信息表的操作
- * @author hua
- *
- */
 
-public interface AdminInfoDao {
-	
+public interface AdminService {
 	public  boolean add(Admininfo admin);        /*增添管理员*/
 	public boolean update(Admininfo admin);      /*更新管理员信息*/
 	public boolean delete(String adminName);      /*根据管理员的登录名删除管理员*/
