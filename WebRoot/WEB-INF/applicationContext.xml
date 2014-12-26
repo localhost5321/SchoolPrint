@@ -9,9 +9,9 @@
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="url"
-			value="jdbc:mysql://localhost:3306/schoolo2o">
+			value="jdbc:mysql://192.168.1.100:3306/schoolo2o">
 		</property>
-		<property name="username" value="hua"></property>
+		<property name="username" value="zl"></property>
 		<property name="password" value="123456"></property>
 	</bean>
 	<bean id="sessionFactory"
@@ -42,4 +42,16 @@
 		<bean id = "ShopinfoDao" class="com.schoolo2o.dao.impl.ShopInfoDaoImpl">
 				<property name="sessionFactory" ref="sessionFactory"></property>
 		</bean>
+		
+		<!-- UserInfoDao 的依赖注入 -->
+		<bean id = "UserInfoDao" class="com.schoolo2o.dao.impl.UserInfoDaoImpl">
+				<property name="sessionFactory" ref="sessionFactory"></property>
+		</bean>
+		<bean id = "userService" class="com.schoolo2o.service.impl.UserServiceImpl"
+					abstract="false" lazy-init="default" autowire="default" >
+				<property name="userinfoDao" ref="UserInfoDao"></property>
+		</bean>
+		
+		
+		
 		</beans>
