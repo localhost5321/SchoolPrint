@@ -92,13 +92,13 @@
 			<!--拖拽文件区域-->
 			<div>
 				<div id="holder"></div>
-				<form id="uploadFileForm" action="javascript:uploadFile();"
+				<form id="uploadFileForm" action="javascript:uploadFile()"
 					method="post" enctype="multipart/form-data" role="form">
 					<!--通过浏览上传文件-->
 					<div class="file-box form-group">
 						<input type="text" id="textfield" disabled /> <a
-							class="btn btn-info" id="browseBtn" />浏览</a> <input type="file"
-							id="fileInput" size="28"
+							class="btn btn-info" id="browseBtn" />浏览</a> 
+							<input type="file" id="fileInput" size="28" name="upFile"
 							onchange="document.getElementById('textfield').value=this.value"
 							accept=".pdf,.doc,.xls" multiple /> <input type="submit"
 							id="uploadBtn" class="btn btn-primary" value="上传" />

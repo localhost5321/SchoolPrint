@@ -423,7 +423,7 @@ function handleFile(file) {
 			xhr.open(
 			/* method */"POST",
 			/* target url */
-			"upload.jsp?fileName=" + file.name
+			"fileUpLoad.action?fileName=" + file.name
 			/* , async, default to true */
 			);
 			xhr.overrideMimeType("application/octet-stream");
