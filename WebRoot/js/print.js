@@ -25,7 +25,6 @@ $(document)
 					// 给店铺的订单详情按钮添加对应监听
 					$("#shopDetail_1").click(function(){
 						showOrder(this);
-						$("#orderModal").modal();
 					});
 
 					// 将浏览按钮的事件清除
@@ -368,6 +367,9 @@ function showOrder(obj){
 		sumPrice += Number($(tdSumPrice.get(i)).text());
 	}
 	$(".orderInfo").text("总价：" + sumPrice + "元 ");
+	
+	//弹窗
+	$("#orderModal").modal();
 }
 
 /**
