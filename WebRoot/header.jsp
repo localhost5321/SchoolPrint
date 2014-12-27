@@ -27,14 +27,12 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<c:choose>
-					<!-- 未登录时 -->
 					<c:when test="${sessionScope.user == null}">
 						<li><a href="#" data-toggle="modal" data-target="#loginModal">登陆</a>
 						</li>
 						<li><a href="#" data-toggle="modal"
 							data-target="#registerModal">注册</a></li>
 					</c:when>
-					<!-- 登陆成功时 -->
 					<c:when test="${sessionScope.user != null}">
 						<li><a href="#">欢迎你：${sessionScope.user.userName}</a>
 						</li>
