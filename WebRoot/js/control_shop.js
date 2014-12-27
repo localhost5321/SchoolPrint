@@ -3,8 +3,18 @@
  */
 
 $(document).ready(function(){
+	
+	$("#btnSave").addClass("btnSaveHidden");
+	
 	$("#editInfo").click(function (e) {
-		alert("*****");
+		$("input[disabled]").removeAttr("disabled");
+		$("#btnSave").addClass("btnSaveVisible");
+	});
+	
+	$("#btnSave").click(function(e){
+		//用户点击了保存
+		
+		alert("************");
 	});
 	
 			
