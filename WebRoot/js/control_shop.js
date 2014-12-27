@@ -4,10 +4,11 @@
 
 $(document).ready(function(){
 	
+	$("#btnSave").addClass("btnSaveHidden");
 	
 	$("#editInfo").click(function (e) {
 		$("input[disabled]").removeAttr("disabled");
-		
+		$("#btnSave").addClass("btnSaveVisible");
 	});
 	
 	$("#btnSave").click(function(e){

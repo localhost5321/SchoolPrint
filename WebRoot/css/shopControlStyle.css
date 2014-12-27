@@ -21,3 +21,9 @@
 .btnSaveVisible{
 	visibility: visible;
 }
+
+tr td{
+	vertical-align: middle;
+	line-height:100%;
+	
+}
