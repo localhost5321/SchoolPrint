@@ -80,7 +80,7 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">
 							取消</button>
-						<button type="submit" class="btn btn-primary">登陆</button>
+						<button type="button" class="btn btn-primary" onclick="login()">登陆</button>
 					</div>
 				</form>
 			</div>
@@ -170,3 +170,5 @@
 			</div>
 		</div>
 	</div>
+	
+	<script src="js/header.js"></script>

@@ -41,7 +41,7 @@ public class UserAction extends ActionSupport{
 		String MD5Psw = MD5.md5(user.getUserPwd().getBytes());
 		if(us == null){
 			ServletActionContext.getResponse().getWriter().write("0");
-			return ERROR;
+			return null;
 		}else if(us.getUserPwd().equals(MD5Psw)){
 			session.put("user", user);
 			ServletActionContext.getResponse().getWriter().write("1");
@@ -50,7 +50,7 @@ public class UserAction extends ActionSupport{
 			this.user = null;
 			ServletActionContext.getResponse().getWriter().write("0");
 			session.put("user", user);
-			return  ERROR;
+			return  null;
 		}
 		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 	}
