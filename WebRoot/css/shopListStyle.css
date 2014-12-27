@@ -4,21 +4,21 @@
 }
 
 .shopInfo {
-	width:370px;
-	height:190px;
-	float:left;
+	width: 360px;
+	height: 190px;
+	float: left;
 	overflow: hidden;
-	border: 1px solid #ccc;
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	border-radius: 10px;
-	background-color:#ccc;
-	margin: 5px;
+	background-color: #ddd;
+	margin: 15px;
 }
 
-.shopInfo:hover{
-	background-color:#aaa;
-	border: 1px solid #f00;
+.shopInfo:hover {
+	-webkit-box-shadow: #666 0px 0px 10px;
+	-moz-box-shadow: #666 0px 0px 10px;
+	box-shadow: #666 0px 0px 10px;
 }
 
 .shopInfo h2 {
@@ -29,13 +29,13 @@
 .shopInfo img {
 	width: 140px;
 	height: 140px;
-	border: 1px solid #000; 
+	border: 1px solid #000;
 	margin: 25px 10px;;
 	float: left;
 }
 
-.shopInfo p{
-	word-break:break-all;
+.shopInfo p {
+	word-break: break-all;
 	margin-top: 5px;
 	margin-bottom: 5px;
 }

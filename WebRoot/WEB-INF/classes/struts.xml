@@ -13,7 +13,8 @@
 				
 				<action name="userLogin" class="com.schoolo2o.action.UserAction" method="userLogin">
 				</action>
-				
+				<action name="userExit" class="com.schoolo2o.action.UserAction" method="exit">
+				</action>
 				<action name="userRegist" class="com.schoolo2o.action.UserAction" method="userRegist">
 					<result name="success" type="redirect" > /index.jsp</result>
 						<result name="error" type="redirect"> /print.jsp</result>

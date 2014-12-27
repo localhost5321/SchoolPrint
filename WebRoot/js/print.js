@@ -16,6 +16,7 @@ $(document)
 									scrollTop : targetOffset
 								}, 1000);
 							});
+					
 					// 将打印页面的导航高亮改变
 					$("#navBarIndex").attr("class", "");
 					$("#navBarIndex").children("a").attr("href", "index.jsp");
@@ -23,10 +24,14 @@ $(document)
 					$("#navBarPrint").children("a").attr("href", "");
 
 					// 给店铺的订单详情按钮添加对应监听
-					$("#shopDetail_1").click(function(){
+					$("#shopDetail_1").click(function() {
 						showOrder(this);
 					});
 
+					$("#enterShop_1").click(function(){
+						window.open("shopHome.jsp");
+					});
+					
 					// 将浏览按钮的事件清除
 					var fileInput = $("#fileInput");// 文件输入框
 					var browseBtn = document.getElementById("browseBtn");// 浏览按钮
@@ -137,8 +142,8 @@ function updateProgressBar(progressBar, pro) {
  */
 function updateFileInfo() {
 	var num = userFiles.length;
-	var printCount = $("#fileListTable").find(".printCounts");//份数
-	var pageCount = $("#fileListTable").find(".pageCounts");//页数
+	var printCount = $("#fileListTable").find(".printCounts");// 份数
+	var pageCount = $("#fileListTable").find(".pageCounts");// 页数
 	var count = 0;
 	var allPage = 0;
 	for (var i = 0; i < printCount.length; i++) {
@@ -300,7 +305,7 @@ function judgeRepeat(file, files) {
  */
 function showUserFile() {
 	var json = {
-			data : []
+		data : []
 	};
 	var pageCounts = $("#fileListTable").find(".pageCounts");
 	var setting = $("#fileListTable").find(".setting");
@@ -319,61 +324,71 @@ function showUserFile() {
 /**
  * 显示订单详情
  */
-function showOrder(obj){
+function showOrder(obj) {
 	var json = showUserFile();
+	alert(JSON.stringify(json));
 	var table = document.getElementById("orderTable");
-	//清空表格
+	// 清空表格
 	table.tBodies[0].innerHTML = "";
-	if(json.data.length == 0){
+	if (json.data.length == 0) {
 		alert("请先选择文件");
 		return;
 	}
-	for(var i = 0; i < json.data.length; i++){
+	for (var i = 0; i < json.data.length; i++) {
 		var tr = document.createElement("tr");
 		tr.style.textAlign = "center";
-		//创建文件名列
+		// 创建文件名列
 		var tdFileName = document.createElement("td");
 		tdFileName.innerHTML = json.data[i].fileName;
 		tr.appendChild(tdFileName);
-		//创建页数列
+		// 创建页数列
 		var tdPrintCount = document.createElement("td");
 		tdPrintCount.innerHTML = json.data[i].pageCounts;
 		tr.appendChild(tdPrintCount);
-		//创建打印设置列
+		// 创建打印设置列
 		var tdSetting = document.createElement("td");
 		tdSetting.innerHTML = json.data[i].setting;
 		tr.appendChild(tdSetting);
-		//创建份数列
+		// 创建份数列
 		var tdPrintCounts = document.createElement("td");
 		tdPrintCounts.innerHTML = json.data[i].printCounts;
 		tr.appendChild(tdPrintCounts);
-		//创建单价列
+		// 创建单价列
 		var tdPrice = document.createElement("td");
 		tdPrice.innerHTML = 0.1;
 		tr.appendChild(tdPrice);
-		//创建总价列
+		// 创建总价列
 		var sumPrice = document.createElement("td");
-		sumPrice.className="sumPrice"
-		sumPrice.innerHTML = Number(tdPrintCount.innerHTML) * Number(tdPrintCounts.innerHTML) * Number(tdPrice.innerHTML);
+		sumPrice.className = "sumPrice"
+		sumPrice.innerHTML = Number(tdPrintCount.innerHTML)
+				* Number(tdPrintCounts.innerHTML) * Number(tdPrice.innerHTML);
 		tr.appendChild(sumPrice);
-		
-		//添加此行
+
+		// 添加此行
 		table.tBodies[0].appendChild(tr);
 	}
-	
+
 	var sumPrice = 0;
 	var tdSumPrice = $("#orderTable").find(".sumPrice");
 	for (var i = 0; i < tdSumPrice.length; i++) {
 		sumPrice += Number($(tdSumPrice.get(i)).text());
 	}
 	$(".orderInfo").text("总价：" + sumPrice + "元 ");
-	
-	//弹窗
+
+	// 弹窗
 	$("#orderModal").modal();
 }
 
 /**
- * 处理用户上传的文件
+ * 确认订单
+ */
+function commitOrder() {
+	var json = showUserFile();
+	$.post("index.jsp", json);
+}
+
+/**
+ * 处理用户上传的文件$("#orderModal").modal();
  * 
  * @param file
  */
@@ -427,7 +442,20 @@ function handleFile(file) {
 			/* , async, default to true */
 			);
 			xhr.overrideMimeType("application/octet-stream");
+
+			//兼容chrome
+			if (typeof XMLHttpRequest.prototype.sendAsBinary == 'undefined') {
+				XMLHttpRequest.prototype.sendAsBinary = function(text) {
+					var data = new ArrayBuffer(text.length);
+					var ui8a = new Uint8Array(data, 0);
+					for (var i = 0; i < text.length; i++)
+						ui8a[i] = (text.charCodeAt(i) & 0xff);
+					this.send(ui8a);
+				}
+			}
+
 			xhr.sendAsBinary(reader.result);
+
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState == 4) {
 					if (xhr.status == 200) {
