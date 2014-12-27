@@ -51,26 +51,28 @@ public class UserAction extends ActionSupport{
 			return null;
 		}else if(us.getUserPwd().equals(MD5Psw)){
 			session.put("user", user);
-			response.getWriter().write("{status:1,message:}");
+			response.getWriter().write("{status:'1',message:''}");
 			return null;
 		}else{
 			this.user = null;
-			response.getWriter().write("{status:0,message:}");
+			response.getWriter().write("{status:'0',message:''}");
 			session.put("user", user);
 			return null;
 		}
 		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 	}
 	public String userRegist() throws IOException{
+		response.setContentType("text/plain");
 		user.setUserPwd(MD5.md5(user.getUserPwd().getBytes()));
 		user.setRegTime(new Date());
 //		System.out.println(this.user);
 		if(this.userService.addUser(this.user)){
 			session.put("user", this.user);
-			ServletActionContext.getResponse().getWriter().write("1");
+			response.getWriter().write("{status:'1',message:''}");
 			return null;
 		}else{
-			return ERROR;
+			response.getWriter().write("{status:'0',message:'注册失败'}");
+			return null;
 		}
 	}
 	/**

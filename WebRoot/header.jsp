@@ -28,14 +28,18 @@
 			<ul class="nav navbar-nav navbar-right">
 				<c:choose>
 					<c:when test="${sessionScope.user == null}">
-						<li><a href="#" data-toggle="modal" data-target="#loginModal">登陆</a>
+						<li><a href="javascript:void(0)" data-toggle="modal" data-target="#loginModal">登陆</a>
 						</li>
-						<li><a href="#" data-toggle="modal"
+						<li><a href="javascript:void(0)" data-toggle="modal"
 							data-target="#registerModal">注册</a></li>
 					</c:when>
 					<c:when test="${sessionScope.user != null}">
-						<li><a href="#">欢迎你：${sessionScope.user.userName}</a>
-						</li>
+						<li><a href="javascript:void(0)" class="dropdown-toggle"
+							data-toggle="dropdown">欢迎你：${sessionScope.user.userName}<span
+								class="caret"></span></a>
+							<ul class="dropdown-menu" role="menu">
+								<li><a href="javascript:void(0)" data-tab="tab-chrome" onclick="exit();">退出</a></li>
+							</ul></li>
 					</c:when>
 				</c:choose>
 			</ul>
@@ -90,7 +94,7 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">
 						取消</button>
-					<button type="button" class="btn btn-primary" onclick="login()">登陆</button>
+					<button type="button" class="btn btn-primary" onclick="login();">登陆</button>
 				</div>
 			</form>
 		</div>
