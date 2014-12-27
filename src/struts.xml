@@ -11,12 +11,13 @@
 						<result name="success">/print.jsp</result>
 				</action>
 				<action name="userLogin" class="com.schoolo2o.action.UserAction" method="userLogin">
-						<result name="success" > /index.jsp</result>
-						<result name="error" > /print.jsp</result>
+						
 				</action>
 				<action name="userRegist" class="com.schoolo2o.action.UserAction" method="userRegist">
-					<result name="success" > /index.jsp</result>
-						<result name="error" > /print.jsp</result>
+					<result name="success" type="redirect" > /index.jsp</result>
+						<result name="error" type="redirect"> /print.jsp</result>
+				</action>
+				<action name="ajaxTest" class="com.schoolo2o.test.TestAjax">
 				</action>
 		</package>
 </struts>    

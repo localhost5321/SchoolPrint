@@ -51,6 +51,13 @@ $(document)
 
 				});
 
+function ajaxTest(){
+	var json = showUserFile();
+	$.post("ajaxTest.action",  json, function(data){
+		$(".shopAdd").text(data);
+	});
+}
+
 function initDrag() {
 	var holder = document.getElementById('holder'), uploadBtn = document
 			.getElementById('uploadBtn');

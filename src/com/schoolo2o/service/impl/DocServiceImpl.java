@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.schoolo2o.dao.DocInfoDao;
 import com.schoolo2o.pojo.Docinfo;
+import com.schoolo2o.pojo.Userinfo;
 import com.schoolo2o.service.DocService;
 
 public class DocServiceImpl implements DocService{
@@ -18,7 +19,7 @@ public class DocServiceImpl implements DocService{
 	}
 
 	@Override
-	public boolean add(Docinfo doc) {
+	public boolean add(Docinfo doc, Userinfo user) {
 		return docInfoDao.add(doc);
 	}
 

@@ -38,5 +38,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="/opt/mysql-connector-java-5.1.32/mysql-connector-java-5.1.32-bin.jar"/>
+	<classpathentry kind="lib" path="/home/hua/Desktop/commons-fileupload-1.2.2.jar"/>
+	<classpathentry kind="lib" path="/home/hua/Desktop/commons-io-2.4.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
