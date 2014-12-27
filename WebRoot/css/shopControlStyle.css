@@ -13,3 +13,17 @@
 .shopInfoTable td{
 	
 }
+
+.btnSaveHidden{
+	visibility: hidden;
+}
+
+.btnSaveVisible{
+	visibility: visible;
+}
+
+tr td{
+	vertical-align: middle;
+	line-height:100%;
+	
+}

@@ -8,12 +8,13 @@ import org.apache.poi.POIXMLDocument;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 
 /**
- * 计算文档页数
+ * 文档工具类
  * 
  * @author hengyi
  * 
  */
-public class PageCount {
+public class DOMUtils {
+
 	/**
 	 * PDF页数
 	 * 
@@ -47,4 +48,5 @@ public class PageCount {
 		}
 		return 0;
 	}
+
 }
