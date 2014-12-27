@@ -3,6 +3,7 @@ package com.schoolo2o.action;
 import java.util.Date;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -15,6 +16,7 @@ public class UserAction extends ActionSupport{
 	private Userinfo user ;
 	private UserService userService ;
 	private Map<String, Object> session = ServletActionContext.getContext().getSession();
+	private Logger log = Logger.getLogger(UserAction.class);
 	
 	public Userinfo getUser() {
 		return user;
@@ -22,6 +24,7 @@ public class UserAction extends ActionSupport{
 
 	public void setUser(Userinfo user) {
 		this.user = user;
+		log.debug(user.toString());
 	}
 	
 	public UserService getUserService() {
@@ -34,11 +37,11 @@ public class UserAction extends ActionSupport{
 
 	public String userLogin(){
 		Userinfo us =	this.userService.searchUser(user.getUserName());
-		String MD5Psw = MD5.md5(user.getUserPwd().getBytes());
-		System.out.println(MD5Psw);
+		//String MD5Psw = MD5.md5(user.getUserPwd().getBytes());
+		//System.out.println(MD5Psw);
 		if(us == null){
 			return ERROR;
-		}else if(us.getUserPwd().equals(MD5Psw)){
+		}else if(us.getUserPwd().equals(user.getUserPwd())){
 			session.put("user", user);
 			return SUCCESS;
 		}else{
@@ -49,9 +52,9 @@ public class UserAction extends ActionSupport{
 		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 	}
 	public String userRegist(){
-		//user.setUserPwd(MD5.md5(user.getUserPwd().getBytes()));
+//		user.setUserPwd(MD5.md5(user.getUserPwd().getBytes()));
 		user.setRegTime(new Date());
-		System.out.println(this.userService);
+//		System.out.println(this.user);
 		if(this.userService.addUser(this.user)){
 			session.put("user", this.user);
 			return SUCCESS;

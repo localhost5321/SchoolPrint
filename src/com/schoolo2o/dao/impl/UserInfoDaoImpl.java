@@ -24,11 +24,9 @@ public class UserInfoDaoImpl extends HibernateDaoSupport implements UserinfoDao 
 		if(user!=null){
 			try{
 				this.getHibernateTemplate().save(user);
-				System.out.println("yes");
 				return true;
 			}catch(Exception e){
 				e.printStackTrace();
-				System.out.println("no");
 			}
 		}
 		return false;
