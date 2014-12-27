@@ -2,7 +2,7 @@ function login(){
 	var json = $("#loginForm").serialize();
 	$.post("userLogin.action",  json, function(data){
 		var obj = eval(data);
-		alert(obj.data);
+		alert(obj.status);
 	});
 }
 
@@ -14,7 +14,5 @@ function regist(){
 }
 
 function exit(){
-	$.post("userExit.action",  function(data){
-		alert(data);
-	});
+	$.post("userExit.action");
 }

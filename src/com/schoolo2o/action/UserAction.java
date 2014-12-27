@@ -47,15 +47,15 @@ public class UserAction extends ActionSupport{
 		String MD5Psw = MD5.md5(user.getUserPwd().getBytes());
 		if(us == null){
 			//返回一段json数据
-			response.getWriter().write("{status:0,message:}");
+			response.getWriter().write("{\"status\":\"0\",\"message\":\"\"}");
 			return null;
 		}else if(us.getUserPwd().equals(MD5Psw)){
 			session.put("user", user);
-			response.getWriter().write("{status:'1',message:''}");
+			response.getWriter().write("{\"status\":\"1\",\"message\":\"\"}");
 			return null;
 		}else{
 			this.user = null;
-			response.getWriter().write("{status:'0',message:''}");
+			response.getWriter().write("{\"status\":\"0\",\"message\":\"\"}");
 			session.put("user", user);
 			return null;
 		}
@@ -68,10 +68,10 @@ public class UserAction extends ActionSupport{
 //		System.out.println(this.user);
 		if(this.userService.addUser(this.user)){
 			session.put("user", this.user);
-			response.getWriter().write("{status:'1',message:''}");
+			response.getWriter().write("{\"status\":\"1\",\"message\":\"\"}");
 			return null;
 		}else{
-			response.getWriter().write("{status:'0',message:'注册失败'}");
+			response.getWriter().write("{\"status\":\"0\",\"message\":\"\"}");
 			return null;
 		}
 	}
