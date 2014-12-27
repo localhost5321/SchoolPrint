@@ -59,3 +59,15 @@ th{
 .fileInfo, .orderInfo{
 	text-align: right;
 }
+
+#printShopContent{
+	color: white;
+	background-color: #aaa;
+	height: 60px;
+}
+
+#printShopContent span{
+	color: white;
+	line-height: 60px;
+	font-size: 25px;;
+}
