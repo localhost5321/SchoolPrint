@@ -326,6 +326,7 @@ function showUserFile() {
  */
 function showOrder(obj) {
 	var json = showUserFile();
+	alert(JSON.stringify(json));
 	var table = document.getElementById("orderTable");
 	// 清空表格
 	table.tBodies[0].innerHTML = "";
