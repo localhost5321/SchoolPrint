@@ -99,4 +99,13 @@ public class UserAction extends ActionSupport{
 			return ERROR;
 		}
 	}
+	/**
+	 * 用于退出用户登陆
+	 * @return
+	 */
+	public String exit(){
+		session.clear();
+		user=null;
+		return null;
+	}
 }
