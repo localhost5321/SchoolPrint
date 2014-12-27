@@ -41,7 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</tr>
 		</table>
 		<a href="javascript:void(0)" id="editInfo">编辑信息</a>
-		<button name="btnSave" >保存</button>
+		<button id="btnSave"  >保存</button>
     </form>   
     </div> <!-- 店家控制中心body  body -->
     </div>

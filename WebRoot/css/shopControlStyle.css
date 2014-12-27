@@ -13,3 +13,11 @@
 .shopInfoTable td{
 	
 }
+
+.btnSaveHidden{
+	visibility: hidden;
+}
+
+.btnSaveVisible{
+	visibility: visible;
+}
