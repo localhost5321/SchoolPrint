@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
@@ -18,6 +20,7 @@ public class UserAction extends ActionSupport{
 	private UserService userService ;
 	private Map<String, Object> session = ServletActionContext.getContext().getSession();
 	private Logger log = Logger.getLogger(UserAction.class);
+	private HttpServletResponse response = ServletActionContext.getResponse();
 	
 	public Userinfo getUser() {
 		return user;
@@ -37,20 +40,24 @@ public class UserAction extends ActionSupport{
 	}
 
 	public String userLogin() throws IOException{
-		Userinfo us =	this.userService.searchUser(user.getUserName());
+		System.out.println("aaa");
+		//设置响应体的格式
+		response.setContentType("text/plain");
+		Userinfo us = this.userService.searchUser(user.getUserName());
 		String MD5Psw = MD5.md5(user.getUserPwd().getBytes());
 		if(us == null){
-			ServletActionContext.getResponse().getWriter().write("0");
+			//返回一段json数据
+			response.getWriter().write("{status:0,message:}");
 			return null;
 		}else if(us.getUserPwd().equals(MD5Psw)){
 			session.put("user", user);
-			ServletActionContext.getResponse().getWriter().write("1");
+			response.getWriter().write("{status:1,message:}");
 			return null;
 		}else{
 			this.user = null;
-			ServletActionContext.getResponse().getWriter().write("0");
+			response.getWriter().write("{status:0,message:}");
 			session.put("user", user);
-			return  null;
+			return null;
 		}
 		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 	}

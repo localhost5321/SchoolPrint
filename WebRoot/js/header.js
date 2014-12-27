@@ -1,8 +1,13 @@
 function login(){
-	var json = {};
-	json.username = $("#loginUsername").val();
-	json.password = $("#loginPassword").val();
-	$.post("ajaxTest.action",  json, function(data){
+	var json = $("#loginForm").serialize()
+	$.post("userLogin.action",  json, function(data){
+		alert(data);
+	});
+}
+
+function regist(){
+	var json = $("#registForm").serialize()
+	$.post("userRegist.action",  json, function(data){
 		alert(data);
 	});
 }
