@@ -16,16 +16,20 @@ public class FileName {
 	 * @param oldFileName 文件名,要重命名的文件名
 	 * @return 文件是否重命名成功
 	 */
-	public boolean FileRename(String path, String oldFileName){
+	public String FileRename(){
 		String name = new Date().toString();
 		int num = (int)(Math.random()*100000)+10000;
 		String newfileName = name + num;
-		File oldFile = new File(path + "/" + oldFileName);
-		File newFile = new File(path + "/" +  newfileName);
-		if(oldFile.exists() && !newFile.exists()){
-			oldFile.renameTo(newFile);
-			return true;
-		}
-		return false;
+		return newfileName;
+	}
+	/**
+	 * 返回文件日期路径
+	 * @return
+	 */
+	public String filePath(){
+		String path;
+		Date date = new Date();
+		path = "" + date.getYear() + "/" + date.getMonth() + "/" + date.getDay() + "/";
+		return path;
 	}
 }

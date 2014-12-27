@@ -48,7 +48,7 @@
 				<!--登陆窗口内容-->
 				<!--登陆表单-->
 				<form class="form-horizontal" role="form"
-					action="userLogin.action" method="post">
+					action="userLogin.action" method="post" id="loginForm">
 					<div class="modal-body">
 						<!--输入用户名-->
 						<div class="form-group">
@@ -80,7 +80,7 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">
 							取消</button>
-						<button type="submit" class="btn btn-primary">登陆</button>
+						<button type="button" class="btn btn-primary" onclick="login()">登陆</button>
 					</div>
 				</form>
 			</div>
@@ -101,7 +101,7 @@
 				<!--注册窗口内容-->
 				<!--注册表单-->
 				<form class="form-horizontal" role="form"
-					action="userRegist.action" method="post">
+					action="userRegist.action" method="post" id="registForm">
 					<div class="modal-body">
 						<!--输入用户名-->
 						<div class="form-group">
@@ -140,7 +140,7 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">
 							取消</button>
-						<button type="submit" class="btn btn-primary">注册</button>
+						<button type="button" class="btn btn-primary" onclick="regist()">注册</button>
 					</div>
 				</form>
 			</div>
@@ -170,3 +170,5 @@
 			</div>
 		</div>
 	</div>
+	
+	<script src="js/header.js"></script>

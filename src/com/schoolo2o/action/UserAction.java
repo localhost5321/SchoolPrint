@@ -1,8 +1,12 @@
 package com.schoolo2o.action;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.log4j.Logger;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -15,6 +19,8 @@ public class UserAction extends ActionSupport{
 	private Userinfo user ;
 	private UserService userService ;
 	private Map<String, Object> session = ServletActionContext.getContext().getSession();
+	private Logger log = Logger.getLogger(UserAction.class);
+	private HttpServletResponse response = ServletActionContext.getResponse();
 	
 	public Userinfo getUser() {
 		return user;
@@ -22,6 +28,7 @@ public class UserAction extends ActionSupport{
 
 	public void setUser(Userinfo user) {
 		this.user = user;
+		log.info(user.toString());
 	}
 	
 	public UserService getUserService() {
@@ -32,27 +39,61 @@ public class UserAction extends ActionSupport{
 		this.userService = userService;
 	}
 
-	public String userLogin(){
-		Userinfo us =	this.userService.searchUser(user.getUserName());
+	public String userLogin() throws IOException{
+		System.out.println("aaa");
+		//设置响应体的格式
+		response.setContentType("text/plain");
+		Userinfo us = this.userService.searchUser(user.getUserName());
 		String MD5Psw = MD5.md5(user.getUserPwd().getBytes());
 		if(us == null){
-			return ERROR;
+			//返回一段json数据
+			response.getWriter().write("{status:0,message:}");
+			return null;
 		}else if(us.getUserPwd().equals(MD5Psw)){
 			session.put("user", user);
-			return SUCCESS;
+			response.getWriter().write("{status:1,message:}");
+			return null;
 		}else{
 			this.user = null;
+			response.getWriter().write("{status:0,message:}");
 			session.put("user", user);
-			return  ERROR;
+			return null;
 		}
 		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 	}
-	public String userRegist(){
+	public String userRegist() throws IOException{
 		user.setUserPwd(MD5.md5(user.getUserPwd().getBytes()));
 		user.setRegTime(new Date());
-		System.out.println(this.userService);
+//		System.out.println(this.user);
 		if(this.userService.addUser(this.user)){
 			session.put("user", this.user);
+			ServletActionContext.getResponse().getWriter().write("1");
+			return null;
+		}else{
+			return ERROR;
+		}
+	}
+	/**
+	 * 验证用户的邮箱是否已经注册过
+	 * @param email
+	 * @return　若注册过，则返回false,否则为true
+	 */
+	public String verifyEmail(String email){
+		if(this.userService.checkEmail(email)){
+			return SUCCESS;
+		}
+		else{
+			return ERROR;
+		}
+	}
+	/**
+	 * 用户注册时的用户名验证
+	 * @param userName　 用户名
+	 * @return　没有存在的，返回SUCCESS, 若存在，返回ERROR
+	 */
+	public String verifyUserName(String userName){
+		Userinfo user = this.userService.searchUser(userName);
+		if(user == null){
 			return SUCCESS;
 		}else{
 			return ERROR;

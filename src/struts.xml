@@ -2,16 +2,22 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
 	
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.objectFactory.spring.autoWire" value="name"></constant>
 	<include file="struts-default.xml"></include>
-		<package name="user" extends="struts-default" namespace="/">
-		<action name="fileUpLoad" class="com.schoolo2o.test.TestFileAction" >
-			<result name="success">/print.jsp</result>
-		</action>
+	
+		<package name="user" extends="struts-default">
+				<action name="fileUpLoad" class="com.schoolo2o.test.TestFileAction" >
+						<result name="success">/print.jsp</result>
+				</action>
 				<action name="userLogin" class="com.schoolo2o.action.UserAction" method="userLogin">
 						
 				</action>
 				<action name="userRegist" class="com.schoolo2o.action.UserAction" method="userRegist">
-				
+					<result name="success" type="redirect" > /index.jsp</result>
+						<result name="error" type="redirect"> /print.jsp</result>
+				</action>
+				<action name="ajaxTest" class="com.schoolo2o.test.TestAjax">
 				</action>
 		</package>
 </struts>    

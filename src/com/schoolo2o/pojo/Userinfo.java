@@ -113,4 +113,12 @@ public class Userinfo implements java.io.Serializable {
 		this.docinfos = docinfos;
 	}
 
+	@Override
+	public String toString() {
+		return "Userinfo [userId=" + userId + ", userName=" + userName
+				+ ", userPwd=" + userPwd + ", email=" + email + ", regTime="
+				+ regTime + ", addressinfos=" + addressinfos + ", orderinfos="
+				+ orderinfos + ", docinfos=" + docinfos + "]";
+	}
+	
 }

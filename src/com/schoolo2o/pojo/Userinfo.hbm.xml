@@ -14,7 +14,7 @@
             <column name="userName" length="40" not-null="true" unique="true" />
         </property>
         <property name="userPwd" type="java.lang.String">
-            <column name="userPwd" length="20" not-null="true" />
+            <column name="userPwd" length="255" not-null="true" />
         </property>
         <property name="email" type="java.lang.String">
             <column name="email" length="40" not-null="true" />

@@ -161,7 +161,7 @@
 			<p class="shopAdd">地址：弘辰桥洞小巷内10米左拐</p>
 			<p class="shopTel">联系电话：0728-8259807/13027342004</p>
 			<button class="btn btn-info shopDetail" data-toggle="modal" data-target="#orderModal">查看订单</button>
-			<button class="btn btn-primary enterShop">进入店铺</button>
+			<button class="btn btn-primary enterShop" onclick="ajaxTest()">进入店铺</button>
 		</div>
 
 		<div class="shopInfo">
