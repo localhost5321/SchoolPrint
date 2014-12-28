@@ -10,7 +10,7 @@
             <column name="commentId" />
             <generator class="identity" />
         </id>
-        <many-to-one name="shopinfo" class="com.schoolo2o.pojo.Shopinfo" cascade="save-update,persist" fetch="select">
+        <many-to-one name="shopinfo" class="com.schoolo2o.pojo.Shopinfo" fetch="select">
             <column name="shopId" not-null="true" />
         </many-to-one>
         <property name="commentUser" type="java.lang.String">
@@ -19,8 +19,8 @@
         <property name="commentContent" type="java.lang.String">
             <column name="commentContent" not-null="true" />
         </property>
-        <property name="commentDate" type="java.util.Date">
-            <column name="commentDate" length="10" not-null="true" />
+        <property name="commentDate" type="java.sql.Timestamp">
+            <column name="commentDate" length="19" not-null="true" />
         </property>
         <property name="shopScore" type="java.lang.Integer">
             <column name="shopScore" not-null="true" />

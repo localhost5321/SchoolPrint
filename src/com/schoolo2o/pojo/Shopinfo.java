@@ -15,6 +15,7 @@ public class Shopinfo implements java.io.Serializable {
 	private String shopName;
 	private String shopPwd;
 	private String shopNick;
+	private String shopPhone;
 	private String shopAddress;
 	private String shopPic;
 	private String shopDesc;
@@ -31,21 +32,24 @@ public class Shopinfo implements java.io.Serializable {
 
 	/** minimal constructor */
 	public Shopinfo(String shopName, String shopPwd, String shopNick,
-			String shopAddress, Double delivery) {
+			String shopPhone, String shopAddress, Double delivery) {
 		this.shopName = shopName;
 		this.shopPwd = shopPwd;
 		this.shopNick = shopNick;
+		this.shopPhone = shopPhone;
 		this.shopAddress = shopAddress;
 		this.delivery = delivery;
 	}
 
 	/** full constructor */
 	public Shopinfo(String shopName, String shopPwd, String shopNick,
-			String shopAddress, String shopPic, String shopDesc,
-			Double delivery, Set orderinfos, Set priceinfos, Set shopComments) {
+			String shopPhone, String shopAddress, String shopPic,
+			String shopDesc, Double delivery, Set orderinfos, Set priceinfos,
+			Set shopComments) {
 		this.shopName = shopName;
 		this.shopPwd = shopPwd;
 		this.shopNick = shopNick;
+		this.shopPhone = shopPhone;
 		this.shopAddress = shopAddress;
 		this.shopPic = shopPic;
 		this.shopDesc = shopDesc;
@@ -87,6 +91,14 @@ public class Shopinfo implements java.io.Serializable {
 
 	public void setShopNick(String shopNick) {
 		this.shopNick = shopNick;
+	}
+
+	public String getShopPhone() {
+		return this.shopPhone;
+	}
+
+	public void setShopPhone(String shopPhone) {
+		this.shopPhone = shopPhone;
 	}
 
 	public String getShopAddress() {

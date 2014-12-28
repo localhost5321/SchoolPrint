@@ -21,15 +21,12 @@ public class AdminInfoDaoImpl extends HibernateDaoSupport implements AdminInfoDa
 		if(admin!=null){
 			try{
 				this.getHibernateTemplate().save(admin);
-				System.out.println(admin.getAdminName()+"+++++++++++++");
 				return true;
 			}catch(Exception e){
-				System.out.println(admin.getAdminPwd()+"~~~~~~~~~~~~");
 				e.printStackTrace();
 				return false;
 			}
 		}else{
-			
 			return false;
 		}
 	}
@@ -39,7 +36,7 @@ public class AdminInfoDaoImpl extends HibernateDaoSupport implements AdminInfoDa
 		if(admin==null)
 			return false;
 		Admininfo myAdmin=search(admin.getAdminName());
-		if(myAdmin!=null){
+		if(myAdmin != null){
 			try{
 				admin.setAdminId(myAdmin.getAdminId());
 				this.getHibernateTemplate().update(admin);
@@ -66,7 +63,6 @@ public class AdminInfoDaoImpl extends HibernateDaoSupport implements AdminInfoDa
 				return false;
 			}
 		}else{
-			System.out.println("此管理员不存在");
 			return false;
 		}
 	}
@@ -79,7 +75,7 @@ public class AdminInfoDaoImpl extends HibernateDaoSupport implements AdminInfoDa
 				try{
 					System.out.println(this.getHibernateTemplate());
 					List<Admininfo> list=this.getHibernateTemplate().find(hql);
-					if(list!=null&&!list.isEmpty()){
+					if(!list.isEmpty()){
 						Admininfo admin=list.iterator().next();
 						return admin;
 					}else{

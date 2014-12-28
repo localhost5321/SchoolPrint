@@ -1,6 +1,7 @@
 package com.schoolo2o.action;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Map;
 
@@ -62,7 +63,7 @@ public class UserAction extends ActionSupport{
 	public String userRegist() throws IOException{
 		response.setContentType("text/plain");
 		user.setUserPwd(MD5.md5(user.getUserPwd().getBytes()));
-		user.setRegTime(new Date());
+		user.setRegTime(new Timestamp(new Date().getTime()));
 		if(this.userService.addUser(this.user)){
 			session.put("user", this.user);
 			response.getWriter().write("{status:'1',message:''}");
