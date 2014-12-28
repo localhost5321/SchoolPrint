@@ -39,12 +39,11 @@ public class UserInfoDaoImpl extends HibernateDaoSupport implements UserinfoDao 
 			String hql="from Userinfo where userName='"+user.getUserName()+"'";
 			try{
 				List<Userinfo> list=this.getHibernateTemplate().find(hql);
-				if(list==null){
+				Iterator<Userinfo> it=list.iterator();
+				if (!it.hasNext()){
 					return false;
-					
 				}else{
-					Iterator it=list.iterator();
-					Userinfo myUser=(Userinfo) it.next();
+					Userinfo myUser= it.next();
 					user.setUserId(myUser.getUserId());
 					this.getHibernateTemplate().update(user);
 					return true;
@@ -94,9 +93,9 @@ public class UserInfoDaoImpl extends HibernateDaoSupport implements UserinfoDao 
 		String hql="from Addressinfo where addressId='"+address.getAddressId()+"'";
 		try{
 			List<Addressinfo> list=this.getHibernateTemplate().find(hql);
-			if(list!=null){
-				Iterator it=list.iterator();
-				Addressinfo af=(Addressinfo) it.next();
+			Iterator<Addressinfo> it=list.iterator();
+			if(it.hasNext()){
+				Addressinfo af= it.next();
 				address.setAddressId(af.getAddressId());
 				return true;
 			}else{
@@ -130,7 +129,8 @@ public class UserInfoDaoImpl extends HibernateDaoSupport implements UserinfoDao 
 		String hql="from Addressinfo where userId="+userId;
 		try{
 			List<Addressinfo> list=this.getHibernateTemplate().find(hql);
-			if(list!=null){
+			Iterator<Addressinfo> it = list.iterator();
+			if(it.hasNext()){
 				return list;
 			}else{
 				return null;
@@ -146,10 +146,7 @@ public class UserInfoDaoImpl extends HibernateDaoSupport implements UserinfoDao 
 		try{
 			String hql="from Docinfo where userId="+userId;
 			List<Docinfo> list=this.getHibernateTemplate().find(hql);
-			if(list!=null)
-				return list;
-			else
-				return null;
+			return list;
 		}catch(Exception e){
 			e.printStackTrace();
 			return null;
@@ -161,10 +158,7 @@ public class UserInfoDaoImpl extends HibernateDaoSupport implements UserinfoDao 
 		try{
 			String hql="from Orderinfo where userId="+userId;
 			List<Orderinfo> list=this.getHibernateTemplate().find(hql);
-			if(list!=null)
-				return list;
-			else
-				return null;
+			return list;
 		}catch(Exception e){
 			e.printStackTrace();
 			return null;

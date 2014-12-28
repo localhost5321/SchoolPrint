@@ -65,7 +65,6 @@ public class UserAction extends ActionSupport{
 		response.setContentType("text/plain");
 		user.setUserPwd(MD5.md5(user.getUserPwd().getBytes()));
 		user.setRegTime(new Date());
-//		System.out.println(this.user);
 		if(this.userService.addUser(this.user)){
 			session.put("user", this.user);
 			response.getWriter().write("{\"status\":\"1\",\"message\":\"\"}");
@@ -79,13 +78,16 @@ public class UserAction extends ActionSupport{
 	 * 验证用户的邮箱是否已经注册过
 	 * @param email
 	 * @return　若注册过，则返回false,否则为true
+	 * @throws IOException 
 	 */
-	public String verifyEmail(String email){
+	public String verifyEmail(String email) throws IOException{
 		if(this.userService.checkEmail(email)){
-			return SUCCESS;
+			response.getWriter().write("{status:'1',message:''}");
+			return null;
 		}
 		else{
-			return ERROR;
+			response.getWriter().write("{status:'0',message:''}");
+			return null;
 		}
 	}
 	/**
@@ -94,15 +96,15 @@ public class UserAction extends ActionSupport{
 	 * @return　没有存在的，返回SUCCESS, 若存在，返回ERROR
 	 * @throws IOException 
 	 */
-	public String verifyUserName(String userName) throws IOException{
+	public String verifyUserName() throws IOException{
+		String userName = null;
 		response.setContentType("text/plain");
-		System.out.println("....");
 		Userinfo user = this.userService.searchUser(userName);
 		if(user == null){
-			response.getWriter().write("{\"status\":\"1\",\"message\":\"\"}");
+			response.getWriter().write("{status:'1',message:''}");
 			return null;
 		}else{
-			response.getWriter().write("{\"status\":\"0\",\"message\":\"用户名已存在\"}");
+			response.getWriter().write("{status:'0',message:'用户名已存在'}");
 			return null;
 		}
 	}
