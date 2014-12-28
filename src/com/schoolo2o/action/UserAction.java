@@ -41,20 +41,22 @@ public class UserAction extends ActionSupport{
 	}
 
 	public String userLogin() throws IOException{
-		response.setContentType("text/plain");  //设置响应体的格式
+		//设置响应体的格式
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("utf-8");
 		Userinfo us = this.userService.searchUser(user.getUserName());
 		String MD5Psw = MD5.md5(user.getUserPwd().getBytes());
 		if(us == null){
 			//返回一段json数据
-			response.getWriter().write("{status:0,message:}");
+			response.getWriter().write("{\"status\":\"0\",\"message\":\"用户名不存在\"}");
 			return null;
 		}else if(us.getUserPwd().equals(MD5Psw)){
 			session.put("user", user);
-			response.getWriter().write("{status:'1',message:''}");
+			response.getWriter().write("{\"status\":\"1\",\"message\":\"\"}");
 			return null;
 		}else{
 			this.user = null;
-			response.getWriter().write("{status:'0',message:''}");
+			response.getWriter().write("{\"status\":\"0\",\"message\":\"密码错误\"}");
 			session.put("user", user);
 			return null;
 		}
@@ -66,10 +68,10 @@ public class UserAction extends ActionSupport{
 		user.setRegTime(new Timestamp(new Date().getTime()));
 		if(this.userService.addUser(this.user)){
 			session.put("user", this.user);
-			response.getWriter().write("{status:'1',message:''}");
+			response.getWriter().write("{\"status\":\"1\",\"message\":\"\"}");
 			return null;
 		}else{
-			response.getWriter().write("{status:'0',message:'注册失败'}");
+			response.getWriter().write("{\"status\":\"0\",\"message\":\"\"}");
 			return null;
 		}
 	}
@@ -107,6 +109,7 @@ public class UserAction extends ActionSupport{
 			return null;
 		}
 	}
+	
 	/**
 	 * 用于退出用户登陆
 	 * @return
