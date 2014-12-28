@@ -92,15 +92,21 @@ public class UserAction extends ActionSupport{
 	 * 用户注册时的用户名验证
 	 * @param userName　 用户名
 	 * @return　没有存在的，返回SUCCESS, 若存在，返回ERROR
+	 * @throws IOException 
 	 */
-	public String verifyUserName(String userName){
+	public String verifyUserName(String userName) throws IOException{
+		response.setContentType("text/plain");
+		System.out.println("....");
 		Userinfo user = this.userService.searchUser(userName);
 		if(user == null){
-			return SUCCESS;
+			response.getWriter().write("{\"status\":\"1\",\"message\":\"\"}");
+			return null;
 		}else{
-			return ERROR;
+			response.getWriter().write("{\"status\":\"0\",\"message\":\"用户名已存在\"}");
+			return null;
 		}
 	}
+	
 	/**
 	 * 用于退出用户登陆
 	 * @return

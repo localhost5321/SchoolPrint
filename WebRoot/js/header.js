@@ -10,8 +10,11 @@ window.onload = function() {
 function login() {
 	var json = $("#loginForm").serialize();
 	$.post("userLogin.action", json, function(data) {
-		var obj = data.parseJSON();
-		alert(obj.status);
+		var obj = JSON.parse(data)
+		if(obj.status == 1){
+			//登陆成功
+			location.reload();   
+		}
 	});
 }
 
@@ -21,7 +24,10 @@ function login() {
 function regist() {
 	var json = $("#registForm").serialize();
 	$.post("userRegist.action", json, function(data) {
-		alert(data);
+		if(obj.status == 1){
+			//注册成功
+			location.reload(); 
+		}
 	});
 }
 
@@ -29,7 +35,9 @@ function regist() {
  * 退出登陆
  */
 function exit() {
-	$.post("userExit.action");
+	$.post("userExit.action",function(data) {
+			location.reload();   
+	});
 }
 
 /**
@@ -65,6 +73,22 @@ function preLogin() {
 		return false;
 	}
 
+	$.post("verifyUserName.action", $(this).val(), function(data) {
+		var obj = JSON.parse(data);
+		alert(obj.status);
+		if(obj.status == 1){
+			//注册成功
+			location.reload(); 
+		}else{
+			$("#registUsernameDiv").addClass("form-group has-error has-feedback");
+			$("#registUsernameInfo").show();
+			$("#registUsernameInfo").text(obj.message);
+			$("#registUsernameIcon").addClass(
+					"glyphicon glyphicon-remove form-control-feedback");
+			$("#registUsernameIcon").show();
+		}
+	});
+	
 	// 符合正确格式
 	$("#registUsernameDiv").addClass("form-group has-success has-feedback");
 	$("#registUsernameIcon").addClass(

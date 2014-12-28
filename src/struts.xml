@@ -19,7 +19,7 @@
 					<result name="success" type="redirect" > /index.jsp</result>
 						<result name="error" type="redirect"> /print.jsp</result>
 				</action>
-				<action name="ajaxTest" class="com.schoolo2o.test.TestAjax">
+				<action name="verifyUserName" class="com.schoolo2o.action.UserAction" method="verifyUserName">
 				</action>
 		</package>
 </struts>    
