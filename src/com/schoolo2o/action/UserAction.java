@@ -40,9 +40,7 @@ public class UserAction extends ActionSupport{
 	}
 
 	public String userLogin() throws IOException{
-		System.out.println("aaa");
-		//设置响应体的格式
-		response.setContentType("text/plain");
+		response.setContentType("text/plain");  //设置响应体的格式
 		Userinfo us = this.userService.searchUser(user.getUserName());
 		String MD5Psw = MD5.md5(user.getUserPwd().getBytes());
 		if(us == null){
@@ -65,7 +63,6 @@ public class UserAction extends ActionSupport{
 		response.setContentType("text/plain");
 		user.setUserPwd(MD5.md5(user.getUserPwd().getBytes()));
 		user.setRegTime(new Date());
-//		System.out.println(this.user);
 		if(this.userService.addUser(this.user)){
 			session.put("user", this.user);
 			response.getWriter().write("{status:'1',message:''}");
@@ -79,26 +76,34 @@ public class UserAction extends ActionSupport{
 	 * 验证用户的邮箱是否已经注册过
 	 * @param email
 	 * @return　若注册过，则返回false,否则为true
+	 * @throws IOException 
 	 */
-	public String verifyEmail(String email){
+	public String verifyEmail(String email) throws IOException{
 		if(this.userService.checkEmail(email)){
-			return SUCCESS;
+			response.getWriter().write("{status:'1',message:''}");
+			return null;
 		}
 		else{
-			return ERROR;
+			response.getWriter().write("{status:'0',message:''}");
+			return null;
 		}
 	}
 	/**
 	 * 用户注册时的用户名验证
 	 * @param userName　 用户名
 	 * @return　没有存在的，返回SUCCESS, 若存在，返回ERROR
+	 * @throws IOException 
 	 */
-	public String verifyUserName(String userName){
+	public String verifyUserName() throws IOException{
+		String userName = null;
+		response.setContentType("text/plain");
 		Userinfo user = this.userService.searchUser(userName);
 		if(user == null){
-			return SUCCESS;
+			response.getWriter().write("{status:'1',message:''}");
+			return null;
 		}else{
-			return ERROR;
+			response.getWriter().write("{status:'0',message:'用户名已存在'}");
+			return null;
 		}
 	}
 	/**
