@@ -28,8 +28,8 @@
 			<ul class="nav navbar-nav navbar-right">
 				<c:choose>
 					<c:when test="${sessionScope.user == null}">
-						<li><a href="javascript:void(0)" data-toggle="modal" data-target="#loginModal">登陆</a>
-						</li>
+						<li><a href="javascript:void(0)" data-toggle="modal"
+							data-target="#loginModal">登陆</a></li>
 						<li><a href="javascript:void(0)" data-toggle="modal"
 							data-target="#registerModal">注册</a></li>
 					</c:when>
@@ -38,7 +38,8 @@
 							data-toggle="dropdown">欢迎你：${sessionScope.user.userName}<span
 								class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="javascript:void(0)" data-tab="tab-chrome" onclick="exit();">退出</a></li>
+								<li><a href="javascript:void(0)" data-tab="tab-chrome"
+									onclick="exit();">退出</a></li>
 							</ul></li>
 					</c:when>
 				</c:choose>
@@ -118,36 +119,49 @@
 				method="post" id="registForm">
 				<div class="modal-body">
 					<!--输入用户名-->
-					<div class="form-group">
-						<label for="loginUsername" class="col-sm-3 control-label">用户名：</label>
-						<div class="col-sm-7">
-							<input type="text" class="form-control" id="loginUsername"
-								name="user.userName" placeholder="输入用户名">
+					<div class="form-group" id="registUsernameDiv">
+						<label for="registUsername" class="col-sm-3 control-label">用户名：</label>
+						<div class="col-sm-6">
+							<input type="text" class="form-control" id="registUsername"
+								name="user.userName" placeholder="输入用户名"> <span class=""
+								id="registUsernameIcon"></span>
 						</div>
+						<span class="help-block col-sm-3" id="registUsernameInfo"
+							style="padding:0px;"></span>
 					</div>
 					<!--输入密码-->
-					<div class="form-group">
-						<label for="loginPassword" class="col-sm-3 control-label">密码：</label>
-						<div class="col-sm-7">
-							<input type="password" class="form-control" id="loginPassword"
-								placeholder="输入密码">
+					<div class="form-group" id="registPasswordDiv">
+						<label for="registPassword" class="col-sm-3 control-label">密码：</label>
+						<div class="col-sm-6">
+							<input type="password" class="form-control " id="registPassword"
+								placeholder="输入密码"> <span class=""
+								id="registPasswordIcon"></span>
 						</div>
+						<span class="help-block col-sm-3" id="registPasswordInfo"
+							style="padding:0px;"></span>
 					</div>
 					<!--确认密码-->
-					<div class="form-group">
-						<label for="loginPassword" class="col-sm-3 control-label">确认密码：</label>
-						<div class="col-sm-7">
-							<input type="password" class="form-control" id="loginPassword"
-								name="user.userPwd" placeholder="再次输入密码">
+					<div class="form-group" id="registPasswordAgainDiv">
+						<label for="registPasswordAgain" class="col-sm-3 control-label">确认密码：</label>
+						<div class="col-sm-6">
+							<input type="password" class="form-control"
+								id="registPasswordAgain" name="user.userPwd"
+								placeholder="再次输入密码"> <span class=""
+								id="registPasswordAgainIcon"></span>
 						</div>
+						<span class="help-block col-sm-3" id="registPasswordAgainInfo"
+							style="padding:0px;"></span>
 					</div>
 					<!--邮箱-->
 					<div class="form-group">
 						<label for="loginEmail" class="col-sm-3 control-label">注册邮箱：</label>
-						<div class="col-sm-7">
+						<div class="col-sm-6">
 							<input type="email" class="form-control" id="loginEmail"
-								name="user.email" placeholder="输入邮箱">
+								name="user.email" placeholder="输入邮箱"> <span class=""
+								id="registEmailIcon"></span>
 						</div>
+						<span class="help-block col-sm-3" id="registEmailInfo"
+							style="padding:0px;"></span>
 					</div>
 				</div>
 				<!--注册窗口底部-->
