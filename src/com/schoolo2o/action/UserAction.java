@@ -40,14 +40,14 @@ public class UserAction extends ActionSupport{
 	}
 
 	public String userLogin() throws IOException{
-		System.out.println("aaa");
 		//设置响应体的格式
 		response.setContentType("text/plain");
+		response.setCharacterEncoding("utf-8");
 		Userinfo us = this.userService.searchUser(user.getUserName());
 		String MD5Psw = MD5.md5(user.getUserPwd().getBytes());
 		if(us == null){
 			//返回一段json数据
-			response.getWriter().write("{\"status\":\"0\",\"message\":\"\"}");
+			response.getWriter().write("{\"status\":\"0\",\"message\":\"用户名不存在\"}");
 			return null;
 		}else if(us.getUserPwd().equals(MD5Psw)){
 			session.put("user", user);
@@ -55,7 +55,7 @@ public class UserAction extends ActionSupport{
 			return null;
 		}else{
 			this.user = null;
-			response.getWriter().write("{\"status\":\"0\",\"message\":\"\"}");
+			response.getWriter().write("{\"status\":\"0\",\"message\":\"密码错误\"}");
 			session.put("user", user);
 			return null;
 		}

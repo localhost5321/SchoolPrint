@@ -61,7 +61,7 @@ public class UserInfoDaoImpl extends HibernateDaoSupport implements UserinfoDao 
 		String hql="from Userinfo where userName='"+userName+"'";
 		try{
 			List<Userinfo> list=this.getHibernateTemplate().find(hql);
-			if(list!=null){
+			if(!list.isEmpty()){
 				Iterator it=list.iterator();
 				Userinfo user=(Userinfo) it.next();
 				return user;
