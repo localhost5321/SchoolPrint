@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
@@ -22,6 +23,7 @@ public class UserAction extends ActionSupport{
 	private Map<String, Object> session = ServletActionContext.getContext().getSession();
 	private Logger log = Logger.getLogger(UserAction.class);
 	private HttpServletResponse response = ServletActionContext.getResponse();
+	private HttpServletRequest request = ServletActionContext.getRequest();
 	
 	public Userinfo getUser() {
 		return user;
@@ -85,13 +87,16 @@ public class UserAction extends ActionSupport{
 	 * @return　若注册过，则返回false,否则为true
 	 * @throws IOException 
 	 */
-	public String verifyEmail(String email) throws IOException{
+	public String verifyEmail() throws IOException{
+		String email = request.getParameter("email");
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("utf-8");
 		if(this.userService.checkEmail(email)){
-			response.getWriter().write("{status:'1',message:''}");
+			response.getWriter().write("{\"status\":\"0\",\"message\":\"此邮箱已被注册\"}");
 			return null;
 		}
 		else{
-			response.getWriter().write("{status:'0',message:''}");
+			response.getWriter().write("{\"status\":\"1\",\"message\":\"\"}");
 			return null;
 		}
 	}
@@ -102,7 +107,7 @@ public class UserAction extends ActionSupport{
 	 * @throws IOException 
 	 */
 	public String verifyUserName() throws IOException{
-		String userName = ServletActionContext.getRequest().getParameter("userName");
+		String userName = request.getParameter("userName");
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("utf-8");
 		Userinfo user = this.userService.searchUser(userName);
