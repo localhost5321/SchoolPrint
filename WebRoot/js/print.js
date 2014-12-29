@@ -56,6 +56,9 @@ $(document)
 
 				});
 
+/**
+ * 通过拖拽上传文件
+ */
 function initDrag() {
 	var holder = document.getElementById('holder'), uploadBtn = document
 			.getElementById('uploadBtn');
@@ -81,6 +84,12 @@ function initDrag() {
 		var files = event.dataTransfer.files;
 		event.stopPropagation();
 		event.preventDefault();
+		//判断文件类型是否符合要求
+		var result = judgeType(files);
+		if(result != ""){
+			alert("抱歉，暂不支持" + result + "格式");
+			return;
+		}
 		// 添加一项文件到表格
 		for (var i = 0; i < files.length; i++) {
 			// 文件判重
@@ -100,13 +109,19 @@ function initDrag() {
 }
 
 /**
- * 上传文件
+ * 通过input上传文件
  */
 function uploadFile() {
 	var form = document.forms["uploadFileForm"];
 	var fileCount = form["fileInput"].files.length;
 	if (fileCount == 0) {
 		alert("请选择文件");
+		return;
+	}
+	//判断文件类型是否符合要求
+	var result = judgeType(form["fileInput"].files);
+	if(result != ""){
+		alert("抱歉，暂不支持" + result + "格式");
 		return;
 	}
 	for (var i = 0; i < fileCount; i++) {
@@ -124,6 +139,19 @@ function uploadFile() {
 	}
 	// 更新文件信息
 	updateFileInfo();
+}
+
+function judgeType(files){
+	//遍历数组判断后缀名
+	for (var i = 0; i < files.length; i++) {
+		var fileName = files[i].name;
+		var type = fileName.substring(fileName.lastIndexOf(".") + 1);
+		if("doc pdf xls".indexOf(type) == -1){
+			//文件类型不支持
+			return type;
+		}
+	}
+	return "";
 }
 
 /**
@@ -460,12 +488,17 @@ function handleFile(file) {
 				if (xhr.readyState == 4) {
 					if (xhr.status == 200) {
 						console.log("upload complete");
-						console.log("response: " + xhr.responseText);
 					}
 				}
 			}
 		}
 	}
-
-	reader.readAsBinaryString(file);
+	
+	if(reader.readAsBinaryString){
+		reader.readAsBinaryString(file);
+	}else if(reader.readAsText){
+		reader.readAsText(file);
+	}else if(reader.readAsArrayBuffer){
+		reader.readAsArrayBuffer(file);
+	}
 }

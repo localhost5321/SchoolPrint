@@ -96,7 +96,7 @@
 					method="post" enctype="multipart/form-data" role="form">
 					<!--通过浏览上传文件-->
 					<div class="file-box form-group">
-						<input type="text" id="textfield" disabled /> <a
+						<input type="text" id="textfield" disabled/> <a
 							class="btn btn-info" id="browseBtn" >浏览</a> 
 							<input type="file" id="fileInput" size="28" name="upFile"
 							onchange="document.getElementById('textfield').value=this.value"
