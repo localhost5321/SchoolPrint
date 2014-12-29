@@ -38,7 +38,7 @@
 							data-toggle="dropdown">欢迎你：${sessionScope.user.userName}<span
 								class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="javascript:void(0)" data-tab="tab-chrome"
+								<li><a href="javascript:void(0)"
 									onclick="exit();">退出</a></li>
 							</ul></li>
 					</c:when>

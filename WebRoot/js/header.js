@@ -12,10 +12,11 @@ window.onload = function() {
 function login() {
 	var json = $("#loginForm").serialize();
 	$.post("userLogin.action", json, function(data) {
-		var obj = JSON.parse(data)
+		var obj = JSON.parse(data);
 		if (obj.status == 1) {
 			// 登陆成功
-			location.reload();
+			$("#navbarUserInfo").html(obj.message);
+			$("#loginModal").modal("hide");
 		} else {
 			// 登陆失败
 			$("#loginInfo").text(obj.message);
@@ -36,7 +37,8 @@ function regist() {
 		var obj = JSON.parse(data);
 		if (obj.status == 1) {
 			// 注册成功
-			location.reload();
+			$("#navbarUserInfo").html(obj.message);
+			$("#registerModal").modal("hide");
 		}
 	});
 }
@@ -56,6 +58,7 @@ function exit() {
  * @returns {Boolean}
  */
 function preLogin() {
+	var flag = true;
 	var username = $("#registUsername").val();
 	// 用户名验证
 	$("#registUsernameIcon").removeClass();
@@ -84,29 +87,37 @@ function preLogin() {
 		$("#registUsernameIcon").show();
 		return false;
 	}
-
-	//判断用户名是否存在
-	$.post("verifyUserName.action", username, function(data) {
-		var obj = JSON.parse(data);
-		alert(obj.status);
-		if (obj.status != 1) {
-			//用户名已存在
-			$("#registUsernameDiv").addClass(
-					"form-group has-error has-feedback");
-			$("#registUsernameInfo").show();
-			$("#registUsernameInfo").text(obj.message);
-			$("#registUsernameIcon").addClass(
-					"glyphicon glyphicon-remove form-control-feedback");
-			$("#registUsernameIcon").show();
-		}
-	});
-
+	
 	// 符合正确格式
 	$("#registUsernameDiv").addClass("form-group has-success has-feedback");
 	$("#registUsernameIcon").addClass(
 			"glyphicon glyphicon-ok form-control-feedback");
 	$("#registUsernameIcon").show();
 	$("#registUsernameInfo").hide();
+
+	// 判断用户名是否存在
+	$.ajax({
+		type : "post",
+		url : "verifyUserName.action",
+		data : "userName=" + username,
+		async : true,
+		success : function(data) {
+			var obj = JSON.parse(data);
+			if (obj.status != 1) {
+				// 用户名已存在
+				$("#registUsernameDiv").addClass(
+						"form-group has-error has-feedback");
+				$("#registUsernameInfo").show();
+				$("#registUsernameInfo").text(obj.message);
+				$("#registUsernameIcon").addClass(
+						"glyphicon glyphicon-remove form-control-feedback");
+				$("#registUsernameIcon").show();
+				flag = false;
+			}
+		}
+	});
+	
+	return flag;
 }
 
 /**
@@ -150,6 +161,7 @@ function preCheckPassword() {
 			"glyphicon glyphicon-ok form-control-feedback");
 	$("#registPasswordIcon").show();
 	$("#registPasswordInfo").hide();
+	return true;
 }
 
 /**
@@ -183,6 +195,7 @@ function preCheckPasswordSame() {
 			"glyphicon glyphicon-ok form-control-feedback");
 	$("#registPasswordAgainIcon").show();
 	$("#registPasswordAgainInfo").hide();
+	return true;
 }
 
 /**
@@ -211,12 +224,14 @@ function preCheckPhone() {
 			"glyphicon glyphicon-ok form-control-feedback");
 	$("#registPhoneIcon").show();
 	$("#registPhoneInfo").hide();
+	return true;
 }
 
 /**
  * 验证邮箱格式
  */
 function preCheckEmail() {
+	var flag = true;
 	var email = $("#registEmail").val();
 	$("#registEmailIcon").removeClass();
 	$("#registEmailDiv").removeClass();
@@ -232,10 +247,35 @@ function preCheckEmail() {
 		$("#registEmailIcon").show();
 		return false;
 	}
+	
 	// 符合正确格式
 	$("#registEmailDiv").addClass("form-group has-success has-feedback");
 	$("#registEmailIcon").addClass(
 			"glyphicon glyphicon-ok form-control-feedback");
 	$("#registEmailIcon").show();
 	$("#registEmailInfo").hide();
+	
+	// 判断邮箱是否被注册
+	$.ajax({
+		type : "post",
+		url : "verifyEmail.action",
+		data : "email=" + email,
+		async : true,
+		success : function(data) {
+			var obj = JSON.parse(data);
+			if (obj.status != 1) {
+				// 邮箱已被注册
+				$("#registEmailDiv").addClass(
+						"form-group has-error has-feedback");
+				$("#registEmailInfo").show();
+				$("#registEmailInfo").text(obj.message);
+				$("#registEmailIcon").addClass(
+						"glyphicon glyphicon-remove form-control-feedback");
+				$("#registEmailIcon").show();
+				flag = false;
+			}
+		}
+	});
+	
+	return flag;
 }

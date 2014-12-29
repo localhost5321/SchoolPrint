@@ -21,7 +21,7 @@
 				</action>
 				<action name="verifyUserName" class="com.schoolo2o.action.UserAction" method="verifyUserName">
 				</action>
-				<action name="verifyUserName" class="com.schoolo2o.action.UserAction" method="verifyUserName">
+				<action name="verifyEmail" class="com.schoolo2o.action.UserAction" method="verifyEmail">
 				</action>
 		</package>
 </struts>    
