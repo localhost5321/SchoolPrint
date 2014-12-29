@@ -433,24 +433,21 @@ function handleFile(file) {
 	$("#showFilesContent").fadeIn(1000);
 	showFilesContent.style.left = 2 * GAP + FILE_UPLOAD_WIDTH + "px";
 
+	progressBar = addFileToTable(file, progressBar);
+	
+	// 这个事件在读取开始时触发
 	reader.onloadstart = function() {
-		// 这个事件在读取开始时触发
-		console.log("onloadstart");
-		// 添加一项文件到表格
-		progressBar = addFileToTable(file, progressBar);
 	}
 
+	// 这个事件在读取进行中定时触发
 	reader.onprogress = function(p) {
-		// 这个事件在读取进行中定时触发
-		console.log("onprogress");
 		var pro = Math.round(p.loaded / file.size * 100);
 		// 更新进度条
 		updateProgressBar(progressBar, pro);
 	}
 
+	// 这个事件在读取成功结束后触发
 	reader.onload = function() {
-		// 这个事件在读取成功结束后触发
-		console.log("load complete");
 	}
 
 	reader.onloadend = function() {
