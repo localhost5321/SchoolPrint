@@ -16,8 +16,8 @@
         <property name="status" type="java.lang.Integer">
             <column name="status" not-null="true" />
         </property>
-        <property name="changeTime" type="java.util.Date">
-            <column name="changeTime" length="10" not-null="true" />
+        <property name="changeTime" type="java.sql.Timestamp">
+            <column name="changeTime" length="19" not-null="true" />
         </property>
         <property name="isCurrent" type="java.lang.Integer">
             <column name="isCurrent" not-null="true" />

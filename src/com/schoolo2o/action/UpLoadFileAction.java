@@ -18,7 +18,6 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.schoolo2o.pojo.Docinfo;
 import com.schoolo2o.pojo.Orderinfo;
 import com.schoolo2o.pojo.Orderitem;
-import com.schoolo2o.pojo.Userinfo;
 import com.schoolo2o.utils.MyFileUtils;
 
 /**
@@ -27,37 +26,20 @@ import com.schoolo2o.utils.MyFileUtils;
  * @author hua
  * 
  */
+
 public class UpLoadFileAction extends ActionSupport {
-	private File[] uploadFile;
-	private String[] uploadFileType;
-	private String[] uploadFileName;
-	private String[] uploadPath;
-	private String[] newFileName;
+
+	private File saveFile;
 	private Set<Orderitem> itemSet = new HashSet<Orderitem>();
 	private List<Docinfo> docList = null;
+	HttpServletRequest serletRequest = ServletActionContext.getRequest();
 
-	public File[] getUploadFile() {
-		return uploadFile;
+	public File getSaveFile() {
+		return saveFile;
 	}
 
-	public void setUploadFile(File[] uploadFile) {
-		this.uploadFile = uploadFile;
-	}
-
-	public String[] getUploadFileType() {
-		return uploadFileType;
-	}
-
-	public void setUploadFileType(String[] uploadFileType) {
-		this.uploadFileType = uploadFileType;
-	}
-
-	public String[] getUploadFileName() {
-		return uploadFileName;
-	}
-
-	public void setUploadFileName(String[] uploadFileName) {
-		this.uploadFileName = uploadFileName;
+	public void setSaveFile(File saveFile) {
+		this.saveFile = saveFile;
 	}
 
 	public Set<Orderitem> getItemSet() {
@@ -82,35 +64,33 @@ public class UpLoadFileAction extends ActionSupport {
 	 * @throws IOException
 	 */
 	public void upLoadFileSave() throws IOException {
-		File[] files = this.getUploadFile();
-		for (int i = 0; i < files.length; i++) {
-			InputStream is = new FileInputStream(files[i]);
-			this.uploadPath[i] = MyFileUtils.CreateFileParentPath()
-					+ this.getUploadFileType()[i];
-			this.newFileName[i] = MyFileUtils.CreateFileName(); /* 文件重命名 */
-			File toFile = new File(this.uploadPath[i], this.newFileName[i]);
-			OutputStream os = new FileOutputStream(toFile);
-			byte[] buffer = new byte[1024];
-			int length = 0;
-			while ((length = is.read(buffer)) > 0) {
-				os.write(buffer, 0, length);
-			}
-			is.close();
-			os.close();
+		File files = this.getSaveFile();
+		InputStream is = new FileInputStream(files);
+		String uploadPath = MyFileUtils.CreateFileParentPath() + "doc"; // 文件路径
+		String newFileName = MyFileUtils.CreateFileName(); /* 文件重命名 */
+		File toFile = new File(uploadPath, newFileName);
+		OutputStream os = new FileOutputStream(toFile);
+		byte[] buffer = new byte[1024];
+		int length = 0;
+		while ((length = is.read(buffer)) > 0) {
+			os.write(buffer, 0, length);
 		}
+		is.close();
+		os.close();
+		addDocument(newFileName, uploadPath);
 	}
 
 	/**
 	 * 添加到文件表中
 	 */
-	public void addDocument() {
+	public void addDocument(String fileName, String filePath) {
 		Docinfo doc = new Docinfo();
-		HttpServletRequest serletRequest = ServletActionContext.getRequest();
-		Userinfo user = (Userinfo) serletRequest.getAttribute("user");
-		for (int i = 0; i < uploadFile.length; i++) {
-			Docinfo Doc = new Docinfo();
-
-		}
+		doc.setFileName(fileName);
+		doc.setFilePath(filePath);
+		doc.setIsShare(1);
+		doc.setBrowseNum(0L);
+		doc.setDownNum(0L);
+		this.getDocList().add(doc);
 	}
 
 	/**
@@ -121,4 +101,5 @@ public class UpLoadFileAction extends ActionSupport {
 	public void createOrderItem(Orderinfo order) {
 
 	}
+
 }

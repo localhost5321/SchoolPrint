@@ -1,5 +1,6 @@
 package com.schoolo2o.test;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -51,7 +52,7 @@ public class TestOrderInfoDao {
 		order.setOrderitems(itemSet);
 		Orderstatus status = new Orderstatus();
 		status.setOrderinfo(order);
-		status.setChangeTime(new Date());
+		status.setChangeTime(new Timestamp(new Date().getTime()));
 		status.setStatus(1);
 		status.setIsCurrent(1);
 		order.getOrderstatuses().add(status);
@@ -69,7 +70,7 @@ public class TestOrderInfoDao {
 		user.setUserId(1L);
 		user.setUserName("huazai");
 		user.setEmail("penghua234@163.com");
-		user.setRegTime(new Date());
+		user.setRegTime(new Timestamp(new Date().getTime()));
 		order.setUserinfo(user);
 		ApplicationContext context = new ClassPathXmlApplicationContext
 				("applicationContext.xml");

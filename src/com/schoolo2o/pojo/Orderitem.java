@@ -9,6 +9,7 @@ public class Orderitem implements java.io.Serializable {
 	// Fields
 
 	private Long itemId;
+	private Modelfile modelfile;
 	private Orderinfo orderinfo;
 	private String fileName;
 	private Integer fileCount;
@@ -24,17 +25,20 @@ public class Orderitem implements java.io.Serializable {
 
 	/** minimal constructor */
 	public Orderitem(Orderinfo orderinfo, String fileName, Integer fileCount,
-			Integer pageNumber, Double filePrice) {
+			Integer pageNumber, Double filePrice, String printRequire) {
 		this.orderinfo = orderinfo;
 		this.fileName = fileName;
 		this.fileCount = fileCount;
 		this.pageNumber = pageNumber;
 		this.filePrice = filePrice;
+		this.printRequire = printRequire;
 	}
 
 	/** full constructor */
-	public Orderitem(Orderinfo orderinfo, String fileName, Integer fileCount,
-			Integer pageNumber, Double filePrice, String printRequire) {
+	public Orderitem(Modelfile modelfile, Orderinfo orderinfo, String fileName,
+			Integer fileCount, Integer pageNumber, Double filePrice,
+			String printRequire) {
+		this.modelfile = modelfile;
 		this.orderinfo = orderinfo;
 		this.fileName = fileName;
 		this.fileCount = fileCount;
@@ -51,6 +55,14 @@ public class Orderitem implements java.io.Serializable {
 
 	public void setItemId(Long itemId) {
 		this.itemId = itemId;
+	}
+
+	public Modelfile getModelfile() {
+		return this.modelfile;
+	}
+
+	public void setModelfile(Modelfile modelfile) {
+		this.modelfile = modelfile;
 	}
 
 	public Orderinfo getOrderinfo() {

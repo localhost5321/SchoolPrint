@@ -37,7 +37,7 @@
 				<value>com/schoolo2o/pojo/Addressinfo.hbm.xml</value>
 				<value>com/schoolo2o/pojo/Admininfo.hbm.xml</value>
 				<value>com/schoolo2o/pojo/ShopComment.hbm.xml</value>
-			</list>
+				<value>com/schoolo2o/pojo/Modelfile.hbm.xml</value></list>
 		</property>
 	</bean>
 

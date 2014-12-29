@@ -23,11 +23,11 @@ public interface DocService {
 	public boolean delete(Long id); 
 	
 	/**
-	 * 
+	 * 修改文档信息
 	 * @param doc
-	 * @return
+	 * @return 如果修改成功则返回true;否则返回false
 	 */
-	public boolean update(Docinfo doc);  /*修改文档信息，如果修改成功则返回true;否则返回false**/
+	public boolean update(Docinfo doc); 
 	/**
 	 * 根据用户ＩＤ获取用户所有上传的文档信息
 	 * @param userId　用户ＩＤ

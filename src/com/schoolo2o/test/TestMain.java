@@ -1,5 +1,6 @@
 package com.schoolo2o.test;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 import org.springframework.context.ApplicationContext;
@@ -16,13 +17,14 @@ public class TestMain {
 		shop.setShopPwd("123456");
 		shop.setShopNick("华仔打印店");
 		shop.setShopAddress("洪辰六栋420");
+		shop.setShopPhone("15575462341");
 		shop.setShopPic("/shop/picture/201412212207.jpg");
 		shop.setShopDesc("我们是洪辰最好的打印店");
 		shop.setDelivery(2.5);
 		ShopComment comment = new ShopComment();
 		comment.setCommentId(2L);
 		comment.setCommentContent("这个打印店很好");
-		comment.setCommentDate(new Date());
+		comment.setCommentDate(new Timestamp(new Date().getTime()));
 		comment.setCommentUser("huazai");
 		comment.setShopScore(5);
 		ApplicationContext context = new ClassPathXmlApplicationContext
