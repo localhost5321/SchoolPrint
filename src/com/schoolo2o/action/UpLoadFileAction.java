@@ -1,23 +1,18 @@
 package com.schoolo2o.action;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.schoolo2o.pojo.Docinfo;
-import com.schoolo2o.pojo.Orderinfo;
-import com.schoolo2o.pojo.Orderitem;
+import com.schoolo2o.pojo.Userinfo;
+import com.schoolo2o.service.DocService;
+import com.schoolo2o.service.UserService;
 import com.schoolo2o.utils.MyFileUtils;
 
 /**
@@ -29,34 +24,10 @@ import com.schoolo2o.utils.MyFileUtils;
 
 public class UpLoadFileAction extends ActionSupport {
 
-	private File saveFile;
-	private Set<Orderitem> itemSet = new HashSet<Orderitem>();
-	private List<Docinfo> docList = null;
-	HttpServletRequest serletRequest = ServletActionContext.getRequest();
-
-	public File getSaveFile() {
-		return saveFile;
-	}
-
-	public void setSaveFile(File saveFile) {
-		this.saveFile = saveFile;
-	}
-
-	public Set<Orderitem> getItemSet() {
-		return itemSet;
-	}
-
-	public void setItemSet(Set<Orderitem> itemSet) {
-		this.itemSet = itemSet;
-	}
-
-	public List<Docinfo> getDocList() {
-		return docList;
-	}
-
-	public void setDocList(List<Docinfo> docList) {
-		this.docList = docList;
-	}
+	private DocService dcoService ;
+	private UserService userService;
+	private HttpServletRequest serletRequest = ServletActionContext.getRequest();
+	private HttpServletResponse response = ServletActionContext.getResponse();
 
 	/**
 	 * 上传文件保存到服务器硬盘中
@@ -64,42 +35,38 @@ public class UpLoadFileAction extends ActionSupport {
 	 * @throws IOException
 	 */
 	public void upLoadFileSave() throws IOException {
-		File files = this.getSaveFile();
-		InputStream is = new FileInputStream(files);
-		String uploadPath = MyFileUtils.CreateFileParentPath() + "doc"; // 文件路径
-		String newFileName = MyFileUtils.CreateFileName(); /* 文件重命名 */
-		File toFile = new File(uploadPath, newFileName);
-		OutputStream os = new FileOutputStream(toFile);
-		byte[] buffer = new byte[1024];
-		int length = 0;
-		while ((length = is.read(buffer)) > 0) {
-			os.write(buffer, 0, length);
-		}
-		is.close();
-		os.close();
-		addDocument(newFileName, uploadPath);
+		InputStream in = serletRequest.getInputStream();
+		String fileName = serletRequest.getParameter("fileName");
+		String userName = serletRequest.getParameter("userName");
+		response.setContentType("text/plain");
+		
+		response.setCharacterEncoding("utf-8");
+		
+		String uploadPath = MyFileUtils.CreateFileParentPath()
+				+ MyFileUtils.GetFileNameExtensionWithoutPoint(fileName) + "/"; // 文件所在文件夹
+		String newFileName = MyFileUtils.CreateFileName()
+				+ MyFileUtils.GetFileNameExtension(fileName); /* 文件重命名 */
+		String fullPath = uploadPath + newFileName;
+		MyFileUtils.Store(in, fullPath);
+		long docId =  addDocument(fileName, fullPath, userName);
+		response.getWriter().write("status\":\"1\",\"message\":\"'"+docId+"'\"}");
 	}
 
 	/**
 	 * 添加到文件表中
 	 */
-	public void addDocument(String fileName, String filePath) {
+	public long addDocument(String fileName, String filePath ,String userName) {
+		
 		Docinfo doc = new Docinfo();
 		doc.setFileName(fileName);
 		doc.setFilePath(filePath);
 		doc.setIsShare(1);
 		doc.setBrowseNum(0L);
 		doc.setDownNum(0L);
-		this.getDocList().add(doc);
-	}
-
-	/**
-	 * 文件打印条目添加到Set容器中
-	 * 
-	 * @param order
-	 */
-	public void createOrderItem(Orderinfo order) {
-
+		Userinfo user = userService.searchUser(userName);
+		doc.setUserinfo(user);
+		doc = dcoService.add(doc,user);
+		return doc.getDocId();
 	}
 
 }
