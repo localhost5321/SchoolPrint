@@ -38,7 +38,7 @@
 							data-toggle="dropdown">欢迎你：${sessionScope.user.userName}<span
 								class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="javascript:void(0)" data-tab="tab-chrome"
+								<li><a href="javascript:void(0)"
 									onclick="exit();">退出</a></li>
 							</ul></li>
 					</c:when>
@@ -165,7 +165,7 @@
 						<label for="registPhone" class="col-sm-3 control-label">手机号：</label>
 						<div class="col-sm-6">
 							<input type="tel" class="form-control" id="registPhone"
-								name="user.phone" placeholder="输入手机号码"> <span class=""
+								name="user.userPhone" placeholder="输入手机号码"> <span class=""
 								id="registPhoneIcon"></span>
 						</div>
 						<span class="help-block col-sm-3" id="registPhoneInfo"

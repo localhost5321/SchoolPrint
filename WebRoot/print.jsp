@@ -147,36 +147,36 @@
 	<div class="container shopContainer">
 
 		<div class="shopInfo">
-			<img src="images/chrome-logo-small.jpg" class="img-circle" />
+			<img src="images/s1.png" class="img-circle" />
 			<h3 class="shopName">打印店名八字以内</h3>
-			<p class="shopAdd">地址：弘辰桥洞小巷内10米左拐急急急急急急积极</p>
+			<p class="shopAddr">地址：弘辰桥洞小巷内10米左拐急急急急急急积极</p>
 			<p class="shopTel">联系电话：0728-8259807</p>
 			<button id="shopDetail_1" class="btn btn-info shopDetail" >查看订单</button>
 			<button id="enterShop_1" class="btn btn-primary enterShop">进入店铺</button>
 		</div>
 
 		<div class="shopInfo">
-			<img src="images/chrome-logo-small.jpg" class="img-circle" />
+			<img src="images/s2.png" class="img-circle" />
 			<h3 class="shopName">打印店名八字以内</h3>
-			<p class="shopAdd">地址：弘辰桥洞小巷内10米左拐</p>
+			<p class="shopAddr">地址：弘辰桥洞小巷内10米左拐</p>
 			<p class="shopTel">联系电话：0728-8259807/13027342004</p>
 			<button class="btn btn-info shopDetail" data-toggle="modal" data-target="#orderModal">查看订单</button>
 			<button class="btn btn-primary enterShop">进入店铺</button>
 		</div>
 
 		<div class="shopInfo">
-			<img src="images/chrome-logo-small.jpg" class="img-circle" />
+			<img src="images/s3.png" class="img-circle" />
 			<h3 class="shopName">打印店名八字以内</h3>
-			<p class="shopAdd">地址：弘辰桥洞小巷内10米左拐万一超过</p>
+			<p class="shopAddr">地址：弘辰桥洞小巷内10米左拐万一超过</p>
 			<p class="shopTel">联系电话：0728-8259807/18373425473ddddddd</p>
 			<button class="btn btn-info shopDetail" data-toggle="modal" data-target="#orderModal">查看订单</button>
 			<button class="btn btn-primary enterShop">进入店铺</button>
 		</div>
 
 		<div class="shopInfo">
-			<img src="images/chrome-logo-small.jpg" class="img-circle" />
+			<img src="images/s4.png" class="img-circle" />
 			<h3 class="shopName">打印店名八字以内</h3>
-			<p class="shopAdd">地址：弘辰桥洞小巷内10米左拐万一超过</p>
+			<p class="shopAddr">地址：弘辰桥洞小巷内10米左拐万一超过</p>
 			<p class="shopTel">联系电话：0728-8259807/18373425473ddddddd</p>
 			<button class="btn btn-info shopDetail" data-toggle="modal" data-target="#orderModal">查看订单</button>
 			<button class="btn btn-primary enterShop">进入店铺</button>
