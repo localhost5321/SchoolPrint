@@ -50,6 +50,17 @@ public class MyFileUtils {
 	}
 
 	/**
+	 * 文件类型
+	 * 
+	 * @param fileName
+	 * @return
+	 */
+	public static String GetFileNameExtensionWithoutPoint(String fileName) {
+		String[] strs = fileName.split("\\.");
+		return strs[strs.length - 1];
+	}
+
+	/**
 	 * 将输入流存储到指定的文件中去
 	 * 
 	 * @param in
