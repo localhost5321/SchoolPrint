@@ -13,6 +13,7 @@
 	border-radius: 10px;
 	background-color: #ddd;
 	margin: 10px;
+	position:relative;
 }
 
 .shopInfo:hover {
@@ -43,7 +44,9 @@
 }
 
 .shopInfo .shopDetail {
-	float: left;
+	position: absolute;
+	left: 155px;
+	top:145px;
 }
 .shopInfo .shopTel {
 	margin-right: 5px;
@@ -52,6 +55,7 @@
 	margin-right: 5px;
 }
 .shopInfo .enterShop {
-	float: right;
-	margin-right: 10px;
+	position: absolute;
+	left: 280px;
+	top:145px;
 }
