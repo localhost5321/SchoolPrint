@@ -3,6 +3,7 @@ package com.schoolo2o.utils;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -33,8 +34,8 @@ public class MyFileUtils {
 	public static String CreateFileParentPath() {
 		String path;
 		Date date = new Date();
-		path = "" + date.getYear() + "/" + date.getMonth() + "/"
-				+ date.getDay() + "/";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy/MM/dd");
+		path = simpleDateFormat.format(date);
 		return path;
 	}
 
