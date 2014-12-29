@@ -19,7 +19,8 @@ public class DocServiceImpl implements DocService{
 	}
 
 	@Override
-	public boolean add(Docinfo doc, Userinfo user) {
+	public Docinfo add(Docinfo doc, Userinfo user) {
+		doc.setUserinfo(user);
 		return docInfoDao.add(doc);
 	}
 

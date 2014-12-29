@@ -14,7 +14,7 @@ public class TestDocInfoDaoImpl {
 	public void setDocInfoDao(DocInfoDao docInfoDao) {
 		this.docInfoDao = docInfoDao;
 	}
-	public boolean addTest(Docinfo doc){
+	public Docinfo addTest(Docinfo doc){
 		return docInfoDao.add(doc);
 	}     /*添加文档*/
 	public boolean deleteTest(Long id){

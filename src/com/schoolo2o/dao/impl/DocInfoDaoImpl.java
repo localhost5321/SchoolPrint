@@ -17,17 +17,16 @@ import com.schoolo2o.pojo.Docinfo;
 public class DocInfoDaoImpl extends HibernateDaoSupport implements DocInfoDao {
 
 	@Override
-	public boolean add(Docinfo doc) {
+	public Docinfo add(Docinfo doc) {
 		if(doc!=null){
 			try{
 				this.getHibernateTemplate().save(doc);
-				return true;
+				return doc;
 			}catch(Exception e){
 				e.printStackTrace();
-				return false;
 			}
 		}
-		return false;
+		return null;
 	}
 
 	//删除一个文档
