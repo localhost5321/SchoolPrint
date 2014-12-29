@@ -346,7 +346,7 @@ function showUserFile() {
 		file.printCounts = $(printCounts[i]).val();
 		json.data.push(file);
 	}
-	return json
+	return json;
 }
 
 /**
@@ -387,7 +387,7 @@ function showOrder(obj) {
 		tr.appendChild(tdPrice);
 		// 创建总价列
 		var sumPrice = document.createElement("td");
-		sumPrice.className = "sumPrice"
+		sumPrice.className = "sumPrice";
 		sumPrice.innerHTML = Number(tdPrintCount.innerHTML)
 				* Number(tdPrintCounts.innerHTML) * Number(tdPrice.innerHTML);
 		tr.appendChild(sumPrice);
@@ -434,9 +434,8 @@ function handleFile(file) {
 	showFilesContent.style.left = 2 * GAP + FILE_UPLOAD_WIDTH + "px";
 
 	progressBar = addFileToTable(file, progressBar);
-	
-	// 这个事件在读取开始时触发
 	reader.onloadstart = function() {
+		// 这个事件在读取开始时触发
 	}
 
 	// 这个事件在读取进行中定时触发
@@ -450,8 +449,8 @@ function handleFile(file) {
 	reader.onload = function() {
 	}
 
+	// 这个事件在读取结束后，无论成功或者失败都会触发
 	reader.onloadend = function() {
-		// 这个事件在读取结束后，无论成功或者失败都会触发
 		if (reader.error) {
 			console.log(reader.error);
 			progressBar.className = "progress-bar progress-bar-danger progress-bar-striped";
@@ -463,7 +462,7 @@ function handleFile(file) {
 			xhr.open(
 			/* method */"POST",
 			/* target url */
-			"fileUpLoad.action?fileName=" + file.name
+			"fileUpLoad.action?fileName=" + file.name + "&userName=" + USERNAME
 			/* , async, default to true */
 			);
 			xhr.overrideMimeType("application/octet-stream");
@@ -476,7 +475,7 @@ function handleFile(file) {
 					for (var i = 0; i < text.length; i++)
 						ui8a[i] = (text.charCodeAt(i) & 0xff);
 					this.send(ui8a);
-				}
+				};
 			}
 
 			xhr.sendAsBinary(reader.result);
@@ -487,9 +486,9 @@ function handleFile(file) {
 						console.log("upload complete");
 					}
 				}
-			}
+			};
 		}
-	}
+	};
 	
 	if(reader.readAsBinaryString){
 		reader.readAsBinaryString(file);

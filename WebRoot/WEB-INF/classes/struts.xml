@@ -7,8 +7,7 @@
 	<include file="struts-default.xml"></include>
 	
 		<package name="user" extends="struts-default">
-				<action name="fileUpLoad" class="com.schoolo2o.test.TestFileAction" >
-						<result name="success">/print.jsp</result>
+				<action name="fileUpLoad" class="com.schoolo2o.action.UpLoadFileAction"  method="upLoadFileSave">
 				</action>
 				
 				<action name="userLogin" class="com.schoolo2o.action.UserAction" method="userLogin">

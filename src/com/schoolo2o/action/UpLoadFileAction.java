@@ -34,7 +34,7 @@ public class UpLoadFileAction extends ActionSupport {
 	 * 
 	 * @throws IOException
 	 */
-	public void upLoadFileSave() throws IOException {
+	public String upLoadFileSave() throws IOException {
 		InputStream in = serletRequest.getInputStream();
 		String fileName = serletRequest.getParameter("fileName");
 		String userName = serletRequest.getParameter("userName");
@@ -46,10 +46,14 @@ public class UpLoadFileAction extends ActionSupport {
 				+ MyFileUtils.GetFileNameExtensionWithoutPoint(fileName) + "/"; // 文件所在文件夹
 		String newFileName = MyFileUtils.CreateFileName()
 				+ MyFileUtils.GetFileNameExtension(fileName); /* 文件重命名 */
-		String fullPath = uploadPath + newFileName;
+		
+		uploadPath="/home/sun/temp/print/";
+		String fullPath = uploadPath + newFileName.trim();
+		
 		MyFileUtils.Store(in, fullPath);
 		long docId =  addDocument(fileName, fullPath, userName);
 		response.getWriter().write("status\":\"1\",\"message\":\"'"+docId+"'\"}");
+		return null;
 	}
 
 	/**
