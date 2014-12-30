@@ -422,7 +422,7 @@ function commitOrder() {
  */
 function handleFile(file) {
 	var reader = new FileReader();
-	var progressBar;
+	var progressBar = null;
 
 	// 移动两个div
 	$("#fileUploadContent").animate({
@@ -457,8 +457,16 @@ function handleFile(file) {
 		} else {
 			progressBar.style.width = "100%";
 			progressBar.innerHTML = "100%";
+			
 			// 构造 XMLHttpRequest 对象，发送文件 Binary 数据
-			var xhr = new XMLHttpRequest();
+			var xhr = null;
+			if (window.ActiveXObject) {
+				xhr = new ActiveXObject("Microsoft.XMLHTTP");
+		    } else {
+		        if (window.XMLHttpRequest) {
+		        	xhr = new XMLHttpRequest();
+		        }
+		    }
 			xhr.open(
 			/* method */"POST",
 			/* target url */
@@ -483,7 +491,7 @@ function handleFile(file) {
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState == 4) {
 					if (xhr.status == 200) {
-						console.log("upload complete");
+						alert(xhr.responseText);
 					}
 				}
 			};
@@ -497,4 +505,5 @@ function handleFile(file) {
 	}else if(reader.readAsArrayBuffer){
 		reader.readAsArrayBuffer(file);
 	}
+	
 }
