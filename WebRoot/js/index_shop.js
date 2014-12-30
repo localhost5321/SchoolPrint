@@ -3,6 +3,12 @@
  */
 $(function() {
 	
+	/*$("#navBarIndex").attr("class", "");
+	$("#navBarIndex").children("a").attr("href", "index.jsp");
+	$("#navBarPrint").attr("class", "active");
+	$("#navBarPrint").children("a").attr("href", "");*/
+
+	
 	$("#order_details").click(
 			
 	    function() {
@@ -16,10 +22,7 @@ $(function() {
 	    		//$("#details_ul").css("display","none");
 	    		$(this).text("订单详情");
 	    	}
-	    	
 		}
-			
 	);
-	
 });
 

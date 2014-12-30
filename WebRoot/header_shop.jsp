@@ -10,25 +10,24 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="index.html">校园云打印(商家版)</a>
+					<a class="navbar-brand" href="index_shop.html">校园云打印(商家版)</a>
 				</div>
 				<!--导航体-->
 				<div class="navbar-collapse collapse">
 					<ul class="nav navbar-nav">
-						<li>
-							<a href="">首页</a>
+						<li id="navBarIndex_shop">
+							<a href="index_shop.jsp">首页</a>
 						</li>
-						<li class="active">
-							<a href="control_shop.html">控制中心</a>
+						<li id="navControl_shop">
+							<a href="control_shop.jsp">控制中心</a>
 						</li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown">历史订单</a>
-							 
+						<li id="navBarOrderHistory_shop">
+							<a href="order_history_shop.jsp">历史订单</a>
 						</li>
-						<li>
+						<li id="navBarComments_shop">
 							<a href="#" data-toggle="modal" data-target="#aboutUs">查看评论</a>
 						</li>
-						<li>
+						<li id="navBarrefund_shop">
 						    <a href="#" data-toggle="modal" data-target="">退款管理</a>
 						
 						</li>
