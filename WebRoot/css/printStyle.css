@@ -1,41 +1,40 @@
-
-#print-content{
+#print-content {
 	position: relative;
 	height: 535px;
 }
 
-th{
+th {
 	text-align: center;
 }
 
 #fileUploadContent {
-  width: 500px;
-  padding-top: 20px;
-  background: #eee center bottom;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  border-top: 1px solid #fff;
-  padding-bottom: 20px;
-  position: absolute;
-  top: 20px;
+	width: 500px;
+	padding-top: 20px;
+	background: #eee center bottom;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	border-top: 1px solid #fff;
+	padding-bottom: 20px;
+	position: absolute;
+	top: 20px;
 }
 
-#fileUploadContent p{
+#fileUploadContent p {
 	margin-top: 20px;
 }
 
-#showFilesContent{
-  padding-top: 20px;
-  background: #eee center bottom;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border-radius: 10px;
-  border-top: 1px solid #fff;
-  display:none;
-  position: absolute;
-  top: 20px;
-  padding-bottom: 20px;
+#showFilesContent {
+	padding-top: 20px;
+	background: #eee center bottom;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	border-top: 1px solid #fff;
+	display: none;
+	position: absolute;
+	top: 20px;
+	padding-bottom: 20px;
 }
 
 #holder {
@@ -49,25 +48,45 @@ th{
 	border: 10px dashed #333;
 }
 
-#textfield{ vertical-align:middle; margin:0; padding:0; height:35px; border:1px solid #cdcdcd; width:180px;}
-.file-box{ position:relative;width:340px}
-#fileInput{ position:absolute; top:0; right:80px; height:24px; filter:alpha(opacity:0);opacity: 0;width:260px }
-
-#fileListTable a{
-	text-decoration:none;
+#textfield {
+	vertical-align: middle;
+	margin: 0;
+	padding: 0;
+	height: 35px;
+	border: 1px solid #cdcdcd;
+	width: 180px;
 }
 
-.fileInfo, .orderInfo{
+.file-box {
+	position: relative;
+	width: 340px
+}
+
+#fileInput {
+	position: absolute;
+	top: 0;
+	right: 80px;
+	height: 24px;
+	filter: alpha(opacity : 0);
+	opacity: 0;
+	width: 260px
+}
+
+#fileListTable a {
+	text-decoration: none;
+}
+
+.fileInfo,.orderInfo {
 	text-align: right;
 }
 
-#printShopContent{
-	color: white;
-	background-color: #aaa;
-	height: 60px;
+#printShopContent {
+	background-image:url("../images/xuanze.png");
+	background-position:center;
+	height: 84px;
 }
 
-#printShopContent span{
+#printShopContent span {
 	color: white;
 	line-height: 60px;
 	font-size: 25px;;
