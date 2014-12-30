@@ -52,6 +52,7 @@ public class ShopAction extends ActionSupport {
 			return null;
 		}
 	}
+	
 	/**
 	 * 由商店名获取商店详情
 	 * @param shopName
