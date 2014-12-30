@@ -346,7 +346,7 @@ function showUserFile() {
 		file.printCounts = $(printCounts[i]).val();
 		json.data.push(file);
 	}
-	return json
+	return json;
 }
 
 /**
@@ -387,7 +387,7 @@ function showOrder(obj) {
 		tr.appendChild(tdPrice);
 		// 创建总价列
 		var sumPrice = document.createElement("td");
-		sumPrice.className = "sumPrice"
+		sumPrice.className = "sumPrice";
 		sumPrice.innerHTML = Number(tdPrintCount.innerHTML)
 				* Number(tdPrintCounts.innerHTML) * Number(tdPrice.innerHTML);
 		tr.appendChild(sumPrice);
@@ -433,28 +433,24 @@ function handleFile(file) {
 	$("#showFilesContent").fadeIn(1000);
 	showFilesContent.style.left = 2 * GAP + FILE_UPLOAD_WIDTH + "px";
 
+	progressBar = addFileToTable(file, progressBar);
 	reader.onloadstart = function() {
 		// 这个事件在读取开始时触发
-		console.log("onloadstart");
-		// 添加一项文件到表格
-		progressBar = addFileToTable(file, progressBar);
 	}
 
+	// 这个事件在读取进行中定时触发
 	reader.onprogress = function(p) {
-		// 这个事件在读取进行中定时触发
-		console.log("onprogress");
 		var pro = Math.round(p.loaded / file.size * 100);
 		// 更新进度条
 		updateProgressBar(progressBar, pro);
 	}
 
+	// 这个事件在读取成功结束后触发
 	reader.onload = function() {
-		// 这个事件在读取成功结束后触发
-		console.log("load complete");
 	}
 
+	// 这个事件在读取结束后，无论成功或者失败都会触发
 	reader.onloadend = function() {
-		// 这个事件在读取结束后，无论成功或者失败都会触发
 		if (reader.error) {
 			console.log(reader.error);
 			progressBar.className = "progress-bar progress-bar-danger progress-bar-striped";
@@ -466,7 +462,7 @@ function handleFile(file) {
 			xhr.open(
 			/* method */"POST",
 			/* target url */
-			"fileUpLoad.action?fileName=" + file.name
+			"fileUpLoad.action?fileName=" + file.name + "&userName=" + USERNAME
 			/* , async, default to true */
 			);
 			xhr.overrideMimeType("application/octet-stream");
@@ -479,7 +475,7 @@ function handleFile(file) {
 					for (var i = 0; i < text.length; i++)
 						ui8a[i] = (text.charCodeAt(i) & 0xff);
 					this.send(ui8a);
-				}
+				};
 			}
 
 			xhr.sendAsBinary(reader.result);
@@ -490,9 +486,9 @@ function handleFile(file) {
 						console.log("upload complete");
 					}
 				}
-			}
+			};
 		}
-	}
+	};
 	
 	if(reader.readAsBinaryString){
 		reader.readAsBinaryString(file);

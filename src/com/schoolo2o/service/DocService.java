@@ -13,7 +13,7 @@ public interface DocService {
 	 * @param user　当前操作用户
 	 * @return
 	 */
-	public boolean add(Docinfo doc, Userinfo user);
+	public Docinfo add(Docinfo doc, Userinfo user);
 	
 	/**
 	 * 根据用户ＩＤ删除用户所上传的文档
