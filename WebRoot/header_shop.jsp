@@ -10,7 +10,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="index_shop.html">校园云打印(商家版)</a>
+					<a class="navbar-brand" href="index_shop.jsp">校园云打印(商家版)</a>
 				</div>
 				<!--导航体-->
 				<div class="navbar-collapse collapse">
