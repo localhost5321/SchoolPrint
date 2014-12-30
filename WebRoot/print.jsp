@@ -103,7 +103,7 @@
 							accept=".pdf,.doc,.xls" multiple /> <input type="submit"
 							id="uploadBtn" class="btn btn-primary" value="上传" />
 						<p>点击“浏览”上传文件 或 将文件直接拖拽到上方虚线框中</p>
-						<span>* 暂只支持<font color="red">.pdf,.doc,.xls</font>格式
+						<span>* 暂只支持<font color="red">.pdf,.doc,.docx,.xls</font>格式
 						</span>
 					</div>
 				</form>
@@ -138,9 +138,7 @@
 	</div>
 	<!-- 选择完文件后显示的文件信息结束 -->
 
-	<div class="container-fluid" id="printShopContent"
-		name="printShopContent" align="center">
-		<span>选择打印店</span>
+	<div class="container-fluid" id="printShopContent" align="center">
 	</div>
 
 	<!-- 店铺列表区域 -->
