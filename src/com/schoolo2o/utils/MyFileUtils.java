@@ -7,8 +7,6 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.schoolo2o.action.UpLoadFileAction;
-
 /**
  * 文件通用工具类
  * 
@@ -77,7 +75,7 @@ public class MyFileUtils {
 		String uploadPath = MyFileUtils.CreateFileParentPath(MyFileUtils
 				.GetFileNameExtensionWithoutPoint(fileName));
 		// 得到完整的文件夹。形如“/home/user/temp/2014/12/30/doc/”
-		String fullParentPath = UpLoadFileAction.FILE_ROOT_PATH + uploadPath;
+		String fullParentPath = Constant.WebFilePath + uploadPath;
 
 		// 得到新的文件名,形如"jsafhkjsdghks.doc"
 		String newFileName = MyFileUtils.CreateNewFileName(MyFileUtils

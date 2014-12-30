@@ -3,6 +3,7 @@ package com.schoolo2o.action;
 import java.io.IOException;
 import java.io.InputStream;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -13,6 +14,7 @@ import com.schoolo2o.pojo.Docinfo;
 import com.schoolo2o.pojo.Userinfo;
 import com.schoolo2o.service.DocService;
 import com.schoolo2o.service.UserService;
+import com.schoolo2o.utils.Constant;
 import com.schoolo2o.utils.MyFileUtils;
 
 /**
@@ -24,12 +26,12 @@ import com.schoolo2o.utils.MyFileUtils;
 
 public class UpLoadFileAction extends ActionSupport {
 
-	/** 这个final字段是在服务器硬盘上存储的根路径，按需改变 **/
-	public static final String FILE_ROOT_PATH = "/home/user/temp/";
 	private DocService dcoService;
 	private UserService userService;
 	private final HttpServletRequest serletRequest = ServletActionContext
 			.getRequest();
+	private final ServletContext servletContext = ServletActionContext
+			.getServletContext();
 	private final HttpServletResponse response = ServletActionContext
 			.getResponse();
 
@@ -46,6 +48,12 @@ public class UpLoadFileAction extends ActionSupport {
 
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("utf-8");
+
+		String webName = serletRequest.getContextPath().toString()
+				.replace("/", "").trim();
+		Constant.WebFilePath = servletContext.getRealPath("/")
+				.replace(webName, "files").toString();
+		System.out.println(Constant.WebFilePath);
 
 		// 存储文件
 		String finalFilePath = MyFileUtils.Store(in, fileName);
