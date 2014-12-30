@@ -11,16 +11,18 @@
 	-moz-border-radius: 10px;
 	-webkit-border-radius: 10px;
 	border-radius: 10px;
-	background-image: url("../images/shop_card_bg.jpg");
+	background: #ddd;
 	margin: 10px;
 	position:relative;
-	color: white;
+	color: black;
 }
 
 .shopInfo:hover {
+	color:white;
 	-webkit-box-shadow: #666 0px 0px 10px;
 	-moz-box-shadow: #666 0px 0px 10px;
 	box-shadow: #666 0px 0px 10px;
+	background-image: url("../images/shop_card_bg.jpg");
 }
 
 .shopInfo h2 {
