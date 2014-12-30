@@ -21,9 +21,8 @@ public class MyFileUtils {
 	 * @return
 	 */
 	public static String CreateNewFileName(String fileSuffix) {
-		String name = new Date().toString();
-		int num = (int) (Math.random() * 100000) + 10000;
-		String newfileName = name + num;
+		String newfileName = MD5.md5((System.currentTimeMillis() + "")
+				.getBytes());
 		return newfileName.trim() + fileSuffix;
 	}
 
