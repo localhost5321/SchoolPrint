@@ -56,6 +56,9 @@ $(document)
 
 				});
 
+/**
+ * 通过拖拽上传文件
+ */
 function initDrag() {
 	var holder = document.getElementById('holder'), uploadBtn = document
 			.getElementById('uploadBtn');
@@ -81,6 +84,12 @@ function initDrag() {
 		var files = event.dataTransfer.files;
 		event.stopPropagation();
 		event.preventDefault();
+		//判断文件类型是否符合要求
+		var result = judgeType(files);
+		if(result != ""){
+			alert("抱歉，暂不支持" + result + "格式");
+			return;
+		}
 		// 添加一项文件到表格
 		for (var i = 0; i < files.length; i++) {
 			// 文件判重
@@ -100,13 +109,19 @@ function initDrag() {
 }
 
 /**
- * 上传文件
+ * 通过input上传文件
  */
 function uploadFile() {
 	var form = document.forms["uploadFileForm"];
 	var fileCount = form["fileInput"].files.length;
 	if (fileCount == 0) {
 		alert("请选择文件");
+		return;
+	}
+	//判断文件类型是否符合要求
+	var result = judgeType(form["fileInput"].files);
+	if(result != ""){
+		alert("抱歉，暂不支持" + result + "格式");
 		return;
 	}
 	for (var i = 0; i < fileCount; i++) {
@@ -124,6 +139,19 @@ function uploadFile() {
 	}
 	// 更新文件信息
 	updateFileInfo();
+}
+
+function judgeType(files){
+	//遍历数组判断后缀名
+	for (var i = 0; i < files.length; i++) {
+		var fileName = files[i].name;
+		var type = fileName.substring(fileName.lastIndexOf(".") + 1);
+		if("doc pdf xls".indexOf(type) == -1){
+			//文件类型不支持
+			return type;
+		}
+	}
+	return "";
 }
 
 /**
@@ -318,7 +346,7 @@ function showUserFile() {
 		file.printCounts = $(printCounts[i]).val();
 		json.data.push(file);
 	}
-	return json
+	return json;
 }
 
 /**
@@ -359,7 +387,7 @@ function showOrder(obj) {
 		tr.appendChild(tdPrice);
 		// 创建总价列
 		var sumPrice = document.createElement("td");
-		sumPrice.className = "sumPrice"
+		sumPrice.className = "sumPrice";
 		sumPrice.innerHTML = Number(tdPrintCount.innerHTML)
 				* Number(tdPrintCounts.innerHTML) * Number(tdPrice.innerHTML);
 		tr.appendChild(sumPrice);
@@ -394,7 +422,7 @@ function commitOrder() {
  */
 function handleFile(file) {
 	var reader = new FileReader();
-	var progressBar;
+	var progressBar = null;
 
 	// 移动两个div
 	$("#fileUploadContent").animate({
@@ -405,40 +433,44 @@ function handleFile(file) {
 	$("#showFilesContent").fadeIn(1000);
 	showFilesContent.style.left = 2 * GAP + FILE_UPLOAD_WIDTH + "px";
 
+	progressBar = addFileToTable(file, progressBar);
 	reader.onloadstart = function() {
 		// 这个事件在读取开始时触发
-		console.log("onloadstart");
-		// 添加一项文件到表格
-		progressBar = addFileToTable(file, progressBar);
 	}
 
+	// 这个事件在读取进行中定时触发
 	reader.onprogress = function(p) {
-		// 这个事件在读取进行中定时触发
-		console.log("onprogress");
 		var pro = Math.round(p.loaded / file.size * 100);
 		// 更新进度条
 		updateProgressBar(progressBar, pro);
 	}
 
+	// 这个事件在读取成功结束后触发
 	reader.onload = function() {
-		// 这个事件在读取成功结束后触发
-		console.log("load complete");
 	}
 
+	// 这个事件在读取结束后，无论成功或者失败都会触发
 	reader.onloadend = function() {
-		// 这个事件在读取结束后，无论成功或者失败都会触发
 		if (reader.error) {
 			console.log(reader.error);
 			progressBar.className = "progress-bar progress-bar-danger progress-bar-striped";
 		} else {
 			progressBar.style.width = "100%";
 			progressBar.innerHTML = "100%";
+			
 			// 构造 XMLHttpRequest 对象，发送文件 Binary 数据
-			var xhr = new XMLHttpRequest();
+			var xhr = null;
+			if (window.ActiveXObject) {
+				xhr = new ActiveXObject("Microsoft.XMLHTTP");
+		    } else {
+		        if (window.XMLHttpRequest) {
+		        	xhr = new XMLHttpRequest();
+		        }
+		    }
 			xhr.open(
 			/* method */"POST",
 			/* target url */
-			"fileUpLoad.action?fileName=" + file.name
+			"fileUpLoad.action?fileName=" + file.name + "&userName=" + USERNAME
 			/* , async, default to true */
 			);
 			xhr.overrideMimeType("application/octet-stream");
@@ -451,7 +483,7 @@ function handleFile(file) {
 					for (var i = 0; i < text.length; i++)
 						ui8a[i] = (text.charCodeAt(i) & 0xff);
 					this.send(ui8a);
-				}
+				};
 			}
 
 			xhr.sendAsBinary(reader.result);
@@ -459,13 +491,19 @@ function handleFile(file) {
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState == 4) {
 					if (xhr.status == 200) {
-						console.log("upload complete");
-						console.log("response: " + xhr.responseText);
+						alert(xhr.responseText);
 					}
 				}
-			}
+			};
 		}
+	};
+	
+	if(reader.readAsBinaryString){
+		reader.readAsBinaryString(file);
+	}else if(reader.readAsText){
+		reader.readAsText(file);
+	}else if(reader.readAsArrayBuffer){
+		reader.readAsArrayBuffer(file);
 	}
-
-	reader.readAsBinaryString(file);
+	
 }

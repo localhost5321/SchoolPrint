@@ -7,8 +7,7 @@
 	<include file="struts-default.xml"></include>
 	
 		<package name="user" extends="struts-default">
-				<action name="fileUpLoad" class="com.schoolo2o.test.TestFileAction" >
-						<result name="success">/print.jsp</result>
+				<action name="fileUpLoad" class="com.schoolo2o.action.UpLoadFileAction"  method="upLoadFileSave">
 				</action>
 				
 				<action name="userLogin" class="com.schoolo2o.action.UserAction" method="userLogin">
@@ -19,7 +18,9 @@
 					<result name="success" type="redirect" > /index.jsp</result>
 						<result name="error" type="redirect"> /print.jsp</result>
 				</action>
-				<action name="ajaxTest" class="com.schoolo2o.test.TestAjax">
+				<action name="verifyUserName" class="com.schoolo2o.action.UserAction" method="verifyUserName">
+				</action>
+				<action name="verifyEmail" class="com.schoolo2o.action.UserAction" method="verifyEmail">
 				</action>
 		</package>
 </struts>    

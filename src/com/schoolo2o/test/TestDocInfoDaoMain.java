@@ -1,5 +1,6 @@
 package com.schoolo2o.test;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +16,7 @@ public class TestDocInfoDaoMain {
 	public static void main(String[] args) {
 		Userinfo user=new Userinfo();
 		user.setEmail("10145@qqrew.com");
-		user.setRegTime(new Date());
+		user.setRegTime(new Timestamp(new Date().getTime()));
 		user.setUserName("zhaolong");
 		user.setUserPwd("1212434343");
 		user.setUserId(2l);

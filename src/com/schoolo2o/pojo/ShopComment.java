@@ -1,6 +1,6 @@
 package com.schoolo2o.pojo;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  * ShopComment entity. @author MyEclipse Persistence Tools
@@ -14,7 +14,7 @@ public class ShopComment implements java.io.Serializable {
 	private Shopinfo shopinfo;
 	private String commentUser;
 	private String commentContent;
-	private Date commentDate;
+	private Timestamp commentDate;
 	private Integer shopScore;
 	private String shopReply;
 
@@ -26,7 +26,7 @@ public class ShopComment implements java.io.Serializable {
 
 	/** minimal constructor */
 	public ShopComment(Shopinfo shopinfo, String commentUser,
-			String commentContent, Date commentDate, Integer shopScore) {
+			String commentContent, Timestamp commentDate, Integer shopScore) {
 		this.shopinfo = shopinfo;
 		this.commentUser = commentUser;
 		this.commentContent = commentContent;
@@ -36,7 +36,7 @@ public class ShopComment implements java.io.Serializable {
 
 	/** full constructor */
 	public ShopComment(Shopinfo shopinfo, String commentUser,
-			String commentContent, Date commentDate, Integer shopScore,
+			String commentContent, Timestamp commentDate, Integer shopScore,
 			String shopReply) {
 		this.shopinfo = shopinfo;
 		this.commentUser = commentUser;
@@ -80,11 +80,11 @@ public class ShopComment implements java.io.Serializable {
 		this.commentContent = commentContent;
 	}
 
-	public Date getCommentDate() {
+	public Timestamp getCommentDate() {
 		return this.commentDate;
 	}
 
-	public void setCommentDate(Date commentDate) {
+	public void setCommentDate(Timestamp commentDate) {
 		this.commentDate = commentDate;
 	}
 

@@ -19,6 +19,9 @@
         <property name="shopNick" type="java.lang.String">
             <column name="shopNick" length="100" not-null="true" />
         </property>
+        <property name="shopPhone" type="java.lang.String">
+            <column name="shopPhone" length="40" not-null="true" />
+        </property>
         <property name="shopAddress" type="java.lang.String">
             <column name="shopAddress" length="200" not-null="true" />
         </property>
@@ -37,13 +40,13 @@
             </key>
             <one-to-many class="com.schoolo2o.pojo.Orderinfo" />
         </set>
-        <set name="priceinfos" inverse="true">
+        <set name="priceinfos" inverse="true" lazy="false" cascade="all">
             <key>
                 <column name="shopId" not-null="true" />
             </key>
             <one-to-many class="com.schoolo2o.pojo.Priceinfo" />
         </set>
-        <set name="shopComments" inverse="true"  cascade="all">
+        <set name="shopComments" inverse="true">
             <key>
                 <column name="shopId" not-null="true" />
             </key>

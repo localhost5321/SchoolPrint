@@ -37,16 +37,20 @@
 				<form action="" role="form" class="form-horizontal">
 					<div class="modal-body">
 						<!--店名-->
-						<div class="form-group">
-							<label class="col-sm-2 control-label">您的店名</label>
-							<div class="col-sm-10">
-								<input type="text" class="form-control">
+						<div>
+							<label>您的店名</label>
+							<div>
+								<input type="text" value="弘辰桥洞打印店">
+							</div>
+						</div>
+						<!-- 电话 -->
+						<div>
+							<label>您的电话</label>
+							<div>
+								<input type="text" value="123456789">
 							</div>
 						</div>
 					</div>
-
-
-
 					<br> <a href="javascript:void(0)" id="editInfo">编辑信息</a>
 					<button id="btnSave">保存</button>
 				</form>

@@ -25,7 +25,7 @@
 					data-target="#aboutUs">关于</a>
 				<li id="navBarNote"><a href="">留言</a></li>
 			</ul>
-			<ul class="nav navbar-nav navbar-right">
+			<ul class="nav navbar-nav navbar-right" id="navbarUserInfo">
 				<c:choose>
 					<c:when test="${sessionScope.user == null}">
 						<li><a href="javascript:void(0)" data-toggle="modal"
@@ -38,7 +38,7 @@
 							data-toggle="dropdown">欢迎你：${sessionScope.user.userName}<span
 								class="caret"></span></a>
 							<ul class="dropdown-menu" role="menu">
-								<li><a href="javascript:void(0)" data-tab="tab-chrome"
+								<li><a href="javascript:void(0)"
 									onclick="exit();">退出</a></li>
 							</ul></li>
 					</c:when>
@@ -78,16 +78,13 @@
 						<label for="loginPassword" class="col-sm-2 control-label">密码：</label>
 						<div class="col-sm-10">
 							<input type="password" class="form-control" id="loginPassword"
-								name="user.userPwd" placeholder="输入密码">
+								name="user.userPwd" placeholder="输入密码"> 
 						</div>
 					</div>
-					<!--记住密码选项-->
+					<!--登陆信息-->
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
-							<div class="checkbox">
-								<label> <input type="checkbox"> 记住密码
-								</label>
-							</div>
+							<span id="loginInfo"  style="color:red"></span>
 						</div>
 					</div>
 				</div>
@@ -153,14 +150,25 @@
 							style="padding:0px;"></span>
 					</div>
 					<!--邮箱-->
-					<div class="form-group">
+					<div class="form-group" id="registEmailDiv">
 						<label for="loginEmail" class="col-sm-3 control-label">注册邮箱：</label>
 						<div class="col-sm-6">
-							<input type="email" class="form-control" id="loginEmail"
+							<input type="email" class="form-control" id="registEmail"
 								name="user.email" placeholder="输入邮箱"> <span class=""
 								id="registEmailIcon"></span>
 						</div>
 						<span class="help-block col-sm-3" id="registEmailInfo"
+							style="padding:0px;"></span>
+					</div>
+					<!--电话号码-->
+					<div class="form-group" id="registPhoneDiv">
+						<label for="registPhone" class="col-sm-3 control-label">手机号：</label>
+						<div class="col-sm-6">
+							<input type="tel" class="form-control" id="registPhone"
+								name="user.userPhone" placeholder="输入手机号码"> <span class=""
+								id="registPhoneIcon"></span>
+						</div>
+						<span class="help-block col-sm-3" id="registPhoneInfo"
 							style="padding:0px;"></span>
 					</div>
 				</div>

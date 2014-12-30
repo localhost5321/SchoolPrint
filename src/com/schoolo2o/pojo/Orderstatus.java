@@ -1,6 +1,6 @@
 package com.schoolo2o.pojo;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 /**
  * Orderstatus entity. @author MyEclipse Persistence Tools
@@ -13,7 +13,7 @@ public class Orderstatus implements java.io.Serializable {
 	private Long orderStatusId;
 	private Orderinfo orderinfo;
 	private Integer status;
-	private Date changeTime;
+	private Timestamp changeTime;
 	private Integer isCurrent;
 
 	// Constructors
@@ -23,8 +23,8 @@ public class Orderstatus implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Orderstatus(Orderinfo orderinfo, Integer status, Date changeTime,
-			Integer isCurrent) {
+	public Orderstatus(Orderinfo orderinfo, Integer status,
+			Timestamp changeTime, Integer isCurrent) {
 		this.orderinfo = orderinfo;
 		this.status = status;
 		this.changeTime = changeTime;
@@ -57,11 +57,11 @@ public class Orderstatus implements java.io.Serializable {
 		this.status = status;
 	}
 
-	public Date getChangeTime() {
+	public Timestamp getChangeTime() {
 		return this.changeTime;
 	}
 
-	public void setChangeTime(Date changeTime) {
+	public void setChangeTime(Timestamp changeTime) {
 		this.changeTime = changeTime;
 	}
 

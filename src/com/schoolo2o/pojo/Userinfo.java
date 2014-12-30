@@ -1,6 +1,6 @@
 package com.schoolo2o.pojo;
 
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,7 +16,9 @@ public class Userinfo implements java.io.Serializable {
 	private String userName;
 	private String userPwd;
 	private String email;
-	private Date regTime;
+	private Timestamp regTime;
+	private String userPhone;
+	private Integer emailChecked;
 	private Set addressinfos = new HashSet(0);
 	private Set orderinfos = new HashSet(0);
 	private Set docinfos = new HashSet(0);
@@ -28,20 +30,26 @@ public class Userinfo implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Userinfo(String userName, String userPwd, String email, Date regTime) {
+	public Userinfo(String userName, String userPwd, String email,
+			Timestamp regTime, String userPhone, Integer emailChecked) {
 		this.userName = userName;
 		this.userPwd = userPwd;
 		this.email = email;
 		this.regTime = regTime;
+		this.userPhone = userPhone;
+		this.emailChecked = emailChecked;
 	}
 
 	/** full constructor */
 	public Userinfo(String userName, String userPwd, String email,
-			Date regTime, Set addressinfos, Set orderinfos, Set docinfos) {
+			Timestamp regTime, String userPhone, Integer emailChecked,
+			Set addressinfos, Set orderinfos, Set docinfos) {
 		this.userName = userName;
 		this.userPwd = userPwd;
 		this.email = email;
 		this.regTime = regTime;
+		this.userPhone = userPhone;
+		this.emailChecked = emailChecked;
 		this.addressinfos = addressinfos;
 		this.orderinfos = orderinfos;
 		this.docinfos = docinfos;
@@ -81,12 +89,28 @@ public class Userinfo implements java.io.Serializable {
 		this.email = email;
 	}
 
-	public Date getRegTime() {
+	public Timestamp getRegTime() {
 		return this.regTime;
 	}
 
-	public void setRegTime(Date regTime) {
+	public void setRegTime(Timestamp regTime) {
 		this.regTime = regTime;
+	}
+
+	public String getUserPhone() {
+		return this.userPhone;
+	}
+
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
+	}
+
+	public Integer getEmailChecked() {
+		return this.emailChecked;
+	}
+
+	public void setEmailChecked(Integer emailChecked) {
+		this.emailChecked = emailChecked;
 	}
 
 	public Set getAddressinfos() {
@@ -113,12 +137,4 @@ public class Userinfo implements java.io.Serializable {
 		this.docinfos = docinfos;
 	}
 
-	@Override
-	public String toString() {
-		return "Userinfo [userId=" + userId + ", userName=" + userName
-				+ ", userPwd=" + userPwd + ", email=" + email + ", regTime="
-				+ regTime + ", addressinfos=" + addressinfos + ", orderinfos="
-				+ orderinfos + ", docinfos=" + docinfos + "]";
-	}
-	
 }
