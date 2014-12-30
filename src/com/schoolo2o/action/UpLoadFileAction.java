@@ -24,10 +24,14 @@ import com.schoolo2o.utils.MyFileUtils;
 
 public class UpLoadFileAction extends ActionSupport {
 
-	private DocService dcoService ;
+	/** 这个final字段是在服务器硬盘上存储的根路径，按需改变 **/
+	private static final String FILE_ROOT_PATH = "/home/user/temp/";
+	private DocService dcoService;
 	private UserService userService;
-	private HttpServletRequest serletRequest = ServletActionContext.getRequest();
-	private HttpServletResponse response = ServletActionContext.getResponse();
+	private final HttpServletRequest serletRequest = ServletActionContext
+			.getRequest();
+	private final HttpServletResponse response = ServletActionContext
+			.getResponse();
 
 	/**
 	 * 上传文件保存到服务器硬盘中
@@ -39,28 +43,36 @@ public class UpLoadFileAction extends ActionSupport {
 		String fileName = serletRequest.getParameter("fileName");
 		String userName = serletRequest.getParameter("userName");
 		response.setContentType("text/plain");
-		
+
 		response.setCharacterEncoding("utf-8");
-		
-		String uploadPath = MyFileUtils.CreateFileParentPath()
-				+ MyFileUtils.GetFileNameExtensionWithoutPoint(fileName) + "/"; // 文件所在文件夹
-		String newFileName = MyFileUtils.CreateFileName()
-				+ MyFileUtils.GetFileNameExtension(fileName); /* 文件重命名 */
-		
-		uploadPath="/home/sun/temp/print/";
-		String fullPath = uploadPath + newFileName.trim();
-		
+
+		// 文件所在文件夹，形如“2014/12/30/doc/”
+		String uploadPath = MyFileUtils.CreateFileParentPath(MyFileUtils
+				.GetFileNameExtensionWithoutPoint(fileName));
+		// 得到新的文件名,形如"jsafhkjsdghks.doc"
+		String newFileName = MyFileUtils.CreateNewFileName(MyFileUtils
+				.GetFileNameExtension(fileName));
+
+		String fullParentPath = FILE_ROOT_PATH + uploadPath;
+		// 文件夹不存在则创建
+		MyFileUtils.createFilePath(fullParentPath);
+		// 文件完整的存储路径　形如"/home/user/2014/12/30/filename.doc"
+		String fullPath = FILE_ROOT_PATH + uploadPath + newFileName;
+
 		MyFileUtils.Store(in, fullPath);
-		long docId =  addDocument(fileName, fullPath, userName);
-		response.getWriter().write("status\":\"1\",\"message\":\"'"+docId+"'\"}");
+
+		// *******************以下代码需要重构下＊＊＊＊＊＊＊＊＊＊＊＊＊＊ //
+		long docId = addDocument(fileName, fullPath, userName);
+		response.getWriter().write(
+				"status\":\"1\",\"message\":\"'" + docId + "'\"}");
 		return null;
 	}
 
 	/**
 	 * 添加到文件表中
 	 */
-	public long addDocument(String fileName, String filePath ,String userName) {
-		
+	public long addDocument(String fileName, String filePath, String userName) {
+
 		Docinfo doc = new Docinfo();
 		doc.setFileName(fileName);
 		doc.setFilePath(filePath);
@@ -69,7 +81,7 @@ public class UpLoadFileAction extends ActionSupport {
 		doc.setDownNum(0L);
 		Userinfo user = userService.searchUser(userName);
 		doc.setUserinfo(user);
-		doc = dcoService.add(doc,user);
+		doc = dcoService.add(doc, user);
 		return doc.getDocId();
 	}
 
