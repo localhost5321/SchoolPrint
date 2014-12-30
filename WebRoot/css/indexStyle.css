@@ -105,7 +105,7 @@ body {
 	width: 115px;
 	height: 83px;
 	background: transparent url("../images/ad_1_cloud.png") no-repeat 0 0;
-	right: 235px;
+	right: 265px;
 	top: 50px;
 }
 
@@ -153,7 +153,7 @@ body {
 	width: 328px;
 	height: 96px;
 	background: transparent url("../images/ad_4_text_1.png") no-repeat 0 0;
-	right: 237px;
+	right: 267px;
 	top: 0px;
 }
 
@@ -161,15 +161,15 @@ body {
 	width: 269px;
 	height: 123px;
 	background: transparent url("../images/ad_4_text_2.png") no-repeat 0 0;
-	right: 153px;
-	top: 100px;
+	right: 183px;
+	top: 223px;
 }
 
 .ad_4_text_3 {
 	width: 196px;
 	height: 75px;
 	background: transparent url("../images/ad_4_text_3.png") no-repeat 0 0;
-	right: 65px;
+	right: 95px;
 	top: 332px;
 }
 

@@ -100,19 +100,19 @@
 	</div>
 
 	<!-- 功能展示 -->
+	<!-- 改变传统打印，打印进入云时代 -->
+	<div class="ad_1">
+		<div class="ad_1_icon"></div>
+		<div class="ad_1_cloud"></div>
+		<div class="ad_1_text"></div>
+	</div>
+	
 	<!-- 店家信息，一览无余 -->
 	<div class="ad_2">
 		<div class="ad_2_icon"></div>
 		<div class="ad_2_text_1"></div>
 		<div class="ad_2_text_2"></div>
 		<div class="ad_2_text_3"></div>
-	</div>
-	
-	<!-- 改变传统打印，打印进入云时代 -->
-	<div class="ad_1">
-		<div class="ad_1_icon"></div>
-		<div class="ad_1_cloud"></div>
-		<div class="ad_1_text"></div>
 	</div>
 	
 	<!-- 打印再无需排队，足不出户，文件到手 -->
