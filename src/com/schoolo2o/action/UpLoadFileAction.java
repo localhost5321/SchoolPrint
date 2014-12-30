@@ -25,7 +25,7 @@ import com.schoolo2o.utils.MyFileUtils;
 public class UpLoadFileAction extends ActionSupport {
 
 	/** 这个final字段是在服务器硬盘上存储的根路径，按需改变 **/
-	private static final String FILE_ROOT_PATH = "/home/user/temp/";
+	public static final String FILE_ROOT_PATH = "/home/user/temp/";
 	private DocService dcoService;
 	private UserService userService;
 	private final HttpServletRequest serletRequest = ServletActionContext
@@ -39,30 +39,19 @@ public class UpLoadFileAction extends ActionSupport {
 	 * @throws IOException
 	 */
 	public String upLoadFileSave() throws IOException {
+
 		InputStream in = serletRequest.getInputStream();
 		String fileName = serletRequest.getParameter("fileName");
 		String userName = serletRequest.getParameter("userName");
-		response.setContentType("text/plain");
 
+		response.setContentType("text/plain");
 		response.setCharacterEncoding("utf-8");
 
-		// 文件所在文件夹，形如“2014/12/30/doc/”
-		String uploadPath = MyFileUtils.CreateFileParentPath(MyFileUtils
-				.GetFileNameExtensionWithoutPoint(fileName));
-		// 得到新的文件名,形如"jsafhkjsdghks.doc"
-		String newFileName = MyFileUtils.CreateNewFileName(MyFileUtils
-				.GetFileNameExtension(fileName));
-
-		String fullParentPath = FILE_ROOT_PATH + uploadPath;
-		// 文件夹不存在则创建
-		MyFileUtils.createFilePath(fullParentPath);
-		// 文件完整的存储路径　形如"/home/user/2014/12/30/filename.doc"
-		String fullPath = FILE_ROOT_PATH + uploadPath + newFileName;
-
-		MyFileUtils.Store(in, fullPath);
+		// 存储文件
+		String finalFilePath = MyFileUtils.Store(in, fileName);
 
 		// *******************以下代码需要重构下＊＊＊＊＊＊＊＊＊＊＊＊＊＊ //
-		long docId = addDocument(fileName, fullPath, userName);
+		long docId = addDocument(fileName, finalFilePath, userName);
 		response.getWriter().write(
 				"status\":\"1\",\"message\":\"'" + docId + "'\"}");
 		return null;

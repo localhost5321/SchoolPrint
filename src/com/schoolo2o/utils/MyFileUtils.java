@@ -7,6 +7,8 @@ import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.schoolo2o.action.UpLoadFileAction;
+
 /**
  * 文件通用工具类
  * 
@@ -69,9 +71,26 @@ public class MyFileUtils {
 	 * @param fullPath
 	 * @return
 	 */
-	public static boolean Store(InputStream in, String fullPath) {
+	public static String Store(InputStream in, String fileName) {
+
+		// 文件所在文件夹，形如“2014/12/30/doc/”
+		String uploadPath = MyFileUtils.CreateFileParentPath(MyFileUtils
+				.GetFileNameExtensionWithoutPoint(fileName));
+		// 得到完整的文件夹。形如“/home/user/temp/2014/12/30/doc/”
+		String fullParentPath = UpLoadFileAction.FILE_ROOT_PATH + uploadPath;
+
+		// 得到新的文件名,形如"jsafhkjsdghks.doc"
+		String newFileName = MyFileUtils.CreateNewFileName(MyFileUtils
+				.GetFileNameExtension(fileName));
+
+		// 最终的存储路径
+		String finalFilePath = fullParentPath + newFileName;
+
+		// 文件夹不存在则创建
+		MyFileUtils.createFilePath(fullParentPath);
+
 		try {
-			OutputStream out = new FileOutputStream(fullPath);
+			OutputStream out = new FileOutputStream(finalFilePath);
 			byte[] buffer = new byte[1024];
 			while (true) {
 				int byteRead = in.read(buffer);
@@ -81,11 +100,11 @@ public class MyFileUtils {
 			}
 			out.close();
 			in.close();
-			return true;
+			return finalFilePath;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return false;
+		return "";
 	}
 
 	/**
