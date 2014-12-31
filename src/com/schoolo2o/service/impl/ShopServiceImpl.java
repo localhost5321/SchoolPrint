@@ -51,6 +51,8 @@ public class ShopServiceImpl implements ShopService {
 	 */
 	@Override
 	public List<Shopinfo> searchShop() {
+		System.out.println("++++++++++++——————————————");
+		
 		return shopinfoDao.searchShop();
 	}
 

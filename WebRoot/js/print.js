@@ -54,7 +54,6 @@ $(document)
 					document.getElementById("fileUploadContent").style.left = SCREEN_WIDTH
 							/ 2 - FILE_UPLOAD_WIDTH / 2 + "px";
 					initDrag();
-
 				});
 
 /**
