@@ -16,7 +16,7 @@ import com.schoolo2o.service.ShopService;
 public class TestMain {
 	public static void main(String[] args){
 		Shopinfo shop = new Shopinfo();
-		shop.setShopName("zhangsan000");
+		shop.setShopName("zhangsan0007");
 		shop.setShopPwd("123456");
 		shop.setShopNick("华仔打印店");
 		shop.setShopAddress("洪辰六栋420");
@@ -26,7 +26,7 @@ public class TestMain {
 		shop.setShopPhone("2143434324");
 		shop.setDelivery(2.5);
 		ShopComment comment = new ShopComment();
-		comment.setCommentId(4l);
+		comment.setCommentId(8l);
 		comment.setCommentContent("这个打印店很好");
 		comment.setCommentDate(new Timestamp(new Date().getTime()));
 		comment.setCommentUser("huazai");

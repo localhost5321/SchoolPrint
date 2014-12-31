@@ -2,6 +2,7 @@ package com.schoolo2o.pojo.send;
 
 
 import java.util.List;
+import java.util.Set;
 
 import com.schoolo2o.pojo.ShopComment;
 import com.schoolo2o.pojo.Shopinfo;
@@ -25,6 +26,7 @@ public class ShopinfoSend{
 	private Double delivery;
 	private List<ShopCommentSend> comments;
 	private List<OrderinfoSend> orders;
+	private Set priceinfos;
 	
 	
 
@@ -50,6 +52,7 @@ public class ShopinfoSend{
 		this.delivery = sf.getDelivery();
 		this.shopDesc=sf.getShopDesc();
 		this.shopPic=sf.getShopPic();
+		this.priceinfos=sf.getOrderinfos();
 	}
 
 	public void setSelf(Shopinfo sf) {
