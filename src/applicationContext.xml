@@ -12,15 +12,12 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="username" value="root"></property>
 		<property name="password" value="1014187702"></property>
-		
-		
 	</bean>
 	<bean id="sessionFactory"
 		class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
 		<property name="dataSource">
 			<ref bean="dataSource" />
 		</property>
-		
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">
@@ -28,7 +25,6 @@
 				</prop>
 			</props>
 		</property>
-		
 		<property name="mappingResources">
 			<list>
 				<value>com/schoolo2o/pojo/Userinfo.hbm.xml</value>
