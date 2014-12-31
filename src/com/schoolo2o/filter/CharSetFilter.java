@@ -24,9 +24,7 @@ public class CharSetFilter implements Filter {
 		if (enabled || characterEncoding != null) {
 			request.setCharacterEncoding(characterEncoding);
 			response.setCharacterEncoding(characterEncoding);
-			System.out.println("***************************");
 		}
-		response.getWriter().println(request.getParameter("username"));
 		chain.doFilter(request, response);
 	}
 
