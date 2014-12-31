@@ -52,7 +52,7 @@ public class ShopinfoSend{
 		this.delivery = sf.getDelivery();
 		this.shopDesc=sf.getShopDesc();
 		this.shopPic=sf.getShopPic();
-		this.priceinfos=sf.getOrderinfos();
+		this.priceinfos=sf.getPriceinfos();
 	}
 
 	public void setSelf(Shopinfo sf) {
@@ -66,6 +66,23 @@ public class ShopinfoSend{
 		this.shopDesc=sf.getShopDesc();
 		this.shopPic=sf.getShopPic();
 	}
+	
+	public List<OrderinfoSend> getOrders() {
+		return orders;
+	}
+
+	public void setOrders(List<OrderinfoSend> orders) {
+		this.orders = orders;
+	}
+
+	public Set getPriceinfos() {
+		return priceinfos;
+	}
+
+	public void setPriceinfos(Set priceinfos) {
+		this.priceinfos = priceinfos;
+	}
+
 
 	public Long getShopId() {
 		return shopId;

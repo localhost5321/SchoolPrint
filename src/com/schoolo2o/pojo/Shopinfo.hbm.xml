@@ -41,7 +41,7 @@
             </key>
             <one-to-many class="com.schoolo2o.pojo.Orderinfo" />
         </set>
-        <set name="priceinfos" inverse="true" lazy="true" cascade="all">
+        <set name="priceinfos" inverse="true" lazy="false" >
             <key>
                 <column name="shopId" not-null="true" />
             </key>

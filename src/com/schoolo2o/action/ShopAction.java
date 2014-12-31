@@ -91,7 +91,7 @@ public class ShopAction extends ActionSupport {
 			List<OrderinfoSend> orderSends=ListChange.ParaseOrders(orders);
 			List<ShopCommentSend>commentsSend=ListChange.ParaseComments(comments);
 			shopinfoSend.setComments(commentsSend);
-			shopinfoSend.setComments(commentsSend);
+			shopinfoSend.setOrders(orderSends);;
 			jsonObject.setStatus("1");
 			jsonObject.setMessage("null");
 			jsonObject.setData(shopinfoSend);
