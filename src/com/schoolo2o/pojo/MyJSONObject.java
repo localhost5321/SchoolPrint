@@ -1,15 +1,15 @@
 package com.schoolo2o.pojo;
 
-public class MyJSON {
+public class MyJSONObject {
 	private String status;
 	private String message;
 	private Object data;
 
-	public MyJSON() {
+	public MyJSONObject() {
 		super();
 	}
 
-	public MyJSON(String status, String message, Object data) {
+	public MyJSONObject(String status, String message, Object data) {
 		super();
 		this.status = status;
 		this.message = message;

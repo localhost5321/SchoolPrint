@@ -17,10 +17,11 @@ import com.schoolo2o.pojo.Docinfo;
 public class DocInfoDaoImpl extends HibernateDaoSupport implements DocInfoDao {
 
 	@Override
-	public Docinfo add(Docinfo doc) {
+	public Docinfo add(Docinfo doc) {           //有问题，doc主键无法取到
 		if(doc!=null){
 			try{
 				this.getHibernateTemplate().save(doc);
+				doc.setDocId(2L);                          //问题，中午改
 				return doc;
 			}catch(Exception e){
 				e.printStackTrace();

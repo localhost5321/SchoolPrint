@@ -100,10 +100,10 @@
 							class="btn btn-info" id="browseBtn" >浏览</a> 
 							<input type="file" id="fileInput" size="28" name="upFile"
 							onchange="document.getElementById('textfield').value=this.value"
-							accept=".pdf,.doc,.xls" multiple /> <input type="submit"
+							accept=".pdf,.doc,.xls,.docx" multiple /> <input type="submit"
 							id="uploadBtn" class="btn btn-primary" value="上传" />
 						<p>点击“浏览”上传文件 或 将文件直接拖拽到上方虚线框中</p>
-						<span>* 暂只支持<font color="red">.pdf,.doc,.xls</font>格式
+						<span>* 暂只支持<font color="red">.pdf,.doc,.docx,.xls</font>格式
 						</span>
 					</div>
 				</form>
@@ -138,9 +138,7 @@
 	</div>
 	<!-- 选择完文件后显示的文件信息结束 -->
 
-	<div class="container-fluid" id="printShopContent"
-		name="printShopContent" align="center">
-		<span>选择打印店</span>
+	<div class="container-fluid" id="printShopContent" align="center">
 	</div>
 
 	<!-- 店铺列表区域 -->
@@ -148,8 +146,8 @@
 
 		<div class="shopInfo">
 			<img src="images/s1.png" class="img-circle" />
-			<h3 class="shopName">打印店名八字以内</h3>
-			<p class="shopAddr">地址：弘辰桥洞小巷内10米左拐急急急急急急积极</p>
+			<h3 class="shopName">弘辰打印店</h3>
+			<p class="shopAddr">地址：弘辰桥洞小巷内10米左拐</p>
 			<p class="shopTel">联系电话：0728-8259807</p>
 			<button id="shopDetail_1" class="btn btn-info shopDetail" >查看订单</button>
 			<button id="enterShop_1" class="btn btn-primary enterShop">进入店铺</button>
@@ -157,8 +155,8 @@
 
 		<div class="shopInfo">
 			<img src="images/s2.png" class="img-circle" />
-			<h3 class="shopName">打印店名八字以内</h3>
-			<p class="shopAddr">地址：弘辰桥洞小巷内10米左拐</p>
+			<h3 class="shopName">弘辰食堂打印店</h3>
+			<p class="shopAddr">地址：弘辰食堂2楼</p>
 			<p class="shopTel">联系电话：0728-8259807/13027342004</p>
 			<button class="btn btn-info shopDetail" data-toggle="modal" data-target="#orderModal">查看订单</button>
 			<button class="btn btn-primary enterShop">进入店铺</button>
@@ -166,18 +164,18 @@
 
 		<div class="shopInfo">
 			<img src="images/s3.png" class="img-circle" />
-			<h3 class="shopName">打印店名八字以内</h3>
-			<p class="shopAddr">地址：弘辰桥洞小巷内10米左拐万一超过</p>
-			<p class="shopTel">联系电话：0728-8259807/18373425473ddddddd</p>
+			<h3 class="shopName">南校打印店</h3>
+			<p class="shopAddr">地址：南校申通快递对面</p>
+			<p class="shopTel">联系电话：0728-8259807/18373425473</p>
 			<button class="btn btn-info shopDetail" data-toggle="modal" data-target="#orderModal">查看订单</button>
 			<button class="btn btn-primary enterShop">进入店铺</button>
 		</div>
 
 		<div class="shopInfo">
 			<img src="images/s4.png" class="img-circle" />
-			<h3 class="shopName">打印店名八字以内</h3>
-			<p class="shopAddr">地址：弘辰桥洞小巷内10米左拐万一超过</p>
-			<p class="shopTel">联系电话：0728-8259807/18373425473ddddddd</p>
+			<h3 class="shopName">北校坑里打印店</h3>
+			<p class="shopAddr">地址：北校坑里</p>
+			<p class="shopTel">联系电话：0728-8259807/18373425473</p>
 			<button class="btn btn-info shopDetail" data-toggle="modal" data-target="#orderModal">查看订单</button>
 			<button class="btn btn-primary enterShop">进入店铺</button>
 		</div>

@@ -179,6 +179,17 @@ function preCheckPasswordSame() {
 	$("#registPasswordAgainIcon").hide();
 	$("#registPasswordAgainInfo").hide();
 
+	// 密码长度过小
+	if (passwordAgain.length < 6) {
+		$("#registPasswordAgainDiv").addClass("form-group has-error has-feedback");
+		$("#registPasswordAgainInfo").show();
+		$("#registPasswordAgainInfo").text("密码不能少于6位");
+		$("#registPasswordAgainIcon").addClass(
+				"glyphicon glyphicon-remove form-control-feedback");
+		$("#registPasswordAgainIcon").show();
+		return false;
+	}
+	
 	// 两次输入密码不一致
 	if (passwordAgain != $("#registPassword").val()) {
 		$("#registPasswordAgainDiv").addClass(

@@ -4,6 +4,7 @@ var FILE_UPLOAD_WIDTH = 500;
 var SHOW_FILE_WIDTH = 700;
 var GAP;
 var userFiles = new Array();
+var SUPPORT_TYPE = "doc pdf xls docx";
 
 $(document)
 		.ready(
@@ -53,7 +54,6 @@ $(document)
 					document.getElementById("fileUploadContent").style.left = SCREEN_WIDTH
 							/ 2 - FILE_UPLOAD_WIDTH / 2 + "px";
 					initDrag();
-
 				});
 
 /**
@@ -146,7 +146,7 @@ function judgeType(files){
 	for (var i = 0; i < files.length; i++) {
 		var fileName = files[i].name;
 		var type = fileName.substring(fileName.lastIndexOf(".") + 1);
-		if("doc pdf xls".indexOf(type) == -1){
+		if(SUPPORT_TYPE.indexOf(type) == -1){
 			//文件类型不支持
 			return type;
 		}

@@ -9,17 +9,19 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.schoolo2o.pojo.Priceinfo;
 import com.schoolo2o.pojo.ShopComment;
 import com.schoolo2o.pojo.Shopinfo;
+import com.schoolo2o.service.ShopService;
 
 public class TestMain {
 	public static void main(String[] args){
 		Shopinfo shop = new Shopinfo();
-		shop.setShopName("huazai");
+		shop.setShopName("huazai2");
 		shop.setShopPwd("123456");
 		shop.setShopNick("华仔打印店");
 		shop.setShopAddress("洪辰六栋420");
 		shop.setShopPhone("15575462341");
 		shop.setShopPic("/shop/picture/201412212207.jpg");
 		shop.setShopDesc("我们是洪辰最好的打印店");
+		shop.setShopPhone("2143434324");
 		shop.setDelivery(2.5);
 		ShopComment comment = new ShopComment();
 		comment.setCommentId(2L);
@@ -30,18 +32,18 @@ public class TestMain {
 		ApplicationContext context = new ClassPathXmlApplicationContext
 				("applicationContext.xml");
 		
-		TestHiberate test = (TestHiberate) context.getBean("TestHiberate");
+		ShopService test = (ShopService) context.getBean("shopService");
 
-		test.TestAdd(shop);
+		test.add(shop);
 //		test.testAddComment(comment);
 //		test.testSearchComment(shop.getShopName());
 	//	comment.setShopReply("谢谢");
 //		comment.setCommentId(1L);
 //		test.testUpdateComment(comment);
-		comment.setShopReply("你好");
-		Priceinfo pf = new Priceinfo();
-		pf.setPrintType("双面打印");
-		pf.setPrice(0.3);
+//		comment.setShopReply("你好");
+//		Priceinfo pf = new Priceinfo();
+//		pf.setPrintType("双面打印");
+//		pf.setPrice(0.3);
 //		test.testAddPriceType(pf, shop.getShopName());
 //		test.testgetTypePrice(shop.getShopName());
 //		pf.setPriceId(1L);

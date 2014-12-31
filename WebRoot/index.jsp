@@ -1,7 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
 
 <!DOCTYPE html>
@@ -23,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </head>
 
 <body>
-	<%@ include file="header.jsp" %>
+	<%@ include file="header.jsp"%>
 
 	<!-- 广告轮播 -->
 	<div id="ad-carousel" class="carousel slide" data-ride="carousel">
@@ -93,11 +95,51 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</div>
 
 	<div class="btnDiv">
-		<button class="btn btn-primary startPrint" onclick="window.location.href='print.jsp'">立即打印！</button>
+		<button class="btn btn-primary btn-lg startPrint"
+			onclick="window.location.href='print.jsp'">立即打印！</button>
 	</div>
 
-	<%@ include file="footer.jsp" %>
+	<!-- 功能展示 -->
+	<!-- 改变传统打印，打印进入云时代 -->
+	<div class="ad_1">
+		<div class="ad_1_icon" id="aaa"></div>
+		<div class="ad_1_cloud"></div>
+		<div class="ad_1_text"></div>
+	</div>
+	
+	<!-- 店家信息，一览无余 -->
+	<div class="ad_2">
+		<div class="ad_2_icon"></div>
+		<div class="ad_2_text_1"></div>
+		<div class="ad_2_text_2"></div>
+		<div class="ad_2_text_3"></div>
+	</div>
+	
+	<!-- 多种打印方式在线选择 -->
+	<div class="ad_3">
+		<div class="ad_3_text_1"></div>
+		<div class="ad_3_text_2"></div>
+		<div class="ad_3_text_3"></div>
+		<div class="ad_3_text_4"></div>
+		<div class="ad_3_text_5"></div>
+		<div class="ad_3_text_6"></div>
+		<div class="ad_3_text_7"></div>
+		<div class="ad_3_text_8"></div>
+		<div class="ad_3_text_9"></div>
+	</div>
+	
+	<!-- 打印再无需排队，足不出户，文件到手 -->
+	<div class="ad_4">
+		<div class="ad_4_icon"></div>
+		<div class="ad_4_bulb"></div>
+		<div class="ad_4_text_1"></div>
+		<div class="ad_4_text_2"></div>
+		<div class="ad_4_text_3"></div>
+	</div>
+
+	<%@ include file="footer.jsp"%>
 	<script src="js/jquery-2.1.1.js"></script>
 	<script src="js/bootstrap.min.js"></script>
+	<script src="js/index.js"></script>
 </body>
 </html>
