@@ -24,6 +24,7 @@ public class ShopinfoSend{
 	private String shopDesc;
 	private Double delivery;
 	private List<ShopCommentSend> comments;
+	private List<OrderinfoSend> orders;
 	
 	
 

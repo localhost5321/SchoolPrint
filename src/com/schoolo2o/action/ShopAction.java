@@ -74,7 +74,7 @@ public class ShopAction extends ActionSupport {
 		}
 	}
 	
-	/**
+	/**  
 	 * 由商店名获取商店详情
 	 * @param shopName
 	 * @return
@@ -85,7 +85,7 @@ public class ShopAction extends ActionSupport {
 		Shopinfo shop=shopService.search(shopName);
 		if(shop!=null){
 			ShopinfoSend shopinfoSend=new ShopinfoSend(shop);
-			List<ShopComment> comment=shopService.getCommentsSplit(shopName, 0, 1);
+			List<ShopComment> comment=shopService.getCommentsSplit(shopName, 0, 10);
 //			List <Priceinfo> priceType=shopService.getTypePrice(shopName);
 			//List<Orderinfo> orders=orderService.shopSearch(shopName);
 //			shop.setOrderinfos(new HashSet(orders));

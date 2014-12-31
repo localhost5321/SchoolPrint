@@ -28,12 +28,13 @@
         <property name="emailChecked" type="java.lang.Integer">
             <column name="emailChecked" not-null="true" />
         </property>
-        <set name="addressinfos" inverse="true">
+        <set name="addressinfos" lazy="false" inverse="true">
             <key>
                 <column name="userId" not-null="true" />
             </key>
             <one-to-many class="com.schoolo2o.pojo.Addressinfo" />
-        </set>
+      </set>
+      
         <set name="orderinfos" inverse="true">
             <key>
                 <column name="userId" not-null="true" />
@@ -46,5 +47,6 @@
             </key>
             <one-to-many class="com.schoolo2o.pojo.Docinfo" />
         </set>
+         
     </class>
 </hibernate-mapping>

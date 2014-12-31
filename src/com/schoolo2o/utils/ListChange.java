@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.schoolo2o.pojo.Orderinfo;
 import com.schoolo2o.pojo.ShopComment;
 import com.schoolo2o.pojo.Shopinfo;
+import com.schoolo2o.pojo.send.OrderinfoSend;
 import com.schoolo2o.pojo.send.ShopCommentSend;
 import com.schoolo2o.pojo.send.ShopinfoSend;
 /**
@@ -37,6 +39,19 @@ public class ListChange {
 			ShopComment sc=(ShopComment)it.next();
 			ShopCommentSend scs=new ShopCommentSend(sc);
 			li.add(scs);
+		}
+		return li;
+	}
+	/**
+	 * 将一个Orderinfo类型List转变为OrderinfoSend类型List
+	 */
+	public static List<OrderinfoSend> ParaseOrders(List <Orderinfo> orders){
+		List<OrderinfoSend> li=new ArrayList();
+		Iterator it=orders.iterator();
+		while(it.hasNext()){
+			Orderinfo order=(Orderinfo)it.next();
+			OrderinfoSend ods=new OrderinfoSend(order);
+			li.add(ods);
 		}
 		return li;
 	}
