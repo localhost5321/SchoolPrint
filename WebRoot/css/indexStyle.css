@@ -38,3 +38,207 @@ body {
 	width: 200px;
 	height: 50px;
 }
+
+.ad_1,.ad_2, .ad_3, .ad_4 {
+	background-position: center;
+	position: relative;
+}
+
+.ad_1_icon,.ad_1_cloud,.ad_1_text,
+.ad_2_icon,.ad_2_text_1,.ad_2_text_2,.ad_2_text_3,
+ .ad_3_text_1, .ad_3_text_2,.ad_3_text_3,.ad_3_text_4,.ad_3_text_5,.ad_3_text_6, 
+ .ad_3_text_7,.ad_3_text_8,.ad_3_text_9, 
+ .ad_4_icon,.ad_4_bulb,.ad_4_text_1,.ad_4_text_2,.ad_4_text_3
+	{
+	position: absolute;
+	filter: alpha(opacity = 0); /*IE滤镜*/
+	-moz-opacity: 0; /*Firefox私有*/
+	opacity: 0; /*其他*/
+}
+
+.ad_1 {
+	background: whilte;
+}
+
+.ad_2 {
+	background: transparent url("../images/ad_2_bg.jpg") no-repeat center
+		top;
+}
+
+.ad_3 {
+	background: transparent url("../images/ad_3_bg.jpg") no-repeat center
+		top;
+}
+
+.ad_4 {
+	background: transparent url("../images/ad_4_bg.jpg") no-repeat center
+		top;
+}
+
+.ad_1_icon {
+	width: 310px;
+	height: 227px;
+	background: transparent url("../images/ad_1_icon.png") no-repeat center top;
+	left: 0px;
+	top: 76px;
+}
+
+.ad_2_icon {
+	width: 400px;
+	height: 308px;
+	background: transparent url("../images/ad_2_icon.png") no-repeat 0 0;
+	left: 0px;
+	top: 36px;
+}
+
+.ad_4_icon {
+	width: 461px;
+	height: 362px;
+	background: transparent url("../images/ad_4_icon.png") no-repeat 0 0;
+	left: -50px;
+	top: 0px;
+}
+
+.ad_1_cloud {
+	width: 115px;
+	height: 83px;
+	background: transparent url("../images/ad_1_cloud.png") no-repeat 0 0;
+	right: 265px;
+	top: 50px;
+}
+
+.ad_4_bulb {
+	width: 128px;
+	height: 102px;
+	background: transparent url("../images/ad_4_bulb.png") no-repeat 0 0;
+	right: 235px;
+	top: -50px;
+}
+
+.ad_1_text {
+	width: 397px;
+	height: 155px;
+	background: transparent url("../images/ad_1_text.png") no-repeat 0 0;
+	right: 96px;
+	top: 50px;
+}
+
+.ad_2_text_1 {
+	width: 148px;
+	height: 57px;
+	background: transparent url("../images/ad_2_text_1.png") no-repeat 0 0;
+	right: 376px;
+	top: 0px;
+}
+
+.ad_2_text_2 {
+	width: 274px;
+	height: 110px;
+	background: transparent url("../images/ad_2_text_2.png") no-repeat 0 0;
+	right: 100px;
+	top: 120px;
+}
+
+.ad_2_text_3 {
+	width: 241px;
+	height: 66px;
+	background: transparent url("../images/ad_2_text_3.png") no-repeat 0 0;
+	right: 53px;
+	bottom: 0px;
+}
+
+.ad_4_text_1 {
+	width: 328px;
+	height: 96px;
+	background: transparent url("../images/ad_4_text_1.png") no-repeat 0 0;
+	right: 267px;
+	top: 0px;
+}
+
+.ad_4_text_2 {
+	width: 269px;
+	height: 123px;
+	background: transparent url("../images/ad_4_text_2.png") no-repeat 0 0;
+	right: 183px;
+	top: 223px;
+}
+
+.ad_4_text_3 {
+	width: 196px;
+	height: 75px;
+	background: transparent url("../images/ad_4_text_3.png") no-repeat 0 0;
+	right: 95px;
+	top: 332px;
+}
+
+.ad_3_text_1 {
+	width: 109px;
+	height: 81px;
+	background: transparent url("../images/ad_3_text_1.png") no-repeat 0 0;
+	left: 350px;
+	top: 0px;
+}
+
+.ad_3_text_2 {
+	width: 142px;
+	height: 57px;
+	background: transparent url("../images/ad_3_text_2.png") no-repeat 0 0;
+	left: 150px;
+	top: 80px;
+}
+
+.ad_3_text_3{
+	width: 127px;
+	height: 54px;
+	background: transparent url("../images/ad_3_text_3.png") no-repeat 0 0;
+	left: 480px;
+	top: 103px;
+}
+
+.ad_3_text_4{
+	width: 94px;
+	height: 66px;
+	background: transparent url("../images/ad_3_text_4.png") no-repeat 0 0;
+	left: 83px;
+	top: 60px;
+}
+
+.ad_3_text_5{
+	width: 115px;
+	height: 71px;
+	background: transparent url("../images/ad_3_text_5.png") no-repeat 0 0;
+	left: 233px;
+	top: 160px;
+}
+
+.ad_3_text_6{
+	width: 109px;
+	height: 41px;
+	background: transparent url("../images/ad_3_text_6.png") no-repeat 0 0;
+	left: 136px;
+	top: 170px;
+}
+
+.ad_3_text_7{
+	width: 100px;
+	height: 62px;
+	background: transparent url("../images/ad_3_text_7.png") no-repeat 0 0;
+	left: 250px;
+	top: 250px;
+}
+
+.ad_3_text_8{
+	width: 136px;
+	height: 51px;
+	background: transparent url("../images/ad_3_text_8.png") no-repeat 0 0;
+	left: 480px;
+	top: 230px;
+}
+
+.ad_3_text_9{
+	width: 397px;
+	height: 66px;
+	background: transparent url("../images/ad_3_text_9.png") no-repeat 0 0;
+	left: 165px;
+	top: 450px;
+}

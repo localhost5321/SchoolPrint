@@ -24,8 +24,6 @@ import com.schoolo2o.utils.MyFileUtils;
 
 public class UpLoadFileAction extends ActionSupport {
 
-	/** 这个final字段是在服务器硬盘上存储的根路径，按需改变 **/
-	public static final String FILE_ROOT_PATH = "/home/user/temp/";
 	private DocService dcoService;
 	private UserService userService;
 	private final HttpServletRequest serletRequest = ServletActionContext
