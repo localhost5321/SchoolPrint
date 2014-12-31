@@ -217,6 +217,16 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 		return false;
 	}
 
+	@Override
+	public List<ShopComment> getCommentsSplit(String shopName, int current,
+			int step) {
+		Session session=this.getSession();
+		Query q=session.createQuery("from ShopComment where shopinfo.shopName = '" +shopName+"' ");
+		q.setFirstResult(current);
+		q.setMaxResults(step);
+		return q.list();
+	}
+
 	
 
 

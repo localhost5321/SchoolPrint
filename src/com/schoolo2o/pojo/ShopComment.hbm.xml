@@ -10,7 +10,7 @@
             <column name="commentId" />
             <generator class="identity" />
         </id>
-        <many-to-one name="shopinfo" class="com.schoolo2o.pojo.Shopinfo" fetch="select">
+        <many-to-one name="shopinfo"  lazy="false"    class="com.schoolo2o.pojo.Shopinfo" fetch="select">
             <column name="shopId" not-null="true" />
         </many-to-one>
         <property name="commentUser" type="java.lang.String">

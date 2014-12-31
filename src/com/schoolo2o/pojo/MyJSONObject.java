@@ -1,6 +1,8 @@
 package com.schoolo2o.pojo;
 
-public class MyJSONObject {
+import java.io.Serializable;
+
+public class MyJSONObject{
 	private String status;
 	private String message;
 	private Object data;

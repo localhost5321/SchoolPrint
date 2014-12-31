@@ -166,4 +166,10 @@ public class ShopServiceImpl implements ShopService {
 		return shopinfoDao.updateTypePrice(priceinfo, shopName);
 	}
 
+	@Override
+	public List<ShopComment> getCommentsSplit(String shopName, int current,
+			int step) {
+		return shopinfoDao.getCommentsSplit(shopName, current, step);
+	}
+
 }
