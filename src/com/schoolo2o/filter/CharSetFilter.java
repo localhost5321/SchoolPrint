@@ -10,29 +10,21 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
 public class CharSetFilter implements Filter {
-	private String characterEncoding;
-	private boolean enabled;
 
 	@Override
 	public void destroy() {
-		characterEncoding = null;
 	}
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
-		if (enabled || characterEncoding != null) {
-			request.setCharacterEncoding(characterEncoding);
-			response.setCharacterEncoding(characterEncoding);
-		}
+		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		chain.doFilter(request, response);
 	}
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		characterEncoding = filterConfig.getInitParameter("encoding");
-		enabled = "true".equalsIgnoreCase(filterConfig
-				.getInitParameter("using").trim());
 	}
 
 }
