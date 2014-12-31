@@ -9,12 +9,6 @@ $(function(){
 	//适应屏幕
 	AD_HEIGHT = SCREEN_WIDTH * 571 / 1540;
 	$(".ad_1, .ad_2, .ad_3, .ad_4").height(AD_HEIGHT);
-	//var arr = [".ad_1_icon", ".ad_2_icon", ".ad_3_icon", ".ad_1_cloud", ".ad_1_text", ".ad_2_text_1", ".ad_2_text_2", ".ad_2_text_3", ".ad_3_text_1", ".ad_3_text_2",".ad_3_text_3",".ad_3_text_4",".ad_3_text_5",".ad_3_text_6", ".ad_3_text_7",".ad_3_text_8",".ad_3_text_9", ".ad_4_icon",".ad_4_bulb",".ad_4_text_1",".ad_4_text_2",".ad_4_text_3"];
-	//var bs = SCREEN_WIDTH  / 1540;
-	//for(var i = 0; i < arr.length; i++){
-		//$(arr[i]).width(bs *  $(arr[i]).width());
-		//$(arr[i]).height(bs *  $(arr[i]).height());
-	//}
 	//广告结束的位置
 	var ad_1_top = $(".ad_1").offset().top + $(".ad_1").height();
 	var ad_2_top = $(".ad_2").offset().top + $(".ad_2").height();
@@ -53,19 +47,19 @@ function ad_2_animate(){
 	//文字一
 	$(".ad_2_text_1").animate({
 		right : "406px",
-		top:"65px",
+		top:(AD_HEIGHT * 0.7 - $(".ad_2_text_2").height())/2 + "px",
 		opacity:"1"
 	}, 1000);
 	//文字二
 	$(".ad_2_text_2").animate({
 		right : "180px",
-		top:"120px",
+		top:(AD_HEIGHT - $(".ad_2_text_2").height())/2  + "px",
 		opacity:"1"
 	}, 1000);
 	//文字三
 	$(".ad_2_text_3").animate({
 		right : "83px",
-		top:"242px",
+		bottom:(AD_HEIGHT * 0.7 - $(".ad_2_text_2").height())/2 + "px",
 		opacity:"1"
 	}, 1000);
 }
@@ -74,18 +68,18 @@ function ad_1_animate(){
 	//图标
 	$(".ad_1_icon").animate({
 		left : "15%",
-		top:"76px",
+		top:(AD_HEIGHT - $(".ad_1_icon").height())/2  + "px",
 		opacity:"1"
 	}, 1000);
 	//文字
 	$(".ad_1_text").animate({
 		right : "126px",
-		top:"112px",
+		top:(AD_HEIGHT - $(".ad_1_text").height())/2  + "px",
 		opacity:"1"
 	}, 1000);
 	//云
 	$(".ad_1_cloud").animate({
-		top: "105px",
+		top: (AD_HEIGHT - $(".ad_1_text").height())/2  + "px",
 		opacity:"1"
 	}, 1000);
 }
