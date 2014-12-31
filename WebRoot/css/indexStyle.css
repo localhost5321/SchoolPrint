@@ -40,7 +40,6 @@ body {
 }
 
 .ad_1,.ad_2, .ad_3, .ad_4 {
-	height: 380px;
 	background-position: center;
 	position: relative;
 }
@@ -58,8 +57,7 @@ body {
 }
 
 .ad_1 {
-	background: transparent url("../images/ad_1_bg.jpg") no-repeat center
-		top;
+	background: whilte;
 }
 
 .ad_2 {
@@ -80,7 +78,7 @@ body {
 .ad_1_icon {
 	width: 310px;
 	height: 227px;
-	background: transparent url("../images/ad_1_icon.png") no-repeat 0 0;
+	background: transparent url("../images/ad_1_icon.png") no-repeat center top;
 	left: 0px;
 	top: 76px;
 }

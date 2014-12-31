@@ -102,7 +102,7 @@
 	<!-- 功能展示 -->
 	<!-- 改变传统打印，打印进入云时代 -->
 	<div class="ad_1">
-		<div class="ad_1_icon"></div>
+		<div class="ad_1_icon" id="aaa"></div>
 		<div class="ad_1_cloud"></div>
 		<div class="ad_1_text"></div>
 	</div>
@@ -113,15 +113,6 @@
 		<div class="ad_2_text_1"></div>
 		<div class="ad_2_text_2"></div>
 		<div class="ad_2_text_3"></div>
-	</div>
-	
-	<!-- 打印再无需排队，足不出户，文件到手 -->
-	<div class="ad_4">
-		<div class="ad_4_icon"></div>
-		<div class="ad_4_bulb"></div>
-		<div class="ad_4_text_1"></div>
-		<div class="ad_4_text_2"></div>
-		<div class="ad_4_text_3"></div>
 	</div>
 	
 	<!-- 多种打印方式在线选择 -->
@@ -135,6 +126,15 @@
 		<div class="ad_3_text_7"></div>
 		<div class="ad_3_text_8"></div>
 		<div class="ad_3_text_9"></div>
+	</div>
+	
+	<!-- 打印再无需排队，足不出户，文件到手 -->
+	<div class="ad_4">
+		<div class="ad_4_icon"></div>
+		<div class="ad_4_bulb"></div>
+		<div class="ad_4_text_1"></div>
+		<div class="ad_4_text_2"></div>
+		<div class="ad_4_text_3"></div>
 	</div>
 
 	<%@ include file="footer.jsp"%>
