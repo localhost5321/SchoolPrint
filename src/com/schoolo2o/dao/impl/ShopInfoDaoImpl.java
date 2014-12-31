@@ -12,6 +12,7 @@ import org.hibernate.Transaction;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.schoolo2o.dao.ShopinfoDao;
+import com.schoolo2o.pojo.Orderinfo;
 import com.schoolo2o.pojo.Priceinfo;
 import com.schoolo2o.pojo.ShopComment;
 import com.schoolo2o.pojo.Shopinfo;
@@ -215,6 +216,25 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 			e.printStackTrace();
 		}
 		return false;
+	}
+
+	@Override
+	public List<ShopComment> getCommentsSplit(String shopName, int current,
+			int step) {
+		Session session=this.getSession();
+		Query q=session.createQuery("from ShopComment where shopinfo.shopName = '" +shopName+"' ");
+		q.setFirstResult(current);
+		q.setMaxResults(step);
+		return q.list();
+	}
+
+	@Override
+	public List<Orderinfo> getOrdersSplit(String shopName, int current, int step) {
+		Session session=this.getSession();
+		Query q=session.createQuery("from Orderinfo where shopinfo.shopName = '" +shopName+"' ");
+		q.setFirstResult(current);
+		q.setMaxResults(step);
+		return q.list();
 	}
 
 	

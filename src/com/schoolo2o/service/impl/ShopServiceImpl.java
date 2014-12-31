@@ -3,6 +3,7 @@ package com.schoolo2o.service.impl;
 import java.util.List;
 
 import com.schoolo2o.dao.ShopinfoDao;
+import com.schoolo2o.pojo.Orderinfo;
 import com.schoolo2o.pojo.Priceinfo;
 import com.schoolo2o.pojo.ShopComment;
 import com.schoolo2o.pojo.Shopinfo;
@@ -164,6 +165,17 @@ public class ShopServiceImpl implements ShopService {
 	@Override
 	public boolean updateTypePrice(Priceinfo priceinfo, String shopName) {
 		return shopinfoDao.updateTypePrice(priceinfo, shopName);
+	}
+
+	@Override
+	public List<ShopComment> getCommentsSplit(String shopName, int current,
+			int step) {
+		return shopinfoDao.getCommentsSplit(shopName, current, step);
+	}
+
+	@Override
+	public List<Orderinfo> getOrdersSplit(String shopName, int current, int step) {
+		return shopinfoDao.getOrdersSplit(shopName, current, step);
 	}
 
 }
