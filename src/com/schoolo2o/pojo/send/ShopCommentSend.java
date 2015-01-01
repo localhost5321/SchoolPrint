@@ -13,7 +13,6 @@ public class ShopCommentSend{
 	// Fields
 
 	private Long commentId;
-	private String shopName;
 	private String commentUser;
 	private String commentContent;
 	private Timestamp commentDate;
@@ -25,15 +24,6 @@ public class ShopCommentSend{
 	public void setCommentId(Long commentId) {
 		this.commentId = commentId;
 	}
-
-	public String getShopName() {
-		return shopName;
-	}
-
-	public void setShopName(String shopName) {
-		this.shopName = shopName;
-	}
-
 	public String getCommentUser() {
 		return commentUser;
 	}
@@ -81,12 +71,10 @@ public class ShopCommentSend{
 	/** default constructor */
 	public ShopCommentSend(ShopComment sc) {
 		this.commentId=sc.getCommentId();
-		this.shopName = sc.getShopinfo().getShopName();
 		this.commentUser = sc.getCommentUser();
 		this.commentContent = sc.getCommentContent();
 		this.commentDate = sc.getCommentDate();
 		this.shopScore = sc.getShopScore();
-		this.shopScore=sc.getShopScore();
 	}
 
 	

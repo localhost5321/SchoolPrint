@@ -35,26 +35,26 @@
             <column name="delivery" precision="10" not-null="true" />
         </property>
          
-  <!--     <set name="orderinfos" inverse="true" lazy="true">
+       <set name="orderinfos" inverse="true" lazy="true">
             <key>
                 <column name="shopId" not-null="true" />
             </key>
             <one-to-many class="com.schoolo2o.pojo.Orderinfo" />
         </set>
- -->   
+    <!-- 商店价格信息不采用延迟加载 -->
         <set name="priceinfos" inverse="true" lazy="false" >
             <key>
                 <column name="shopId" not-null="true" />
             </key>
             <one-to-many class="com.schoolo2o.pojo.Priceinfo" />
         </set>
- <!--  
+   
+   <!-- 商店评论表采用延迟加载 -->
         <set name="shopComments" inverse="true" lazy="true">
             <key>
                 <column name="shopId" not-null="true" />
             </key>
             <one-to-many class="com.schoolo2o.pojo.ShopComment" />
         </set>
-    -->   
     </class>
 </hibernate-mapping>

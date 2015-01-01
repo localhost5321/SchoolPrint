@@ -16,13 +16,17 @@ import com.schoolo2o.pojo.send.ShopinfoSend;
  *
  */
 public class ListChange {
-	public static List<ShopinfoSend>  ParaseShops(List <Shopinfo>list){
-		List<ShopinfoSend> li=new ArrayList();
-		Iterator it=list.iterator();
+	/**
+	 * 把商店信息转换成发送商店信息实体列表
+	 * @param list
+	 * @return
+	 */
+	public static List<ShopinfoSend>  ParaseShops(List<Shopinfo> list){
+		List<ShopinfoSend> li=new ArrayList<ShopinfoSend>();
+		Iterator<Shopinfo> it=list.iterator();
 		while(it.hasNext()){
 			Shopinfo sf=(Shopinfo)it.next();
 			ShopinfoSend sfs=new ShopinfoSend(sf);
-			System.out.println(sfs.getShopPhone());
 			li.add(sfs);
 		}
 		return li;
@@ -32,9 +36,9 @@ public class ListChange {
 	 * @param list
 	 * @return
 	 */
-	public static List<ShopCommentSend>  ParaseComments(List <ShopComment>list){
-		List<ShopCommentSend> li=new ArrayList();
-		Iterator it=list.iterator();
+	public static List<ShopCommentSend>  ParaseComments(List<ShopComment> list){
+		List<ShopCommentSend> li = new ArrayList<ShopCommentSend>();
+		Iterator<ShopComment> it=list.iterator();
 		while(it.hasNext()){
 			ShopComment sc=(ShopComment)it.next();
 			ShopCommentSend scs=new ShopCommentSend(sc);
