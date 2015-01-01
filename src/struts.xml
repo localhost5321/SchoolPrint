@@ -24,4 +24,7 @@
 				<action name="verifyEmail" class="com.schoolo2o.action.UserAction" method="verifyEmail">
 				</action>
 		</package>
+		
+		<include file="strutsShop.xml"></include>
+		
 </struts>    
