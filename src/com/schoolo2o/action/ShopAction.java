@@ -93,6 +93,7 @@ public class ShopAction extends ActionSupport {
 			shopinfoSend.setComments(commentsSend);
 			shopinfoSend.setOrders(orderSends);
 			request.setAttribute("shop", shopinfoSend);
+			
 			jsonObject.setStatus("1");
 			jsonObject.setMessage("null");
 			jsonObject.setData(shopinfoSend);
