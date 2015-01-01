@@ -17,22 +17,13 @@ $(document)
 									scrollTop : targetOffset
 								}, 1000);
 							});
-					
+
 					// 将打印页面的导航高亮改变
-					$("#navBarIndex").attr("class", "");
+					$("#navBarIndex").attr("class", "javascript:void(0)");
 					$("#navBarIndex").children("a").attr("href", "index.jsp");
 					$("#navBarPrint").attr("class", "active");
 					$("#navBarPrint").children("a").attr("href", "");
 
-					// 给店铺的订单详情按钮添加对应监听
-					$("#shopDetail_1").click(function() {
-						showOrder(this);
-					});
-
-					$("#enterShop_1").click(function(){
-						window.open("shopHome.jsp");
-					});
-					
 					// 将浏览按钮的事件清除
 					var fileInput = $("#fileInput");// 文件输入框
 					var browseBtn = document.getElementById("browseBtn");// 浏览按钮
@@ -54,6 +45,16 @@ $(document)
 					document.getElementById("fileUploadContent").style.left = SCREEN_WIDTH
 							/ 2 - FILE_UPLOAD_WIDTH / 2 + "px";
 					initDrag();
+
+					// 请求店铺
+					$.ajax({
+						type : "post",
+						url : "shop/getShopList.action",
+						success : function(data) {
+							var json = JSON.parse(data);
+							createShop(json);
+						}
+					});
 				});
 
 /**
@@ -84,9 +85,9 @@ function initDrag() {
 		var files = event.dataTransfer.files;
 		event.stopPropagation();
 		event.preventDefault();
-		//判断文件类型是否符合要求
+		// 判断文件类型是否符合要求
 		var result = judgeType(files);
-		if(result != ""){
+		if (result != "") {
 			alert("抱歉，暂不支持" + result + "格式");
 			return;
 		}
@@ -118,9 +119,9 @@ function uploadFile() {
 		alert("请选择文件");
 		return;
 	}
-	//判断文件类型是否符合要求
+	// 判断文件类型是否符合要求
 	var result = judgeType(form["fileInput"].files);
-	if(result != ""){
+	if (result != "") {
 		alert("抱歉，暂不支持" + result + "格式");
 		return;
 	}
@@ -141,13 +142,13 @@ function uploadFile() {
 	updateFileInfo();
 }
 
-function judgeType(files){
-	//遍历数组判断后缀名
+function judgeType(files) {
+	// 遍历数组判断后缀名
 	for (var i = 0; i < files.length; i++) {
 		var fileName = files[i].name;
 		var type = fileName.substring(fileName.lastIndexOf(".") + 1);
-		if(SUPPORT_TYPE.indexOf(type) == -1){
-			//文件类型不支持
+		if (SUPPORT_TYPE.indexOf(type) == -1) {
+			// 文件类型不支持
 			return type;
 		}
 	}
@@ -352,9 +353,8 @@ function showUserFile() {
 /**
  * 显示订单详情
  */
-function showOrder(obj) {
+function showOrder(shopId) {
 	var json = showUserFile();
-	alert(JSON.stringify(json));
 	var table = document.getElementById("orderTable");
 	// 清空表格
 	table.tBodies[0].innerHTML = "";
@@ -457,16 +457,16 @@ function handleFile(file) {
 		} else {
 			progressBar.style.width = "100%";
 			progressBar.innerHTML = "100%";
-			
+
 			// 构造 XMLHttpRequest 对象，发送文件 Binary 数据
 			var xhr = null;
 			if (window.ActiveXObject) {
 				xhr = new ActiveXObject("Microsoft.XMLHTTP");
-		    } else {
-		        if (window.XMLHttpRequest) {
-		        	xhr = new XMLHttpRequest();
-		        }
-		    }
+			} else {
+				if (window.XMLHttpRequest) {
+					xhr = new XMLHttpRequest();
+				}
+			}
 			xhr.open(
 			/* method */"POST",
 			/* target url */
@@ -475,7 +475,7 @@ function handleFile(file) {
 			);
 			xhr.overrideMimeType("application/octet-stream");
 
-			//兼容chrome
+			// 兼容chrome
 			if (typeof XMLHttpRequest.prototype.sendAsBinary == 'undefined') {
 				XMLHttpRequest.prototype.sendAsBinary = function(text) {
 					var data = new ArrayBuffer(text.length);
@@ -497,13 +497,57 @@ function handleFile(file) {
 			};
 		}
 	};
-	
-	if(reader.readAsBinaryString){
+
+	if (reader.readAsBinaryString) {
 		reader.readAsBinaryString(file);
-	}else if(reader.readAsText){
+	} else if (reader.readAsText) {
 		reader.readAsText(file);
-	}else if(reader.readAsArrayBuffer){
+	} else if (reader.readAsArrayBuffer) {
 		reader.readAsArrayBuffer(file);
 	}
-	
+
+}
+
+/**
+ * 插入一个店铺
+ */
+function createShop(json) {
+	for (var i = 0; i < json.data.length; i++) {
+		var imageSrc = "images/s1.png";
+		var shopName = json.data[i].shopName;
+		var shopAddr = json.data[i].shopAddress;
+		var shopPhone = json.data[i].shopPhone;
+		var shopName = json.data[i].shopName;
+		$(".shopContainer")
+				.append(
+						"<div class=\"shopInfo\"><img src=\""
+								+ imageSrc
+								+ "\" class=\"img-circle\" /><h3 class=\"shopName\">"
+								+ shopName
+								+ "</h3><p class=\"shopAddr\">"
+								+ shopAddr
+								+ "</p><p class=\"shopTel\">联系电话："
+								+ shopPhone
+								+ "</p><button id=\"shopDetail_"
+								+ shopName
+								+ "\" class=\"btn btn-info shopDetail\" >查看订单</button><button id=\"enterShop_"
+								+ shopName
+								+ "\" class=\"btn btn-primary enterShop\">进入店铺</button></div>");
+
+		// 给店铺的订单详情按钮添加对应监听
+		$("#shopDetail_" + shopName).click(function() {
+			showOrder(shopId);
+		});
+
+		$("#enterShop_" + shopName).click(function() {
+			// 请求shopName的店铺
+			$.ajax({
+				type : "post",
+				url : "shop/getShopDetail.action?sName=" + shopName,
+				success : function(data) {
+					
+				}
+			});
+		});
+	}
 }

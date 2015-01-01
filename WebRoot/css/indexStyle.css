@@ -6,7 +6,6 @@ body {
 
 .carousel {
 	height: 500px;
-	margin-bottom: 20px;
 }
 
 .carousel .item {
@@ -31,12 +30,13 @@ body {
 
 .btnDiv {
 	text-align: center;
-	margin-bottom: 20px;
 }
 
 .startPrint {
 	width: 200px;
 	height: 50px;
+	margin-top: 20px;
+	margin-bottom: 20px;
 }
 
 .ad_1,.ad_2, .ad_3, .ad_4 {
@@ -111,7 +111,7 @@ body {
 	width: 128px;
 	height: 102px;
 	background: transparent url("../images/ad_4_bulb.png") no-repeat 0 0;
-	right: 235px;
+	left: 75%;
 	top: -50px;
 }
 
@@ -168,7 +168,7 @@ body {
 	height: 75px;
 	background: transparent url("../images/ad_4_text_3.png") no-repeat 0 0;
 	right: 95px;
-	top: 332px;
+	bottom: 0px;
 }
 
 .ad_3_text_1 {
@@ -184,7 +184,7 @@ body {
 	height: 57px;
 	background: transparent url("../images/ad_3_text_2.png") no-repeat 0 0;
 	left: 150px;
-	top: 80px;
+	top: 20%;
 }
 
 .ad_3_text_3{
@@ -192,7 +192,7 @@ body {
 	height: 54px;
 	background: transparent url("../images/ad_3_text_3.png") no-repeat 0 0;
 	left: 480px;
-	top: 103px;
+	top: 25%;
 }
 
 .ad_3_text_4{
@@ -208,7 +208,7 @@ body {
 	height: 71px;
 	background: transparent url("../images/ad_3_text_5.png") no-repeat 0 0;
 	left: 233px;
-	top: 160px;
+	top: 40%;
 }
 
 .ad_3_text_6{
@@ -232,7 +232,7 @@ body {
 	height: 51px;
 	background: transparent url("../images/ad_3_text_8.png") no-repeat 0 0;
 	left: 480px;
-	top: 230px;
+	top: 55%;
 }
 
 .ad_3_text_9{
@@ -240,5 +240,5 @@ body {
 	height: 66px;
 	background: transparent url("../images/ad_3_text_9.png") no-repeat 0 0;
 	left: 165px;
-	top: 450px;
+	bottom: 0px;
 }

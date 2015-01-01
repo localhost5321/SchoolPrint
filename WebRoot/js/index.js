@@ -14,6 +14,24 @@ $(function(){
 	var ad_2_top = $(".ad_2").offset().top + $(".ad_2").height();
 	var ad_3_top = $(".ad_3").offset().top + $(".ad_3").height();
 	var ad_4_top = $(".ad_4").offset().top + $(".ad_4").height();
+	
+	$(".startPrint").mouseover(function(){
+		$(".startPrint").animate({
+			marginTop: "0px",
+			marginBottom: "0px",
+			width : document.body.clientWidth + "px",
+			height: $(".btnDiv").height() + "px"
+		}, 500);
+	});
+	$(".startPrint").mouseleave(function(){
+		$(".startPrint").animate({
+			marginTop: "20px",
+			marginBottom: "20px",
+			width : "200px",
+			height: "50px"
+		}, 500);
+	});
+	
 	window.onscroll = function(){
 		//页面下方离顶部的距离
 		var scrollHeight = 0;  
@@ -46,7 +64,6 @@ function ad_2_animate(){
 	}, 1000);
 	//文字一
 	$(".ad_2_text_1").animate({
-		right : "406px",
 		top:(AD_HEIGHT * 0.7 - $(".ad_2_text_2").height())/2 + "px",
 		opacity:"1"
 	}, 1000);
@@ -58,7 +75,6 @@ function ad_2_animate(){
 	}, 1000);
 	//文字三
 	$(".ad_2_text_3").animate({
-		right : "83px",
 		bottom:(AD_HEIGHT * 0.7 - $(".ad_2_text_2").height())/2 + "px",
 		opacity:"1"
 	}, 1000);
@@ -97,15 +113,15 @@ function ad_4_animate(){
 	}, 1000);
 	//文字
 	$(".ad_4_text_1").animate({
-		top:"70px",
+		top:(AD_HEIGHT * 0.65 - $(".ad_4_text_2").height())/2 + "px",
 		opacity:"1"
 	}, 1000);
 	$(".ad_4_text_2").animate({
-		top:"155px",
+		top:(AD_HEIGHT - $(".ad_4_text_2").height())/2 + "px",
 		opacity:"1"
 	}, 1000);
 	$(".ad_4_text_3").animate({
-		top:"272px",
+		bottom:(AD_HEIGHT * 0.65 - $(".ad_4_text_2").height())/2 + "px",
 		opacity:"1"
 	}, 1000);
 }
@@ -113,39 +129,39 @@ function ad_4_animate(){
 function ad_3_animate(){
 	//文字
 	$(".ad_3_text_1").animate({
-		top:"20px",
+		top:AD_HEIGHT * 0.1 + "px",
 		opacity:"1"
 	}, 1000);
 	$(".ad_3_text_2").animate({
-		left:"225px",
+		left:SCREEN_WIDTH * 0.15 + "px",
 		opacity:"1"
 	}, 1000);
 	$(".ad_3_text_3").animate({
-		left:"410px",
+		left:SCREEN_WIDTH * 0.3 + "px",
 		opacity:"1"
 	}, 1000);
 	$(".ad_3_text_4").animate({
-		top:"118px",
+		top:AD_HEIGHT * 0.3 + "px",
 		opacity:"1"
 	}, 1000);
 	$(".ad_3_text_5").animate({
-		left:"362px",
+		left:SCREEN_WIDTH * 0.25 + "px",
 		opacity:"1"
 	}, 1000);
 	$(".ad_3_text_6").animate({
-		top:"238px",
+		top:AD_HEIGHT * 0.65 + "px",
 		opacity:"1"
 	}, 1000);
 	$(".ad_3_text_7").animate({
-		top:"180px",
+		top:AD_HEIGHT * 0.45 + "px",
 		opacity:"1"
 	}, 1000);
 	$(".ad_3_text_8").animate({
-		left:"410px",
+		left:SCREEN_WIDTH * 0.3 + "px",
 		opacity:"1"
 	}, 1000);
 	$(".ad_3_text_9").animate({
-		top:"302px",
+		bottom:AD_HEIGHT * 0.1 + "px",
 		opacity:"1"
 	}, 1000);
 }
