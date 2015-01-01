@@ -37,16 +37,16 @@ public class ShopAction extends ActionSupport{
 		Shopinfo shop = this.shopService.search(shopInfo.getShopName());
 		if(shop == null){
 			response.getWriter().write("{\"status\":\"0\",\"message\":\"商店不存在\"}");
-			return ERROR;
+			return null;
 		}
 		else if(shop.getShopPwd().equals(shopInfo.getShopPwd())){
 			session.put("shopInfo", shop);
 			response.getWriter().write("{\"status\":\"1\",\"message\":\""+shop+"\"}");
-			return SUCCESS;
+			return null;
 		}
 		else{
 			response.getWriter().write("{\"status\":\"0\",\"message\":\"密码错误\"}");
-			return ERROR;
+			return null;
 		}
 	}
 }

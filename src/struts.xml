@@ -24,13 +24,7 @@
 				</action>
 		</package>
 		
-		<package name="shop" extends="struts-default" namespace="/shop">
-			<action name="getShopList" class="com.schoolo2o.action.ShopAction" method="getAllShops">
-			</action>
-			<action name="getShopDetail" class="com.schoolo2o.action.ShopAction" method="getShopByName"
-			>
-			<result name="success" type="redirect">/shopHome.jsp</result>
-			</action>
 
-		</package>
+		<include file="strutsShop.xml"></include>
+		
 </struts>    
