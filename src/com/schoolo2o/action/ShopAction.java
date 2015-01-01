@@ -82,7 +82,7 @@ public class ShopAction extends ActionSupport {
 	 * @throws IOException
 	 */
 	public String getShopByName() throws IOException{
-		String shopName=request.getParameter("userName");
+		String shopName=request.getParameter("shopName");
 		Shopinfo shop=shopService.search(shopName);
 		if(shop!=null){
 			ShopinfoSend shopinfoSend=new ShopinfoSend(shop);
@@ -91,12 +91,15 @@ public class ShopAction extends ActionSupport {
 			List<OrderinfoSend> orderSends=ListChange.ParaseOrders(orders);
 			List<ShopCommentSend>commentsSend=ListChange.ParaseComments(comments);
 			shopinfoSend.setComments(commentsSend);
-			shopinfoSend.setOrders(orderSends);;
+			shopinfoSend.setOrders(orderSends);
+			request.setAttribute("shop", shopinfoSend);
 			jsonObject.setStatus("1");
 			jsonObject.setMessage("null");
 			jsonObject.setData(shopinfoSend);
 			String jsonStr=JSON.toJSONString(jsonObject);
 			response.getWriter().write(jsonStr);
+			return SUCCESS;
+			
 			
 		}else{
 			jsonObject.setStatus("0");
@@ -104,9 +107,9 @@ public class ShopAction extends ActionSupport {
 			jsonObject.setData(null);
 			String jsonStr=JSON.toJSONString(jsonObject);
 			response.getWriter().write(jsonStr);//
-			
+			return null;
 		}
-		return null;
+		
 	}
 	
 

@@ -28,7 +28,9 @@
 			<action name="getShopList" class="com.schoolo2o.action.ShopAction" method="getAllShops">
 			</action>
 			<action name="getShopDetail" class="com.schoolo2o.action.ShopAction" method="getShopByName"
-			></action>
+			>
+			<result name="success" type="redirect">/shopHome.jsp</result>
+			</action>
 
 		</package>
 </struts>    
