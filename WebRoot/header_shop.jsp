@@ -55,7 +55,7 @@
 					</div>
 					<!--登陆窗口内容-->
 					<!--登陆表单-->
-					<form class="form-horizontal" role="form" action="http://www.baidu.com">
+					<form class="form-horizontal" role="form" action="" id="loginForm">
 						<div class="modal-body">
 							<!--输入用户名-->
 							<div class="form-group">
