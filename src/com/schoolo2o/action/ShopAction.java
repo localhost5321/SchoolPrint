@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -27,6 +28,7 @@ import com.schoolo2o.utils.ListChange;
 public class ShopAction extends ActionSupport {
 	private ShopService shopService;
 	private OrderService orderService;
+	private Map<String, Object> session = ServletActionContext.getContext().getSession();
 	private MyJSONObject jsonObject=new MyJSONObject();
 	private HttpServletResponse response=ServletActionContext.getResponse();
 	private HttpServletRequest request = ServletActionContext.getRequest();
@@ -56,11 +58,11 @@ public class ShopAction extends ActionSupport {
 		response.setContentType("text/plain");
 		request.setCharacterEncoding("utf-8");
 		if(list!=null&&!list.isEmpty()){
-			List<ShopinfoSend> listSend=ListChange.ParaseShops(list);
-			System.out.println(listSend.size());
+//			List<ShopinfoSend> listSend=ListChange.ParaseShops(list);
+//			System.out.println(listSend.size());
 			jsonObject.setStatus("1");
 			jsonObject.setMessage("null");
-			jsonObject.setData(listSend);
+			jsonObject.setData(list);
 			String jsonStr=JSON.toJSONString(jsonObject);
 			System.out.println(jsonStr);
 			response.getWriter().write(jsonStr);
@@ -92,16 +94,18 @@ public class ShopAction extends ActionSupport {
 			List<ShopCommentSend>commentsSend=ListChange.ParaseComments(comments);
 			shopinfoSend.setComments(commentsSend);
 			shopinfoSend.setOrders(orderSends);
-			request.setAttribute("shop", shopinfoSend);
-			
+			//request.setAttribute("shop", shopinfoSend);
+			if(session.containsKey("shop")){
+				session.remove("shop");
+			}else{
+				session.put("shop", shopinfoSend);
+			}
 			jsonObject.setStatus("1");
 			jsonObject.setMessage("null");
 			jsonObject.setData(shopinfoSend);
 			String jsonStr=JSON.toJSONString(jsonObject);
 			//response.getWriter().write(jsonStr);
 			return SUCCESS;
-			
-			
 		}else{
 			jsonObject.setStatus("0");
 			jsonObject.setMessage(" 请求错误");

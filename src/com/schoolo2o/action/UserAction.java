@@ -19,7 +19,7 @@ import com.schoolo2o.utils.MD5;
 public class UserAction extends ActionSupport{
 	
 	private Userinfo user ;
-	private UserService userService ;
+	private UserService userService ;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
 	private Map<String, Object> session = ServletActionContext.getContext().getSession();
 	private Logger log = Logger.getLogger(UserAction.class);
 	private HttpServletResponse response = ServletActionContext.getResponse();

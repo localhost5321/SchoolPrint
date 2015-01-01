@@ -543,10 +543,7 @@ function createShop(json) {
 			// 请求shopName的店铺
 			$.ajax({
 				type : "post",
-				url : "shop/getShopDetail.action?sName=" + shopName,
-				success : function(data) {
-					
-				}
+				url : "shop/getShopDetail.action?shopName=" + shopName,
 			});
 		});
 	}
