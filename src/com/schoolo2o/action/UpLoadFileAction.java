@@ -59,7 +59,7 @@ public class UpLoadFileAction extends ActionSupport {
 	 * 添加到文件表中
 	 */
 	public long addDocument(String fileName, String filePath, String userName) {
-
+		System.out.println("...." + userService);
 		Docinfo doc = new Docinfo();
 		doc.setFileName(fileName);
 		doc.setFilePath(filePath);

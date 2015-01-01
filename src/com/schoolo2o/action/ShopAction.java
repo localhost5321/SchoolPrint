@@ -1,5 +1,4 @@
 package com.schoolo2o.action;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -24,7 +23,6 @@ import com.schoolo2o.pojo.send.ShopinfoSend;
 import com.schoolo2o.service.OrderService;
 import com.schoolo2o.service.ShopService;
 import com.schoolo2o.utils.ListChange;
-
 public class ShopAction extends ActionSupport {
 	private ShopService shopService;
 	private OrderService orderService;
@@ -54,9 +52,10 @@ public class ShopAction extends ActionSupport {
 	 * @throws IOException
 	 */
 	public  String getAllShops() throws IOException{
+		System.out.println("enter!");
 		List<Shopinfo> list=shopService.searchShop();
 		response.setContentType("text/plain");
-		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		if(list!=null&&!list.isEmpty()){
 //			List<ShopinfoSend> listSend=ListChange.ParaseShops(list);
 //			System.out.println(listSend.size());
@@ -94,17 +93,18 @@ public class ShopAction extends ActionSupport {
 			List<ShopCommentSend>commentsSend=ListChange.ParaseComments(comments);
 			shopinfoSend.setComments(commentsSend);
 			shopinfoSend.setOrders(orderSends);
-			//request.setAttribute("shop", shopinfoSend);
-			if(session.containsKey("shop")){
-				session.remove("shop");
-			}else{
-				session.put("shop", shopinfoSend);
-			}
+//			if(session.containsKey("shop")){
+//				session.remove("shop");
+//				session.put("shop", shopinfoSend);
+//			}else{
+//				session.put("shop", shopinfoSend);
+//			}
+			request.setAttribute("shop", shopinfoSend);
 			jsonObject.setStatus("1");
 			jsonObject.setMessage("null");
 			jsonObject.setData(shopinfoSend);
 			String jsonStr=JSON.toJSONString(jsonObject);
-			//response.getWriter().write(jsonStr);
+			System.out.println(jsonStr);
 			return SUCCESS;
 		}else{
 			jsonObject.setStatus("0");

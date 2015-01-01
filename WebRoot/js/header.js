@@ -16,7 +16,8 @@ function login() {
 		var obj = JSON.parse(data);
 		if (obj.status == 1) {
 			// 登陆成功
-			USERNAME = $("#loginUsername");
+			USERNAME = $("#loginUsername").val();
+			sessionStorage.setItem("username", USERNAME);
 			$("#navbarUserInfo").html(obj.message);
 			$("#loginModal").modal("hide");
 		} else {
