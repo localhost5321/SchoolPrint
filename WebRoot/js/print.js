@@ -54,11 +54,11 @@ $(document)
 							var json = JSON.parse(data);
 							createShop(json);
 						},
-					   error:function(xhr, data){
-						   alert(data);
-					  },
-						complete:function(xml, ts){
-							 alert(data);
+						error : function(xhr, data) {
+							alert(data);
+						},
+						complete : function(xml, ts) {
+							alert(data);
 						}
 					});
 				});
@@ -473,10 +473,16 @@ function handleFile(file) {
 					xhr = new XMLHttpRequest();
 				}
 			}
+			// 获取用户名
+			try {
+				var username = sessionStorage.getItem("username");
+			} catch (err) {
+				alert("浏览器不支持！请更换浏览器");
+			}
 			xhr.open(
 			/* method */"POST",
 			/* target url */
-			"fileUpLoad.action?fileName=" + file.name + "&userName=" + sessionStorage.getItem("username")
+			"fileUpLoad.action?fileName=" + file.name + "&userName=" + username
 			/* , async, default to true */
 			);
 			xhr.overrideMimeType("application/octet-stream");
@@ -536,22 +542,14 @@ function createShop(json) {
 								+ shopPhone
 								+ "</p><button id=\"shopDetail_"
 								+ shopName
-								+ "\" class=\"btn btn-info shopDetail\" >查看订单</button><form action=\"shop/getShopDetail.action?shopName=" + shopName + "\" method=\"post\" target=\"_blank\"><input type=\"submit\"  class=\"btn btn-primary enterShop\" value=\"进入店铺\"></form></div>");
+								+ "\" class=\"btn btn-info shopDetail\" >查看订单</button><form action=\"shop/getShopDetail.action?shopName="
+								+ shopName
+								+ "\" method=\"post\" target=\"_blank\"><input type=\"submit\"  class=\"btn btn-primary enterShop\" value=\"进入店铺\"></form></div>");
 
 		// 给店铺的订单详情按钮添加对应监听
 		$("#shopDetail_" + shopName).click(function() {
 			showOrder(shopId);
 		});
 
-//		$("#enterShop_" + shopName).click(function() {
-//			// 请求shopName的店铺
-//			$.ajax({
-//				type : "post",
-//				url : "shop/getShopDetail.action?shopName=" + shopName,
-//				success: function(data){
-//					alert(data);
-//				}
-//			});
-//		});
 	}
 }

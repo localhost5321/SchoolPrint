@@ -1,4 +1,3 @@
-var USERNAME="";
 window.onload = function() {
 	$("#registUsername").blur(preLogin);
 	$("#registPassword").blur(preCheckPassword);
@@ -16,8 +15,7 @@ function login() {
 		var obj = JSON.parse(data);
 		if (obj.status == 1) {
 			// 登陆成功
-			USERNAME = $("#loginUsername").val();
-			sessionStorage.setItem("username", USERNAME);
+			sessionStorage.setItem("username", $("#loginUsername").val());
 			$("#navbarUserInfo").html(obj.message);
 			$("#loginModal").modal("hide");
 		} else {
@@ -52,6 +50,7 @@ function regist() {
  */
 function exit() {
 	$.post("userExit.action", function(data) {
+		sessionStorage.removeItem("username");
 		location.reload();
 	});
 }

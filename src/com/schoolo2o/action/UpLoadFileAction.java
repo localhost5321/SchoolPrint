@@ -26,6 +26,15 @@ public class UpLoadFileAction extends ActionSupport {
 
 	private DocService dcoService;
 	private UserService userService;
+	
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
 	private final HttpServletRequest serletRequest = ServletActionContext
 			.getRequest();
 	private final HttpServletResponse response = ServletActionContext
