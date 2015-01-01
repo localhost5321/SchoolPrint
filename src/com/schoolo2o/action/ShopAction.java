@@ -98,7 +98,7 @@ public class ShopAction extends ActionSupport {
 			jsonObject.setMessage("null");
 			jsonObject.setData(shopinfoSend);
 			String jsonStr=JSON.toJSONString(jsonObject);
-			response.getWriter().write(jsonStr);
+			//response.getWriter().write(jsonStr);
 			return SUCCESS;
 			
 			
