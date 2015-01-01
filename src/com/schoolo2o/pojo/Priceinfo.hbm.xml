@@ -10,7 +10,7 @@
             <column name="priceId" />
             <generator class="identity" />
         </id>
-        <many-to-one name="shopinfo" class="com.schoolo2o.pojo.Shopinfo" fetch="select">
+        <many-to-one name="shopinfo" class="com.schoolo2o.pojo.Shopinfo" lazy="false" fetch="select">
             <column name="shopId" not-null="true" />
         </many-to-one>
         <property name="printType" type="java.lang.String">

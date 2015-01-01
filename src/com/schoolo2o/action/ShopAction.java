@@ -1,6 +1,7 @@
 package com.schoolo2o.action;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -16,8 +17,12 @@ import com.schoolo2o.pojo.Orderinfo;
 import com.schoolo2o.pojo.Priceinfo;
 import com.schoolo2o.pojo.ShopComment;
 import com.schoolo2o.pojo.Shopinfo;
+import com.schoolo2o.pojo.send.OrderinfoSend;
+import com.schoolo2o.pojo.send.ShopCommentSend;
+import com.schoolo2o.pojo.send.ShopinfoSend;
 import com.schoolo2o.service.OrderService;
 import com.schoolo2o.service.ShopService;
+import com.schoolo2o.utils.ListChange;
 
 public class ShopAction extends ActionSupport {
 	private ShopService shopService;
@@ -51,11 +56,11 @@ public class ShopAction extends ActionSupport {
 		response.setContentType("text/plain");
 		request.setCharacterEncoding("utf-8");
 		if(list!=null&&!list.isEmpty()){
-			String str=list.iterator().next().getShopDesc();
-			System.out.println(str);
+			List<ShopinfoSend> listSend=ListChange.ParaseShops(list);
+			System.out.println(listSend.size());
 			jsonObject.setStatus("1");
 			jsonObject.setMessage("null");
-			jsonObject.setData(list);
+			jsonObject.setData(listSend);
 			String jsonStr=JSON.toJSONString(jsonObject);
 			System.out.println(jsonStr);
 			response.getWriter().write(jsonStr);
@@ -70,28 +75,32 @@ public class ShopAction extends ActionSupport {
 		}
 	}
 	
-	/**
+	/**  
 	 * 由商店名获取商店详情
 	 * @param shopName
 	 * @return
 	 * @throws IOException
 	 */
 	public String getShopByName() throws IOException{
-		String shopName=request.getParameter("userName");
+		String shopName=request.getParameter("shopName");
 		Shopinfo shop=shopService.search(shopName);
 		if(shop!=null){
-			List<ShopComment> comment=shopService.getComments(shopName);
-//			List <Priceinfo> priceType=shopService.getTypePrice(shopName);
-			List<Orderinfo> orders=orderService.shopSearch(shopName);
-//			shop.setOrderinfos(new HashSet(orders));
-//			shop.setPriceinfos(new HashSet(priceType));
-			shop.setShopComments(new HashSet(comment));
-//			System.out.println(shop.getShopName());
+			ShopinfoSend shopinfoSend=new ShopinfoSend(shop);
+			List<ShopComment> comments=shopService.getCommentsSplit(shopName, 0, 10);
+			List<Orderinfo> orders=shopService.getOrdersSplit(shopName, 0, 10);
+			List<OrderinfoSend> orderSends=ListChange.ParaseOrders(orders);
+			List<ShopCommentSend>commentsSend=ListChange.ParaseComments(comments);
+			shopinfoSend.setComments(commentsSend);
+			shopinfoSend.setOrders(orderSends);
+			request.setAttribute("shop", shopinfoSend);
+			
 			jsonObject.setStatus("1");
 			jsonObject.setMessage("null");
-			jsonObject.setData(shop);
+			jsonObject.setData(shopinfoSend);
 			String jsonStr=JSON.toJSONString(jsonObject);
-			response.getWriter().write(jsonStr);//
+			//response.getWriter().write(jsonStr);
+			return SUCCESS;
+			
 			
 		}else{
 			jsonObject.setStatus("0");
@@ -99,9 +108,9 @@ public class ShopAction extends ActionSupport {
 			jsonObject.setData(null);
 			String jsonStr=JSON.toJSONString(jsonObject);
 			response.getWriter().write(jsonStr);//
-			
+			return null;
 		}
-		return null;
+		
 	}
 	
 

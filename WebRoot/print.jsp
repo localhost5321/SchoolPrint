@@ -231,15 +231,6 @@
 	</div>
 	<!-- 订单详情窗口结束 -->
 
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-
 	<%@ include file="footer.jsp"%>
 	<script src="js/jquery-2.1.1.js"></script>
 	<script src="js/bootstrap.min.js"></script>

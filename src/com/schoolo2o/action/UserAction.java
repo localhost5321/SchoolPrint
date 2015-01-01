@@ -66,6 +66,7 @@ public class UserAction extends ActionSupport{
 		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 	}
 	public String userRegist() throws IOException{
+		System.out.println(user.getUserName());
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("utf-8");
 		user.setUserPwd(MD5.md5(user.getUserPwd().getBytes()));

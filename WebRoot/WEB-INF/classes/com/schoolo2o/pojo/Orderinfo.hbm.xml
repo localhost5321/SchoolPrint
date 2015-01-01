@@ -28,13 +28,13 @@
         <property name="sendType" type="java.lang.Integer">
             <column name="sendType" not-null="true" />
         </property>
-        <set name="orderitems" inverse="true">
+        <set name="orderitems" lazy="false" inverse="true">
             <key>
                 <column name="orderId" not-null="true" />
             </key>
             <one-to-many class="com.schoolo2o.pojo.Orderitem" />
         </set>
-        <set name="orderstatuses" inverse="true">
+        <set name="orderstatuses" lazy="false" inverse="true">
             <key>
                 <column name="orderId" not-null="true" />
             </key>
