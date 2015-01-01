@@ -53,12 +53,6 @@ $(document)
 						success : function(data) {
 							var json = JSON.parse(data);
 							createShop(json);
-						},
-						error : function(xhr, data) {
-							alert(data);
-						},
-						complete : function(xml, ts) {
-							alert(data);
 						}
 					});
 				});
@@ -474,8 +468,9 @@ function handleFile(file) {
 				}
 			}
 			// 获取用户名
+			var username;
 			try {
-				var username = sessionStorage.getItem("username");
+				username = sessionStorage.getItem("username");
 			} catch (err) {
 				alert("浏览器不支持！请更换浏览器");
 			}
@@ -499,11 +494,14 @@ function handleFile(file) {
 			}
 
 			xhr.sendAsBinary(reader.result);
-
+			
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState == 4) {
 					if (xhr.status == 200) {
+						alert("ssss");
 						alert(xhr.responseText);
+						var json = JSON.parse(xhr.responseText);
+						alert(json.data.docId);
 					}
 				}
 			};
