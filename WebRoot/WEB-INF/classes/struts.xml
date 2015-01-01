@@ -1,36 +1,58 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
-	
+
 	<constant name="struts.devMode" value="true" />
 	<constant name="struts.objectFactory.spring.autoWire" value="name"></constant>
-	
-	
-		<package name="user" extends="struts-default">
-				<action name="fileUpLoad" class="com.schoolo2o.action.UpLoadFileAction"  method="upLoadFileSave">
-				</action>
-				
-				<action name="userLogin" class="com.schoolo2o.action.UserAction" method="userLogin">
-				</action>
-				<action name="userExit" class="com.schoolo2o.action.UserAction" method="exit">
-				</action>
-				<action name="userRegist" class="com.schoolo2o.action.UserAction" method="userRegist">
-					<result name="success" type="redirect" > /index.jsp</result>
-						<result name="error" type="redirect"> /print.jsp</result>
-				</action>
-				<action name="verifyUserName" class="com.schoolo2o.action.UserAction" method="verifyUserName">
-				</action>
-				<action name="verifyEmail" class="com.schoolo2o.action.UserAction" method="verifyEmail">
-				</action>
-		</package>
-		
-		<package name="shop" extends="struts-default" namespace="/shop">
-			<action name="getShopList" class="com.schoolo2o.action.ShopAction" method="getAllShops">
-			</action>
-			<action name="getShopDetail" class="com.schoolo2o.action.ShopAction" method="getShopByName"
-			>
-			<result name="success" type="redirect">/shopHome.jsp</result>
-			</action>
 
-		</package>
+<!--  <package name="default" extends="struts-default" >
+		<action name="getShopDetail" class="com.schoolo2o.action.ShopAction" >
+			<result type="redirectAction">
+				<param name="actionName">getShopDetail</param>
+				<param name="namespace">/shop</param>
+			</result>
+		</action>
+	</package>   　重定向
+	-->
+
+	<package name="user" extends="struts-default">
+		<action name="fileUpLoad" class="com.schoolo2o.action.UpLoadFileAction"
+			method="upLoadFileSave">
+		</action>
+
+		<action name="userLogin" class="com.schoolo2o.action.UserAction"
+			method="userLogin">
+		</action>
+		<action name="userExit" class="com.schoolo2o.action.UserAction"
+			method="exit">
+		</action>
+		<action name="userRegist" class="com.schoolo2o.action.UserAction"
+			method="userRegist">
+			<result name="success" type="redirect"> /index.jsp</result>
+			<result name="error" type="redirect"> /print.jsp</result>
+		</action>
+		<action name="verifyUserName" class="com.schoolo2o.action.UserAction"
+			method="verifyUserName">
+		</action>
+		<action name="verifyEmail" class="com.schoolo2o.action.UserAction"
+			method="verifyEmail">
+		</action>
+	</package>
+
+	<package name="shop" extends="struts-default" >
+		<action name="getShopList" class="com.schoolo2o.action.ShopAction"
+			method="getAllShops">
+		</action>
+		<!-- 请求店铺详情 -->
+		<action name="getShopDetail" class="com.schoolo2o.action.ShopAction"
+			method="getShopByName" >
+			<result name="success">
+				/shopHome.jsp
+			</result>
+		</action>
+
+	</package>
+	
+		
+	
 </struts>    

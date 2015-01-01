@@ -20,9 +20,9 @@ public class Shopinfo implements java.io.Serializable {
 	private String shopPic;
 	private String shopDesc;
 	private Double delivery;
-//	private Set orderinfos = new HashSet(0);
+	private Set orderinfos = new HashSet(0);
 	private Set priceinfos = new HashSet(0);
-//	private Set shopComments = new HashSet(0);
+	private Set shopComments = new HashSet(0);
 
 	// Constructors
 
@@ -54,9 +54,9 @@ public class Shopinfo implements java.io.Serializable {
 		this.shopPic = shopPic;
 		this.shopDesc = shopDesc;
 		this.delivery = delivery;
-//		this.orderinfos = orderinfos;
+		this.orderinfos = orderinfos;
 		this.priceinfos = priceinfos;
-//		this.shopComments = shopComments;
+		this.shopComments = shopComments;
 	}
 
 	// Property accessors
@@ -133,7 +133,7 @@ public class Shopinfo implements java.io.Serializable {
 		this.delivery = delivery;
 	}
 
-/*	public Set getOrderinfos() {
+	public Set getOrderinfos() {
 		System.out.println("come in");
 		return this.orderinfos;
 	}
@@ -141,7 +141,7 @@ public class Shopinfo implements java.io.Serializable {
 	public void setOrderinfos(Set orderinfos) {
 		this.orderinfos = orderinfos;
 	}
-*/
+
 	public Set getPriceinfos() {
 		return this.priceinfos;
 	}
@@ -150,12 +150,12 @@ public class Shopinfo implements java.io.Serializable {
 		this.priceinfos = priceinfos;
 	}
 
-/*	public Set getShopComments() {
+	public Set getShopComments() {
 		return this.shopComments;
 	}
 
 	public void setShopComments(Set shopComments) {
 		this.shopComments = shopComments;
 	}
-*/
+
 }

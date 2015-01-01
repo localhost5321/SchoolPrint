@@ -42,6 +42,9 @@ public class ShopinfoSend{
 	}
 
 	/** default constructor */
+	public ShopinfoSend(){
+		
+	}
 	public ShopinfoSend(Shopinfo sf) {
 		this.shopId=sf.getShopId();
 		this.shopName =sf.getShopName(); 

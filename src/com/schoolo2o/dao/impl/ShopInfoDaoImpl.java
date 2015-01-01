@@ -57,13 +57,18 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 	@Override
 	public List<Shopinfo> searchShop() { //查找所有商店,返回List
 		String hql = " from Shopinfo";
+		Session session=this.getSessionFactory().openSession();
+		List<Shopinfo> shopList=null;
 		try {
-			List<Shopinfo> shopList = this.getHibernateTemplate().find(hql);
-			return shopList;
+			Query q=session.createQuery(hql);
+			shopList=q.list();
+			System.out.print("come in");
 		} catch (Exception e) {
 			e.printStackTrace();
-			return null;
+		}finally{
+			session.close();
 		}
+		return shopList;
 	}
 
 	@Override
@@ -86,13 +91,22 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 
 	@Override
 	public Shopinfo search(String name) {   //根据商店名查询商店是否存在,若存在,返回商店bean,不存在,返回null
-		String hql = "from Shopinfo where shopName =  '"+ name +"'" ;
-		List <Shopinfo> shopList = this.getHibernateTemplate().find(hql);
 		Shopinfo shop = null;
+		Session session=this.getSessionFactory().openSession();
+		Query q=null;
+		try{
+		q=session.createQuery( "from Shopinfo where shopName =  '"+ name +"'");
+		List <Shopinfo> shopList=q.list();
 		Iterator<Shopinfo> it = shopList.iterator();
 		if(it.hasNext())
 			shop  = it.next();
-		return shop;
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+			return shop;
+		}
+		
 	}
 
 	@Override
@@ -221,20 +235,38 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 	@Override
 	public List<ShopComment> getCommentsSplit(String shopName, int current,
 			int step) {
-		Session session=this.getSession();
-		Query q=session.createQuery("from ShopComment where shopinfo.shopName = '" +shopName+"' ");
-		q.setFirstResult(current);
-		q.setMaxResults(step);
-		return q.list();
+		List<ShopComment> list=null;
+		Session session=this.getSessionFactory().openSession();
+		Query q=null;
+		try{
+			q=session.createQuery("from ShopComment where shopinfo.shopName = '" +shopName+"' ");
+			q.setFirstResult(current);
+			q.setMaxResults(step);
+		list= q.list();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+			return list;
+		}
 	}
 
 	@Override
 	public List<Orderinfo> getOrdersSplit(String shopName, int current, int step) {
-		Session session=this.getSession();
-		Query q=session.createQuery("from Orderinfo where shopinfo.shopName = '" +shopName+"' ");
-		q.setFirstResult(current);
-		q.setMaxResults(step);
-		return q.list();
+		List<Orderinfo> list=null;
+		Session session=this.getSessionFactory().openSession();
+		Query q=null;
+		try{
+			q=session.createQuery("from Orderinfo where shopinfo.shopName = '" +shopName+"' ");
+			q.setFirstResult(current);
+			q.setMaxResults(step);
+			list=q.list();
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			session.close();
+			return list;
+		}
 	}
 
 	

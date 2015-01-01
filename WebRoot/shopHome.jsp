@@ -9,10 +9,11 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
+<base href="../">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>校园云打印</title>
+<title>${requestScope.shop.shopNick }</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/indexStyle.css" rel="stylesheet">
 <link href="css/footerStyle.css" rel="stylesheet">
@@ -58,9 +59,9 @@
 				class="glyphicon glyphicon-chevron-right"></span></a>
 		</div>
 		<div class="shopInfoDiv">
-			<h1 id="shopName">弘辰打印店</h1>
-			<p id="shopAddr">店家地址：</p>
-			<p id="shopIntro">店家介绍：</p>
+			<h1>${requestScope.shop.shopNick }</h1>
+			<p>店家地址：${requestScope.shop.shopAddress }</p>
+			<p>店家介绍：${requestScope.shop.shopDesc }</p>
 			<hr>
 		</div>
 

@@ -1,5 +1,4 @@
 package com.schoolo2o.action;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -24,7 +23,6 @@ import com.schoolo2o.pojo.send.ShopinfoSend;
 import com.schoolo2o.service.OrderService;
 import com.schoolo2o.service.ShopService;
 import com.schoolo2o.utils.ListChange;
-
 public class ShopAction extends ActionSupport {
 	private ShopService shopService;
 	private OrderService orderService;
@@ -54,15 +52,16 @@ public class ShopAction extends ActionSupport {
 	 * @throws IOException
 	 */
 	public  String getAllShops() throws IOException{
+		System.out.println("enter!");
 		List<Shopinfo> list=shopService.searchShop();
 		response.setContentType("text/plain");
-		request.setCharacterEncoding("utf-8");
+		response.setCharacterEncoding("utf-8");
 		if(list!=null&&!list.isEmpty()){
-//			List<ShopinfoSend> listSend=ListChange.ParaseShops(list);
-//			System.out.println(listSend.size());
+			List<ShopinfoSend> listSend=ListChange.ParaseShops(list);
+			System.out.println(listSend.size());
 			jsonObject.setStatus("1");
 			jsonObject.setMessage("null");
-			jsonObject.setData(list);
+			jsonObject.setData(listSend);
 			String jsonStr=JSON.toJSONString(jsonObject);
 			System.out.println(jsonStr);
 			response.getWriter().write(jsonStr);
@@ -85,33 +84,31 @@ public class ShopAction extends ActionSupport {
 	 */
 	public String getShopByName() throws IOException{
 		String shopName=request.getParameter("shopName");
+//		if(session.containsKey(shopName))
+//			return null;
 		Shopinfo shop=shopService.search(shopName);
 		if(shop!=null){
 			ShopinfoSend shopinfoSend=new ShopinfoSend(shop);
 			List<ShopComment> comments=shopService.getCommentsSplit(shopName, 0, 10);
-			List<Orderinfo> orders=shopService.getOrdersSplit(shopName, 0, 10);
-			List<OrderinfoSend> orderSends=ListChange.ParaseOrders(orders);
+//			List<Orderinfo> orders=shopService.getOrdersSplit(shopName, 0, 10);
+//			List<OrderinfoSend> orderSends=ListChange.ParaseOrders(orders);
 			List<ShopCommentSend>commentsSend=ListChange.ParaseComments(comments);
 			shopinfoSend.setComments(commentsSend);
-			shopinfoSend.setOrders(orderSends);
-			//request.setAttribute("shop", shopinfoSend);
-			if(session.containsKey("shop")){
-				session.remove("shop");
-			}else{
-				session.put("shop", shopinfoSend);
-			}
+//			shopinfoSend.setOrders(orderSends);
+//			session.put(shopName, shopinfoSend);
+			request.setAttribute("shop", shopinfoSend);
 			jsonObject.setStatus("1");
 			jsonObject.setMessage("null");
 			jsonObject.setData(shopinfoSend);
 			String jsonStr=JSON.toJSONString(jsonObject);
-			//response.getWriter().write(jsonStr);
+			System.out.println(jsonStr);
 			return SUCCESS;
 		}else{
 			jsonObject.setStatus("0");
 			jsonObject.setMessage(" 请求错误");
 			jsonObject.setData(null);
 			String jsonStr=JSON.toJSONString(jsonObject);
-			response.getWriter().write(jsonStr);//
+			response.getWriter().write(jsonStr);
 			return null;
 		}
 		
