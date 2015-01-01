@@ -29,7 +29,7 @@
 			</action>
 			<action name="getShopDetail" class="com.schoolo2o.action.ShopAction" method="getShopByName"
 			>
-			<result name="success" type="dispatcher">/shopHome.jsp</result>
+			<result name="success" type="redirect">/shopHome.jsp</result>
 			</action>
 
 		</package>

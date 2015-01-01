@@ -35,24 +35,26 @@
             <column name="delivery" precision="10" not-null="true" />
         </property>
          
-        <set name="orderinfos" inverse="true" lazy="true">
+  <!--     <set name="orderinfos" inverse="true" lazy="true">
             <key>
                 <column name="shopId" not-null="true" />
             </key>
             <one-to-many class="com.schoolo2o.pojo.Orderinfo" />
         </set>
+ -->   
         <set name="priceinfos" inverse="true" lazy="false" >
             <key>
                 <column name="shopId" not-null="true" />
             </key>
             <one-to-many class="com.schoolo2o.pojo.Priceinfo" />
         </set>
+ <!--  
         <set name="shopComments" inverse="true" lazy="true">
             <key>
                 <column name="shopId" not-null="true" />
             </key>
             <one-to-many class="com.schoolo2o.pojo.ShopComment" />
         </set>
-       
+    -->   
     </class>
 </hibernate-mapping>
