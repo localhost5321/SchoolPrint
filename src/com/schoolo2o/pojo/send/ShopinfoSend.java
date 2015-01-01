@@ -50,22 +50,11 @@ public class ShopinfoSend{
 		this.shopPhone = sf.getShopPhone();
 		this.shopAddress = sf.getShopAddress();
 		this.delivery = sf.getDelivery();
-		this.shopDesc=sf.getShopDesc();
-		this.shopPic=sf.getShopPic();
-		this.priceinfos=sf.getPriceinfos();
+		this.shopDesc= sf.getShopDesc();
+		this.shopPic= sf.getShopPic();
+		this.priceinfos= sf.getPriceinfos();
 	}
 
-	public void setSelf(Shopinfo sf) {
-		this.shopId=sf.getShopId();
-		this.shopName =sf.getShopName(); 
-		this.shopPwd = sf.getShopPwd();
-		this.shopNick = sf.getShopNick();
-		this.shopPhone = sf.getShopPhone();
-		this.shopAddress = sf.getShopAddress();
-		this.delivery = sf.getDelivery();
-		this.shopDesc=sf.getShopDesc();
-		this.shopPic=sf.getShopPic();
-	}
 	
 	public List<OrderinfoSend> getOrders() {
 		return orders;
