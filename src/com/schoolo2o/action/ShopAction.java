@@ -76,6 +76,7 @@ public class ShopAction extends ActionSupport {
 		}
 	}
 	
+	
 	/**  
 	 * 由商店名获取商店详情
 	 * @param shopName
@@ -84,20 +85,15 @@ public class ShopAction extends ActionSupport {
 	 */
 	public String getShopByName() throws IOException{
 		String shopName=request.getParameter("shopName");
-//		if(session.containsKey(shopName))
-//			return null;
 		Shopinfo shop=shopService.search(shopName);
 		if(shop!=null){
 			ShopinfoSend shopinfoSend=new ShopinfoSend(shop);
 			List<ShopComment> comments=shopService.getCommentsSplit(shopName, 0, 10);
-//			List<Orderinfo> orders=shopService.getOrdersSplit(shopName, 0, 10);
-//			List<OrderinfoSend> orderSends=ListChange.ParaseOrders(orders);
+			List<Orderinfo> orders=shopService.getOrdersSplit(shopName, 0, 10);
+			List<OrderinfoSend> orderSends=ListChange.ParaseOrders(orders);
 			List<ShopCommentSend>commentsSend=ListChange.ParaseComments(comments);
 			shopinfoSend.setComments(commentsSend);
-
-//			shopinfoSend.setOrders(orderSends);
-//			session.put(shopName, shopinfoSend);
-
+			shopinfoSend.setOrders(orderSends);
 			request.setAttribute("shop", shopinfoSend);
 			jsonObject.setStatus("1");
 			jsonObject.setMessage("null");
@@ -115,6 +111,7 @@ public class ShopAction extends ActionSupport {
 		}
 		
 	}
+	
 	
 
 }
