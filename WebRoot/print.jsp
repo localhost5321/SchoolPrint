@@ -130,7 +130,7 @@
 				</table>
 			</div>
 			<!-- 文件总信息 -->
-			<div class="fileInfo"><span>共**个文件,总份数:**,总页数**</span></div>
+			<div class="fileInfo"><span>计算中...</span></div>
 			<div>
 				<a class="btn btn-info" id="selectPrint" href="javascript:void(0)">选择打印店</a>
 			</div>

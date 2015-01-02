@@ -45,6 +45,7 @@ th {
 	-webkit-box-shadow: #666 0px 0px 10px;
 	-moz-box-shadow: #666 0px 0px 10px;
 	box-shadow: #666 0px 0px 10px;
+	font-size: 12px;
 }
 
 #holder {
@@ -52,6 +53,7 @@ th {
 	width: 300px;
 	height: 300px;
 	margin: 20px auto;
+	background: transparent url("../images/wan.png") center center;
 }
 
 #holder.hover {

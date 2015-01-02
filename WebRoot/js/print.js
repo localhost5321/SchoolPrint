@@ -199,8 +199,8 @@ function addFileToTable(file, progressBar) {
 	tdName.style.verticalAlign = "middle";
 	tdName.title = file.name;
 	tdName.className = "fileName";
-	if (file.name.length >= 6) {
-		tdName.innerHTML = file.name.substring(0, 6) + "...";
+	if (file.name.length >= 9) {
+		tdName.innerHTML = file.name.substring(0, 9) + "...";
 	} else {
 		tdName.innerHTML = file.name;
 	}
@@ -216,7 +216,7 @@ function addFileToTable(file, progressBar) {
 	var tdPageCounts = document.createElement("td");
 	tdPageCounts.className = "pageCounts";
 	tdPageCounts.style.verticalAlign = "middle";
-	tdPageCounts.innerHTML = "0";
+	tdPageCounts.innerHTML = "计算中...";
 	// 创建打印设置列
 	var tdSetting = document.createElement("td");
 	var settingBtn = document.createElement("a");
@@ -255,7 +255,10 @@ function addFileToTable(file, progressBar) {
 	var control = document.createElement("a");
 	control.href = "javascript:void(0)";
 	control.onclick = function() {
-		removeRow(this);
+		var row = this.parentNode.parentNode;
+		// 删除对应的文件
+		var rowIndex = row.rowIndex;
+		removeRow(rowIndex);
 	};
 	control.className = "glyphicon glyphicon-remove";
 	tdControl.appendChild(control);
@@ -273,16 +276,18 @@ function addFileToTable(file, progressBar) {
 }
 
 /**
- * 移除指定元素所在的一行
+ * 移除第rowIndex行（第一个文件算第一行）
  * 
  * @param obj
  */
-function removeRow(obj) {
-	var row = obj.parentNode.parentNode;
+function removeRow(rowIndex) {
 	// 删除对应的文件
-	userFiles.splice(row.rowIndex - 1, 1);
+	userFiles.splice(rowIndex - 1, 1);
 	// 删除对应的行
-	row.parentNode.removeChild(row);
+	var tbody = document.getElementById("fileListTable").getElementsByTagName(
+			"tbody")[0];
+	var row = tbody.childNodes[rowIndex - 1];
+	tbody.removeChild(row);
 	// 当表格没有文件时，隐藏表格区域
 	if (document.getElementById("fileListTable").rows.length == 1) {
 		// 移动两个div
@@ -455,7 +460,7 @@ function handleFile(file) {
 			progressBar.style.width = "100%";
 			progressBar.innerHTML = "100%";
 			progressBar.className = "progress-bar progress-bar-striped";
-			
+
 			// 构造 XMLHttpRequest 对象，发送文件 Binary 数据
 			var xhr = null;
 			if (window.ActiveXObject) {
@@ -500,8 +505,8 @@ function handleFile(file) {
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState == 4) {
 					if (xhr.status == 200) {
-						 console.log(xhr.responseText);
-						 var json = JSON.parse(xhr.responseText);
+						console.log(xhr.responseText);
+						var json = JSON.parse(xhr.responseText);
 						userFiles[userFiles.length - 1].docId = json.data.docId;
 						userFiles[userFiles.length - 1].fileCount = json.data.fileCount;
 						$(".pageCounts").get(userFiles.length - 1).innerHTML = json.data.fileCount;
@@ -523,7 +528,12 @@ function handleFile(file) {
 		console.log("come in binary");
 	} else if (reader.readAsArrayBuffer) {
 		flag = false;
-		reader.readAsArrayBuffer(file);
+		try {
+			reader.readAsArrayBuffer(file);
+		} catch (err) {
+			alert("文件打开失败，请尝试重新上传！");
+			removeRow(userFiles.length);
+		}
 		console.log("come in buffer");
 	}
 
@@ -562,7 +572,7 @@ function createShop(json) {
 	}
 }
 
-function enterShop(){
+function enterShop() {
 	var data = JSON.stringify(showUserFile());
 	sessionStorage.setItem("order", data);
 	return true;
