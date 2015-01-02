@@ -25,6 +25,8 @@ public class OrderinfoSend implements java.io.Serializable {
 	private OrderstatusSend status;;
 
 	// Constructors
+	public OrderinfoSend(){
+	}
 
 	/** default constructor */
 	public OrderinfoSend(Orderinfo order) {

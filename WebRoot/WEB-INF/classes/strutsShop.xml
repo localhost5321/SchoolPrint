@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
-		<package name="shopPackge" extends="struts-default"> 
-				<action name="shopLogin" class="com.schoolo2o.shop.action.ShopAction" method="shopLogin">
-						
-				</action>
-		</package>
+	<package name="shopPackge" extends="struts-default" namespace="/shop">
+		<action name="shopLogin" class="com.schoolo2o.shop.action.ShopAction"
+			method="shopLogin">
+
+		</action>
+		<action name="getShopList" class="com.schoolo2o.action.ShopAction"
+			method="getAllShops">
+		</action>
+		<!-- 请求店铺详情 -->
+		<action name="getShopDetail" class="com.schoolo2o.action.ShopAction"
+			method="getShopByName">
+			<result name="success">
+				/shopHome.jsp
+			</result>
+		</action>
+	</package>
 </struts>

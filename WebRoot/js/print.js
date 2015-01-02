@@ -467,10 +467,17 @@ function handleFile(file) {
 					xhr = new XMLHttpRequest();
 				}
 			}
+			// 获取用户名
+			var username;
+			try {
+				username = sessionStorage.getItem("username");
+			} catch (err) {
+				alert("浏览器不支持！请更换浏览器");
+			}
 			xhr.open(
 			/* method */"POST",
 			/* target url */
-			"fileUpLoad.action?fileName=" + file.name + "&userName=" + USERNAME
+			"fileUpLoad.action?fileName=" + file.name + "&userName=" + username
 			/* , async, default to true */
 			);
 			xhr.overrideMimeType("application/octet-stream");
@@ -487,11 +494,14 @@ function handleFile(file) {
 			}
 
 			xhr.sendAsBinary(reader.result);
-
+			
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState == 4) {
 					if (xhr.status == 200) {
+						alert("ssss");
 						alert(xhr.responseText);
+						var json = JSON.parse(xhr.responseText);
+						alert(json.data.docId);
 					}
 				}
 			};
@@ -514,37 +524,30 @@ function handleFile(file) {
 function createShop(json) {
 	for (var i = 0; i < json.data.length; i++) {
 		var imageSrc = "images/s1.png";
+		var shopNick = json.data[i].shopNick;
 		var shopName = json.data[i].shopName;
 		var shopAddr = json.data[i].shopAddress;
 		var shopPhone = json.data[i].shopPhone;
-		var shopName = json.data[i].shopName;
 		$(".shopContainer")
 				.append(
 						"<div class=\"shopInfo\"><img src=\""
 								+ imageSrc
 								+ "\" class=\"img-circle\" /><h3 class=\"shopName\">"
-								+ shopName
+								+ shopNick
 								+ "</h3><p class=\"shopAddr\">"
 								+ shopAddr
 								+ "</p><p class=\"shopTel\">联系电话："
 								+ shopPhone
 								+ "</p><button id=\"shopDetail_"
 								+ shopName
-								+ "\" class=\"btn btn-info shopDetail\" >查看订单</button><button id=\"enterShop_"
+								+ "\" class=\"btn btn-info shopDetail\" >查看订单</button><form action=\"shop/getShopDetail.action?shopName="
 								+ shopName
-								+ "\" class=\"btn btn-primary enterShop\">进入店铺</button></div>");
+								+ "\" method=\"post\" target=\"_blank\"><input type=\"submit\"  class=\"btn btn-primary enterShop\" value=\"进入店铺\"></form></div>");
 
 		// 给店铺的订单详情按钮添加对应监听
 		$("#shopDetail_" + shopName).click(function() {
 			showOrder(shopId);
 		});
 
-		$("#enterShop_" + shopName).click(function() {
-			// 请求shopName的店铺
-			$.ajax({
-				type : "post",
-				url : "shop/getShopDetail.action?shopName=" + shopName,
-			});
-		});
 	}
 }

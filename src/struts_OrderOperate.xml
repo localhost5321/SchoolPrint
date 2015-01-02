@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+		<package name="order" extends="struts-default">
+		<!-- 计算订单价格信息 展示订单的Action-->
+		<action name="showOrder" class="com.schoolo2o.action.OrderAction"
+			method="showOrder">
+		</action>
+		<!-- 保存订单 -->
+		<action name="saveOrder" class="com.schoolo2o.action.OrderAction"
+			method="saveOrder">
+		</action>
+		<!-- 修改订单 -->
+		<action name="editOrderStatus" class="com.schoolo2o.action.OrderAction"
+			method="editOrderStatus">
+		</action>
+		
+	</package>
+</struts>

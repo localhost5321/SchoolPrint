@@ -61,16 +61,14 @@ public class UserInfoDaoImpl extends HibernateDaoSupport implements UserinfoDao 
 		try{
 			List<Userinfo> list=this.getHibernateTemplate().find(hql);
 			if(!list.isEmpty()){
-				Iterator it=list.iterator();
-				Userinfo user=(Userinfo) it.next();
+				Iterator<Userinfo> it=list.iterator();
+				Userinfo user=it.next();
 				return user;
-			}else{
-				return null;
 			}
 		}catch(Exception e){
 			e.printStackTrace();
-			return null;
 		}
+		return null;
 	}
 	//给用户增加地址信息
 	@Override
