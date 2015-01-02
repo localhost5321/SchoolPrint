@@ -12,7 +12,7 @@ public class OrderitemSend implements java.io.Serializable {
 
 	private Long itemId;
 	private Long  modelfileId;
-	private String fileName;
+	private Long docId;
 	private Integer fileCount;
 	private Integer pageNumber;
 	private Double filePrice;
@@ -23,7 +23,7 @@ public class OrderitemSend implements java.io.Serializable {
 	/** default constructor */
 	public OrderitemSend(Orderitem item) {
 		this.itemId=item.getItemId();
-		this.fileName = item.getFileName();
+		this.docId = item.getDocId();
 		this.fileCount = item.getFileCount();
 		this.pageNumber =item.getPageNumber();
 		this.filePrice = item.getFilePrice();
