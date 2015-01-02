@@ -36,11 +36,17 @@ public interface UserService {
 	 */
 	public boolean checkEmail(String email);
 	/**
-	 * 添加用户地址信息
-	 * @param address 一个Addressinfo的对象
-	 * @return　添加成功为true,否则为false
+	 * 添加一条地址信息
+	 * @param userName 用户名
+	 * @param contactor 联系人
+	 * @param sendAddress 送货地址
+	 * @param callPhone 联系电话
+	 * @param secPhone 备用电话
+	 * @param isDefault 是否为默认
+	 * @return
 	 */
-	public boolean addAddress(Addressinfo address);
+	public boolean addAddress(String userName, String contactor, String sendAddress,
+			String callPhone, String secPhone,Integer isDefault);
 	/**
 	 * 更新用户地址信息
 	 * @param address　需要一个Addressinfo的对象，且addressId不能为空

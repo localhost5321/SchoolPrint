@@ -2,9 +2,6 @@ package com.schoolo2o.action;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.nio.charset.Charset;
-import java.nio.charset.CharsetDecoder;
-import java.nio.charset.CharsetEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,7 +29,7 @@ public class UpLoadFileAction extends ActionSupport {
 
 	private DocService docService;
 	private UserService userService;
-	
+
 	public UserService getUserService() {
 		return userService;
 	}
@@ -40,6 +37,7 @@ public class UpLoadFileAction extends ActionSupport {
 	public void setUserService(UserService userService) {
 		this.userService = userService;
 	}
+
 	public DocService getDocService() {
 		return docService;
 	}
@@ -64,7 +62,7 @@ public class UpLoadFileAction extends ActionSupport {
 		InputStream in = serletRequest.getInputStream();
 		serletRequest.setCharacterEncoding("UTF-8");
 		String fileName = serletRequest.getParameter("fileName");
-//		fileName = new String(fileName.getBytes("iso8859-1"),"utf-8");
+		// fileName = new String(fileName.getBytes("iso8859-1"),"utf-8");
 		String userName = serletRequest.getParameter("userName");
 		System.out.println(fileName);
 		response.setContentType("text/plain");
@@ -75,13 +73,13 @@ public class UpLoadFileAction extends ActionSupport {
 
 		// *******************以下代码需要重构下＊＊＊＊＊＊＊＊＊＊＊＊＊＊ //
 		long docId = addDocument(fileName, finalFilePath, userName);
-		int fileCount=DOMUtils.getPageCountWord(finalFilePath);
-		DocMessage dm=new DocMessage(docId, fileCount);
-		MyJSONObject jsonObject=new MyJSONObject();
+		int fileCount = DOMUtils.getPageCount(finalFilePath);
+		DocMessage dm = new DocMessage(docId, fileCount);
+		MyJSONObject jsonObject = new MyJSONObject();
 		jsonObject.setStatus("1");
 		jsonObject.setMessage("null");
 		jsonObject.setData(dm);
-		String jsonStr=JSON.toJSONString(jsonObject);
+		String jsonStr = JSON.toJSONString(jsonObject);
 		response.getWriter().write(jsonStr);
 		System.out.println(jsonStr);
 		return null;
@@ -105,37 +103,45 @@ public class UpLoadFileAction extends ActionSupport {
 	}
 
 }
+
 /**
  * 文件信息传递对象
+ * 
  * @author hua
- *
+ * 
  */
-class DocMessage{
+class DocMessage {
 	private long docId;
 	private int fileCount;
-	public DocMessage(long docId,int fileCount){
-		this.docId=docId;
-		this.fileCount=fileCount;
+
+	public DocMessage(long docId, int fileCount) {
+		this.docId = docId;
+		this.fileCount = fileCount;
 	}
-	public DocMessage(){
-		
+
+	public DocMessage() {
+
 	}
+
 	@Override
 	public String toString() {
 		return "DocMessage [docId=" + docId + ", fileCount=" + fileCount + "]";
 	}
+
 	public long getDocId() {
 		return docId;
 	}
+
 	public void setDocId(long docId) {
 		this.docId = docId;
 	}
+
 	public int getFileCount() {
 		return fileCount;
 	}
+
 	public void setFileCount(int fileCount) {
 		this.fileCount = fileCount;
 	}
-	
-	
+
 }

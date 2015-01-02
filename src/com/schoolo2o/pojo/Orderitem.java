@@ -11,7 +11,7 @@ public class Orderitem implements java.io.Serializable {
 	private Long itemId;
 	private Modelfile modelfile;
 	private Orderinfo orderinfo;
-	private String fileName;
+	private Long docId;
 	private Integer fileCount;
 	private Integer pageNumber;
 	private Double filePrice;
@@ -24,10 +24,10 @@ public class Orderitem implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public Orderitem(Orderinfo orderinfo, String fileName, Integer fileCount,
+	public Orderitem(Orderinfo orderinfo, Long docId, Integer fileCount,
 			Integer pageNumber, Double filePrice, String printRequire) {
 		this.orderinfo = orderinfo;
-		this.fileName = fileName;
+		this.docId = docId;
 		this.fileCount = fileCount;
 		this.pageNumber = pageNumber;
 		this.filePrice = filePrice;
@@ -35,12 +35,12 @@ public class Orderitem implements java.io.Serializable {
 	}
 
 	/** full constructor */
-	public Orderitem(Modelfile modelfile, Orderinfo orderinfo, String fileName,
+	public Orderitem(Modelfile modelfile, Orderinfo orderinfo, Long docId,
 			Integer fileCount, Integer pageNumber, Double filePrice,
 			String printRequire) {
 		this.modelfile = modelfile;
 		this.orderinfo = orderinfo;
-		this.fileName = fileName;
+		this.docId = docId;
 		this.fileCount = fileCount;
 		this.pageNumber = pageNumber;
 		this.filePrice = filePrice;
@@ -73,12 +73,12 @@ public class Orderitem implements java.io.Serializable {
 		this.orderinfo = orderinfo;
 	}
 
-	public String getFileName() {
-		return this.fileName;
+	public Long getDocId() {
+		return this.docId;
 	}
 
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
+	public void setDocId(Long docId) {
+		this.docId = docId;
 	}
 
 	public Integer getFileCount() {

@@ -30,7 +30,7 @@ public class UserAction extends ActionSupport{
 	}
 
 	public void setUser(Userinfo user) {
-		this.user = user;
+		this.user= user;
 		log.info(user.toString());
 	}
 	

@@ -70,11 +70,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td width="15%" align="center">操作</td>
 					</tr>
 
-					<tr>
+					<tr id="order">
 						<td align="center">2014.12.25 17:05:30</td>
-						<td align="center"><a href="javascript:void(0)"
-							id="order_details">订单详情</a><br>
-							<ul id="details_ul">
+						<td align="center">
+						    <a href="javascript:void(0)" class="order_details">订单详情</a><br>
+							<ul class="details_ul">
 								<table width="90%" id="order_item_tb"
 									class="table table-striped table-bordered table-hover">
 									<tr>
@@ -97,12 +97,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</ul></td>
 						<td align="left">
 							<ul>
-								<a href="">接收订单</a>
-								<a href="">下载文档</a>
+								<a >接收订单</a>
+								<a>下载文档</a>
 							</ul>
 						</td>
 					</tr>
 				</table>
+				
+				<input id="add_button" type="button" value="增加一行"/>
 			</div>
 		</div><!-- 首页主体  body -->
 	</div>
@@ -113,6 +115,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script src="js/jquery-2.1.1.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/index_shop.js"></script>
-	<script src="js/control_shop.js"></script>
 </body>
 </html>

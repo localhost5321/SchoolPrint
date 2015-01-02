@@ -10,7 +10,7 @@
 			value="jdbc:mysql://192.168.1.100:3306/schoolo2o">
 		</property>
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="username" value="zl"></property>
+		<property name="username" value="root"></property>
 		<property name="password" value="123456"></property>
 	</bean>
 	<bean id="sessionFactory"
@@ -37,7 +37,8 @@
 				<value>com/schoolo2o/pojo/Addressinfo.hbm.xml</value>
 				<value>com/schoolo2o/pojo/Admininfo.hbm.xml</value>
 				<value>com/schoolo2o/pojo/ShopComment.hbm.xml</value>
-				<value>com/schoolo2o/pojo/Modelfile.hbm.xml</value></list>
+				<value>com/schoolo2o/pojo/Modelfile.hbm.xml</value>
+			</list>
 		</property>
 	</bean>
 
