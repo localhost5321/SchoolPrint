@@ -502,7 +502,6 @@ function handleFile(file) {
 					if (xhr.status == 200) {
 						 console.log(xhr.responseText);
 						 var json = JSON.parse(xhr.responseText);
-						// 假设服务器返回了消息
 						userFiles[userFiles.length - 1].docId = json.data.docId;
 						userFiles[userFiles.length - 1].fileCount = json.data.fileCount;
 						$(".pageCounts").get(userFiles.length - 1).innerHTML = json.data.fileCount;
