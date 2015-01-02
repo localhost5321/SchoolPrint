@@ -512,10 +512,13 @@ function handleFile(file) {
 
 	if (reader.readAsBinaryString) {
 		reader.readAsBinaryString(file);
+		console.log("come in binary");
 	} else if (reader.readAsText) {
 		reader.readAsText(file);
+		console.log("come in text");
 	} else if (reader.readAsArrayBuffer) {
 		reader.readAsArrayBuffer(file);
+		console.log("come in buffer");
 	}
 
 }
