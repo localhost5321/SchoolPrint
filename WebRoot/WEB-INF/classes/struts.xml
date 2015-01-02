@@ -6,11 +6,9 @@
 	<constant name="struts.objectFactory.spring.autoWire" value="name"></constant>
 	<constant name="struts.il8n.encoding" value="utf-8"></constant>
 
-
 	<include file="strutsShop.xml"></include>
 	<include file="struts_UserOperate.xml"></include>
 	<include file="struts_OrderOperate.xml"></include>
-	<include file="strutsShop.xml"></include>
 
 
 
