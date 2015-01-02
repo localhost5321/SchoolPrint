@@ -91,4 +91,12 @@ public class Docinfo implements java.io.Serializable {
 		this.browseNum = browseNum;
 	}
 
+	@Override
+	public String toString() {
+		return "Docinfo [userinfo=" + userinfo + ", fileName=" + fileName
+				+ ", filePath=" + filePath + ", isShare=" + isShare
+				+ ", downNum=" + downNum + ", browseNum=" + browseNum + "]";
+	}
+	
+
 }
