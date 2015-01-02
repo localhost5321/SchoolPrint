@@ -103,8 +103,7 @@ function initDrag() {
 			userFiles[userFiles.length] = files[i];
 			handleFile(files[i]);
 		}
-		// 更新文件信息
-		updateFileInfo();
+
 		return false;
 	};
 }
@@ -138,8 +137,7 @@ function uploadFile() {
 		userFiles[userFiles.length] = file;
 		handleFile(file);
 	}
-	// 更新文件信息
-	updateFileInfo();
+
 }
 
 function judgeType(files) {
@@ -218,7 +216,7 @@ function addFileToTable(file, progressBar) {
 	var tdPageCounts = document.createElement("td");
 	tdPageCounts.className = "pageCounts";
 	tdPageCounts.style.verticalAlign = "middle";
-	tdPageCounts.innerHTML = "5";
+	tdPageCounts.innerHTML = "0";
 	// 创建打印设置列
 	var tdSetting = document.createElement("td");
 	var settingBtn = document.createElement("a");
@@ -353,7 +351,7 @@ function showUserFile() {
 /**
  * 显示订单详情
  */
-function showOrder(shopId) {
+function showOrder(shopName) {
 	var json = showUserFile();
 	var table = document.getElementById("orderTable");
 	// 清空表格
@@ -423,12 +421,11 @@ function commitOrder() {
 function handleFile(file) {
 	var reader = new FileReader();
 	var progressBar = null;
-
+	var flag;
 	// 移动两个div
 	$("#fileUploadContent").animate({
 		left : GAP + "px"
 	}, 500);
-	var fileUploadContent = document.getElementById("fileUploadContent");
 	var showFilesContent = document.getElementById("showFilesContent");
 	$("#showFilesContent").fadeIn(1000);
 	showFilesContent.style.left = 2 * GAP + FILE_UPLOAD_WIDTH + "px";
@@ -436,28 +433,29 @@ function handleFile(file) {
 	progressBar = addFileToTable(file, progressBar);
 	reader.onloadstart = function() {
 		// 这个事件在读取开始时触发
-	}
+	};
 
 	// 这个事件在读取进行中定时触发
 	reader.onprogress = function(p) {
 		var pro = Math.round(p.loaded / file.size * 100);
 		// 更新进度条
 		updateProgressBar(progressBar, pro);
-	}
+	};
 
 	// 这个事件在读取成功结束后触发
 	reader.onload = function() {
-	}
+	};
 
 	// 这个事件在读取结束后，无论成功或者失败都会触发
-	reader.onloadend = function() {
+	reader.onloadend = function(evt) {
 		if (reader.error) {
-			console.log(reader.error);
+			console.log("出现问题了：" + reader.error);
 			progressBar.className = "progress-bar progress-bar-danger progress-bar-striped";
 		} else {
 			progressBar.style.width = "100%";
 			progressBar.innerHTML = "100%";
-
+			progressBar.className = "progress-bar progress-bar-striped";
+			
 			// 构造 XMLHttpRequest 对象，发送文件 Binary 数据
 			var xhr = null;
 			if (window.ActiveXObject) {
@@ -468,20 +466,20 @@ function handleFile(file) {
 				}
 			}
 			// 获取用户名
-			var username;
+			var username = "";
 			try {
 				username = sessionStorage.getItem("username");
 			} catch (err) {
 				alert("浏览器不支持！请更换浏览器");
 			}
 			xhr.open(
-			/* method */"POST",
-			/* target url */
+			// method
+			"POST",
+			// target url
 			"fileUpLoad.action?fileName=" + file.name + "&userName=" + username
-			/* , async, default to true */
+			// , async, default to true
 			);
 			xhr.overrideMimeType("application/octet-stream");
-
 			// 兼容chrome
 			if (typeof XMLHttpRequest.prototype.sendAsBinary == 'undefined') {
 				XMLHttpRequest.prototype.sendAsBinary = function(text) {
@@ -493,15 +491,27 @@ function handleFile(file) {
 				};
 			}
 
-			xhr.sendAsBinary(reader.result);
-			
+			if (flag) {
+				xhr.sendAsBinary(reader.result);
+			} else {
+				xhr.send(reader.result);
+			}
+
 			xhr.onreadystatechange = function() {
 				if (xhr.readyState == 4) {
 					if (xhr.status == 200) {
-						alert("ssss");
-						alert(xhr.responseText);
-						var json = JSON.parse(xhr.responseText);
-						alert(json.data.docId);
+						 console.log(xhr.responseText);
+						 var json = JSON.parse(xhr.responseText);
+						// 假设服务器返回了消息
+						userFiles[userFiles.length - 1].docId = json.data.docId;
+						userFiles[userFiles.length - 1].fileCount = json.data.fileCount;
+						$(".pageCounts").get(userFiles.length - 1).innerHTML = json.data.fileCount;
+						for (var i = 0; i < userFiles.length; i++) {
+							console.log(userFiles[i].fileCount + "..."
+									+ userFiles[i].docId);
+						}
+						// 更新文件信息
+						updateFileInfo();
 					}
 				}
 			};
@@ -509,12 +519,11 @@ function handleFile(file) {
 	};
 
 	if (reader.readAsBinaryString) {
+		flag = true;
 		reader.readAsBinaryString(file);
 		console.log("come in binary");
-	} else if (reader.readAsText) {
-		reader.readAsText(file);
-		console.log("come in text");
 	} else if (reader.readAsArrayBuffer) {
+		flag = false;
 		reader.readAsArrayBuffer(file);
 		console.log("come in buffer");
 	}
@@ -545,12 +554,17 @@ function createShop(json) {
 								+ shopName
 								+ "\" class=\"btn btn-info shopDetail\" >查看订单</button><form action=\"shop/getShopDetail.action?shopName="
 								+ shopName
-								+ "\" method=\"post\" target=\"_blank\"><input type=\"submit\"  class=\"btn btn-primary enterShop\" value=\"进入店铺\"></form></div>");
+								+ "\" method=\"post\" target=\"_blank\" onsubmit = \"return enterShop();\"><input type=\"submit\"  class=\"btn btn-primary enterShop\" value=\"进入店铺\"></form></div>");
 
 		// 给店铺的订单详情按钮添加对应监听
 		$("#shopDetail_" + shopName).click(function() {
-			showOrder(shopId);
+			showOrder(shopName);
 		});
-
 	}
+}
+
+function enterShop(){
+	var data = JSON.stringify(showUserFile());
+	sessionStorage.setItem("order", data);
+	return true;
 }
