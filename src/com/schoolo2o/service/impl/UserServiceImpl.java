@@ -47,7 +47,16 @@ public class UserServiceImpl implements UserService {
 	/**
 	 * 用户添加地址信息
 	 */
-	public boolean addAddress(Addressinfo address) {
+	public boolean addAddress(String userName, String contactor, String sendAddress,
+			String callPhone, String secPhone,Integer isDefault) {
+		Addressinfo address = new Addressinfo();
+		Userinfo user = userinfoDao.searchUser(userName);
+		address.setCallPhone(callPhone);
+		address.setContactor(contactor);
+		address.setIsDefault(isDefault);
+		address.setSecPhone(secPhone);
+		address.setSendAddress(sendAddress);
+		address.setUserinfo(user);
 		return userinfoDao.addAddress(address);
 	}
 	/**

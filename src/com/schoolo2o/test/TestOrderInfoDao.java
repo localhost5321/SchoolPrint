@@ -36,14 +36,14 @@ public class TestOrderInfoDao {
 		order.setTotalCost(12.3);
 		Set<Orderitem> itemSet = new HashSet<Orderitem>();
 		Orderitem item = new Orderitem();
-		item.setFileName("文档1");
+		item.setDocId(1L);
 		item.setFileCount(3);
 		item.setFilePrice(4.1);
 		item.setPageNumber(41);
 		item.setOrderinfo(order);
 		itemSet.add(item);
 		item = new Orderitem();
-		item.setFileName("文档2");
+		item.setDocId(2L);
 		item.setFileCount(3);
 		item.setFilePrice(4.1);
 		item.setPageNumber(41);

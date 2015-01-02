@@ -70,4 +70,20 @@ public class DocInfoDaoImpl extends HibernateDaoSupport implements DocInfoDao {
 		}
 	}
 
+	@Override
+	public Docinfo searchDoc(Long docId) {
+		try {
+			String hql = "from Docinfo where docId = '"+docId+"'";
+			List<Docinfo> docList = this.getHibernateTemplate().find(hql);
+			if(!docList.isEmpty()){
+				Iterator<Docinfo> it = docList.iterator();
+				Docinfo doc = it.next();
+				return doc;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

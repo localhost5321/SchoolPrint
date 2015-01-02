@@ -59,11 +59,17 @@
 	<!-- OrderInfoDao 的依赖注入 -->
 	<bean id="OrderInfoDao" class="com.schoolo2o.dao.impl.OrderInfoDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
+		
 	</bean><!-- OrderService 的依赖注入 -->
 	<bean id="orderService" class="com.schoolo2o.service.impl.OrderServiceImpl"
 		abstract="false" lazy-init="default" autowire="default">
 		<property name="orderInfoDao" ref="OrderInfoDao" />
-	</bean><!-- ShopInfoDao's add -->
+		<property name="userInfoDao" ref="UserInfoDao"></property>
+		<property name="shopInfoDao" ref="ShopInfoDao"></property>
+		<property name="docInfoDao" ref="DocinfoDao"></property>
+	</bean>
+	
+	<!-- ShopInfoDao's add -->
 	<bean id="ShopInfoDao" class="com.schoolo2o.dao.impl.ShopInfoDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean><!-- ShopService' -->
