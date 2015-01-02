@@ -16,8 +16,8 @@
         <many-to-one name="orderinfo" class="com.schoolo2o.pojo.Orderinfo" fetch="select">
             <column name="orderId" not-null="true" />
         </many-to-one>
-        <property name="fileName" type="java.lang.String">
-            <column name="fileName" length="200" not-null="true" />
+        <property name="docId" type="java.lang.Long">
+            <column name="docId" not-null="true" />
         </property>
         <property name="fileCount" type="java.lang.Integer">
             <column name="fileCount" not-null="true" />
