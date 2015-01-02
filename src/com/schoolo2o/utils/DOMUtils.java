@@ -78,6 +78,7 @@ public class DOMUtils {
 			if (str.contains("doc")) {
 				// 计算word页码
 				return countWordPage(filePath);
+				
 			} else if (str.contains("pdf")) {
 				// 计算pdf页码
 				return getPageCountPDF(filePath);

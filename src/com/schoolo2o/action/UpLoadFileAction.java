@@ -73,7 +73,7 @@ public class UpLoadFileAction extends ActionSupport {
 
 		// *******************以下代码需要重构下＊＊＊＊＊＊＊＊＊＊＊＊＊＊ //
 		long docId = addDocument(fileName, finalFilePath, userName);
-		int fileCount = DOMUtils.getPageCountWord(finalFilePath);
+		int fileCount = DOMUtils.getPageCount(finalFilePath);
 		DocMessage dm = new DocMessage(docId, fileCount);
 		MyJSONObject jsonObject = new MyJSONObject();
 		jsonObject.setStatus("1");
