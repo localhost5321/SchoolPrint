@@ -42,6 +42,8 @@ public class UpLoadFileAction extends ActionSupport {
 		String fileName = serletRequest.getParameter("fileName");
 		String userName = serletRequest.getParameter("userName");
 
+		System.out.println(fileName);
+
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("utf-8");
 
