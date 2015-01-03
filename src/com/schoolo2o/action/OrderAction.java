@@ -83,6 +83,7 @@ public class OrderAction extends ActionSupport {
 			}
 			if(typeSet[1].equals("单面")){
 				typeSet[1]="SL";
+				System.out.println(typeSet[1]);
 			}else{
 				typeSet[1]="DL";
 			}
