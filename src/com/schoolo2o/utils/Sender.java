@@ -32,7 +32,7 @@ public class Sender {
 	public static void sendError(String message,HttpServletResponse response) throws IOException{
 		MyJSONObject mj=new MyJSONObject();
 		mj.setStatus("0");
-		mj.setData(message);
+		mj.setMessage(message);
 		mj.setData(null);
 		String jsonStr = JSON.toJSONString(mj);
 		response.getWriter().write(jsonStr);

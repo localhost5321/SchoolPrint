@@ -89,7 +89,7 @@ public class OrderAction extends ActionSupport {
 			order.getDocId()[i]=docId;
 		}
 		//调用服务层计费方式，待完成
-//		order=orderService.
+		order=orderService.addOrder(order);
 		return order;
 	};
 	
@@ -105,6 +105,7 @@ public class OrderAction extends ActionSupport {
 				Sender.sendOk(order, response);
 			}else{
 				Sender.sendError("参数有误哦", response);
+				System.out.print("!!!!!!!!!!!!!");
 			}
 		}catch(Exception e){
 			e.printStackTrace();
