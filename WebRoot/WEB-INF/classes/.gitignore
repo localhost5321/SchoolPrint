@@ -1,4 +1,6 @@
 /applicationContext.xml
-/struts.xml
-/struts_OrderOperate.xml
 /com/
+/struts.xml
+/strutsShop.xml
+/struts_OrderOperate.xml
+/struts_UserOperate.xml

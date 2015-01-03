@@ -7,7 +7,10 @@ import java.util.regex.Pattern;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 
-import com.qoppa.word.WordDocument;
+import com.jacob.activeX.ActiveXComponent;
+import com.jacob.com.ComThread;
+import com.jacob.com.Dispatch;
+import com.jacob.com.Variant;
 
 /**
  * 文档工具类
@@ -16,6 +19,8 @@ import com.qoppa.word.WordDocument;
  * 
  */
 public class DOMUtils {
+
+	static final int wdFormatPDF = 17;
 
 	/**
 	 * PDF页数
@@ -76,17 +81,44 @@ public class DOMUtils {
 	 * @return pdfPath
 	 */
 	public static String word2pdf(String wordPath) {
-		WordDocument wordDocument;
-		String pdfPath = "";
+		ActiveXComponent app = null;
+		Dispatch doc = null;
+		String toFilePath = "";
 		try {
-			wordDocument = new WordDocument(wordPath);
-			// 构造新的pdf文件名
-			String[] strs = wordPath.split("\\.");
-			pdfPath = strs[0] + ".pdf";
-			wordDocument.saveAsPDF(pdfPath);
+			app = new ActiveXComponent("Word.Application");
+			app.setProperty("Visible", new Variant(false));
+			Dispatch docs = app.getProperty("Documents").toDispatch();
+
+			toFilePath = wordPath2PdfPath(wordPath);
+
+			doc = Dispatch.call(docs, "Open", wordPath).toDispatch();
+
+			File tofile = new File(toFilePath);
+			if (tofile.exists()) {
+				tofile.delete();
+			}
+			Dispatch.call(doc, "ExportAsFixedFormat", toFilePath, wdFormatPDF);
+			long end = System.currentTimeMillis();
+
 		} catch (Exception e) {
+			System.out.println("对不起，此转换工作只能在windows环境下执行，万恶的巨硬。。。。。。。");
 			e.printStackTrace();
+		} finally {
+			Dispatch.call(doc, "Close", false);
+			System.out.println("文档关闭");
+			if (app != null) {
+				app.invoke("Quit", new Variant[] {});
+			}
+
+			ComThread.Release();
 		}
-		return pdfPath;
+		return toFilePath;
 	}
+
+	private static String wordPath2PdfPath(String wordPath) {
+		String[] strs = wordPath.split("\\.");
+		return strs[0] + ".pdf";
+
+	}
+
 }
