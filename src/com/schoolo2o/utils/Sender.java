@@ -18,6 +18,7 @@ public class Sender {
 	public static void sendOk(Object data,HttpServletResponse response) throws IOException{
 		MyJSONObject mj=new MyJSONObject();
 		mj.setStatus("1");
+		mj.setMessage("");
 		mj.setData(data);
 		String jsonStr = JSON.toJSONString(mj);
 		response.getWriter().write(jsonStr);
@@ -32,6 +33,7 @@ public class Sender {
 		MyJSONObject mj=new MyJSONObject();
 		mj.setStatus("0");
 		mj.setData(message);
+		mj.setData(null);
 		String jsonStr = JSON.toJSONString(mj);
 		response.getWriter().write(jsonStr);
 	}
