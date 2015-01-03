@@ -89,6 +89,7 @@ public class OrderAction extends ActionSupport {
 			order.getDocId()[i]=docId;
 		}
 		//调用服务层计费方式，待完成
+//		order=orderService.
 		return order;
 	};
 	
