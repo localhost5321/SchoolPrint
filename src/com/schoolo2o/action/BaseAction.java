@@ -11,10 +11,12 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.schoolo2o.pojo.MyJSONObject;
 
 public class BaseAction extends ActionSupport {
-	private Map<String, Object> session = ServletActionContext.getContext().getSession();
-	private MyJSONObject jsonObject=new MyJSONObject();
-	private HttpServletResponse response=ServletActionContext.getResponse();
-	private HttpServletRequest request = ServletActionContext.getRequest();
+	protected Map<String, Object> session = ServletActionContext.getContext().getSession();
+	protected MyJSONObject jsonObject=new MyJSONObject();
+	protected HttpServletResponse response=ServletActionContext.getResponse();
+	protected HttpServletRequest request = ServletActionContext.getRequest();
+	
+	
 	
 	public Map<String, Object> getSession() {
 		return session;

@@ -15,13 +15,13 @@ import com.schoolo2o.pojo.send.OrderstatusSend;
 import com.schoolo2o.service.OrderService;
 import com.schoolo2o.service.ShopService;
 import com.schoolo2o.utils.Sender;
-public class OrderAction extends ActionSupport {
+public class OrderAction extends BaseAction {
 	private ShopService shopService;
 	private OrderService orderService;
-	private Map<String, Object> session = ServletActionContext.getContext().getSession();
-	private MyJSONObject jsonObject=new MyJSONObject();
-	private HttpServletResponse response=ServletActionContext.getResponse();
-	private HttpServletRequest request = ServletActionContext.getRequest();
+//	private Map<String, Object> session = ServletActionContext.getContext().getSession();
+//	private MyJSONObject jsonObject=new MyJSONObject();
+//	private HttpServletResponse response=ServletActionContext.getResponse();
+//	private HttpServletRequest request = ServletActionContext.getRequest();
 	public ShopService getShopService() {
 		return shopService;
 	}
