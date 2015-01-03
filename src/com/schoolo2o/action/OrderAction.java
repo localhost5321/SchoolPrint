@@ -94,6 +94,7 @@ public class OrderAction extends ActionSupport {
 					}else{
 						typeSet[1]="DL";
 					}
+					setting="";
 					for(String str:typeSet){
 						setting+=str;
 					}
