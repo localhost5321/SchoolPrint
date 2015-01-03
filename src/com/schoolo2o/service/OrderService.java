@@ -4,25 +4,15 @@ import java.util.List;
 
 import com.schoolo2o.pojo.Orderinfo;
 import com.schoolo2o.pojo.Orderstatus;
+import com.schoolo2o.pojo.send.OrderSend;
 
 public interface OrderService {
 	/**
-	 * 增加一条订单
-	 * @param userName 用户名
-	 * @param shopName 商店名
-	 * @param docId    文档ID
-	 * @param pageCount 文档页数
-	 * @param price    每页单价
-	 * @param fileCount 文件份数
-	 * @param addressId 送货地址ID
-	 * @param printRequire 打印要求
-	 * @param payType 支付方式
-	 * @param sendType 送货方式
-	 * @return 成功为 true,否则为false;
+	 * 生成一个订单
+	 * @param Osend 订单对象
+	 * @return
 	 */
-	public boolean addOrder(String userName,String shopName,Long[] docId, Integer[] pageCount,
-			Double[] price, Integer[] fileCount, String[] printRequire, 
-			Long addressId,Integer payType,Integer sendType);
+	public OrderSend addOrder(OrderSend Osend);
 	/**
 	 * 更新订单状态
 	 * @param orderId 订单ID
@@ -43,4 +33,5 @@ public interface OrderService {
 	 * @return
 	 */
 	public List<Orderinfo> shopSearch(String shopName);
+	
 }

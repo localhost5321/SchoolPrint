@@ -269,7 +269,19 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 		}
 	}
 
-	
-
-
+	@Override
+	public double getPrice(String type, String shopName) {
+		try {
+			String hql = "from Priceinfo where shopinfo.shopName = '"+shopName+"' and " +
+					"printType = '"+type+"'";
+			List<Priceinfo> priceList = this.getHibernateTemplate().find(hql);
+			if( !priceList.isEmpty()){
+				Iterator<Priceinfo> it = priceList.iterator();
+				Priceinfo price = it.next();
+				return price.getPrice();
+			}
+		} catch (Exception e) {
+		}
+		return 0;
+	}
 }

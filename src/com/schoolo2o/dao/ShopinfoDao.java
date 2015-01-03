@@ -31,6 +31,14 @@ public interface ShopinfoDao {
 	public boolean deleteTypePrice(Long priceId);//删除一种打印类型以及价格
 	public boolean updateTypePrice(Priceinfo priceinfo, String shopName);//更新一种打印类型以及价格
 	
+	/**
+	 * 根据商店名和打印类型获取价格
+	 * @param type 打印类型
+	 * @param shopName 商店名
+	 * @return
+	 */
+	public double getPrice(String type, String shopName);
+	
 
 
 }

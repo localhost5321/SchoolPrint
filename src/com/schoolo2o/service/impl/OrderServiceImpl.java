@@ -16,6 +16,7 @@ import com.schoolo2o.pojo.Orderitem;
 import com.schoolo2o.pojo.Orderstatus;
 import com.schoolo2o.pojo.Shopinfo;
 import com.schoolo2o.pojo.Userinfo;
+import com.schoolo2o.pojo.send.OrderSend;
 import com.schoolo2o.service.OrderService;
 /**
  * @对于订单操作的服务层实现
@@ -69,42 +70,41 @@ public class OrderServiceImpl implements OrderService {
 	 *
 	 */
 	@Override
-	public boolean addOrder(String userName,String shopName,Long[] docId, 
-			Integer[] pageCount,Double[] price, Integer[] fileCount,String[] printRequire,
-			Long addressId,Integer payType,Integer sendType) {
+	public OrderSend addOrder(OrderSend Osend) {
 		Orderinfo order = new Orderinfo();
 		Set<Orderitem> setItem = new HashSet<Orderitem>();
 		Orderitem item;
-		Docinfo doc;
 		Set<Orderstatus> setStatus = new HashSet<Orderstatus>();
 		Orderstatus status = new Orderstatus();
-		Double totalCost = 0.0;
 		
-		Userinfo user = this.getUserInfoDao().searchUser(userName);
-		Shopinfo shop = this.getShopInfoDao().search(shopName);
+		Userinfo user = this.getUserInfoDao().searchUser( Osend.getUserName());
+		Shopinfo shop = this.getShopInfoDao().search(Osend.getShopName());
 		order.setUserinfo(user);
 		order.setShopinfo(shop);
-		order.setAddressId(addressId);
-		order.setSendType(sendType);
-		order.setPayType(payType);
-		for(int i=0; i<docId.length; i++){
+		order.setAddressId(Osend.getAddressId());
+		order.setSendType(Osend.getSendType());
+		order.setPayType(Osend.getPayType());
+		for(int i=0; i<Osend.getDocId().length; i++){
 			item = new Orderitem();
 			item.setOrderinfo(order);
-			item.setDocId(docId[i]);
-			item.setFileCount(fileCount[i]);
-			item.setPageNumber(pageCount[i]);
-			item.setFilePrice(pageCount[i] * price[i]*fileCount[i]);
-			item.setPrintRequire(printRequire[i]);
-			totalCost = totalCost + item.getFilePrice();
+			item.setDocId(Osend.getDocId()[i]);
+			item.setFileCount(Osend.getFileCount()[i]);
+			item.setPageNumber(Osend.getPageCount()[i]);
+			item.setFilePrice(Osend.getPageCount()[i] * Osend.getPrice()[i]*Osend.getFileCount()[i]);
+			item.setPrintRequire(Osend.getPrintRequire()[i]);
+			Osend.setItem(item.getFilePrice(), i);
+			Osend.setTotal(Osend.getTotal() + item.getFilePrice());
 			setItem.add(item);
 		}
+		
 		order.setOrderitems(setItem);
 		status.setOrderinfo(order);
 		status.setChangeTime(new Timestamp(new Date().getTime()));
 		status.setIsCurrent(1);
 		status.setStatus(1);
 		setStatus.add(status);  
-		return this.getOrderInfoDao().addOrder(order);
+		this.getOrderInfoDao().addOrder(order);
+		return Osend;
 	}
 
 	/**

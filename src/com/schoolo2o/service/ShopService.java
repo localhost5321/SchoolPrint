@@ -24,4 +24,12 @@ public interface ShopService {
 	public boolean addTypePrice(Priceinfo priceinfo, String shopName);//添加一种打印类型以及价格
 	public boolean deleteTypePrice(Long priceId);//删除一种打印类型以及价格
 	public boolean updateTypePrice(Priceinfo priceinfo, String shopName);//更新一种打印类型以及价格
+	
+	/**
+	 * 根据打印类型和商店名获取打印价格
+	 * @param type 打印类型
+	 * @param shopName 商店名
+	 * @return
+	 */
+	public double getPrice(String type, String shopName);
 }

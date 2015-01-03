@@ -56,6 +56,7 @@ public class ShopAction extends ActionSupport {
 		List<Shopinfo> list=shopService.searchShop();
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("utf-8");
 		if(list!=null&&!list.isEmpty()){
 			List<ShopinfoSend> listSend=ListChange.ParaseShops(list);
 			System.out.println(listSend.size());
