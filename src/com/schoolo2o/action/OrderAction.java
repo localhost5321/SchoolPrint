@@ -68,7 +68,6 @@ public class OrderAction extends ActionSupport {
 		order.setPageCount(new Integer[ja.size()]);
 		order.setPrice(new double[ja.size()]);
 		order.setPrintRequire(new String[ja.size()]);
-		System.out.println(shopName+"!!!!!!!!!!!");
 		order.setFileName(new String[ja.size()]);
 		for(int i=0;i<ja.size();i++){
 			JSONObject orderItem=ja.getJSONObject(i);
@@ -79,13 +78,11 @@ public class OrderAction extends ActionSupport {
 			String[] typeSet=setting.split("、");
 			if(typeSet[0].equals("黑白")){
 				typeSet[0]="BK";	
-				System.out.println(typeSet[0]);
 			}else{
 				typeSet[0]="CR";
 			}
 			if(typeSet[1].equals("单面")){
 				typeSet[1]="SL";
-				System.out.println(typeSet[1]);
 			}else{
 				typeSet[1]="DL";
 			}
@@ -109,7 +106,6 @@ public class OrderAction extends ActionSupport {
 		//调用服务层计费方式，待完成
 		System.out.println(orderService);
 		order=orderService.addOrder(order);
-		
 		return order;
 	};
 	
@@ -122,7 +118,6 @@ public class OrderAction extends ActionSupport {
 		try{
 			if(jsonStr!=null&&!jsonStr.equals("null")){
 				OrderSend order=getOrderFromStr(jsonStr);
-				System.out.println(order.getTotal());
 				Sender.sendOk(order, response);
 			}else{
 				Sender.sendError("参数有误哦", response);
