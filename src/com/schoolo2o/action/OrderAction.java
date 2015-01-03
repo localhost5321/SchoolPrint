@@ -45,10 +45,12 @@ public class OrderAction extends ActionSupport {
 	 * @return
 	 */
 	public OrderSend getOrderFromStr(String jsonStr){
+		
 		OrderSend order=new OrderSend();
 		JSONObject orderObject=JSON.parseObject(jsonStr);
 		String data=orderObject.getString("data");
 		String shopName=orderObject.getString("shopName");
+		 System.out.println(shopName);
 		JSONArray ja=JSON.parseArray(data);
 		String userName;
 		if (session.containsKey("user")) {
@@ -57,38 +59,53 @@ public class OrderAction extends ActionSupport {
 		}else{
 			userName="herozhao";
 		}
+		
 		order.setShopName(shopName);
 		order.setPayType(1);
 		order.setSendType(1);
 		order.setUserName(userName);
+		order.setDocId(new Long[ja.size()]);
+		order.setFileCount(new Integer[ja.size()]);
+		order.setItemPrice(new double[ja.size()]);
+		order.setPageCount(new Integer[ja.size()]);
+		order.setPrice(new double[ja.size()]);
+		order.setPrintRequire(new String[ja.size()]);
 		for(int i=0;i<ja.size();i++){
 			JSONObject orderItem=ja.getJSONObject(i);
-			long docId=orderItem.getLongValue("docId");
-			Integer pageCounts=orderItem.getInteger("pageCounts");
+			System.out.print(orderItem.getString("docId"));
+			long docId=Long.parseLong(orderItem.getString("docId"));
+			Integer pageCounts=Integer.parseInt(orderItem.getString("pageCounts"));
 			String setting=orderItem.getString("setting");
 			String[] typeSet=setting.split("、");
 			if(typeSet[0].equals("黑白")){
 				typeSet[0]="BK";	
+				System.out.println(typeSet[0]);
 			}else{
 				typeSet[0]="CR";
 			}
 			if(typeSet[1].equals("单面")){
 				typeSet[1]="SL";
+				System.out.println(typeSet[1]);
 			}else{
 				typeSet[1]="DL";
 			}
-			setting="";
+			setting=new String();
 			for(String str:typeSet){
 				setting+=str;
 			}
+//			System.out.println(setting + "  " + shopName);
 			double price=shopService.getPrice(setting, shopName);
-			String printsCounts=orderItem.getString("printCounts");
-			order.getItemPrice()[i]=price;
+			System.out.println(price);
+			String printCounts=orderItem.getString("printCounts");
+			Integer printCount=Integer.parseInt(printCounts);
+			order.getPrice()[i]=price;
+			order.getFileCount()[i]=printCount;
 			order.getPageCount()[i]=pageCounts;
 			order.getPrintRequire()[i]=setting;
 			order.getDocId()[i]=docId;
 		}
 		//调用服务层计费方式，待完成
+		System.out.println(orderService);
 		order=orderService.addOrder(order);
 		return order;
 	};
@@ -98,10 +115,12 @@ public class OrderAction extends ActionSupport {
 	 */
 	public String showOrder(){
 		String jsonStr=request.getParameter("data");
+		response.setCharacterEncoding("utf-8");
 		try{
 			if(jsonStr!=null&&!jsonStr.equals("null")){
 				OrderSend order=getOrderFromStr(jsonStr);
-				
+				System.out.println("~~~~~~~~~");
+				System.out.println(order.getTotal());
 				Sender.sendOk(order, response);
 			}else{
 				Sender.sendError("参数有误哦", response);

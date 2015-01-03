@@ -5,9 +5,11 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.schoolo2o.pojo.Orderinfo;
+import com.schoolo2o.pojo.Priceinfo;
 import com.schoolo2o.pojo.ShopComment;
 import com.schoolo2o.pojo.Shopinfo;
 import com.schoolo2o.pojo.send.OrderinfoSend;
+import com.schoolo2o.pojo.send.PriceinfoSend;
 import com.schoolo2o.pojo.send.ShopCommentSend;
 import com.schoolo2o.pojo.send.ShopinfoSend;
 /**
@@ -29,6 +31,8 @@ public class ListChange {
 			ShopinfoSend sfs=new ShopinfoSend(sf);
 			li.add(sfs);
 		}
+		
+		
 		return li;
 	}
 	/**
@@ -44,6 +48,7 @@ public class ListChange {
 			ShopCommentSend scs=new ShopCommentSend(sc);
 			li.add(scs);
 		}
+		
 		return li;
 	}
 	/**
@@ -57,6 +62,19 @@ public class ListChange {
 			OrderinfoSend ods=new OrderinfoSend(order);
 			li.add(ods);
 		}
+		
+		return li;
+	}
+	
+	public static List<PriceinfoSend> ParasePrices(List <Priceinfo> prices){
+		List<PriceinfoSend> li=new ArrayList();
+		Iterator it=prices.iterator();
+		while(it.hasNext()){
+			Priceinfo price=(Priceinfo)it.next();
+			PriceinfoSend pfs=new PriceinfoSend(price);
+			li.add(pfs);
+		}
+		
 		return li;
 	}
 

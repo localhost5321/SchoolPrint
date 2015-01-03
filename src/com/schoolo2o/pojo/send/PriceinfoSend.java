@@ -11,7 +11,6 @@ public class PriceinfoSend implements java.io.Serializable {
 	// Fields
 
 	private Long priceId;
-	private String shopName;
 	private String printType;
 	private Double price;
 
@@ -22,7 +21,6 @@ public class PriceinfoSend implements java.io.Serializable {
 		this.priceId=priceInfo.getPriceId();
 		this.printType = priceInfo.getPrintType();
 		this.price = priceInfo.getPrice();
-		this.shopName=priceInfo.getShopinfo().getShopName();
 	}
 
 

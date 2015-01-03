@@ -1,7 +1,10 @@
 package com.schoolo2o.pojo;
 
 import java.util.HashSet;
-import java.util.Set;
+
+import org.hibernate.collection.PersistentSet;
+import org.hibernate.mapping.Set;
+
 
 /**
  * Shopinfo entity. @author MyEclipse Persistence Tools
@@ -20,10 +23,13 @@ public class Shopinfo implements java.io.Serializable {
 	private String shopPic;
 	private String shopDesc;
 	private Double delivery;
-	private Set orderinfos = new HashSet(0);
-	private Set priceinfos = new HashSet(0);
-	private Set shopComments = new HashSet(0);
-
+//	private Set orderinfos = new HashSet(0);
+//	private Set priceinfos = new HashSet(0);
+//	private Set shopComments = new HashSet(0);
+	private PersistentSet orderinfos;
+	private PersistentSet priceinfos ;
+	private PersistentSet shopComments;
+	
 	// Constructors
 
 	/** default constructor */
@@ -41,23 +47,23 @@ public class Shopinfo implements java.io.Serializable {
 		this.delivery = delivery;
 	}
 
-	/** full constructor */
-	public Shopinfo(String shopName, String shopPwd, String shopNick,
-			String shopPhone, String shopAddress, String shopPic,
-			String shopDesc, Double delivery, Set orderinfos, Set priceinfos,
-			Set shopComments) {
-		this.shopName = shopName;
-		this.shopPwd = shopPwd;
-		this.shopNick = shopNick;
-		this.shopPhone = shopPhone;
-		this.shopAddress = shopAddress;
-		this.shopPic = shopPic;
-		this.shopDesc = shopDesc;
-		this.delivery = delivery;
-		this.orderinfos = orderinfos;
-		this.priceinfos = priceinfos;
-		this.shopComments = shopComments;
-	}
+//	/** full constructor */
+//	public Shopinfo(String shopName, String shopPwd, String shopNick,
+//			String shopPhone, String shopAddress, String shopPic,
+//			String shopDesc, Double delivery, Set orderinfos, Set priceinfos,
+//			Set shopComments) {
+//		this.shopName = shopName;
+//		this.shopPwd = shopPwd;
+//		this.shopNick = shopNick;
+//		this.shopPhone = shopPhone;
+//		this.shopAddress = shopAddress;
+//		this.shopPic = shopPic;
+//		this.shopDesc = shopDesc;
+//		this.delivery = delivery;
+//		this.orderinfos = orderinfos;
+//		this.priceinfos = priceinfos;
+//		this.shopComments = shopComments;
+//	}
 
 	// Property accessors
 
@@ -132,29 +138,53 @@ public class Shopinfo implements java.io.Serializable {
 	public void setDelivery(Double delivery) {
 		this.delivery = delivery;
 	}
+//
+//	public Set getOrderinfos() {
+//		System.out.println("come in");
+//		return this.orderinfos;
+//	}
+//
+//	public void setOrderinfos(Set orderinfos) {
+//		this.orderinfos = orderinfos;
+//	}
+//
+//	public Set getPriceinfos() {
+//		return this.priceinfos;
+//	}
+//
+//	public void setPriceinfos(Set priceinfos) {
+//		this.priceinfos = priceinfos;
+//	}
+//
+//	public Set getShopComments() {
+//		return this.shopComments;
+//	}
+//
+//	public void setShopComments(Set shopComments) {
+//		this.shopComments = shopComments;
+//	}
 
-	public Set getOrderinfos() {
-		System.out.println("come in");
-		return this.orderinfos;
+	public PersistentSet getOrderinfos() {
+		return orderinfos;
 	}
 
-	public void setOrderinfos(Set orderinfos) {
+	public void setOrderinfos(PersistentSet orderinfos) {
 		this.orderinfos = orderinfos;
 	}
 
-	public Set getPriceinfos() {
-		return this.priceinfos;
+	public PersistentSet getPriceinfos() {
+		return priceinfos;
 	}
 
-	public void setPriceinfos(Set priceinfos) {
+	public void setPriceinfos(PersistentSet priceinfos) {
 		this.priceinfos = priceinfos;
 	}
 
-	public Set getShopComments() {
-		return this.shopComments;
+	public PersistentSet getShopComments() {
+		return shopComments;
 	}
 
-	public void setShopComments(Set shopComments) {
+	public void setShopComments(PersistentSet shopComments) {
 		this.shopComments = shopComments;
 	}
 
