@@ -103,7 +103,7 @@
 							accept=".pdf,.doc,.xls,.docx" multiple /> <input type="submit"
 							id="uploadBtn" class="btn btn-primary" value="上传" />
 						<p>点击“浏览”上传文件 或 将文件直接拖拽到上方虚线框中</p>
-						<span>* 暂只支持<font color="red">.pdf,.doc,.docx,.xls</font>格式
+						<span>* 暂只支持<font color="red">.pdf,.doc,.docx</font>格式
 						</span>
 					</div>
 				</form>

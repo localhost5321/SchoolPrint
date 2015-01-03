@@ -44,5 +44,6 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/mysql-connector-java-5.1.32-bin.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/pdfbox-1.8.8.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jwordconvert.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/jacob.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
