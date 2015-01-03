@@ -1,4 +1,11 @@
 /applicationContext.xml
+<<<<<<< HEAD
 /struts.xml
 /struts_OrderOperate.xml
+=======
+>>>>>>> branch 'master' of ssh://git@192.168.1.100:22/home/git/project/SchoolPrint/SchoolPrint.git
 /com/
+/struts.xml
+/strutsShop.xml
+/struts_OrderOperate.xml
+/struts_UserOperate.xml
