@@ -11,8 +11,8 @@ public class OrderSend {
 	Long addressId;
 	Integer payType;
 	Integer sendType;
-	double[] itemPrice;
-	double total;
+	double[] itemPrice;   /*每一项的价格*/
+	double total;         /*总价*/
 	public OrderSend(String userName, String shopName, Long[] docId,
 			Integer[] pageCount, Double[] price, Integer[] fileCount,
 			String[] printRequire, Long addressId, Integer payType,
@@ -130,6 +130,12 @@ public class OrderSend {
 	public void setSendType(Integer sendType) {
 		this.sendType = sendType;
 	}
-	
-	
+	/**
+	 * 单个条目总价保存
+	 * @param itemPrice
+	 * @param i
+	 */
+	public void setItem(double itemPrice, int  i){
+		this.itemPrice[i] = itemPrice;
+	}
 }
