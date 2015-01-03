@@ -4,7 +4,7 @@ var FILE_UPLOAD_WIDTH = 500;
 var SHOW_FILE_WIDTH = 700;
 var GAP;
 var userFiles = new Array();
-var SUPPORT_TYPE = "doc pdf xls docx";
+var SUPPORT_TYPE = "doc pdf docx";
 
 $(document)
 		.ready(
@@ -289,6 +289,10 @@ function removeRow(rowIndex) {
 			"tbody")[0];
 	var row = tbody.childNodes[rowIndex - 1];
 	tbody.removeChild(row);
+	
+	// 更新文件信息
+	updateFileInfo();
+	
 	// 当表格没有文件时，隐藏表格区域
 	if (document.getElementById("fileListTable").rows.length == 1) {
 		// 移动两个div
@@ -361,10 +365,6 @@ function showUserFile() {
 function showOrder(shopName) {
 	var json = showUserFile();
 	json.shopName = shopName;
-	console.log("....................." + JSON.stringify(json));
-	$.post("showOrder.action", "data=" + JSON.stringify(json), function(data){
-		alert(data);
-	});
 	var table = document.getElementById("orderTable");
 	// 清空表格
 	table.tBodies[0].innerHTML = "";
@@ -372,46 +372,51 @@ function showOrder(shopName) {
 		alert("请先选择文件");
 		return;
 	}
-	for (var i = 0; i < json.data.length; i++) {
-		var tr = document.createElement("tr");
-		tr.style.textAlign = "center";
-		// 创建文件名列
-		var tdFileName = document.createElement("td");
-		tdFileName.innerHTML = json.data[i].fileName;
-		tr.appendChild(tdFileName);
-		// 创建页数列
-		var tdPrintCount = document.createElement("td");
-		tdPrintCount.innerHTML = json.data[i].pageCounts;
-		tr.appendChild(tdPrintCount);
-		// 创建打印设置列
-		var tdSetting = document.createElement("td");
-		tdSetting.innerHTML = json.data[i].setting;
-		tr.appendChild(tdSetting);
-		// 创建份数列
-		var tdPrintCounts = document.createElement("td");
-		tdPrintCounts.innerHTML = json.data[i].printCounts;
-		tr.appendChild(tdPrintCounts);
-		// 创建单价列
-		var tdPrice = document.createElement("td");
-		tdPrice.innerHTML = 0.1;
-		tr.appendChild(tdPrice);
-		// 创建总价列
-		var sumPrice = document.createElement("td");
-		sumPrice.className = "sumPrice";
-		sumPrice.innerHTML = Number(tdPrintCount.innerHTML)
-				* Number(tdPrintCounts.innerHTML) * Number(tdPrice.innerHTML);
-		tr.appendChild(sumPrice);
-
-		// 添加此行
-		table.tBodies[0].appendChild(tr);
-	}
-
-	var sumPrice = 0;
-	var tdSumPrice = $("#orderTable").find(".sumPrice");
-	for (var i = 0; i < tdSumPrice.length; i++) {
-		sumPrice += Number($(tdSumPrice.get(i)).text());
-	}
-	$(".orderInfo").text("总价：" + sumPrice + "元 ");
+	
+	$.post("showOrder.action", "data=" + JSON.stringify(json), function(response){
+		
+		var obj = JSON.parse(response);
+		
+		if(obj.status == 0){
+			alert(obj.message);
+			return;
+		}
+		
+		for (var i = 0; i < json.data.length; i++) {
+			var tr = document.createElement("tr");
+			tr.style.textAlign = "center";
+			// 创建文件名列
+			var tdFileName = document.createElement("td");
+			tdFileName.innerHTML = json.data[i].fileName;
+			tr.appendChild(tdFileName);
+			// 创建页数列
+			var tdPrintCount = document.createElement("td");
+			tdPrintCount.innerHTML = json.data[i].pageCounts;
+			tr.appendChild(tdPrintCount);
+			// 创建打印设置列
+			var tdSetting = document.createElement("td");
+			tdSetting.innerHTML = json.data[i].setting;
+			tr.appendChild(tdSetting);
+			// 创建份数列
+			var tdPrintCounts = document.createElement("td");
+			tdPrintCounts.innerHTML = json.data[i].printCounts;
+			tr.appendChild(tdPrintCounts);
+			// 创建单价列
+			var tdPrice = document.createElement("td");
+			tdPrice.innerHTML = obj.data.price[i];
+			tr.appendChild(tdPrice);
+			// 创建总价列
+			var sumPrice = document.createElement("td");
+			sumPrice.className = "sumPrice";
+			sumPrice.innerHTML = obj.data.itemPrice[i];
+			tr.appendChild(sumPrice);
+			
+			// 添加此行
+			table.tBodies[0].appendChild(tr);
+		
+		}
+		$(".orderInfo").text("总价：" + obj.data.total + "元");
+	});
 
 	// 弹窗
 	$("#orderModal").modal();
@@ -509,9 +514,14 @@ function handleFile(file) {
 					if (xhr.status == 200) {
 						console.log(xhr.responseText);
 						var json = JSON.parse(xhr.responseText);
-						userFiles[userFiles.length - 1].docId = json.data.docId;
-						userFiles[userFiles.length - 1].fileCount = json.data.fileCount;
-						$(".pageCounts").get(userFiles.length - 1).innerHTML = json.data.fileCount;
+						file.docId = json.data.docId;
+						file.fileCount = json.data.fileCount;
+						for(var i = 0; i < userFiles.length; i ++){
+							if(userFiles[i] == file){
+								$(".pageCounts").get(i).innerHTML = json.data.fileCount;
+								break;
+							}
+						}
 						for (var i = 0; i < userFiles.length; i++) {
 							console.log(userFiles[i].fileCount + "..."
 									+ userFiles[i].docId);
@@ -527,7 +537,6 @@ function handleFile(file) {
 	if (reader.readAsBinaryString) {
 		flag = true;
 		reader.readAsBinaryString(file);
-		console.log("come in binary");
 	} else if (reader.readAsArrayBuffer) {
 		flag = false;
 		try {
@@ -536,7 +545,6 @@ function handleFile(file) {
 			alert("文件打开失败，请尝试重新上传！");
 			removeRow(userFiles.length);
 		}
-		console.log("come in buffer");
 	}
 
 }
@@ -546,7 +554,7 @@ function handleFile(file) {
  */
 function createShop(json) {
 	for (var i = 0; i < json.data.length; i++) {
-		var imageSrc = "images/s1.png";
+		var imageSrc = "images/s"+(i + 1)+".png";
 		var shopNick = json.data[i].shopNick;
 		var shopName = json.data[i].shopName;
 		var shopAddr = json.data[i].shopAddress;
@@ -574,7 +582,10 @@ function createShop(json) {
 }
 
 function enterShop() {
-	var data = JSON.stringify(showUserFile());
-	sessionStorage.setItem("order", data);
+	var json = showUserFile();
+	json.shopName = shopName;
+	$.post("showOrder.action", "data=" + JSON.stringify(json), function(response){
+		sessionStorage.setItem("order", JSON.stringify(response));
+	});
 	return true;
 }
