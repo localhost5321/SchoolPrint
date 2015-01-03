@@ -51,7 +51,6 @@ $(document)
 						type : "post",
 						url : "shop/getShopList.action",
 						success : function(data) {
-							console.log(data);
 							var json = JSON.parse(data);
 							createShop(json);
 						}
@@ -375,8 +374,8 @@ function showOrder(shopName) {
 	
 	$.post("showOrder.action", "data=" + JSON.stringify(json), function(response){
 		
+		console.log("!!!" + response);
 		var obj = JSON.parse(response);
-		
 		if(obj.status == 0){
 			alert(obj.message);
 			return;
@@ -573,7 +572,7 @@ function createShop(json) {
 								+ shopName
 								+ "\" class=\"btn btn-info shopDetail\" >查看订单</button><form action=\"shop/getShopDetail.action?shopName="
 								+ shopName
-								+ "\" method=\"post\" target=\"_blank\" onsubmit = \"return enterShop();\"><input type=\"submit\"  class=\"btn btn-primary enterShop\" value=\"进入店铺\"></form></div>");
+								+ "\" method=\"post\" target=\"_blank\" onsubmit = \"return enterShop(this);\" name=\""+shopName+"\"><input type=\"submit\"  class=\"btn btn-primary enterShop\" value=\"进入店铺\"></form></div>");
 		// 给店铺的订单详情按钮添加对应监听
 		$("#" + shopName).click(function() {
 			showOrder($(this).attr("id"));
@@ -581,11 +580,12 @@ function createShop(json) {
 	}
 }
 
-function enterShop() {
+function enterShop(obj) {
 	var json = showUserFile();
-	json.shopName = shopName;
+	json.shopName = obj.name;
 	$.post("showOrder.action", "data=" + JSON.stringify(json), function(response){
-		sessionStorage.setItem("order", JSON.stringify(response));
+		console.log(reponse);
+		sessionStorage.setItem("order", response);
 	});
 	return true;
 }

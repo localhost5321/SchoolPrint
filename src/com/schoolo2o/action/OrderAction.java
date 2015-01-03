@@ -45,7 +45,7 @@ public class OrderAction extends ActionSupport {
 	 * @return
 	 */
 	public OrderSend getOrderFromStr(String jsonStr){
-		
+		System.out.println(jsonStr);
 		OrderSend order=new OrderSend();
 		JSONObject orderObject=JSON.parseObject(jsonStr);
 		String data=orderObject.getString("data");
