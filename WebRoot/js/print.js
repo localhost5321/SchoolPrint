@@ -51,6 +51,7 @@ $(document)
 						type : "post",
 						url : "shop/getShopList.action",
 						success : function(data) {
+							console.log(data);
 							var json = JSON.parse(data);
 							createShop(json);
 						}
@@ -360,7 +361,9 @@ function showUserFile() {
 function showOrder(shopName) {
 	var json = showUserFile();
 	json.shopName = shopName;
-	alert(JSON.stringify(json));
+	$.post("orderShow.action", JSON.stringify(json), function(data){
+		alert(data);
+	});
 	var table = document.getElementById("orderTable");
 	// 清空表格
 	table.tBodies[0].innerHTML = "";
@@ -417,8 +420,10 @@ function showOrder(shopName) {
  * 确认订单
  */
 function commitOrder() {
-	var json = showUserFile();
-	$.post("index.jsp", json);
+//	var json = JSON.stringify(showUserFile());
+//	$.post("orderShow.action", json, function(data){
+//		alert(data);
+//	});
 }
 
 /**
