@@ -16,6 +16,7 @@ public class Orderitem implements java.io.Serializable {
 	private Integer pageNumber;
 	private Double filePrice;
 	private String printRequire;
+	private String fileName; 
 
 	// Constructors
 
@@ -51,6 +52,14 @@ public class Orderitem implements java.io.Serializable {
 
 	public Long getItemId() {
 		return this.itemId;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 
 	public void setItemId(Long itemId) {

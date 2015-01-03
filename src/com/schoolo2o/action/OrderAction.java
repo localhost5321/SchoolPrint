@@ -50,7 +50,6 @@ public class OrderAction extends ActionSupport {
 		JSONObject orderObject=JSON.parseObject(jsonStr);
 		String data=orderObject.getString("data");
 		String shopName=orderObject.getString("shopName");
-		 System.out.println(shopName);
 		JSONArray ja=JSON.parseArray(data);
 		String userName;
 		if (session.containsKey("user")) {
@@ -59,7 +58,6 @@ public class OrderAction extends ActionSupport {
 		}else{
 			userName="herozhao";
 		}
-		
 		order.setShopName(shopName);
 		order.setPayType(1);
 		order.setSendType(1);
@@ -70,6 +68,8 @@ public class OrderAction extends ActionSupport {
 		order.setPageCount(new Integer[ja.size()]);
 		order.setPrice(new double[ja.size()]);
 		order.setPrintRequire(new String[ja.size()]);
+		System.out.println(shopName+"!!!!!!!!!!!");
+		order.setFileName(new String[ja.size()]);
 		for(int i=0;i<ja.size();i++){
 			JSONObject orderItem=ja.getJSONObject(i);
 			System.out.print(orderItem.getString("docId"));
@@ -98,6 +98,8 @@ public class OrderAction extends ActionSupport {
 			System.out.println(price);
 			String printCounts=orderItem.getString("printCounts");
 			Integer printCount=Integer.parseInt(printCounts);
+			String fileName=orderItem.getString("fileName");
+			order.getFileName()[i]=fileName;
 			order.getPrice()[i]=price;
 			order.getFileCount()[i]=printCount;
 			order.getPageCount()[i]=pageCounts;
@@ -107,6 +109,7 @@ public class OrderAction extends ActionSupport {
 		//调用服务层计费方式，待完成
 		System.out.println(orderService);
 		order=orderService.addOrder(order);
+		
 		return order;
 	};
 	
@@ -119,7 +122,6 @@ public class OrderAction extends ActionSupport {
 		try{
 			if(jsonStr!=null&&!jsonStr.equals("null")){
 				OrderSend order=getOrderFromStr(jsonStr);
-				System.out.println("~~~~~~~~~");
 				System.out.println(order.getTotal());
 				Sender.sendOk(order, response);
 			}else{

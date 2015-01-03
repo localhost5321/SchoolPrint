@@ -96,6 +96,7 @@ public class OrderServiceImpl implements OrderService {
 			item.setPrintRequire(Osend.getPrintRequire()[i]);
 			Osend.setItem(item.getFilePrice(), i);
 			Osend.setTotal(Osend.getTotal() + item.getFilePrice());
+			item.setFileName(Osend.getFileName()[i]);
 			setItem.add(item);
 		}
 		

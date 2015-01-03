@@ -8,6 +8,7 @@ public class OrderSend {
 	double[] price;
 	Integer[] fileCount;
 	String[] printRequire;
+	String[] fileName;
 	Long addressId;
 	Integer payType;
 	Integer sendType;
@@ -16,7 +17,7 @@ public class OrderSend {
 	public OrderSend(String userName, String shopName, Long[] docId,
 			Integer[] pageCount, double[] price, Integer[] fileCount,
 			String[] printRequire, Long addressId, Integer payType,
-			Integer sendType, double[] itemPrice, double total) {
+			Integer sendType, double[] itemPrice, double total,String[] fileName) {
 		super();
 		this.userName = userName;
 		this.shopName = shopName;
@@ -30,7 +31,20 @@ public class OrderSend {
 		this.sendType = sendType;
 		this.itemPrice = itemPrice;
 		this.total = total;
+		this.fileName=fileName;
 	}
+	
+	
+	public String[] getFileName() {
+		return fileName;
+	}
+
+
+	public void setFileName(String[] fileName) {
+		this.fileName = fileName;
+	}
+
+
 	public double[] getItemPrice() {
 		return itemPrice;
 	}
