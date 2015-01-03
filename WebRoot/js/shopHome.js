@@ -6,7 +6,7 @@ $(function() {
 	$("#navBarPrint").children("a").attr("href", "print.jsp");
 
 	var json = sessionStorage.getItem("order");
-	console.log("..." + JSON.parse(json));
+	console.log(json);
 	var obj = JSON.parse(json);
 	for (var i = 0; i < obj.data.docId.length; i++) {
 		var fileName = obj.data.fileName[i];
@@ -21,5 +21,5 @@ $(function() {
 						+ "</td><td>"+price+"</td><td>"+itemPrice+"</td></tr>");
 	}
 	
-	$("#orderInfo").text("总价：" + obj.data.total + "元");
+	$(".orderInfo").text("总价：" + obj.data.total + "元");
 });
