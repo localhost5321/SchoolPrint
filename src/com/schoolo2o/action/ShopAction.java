@@ -1,4 +1,5 @@
 package com.schoolo2o.action;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -25,9 +26,79 @@ import com.schoolo2o.service.OrderService;
 import com.schoolo2o.service.ShopService;
 import com.schoolo2o.utils.ListChange;
 import com.schoolo2o.utils.Sender;
+
 public class ShopAction extends BaseAction {
 	private ShopService shopService;
 	private OrderService orderService;
+
+	/**
+	 * 获取商店列表
+	 * 
+	 * @throws IOException
+	 */
+	public String getAllShops() {
+		// System.out.println("enter!");
+		try {
+			List<Shopinfo> list = shopService.searchShop();
+			response.setContentType("text/plain");
+			response.setCharacterEncoding("utf-8");
+			request.setCharacterEncoding("utf-8");
+			if (list != null && !list.isEmpty()) {
+				List<ShopinfoSend> listSend = ListChange.ParaseShops(list);
+				System.out.println(listSend.size());
+				Sender.sendOk(listSend, response);
+			} else {
+				Sender.sendError("请求错误", response);
+			}
+		} catch (Exception e) {
+			Sender.sendError("服务器有点问题", response);
+			e.printStackTrace();
+		} finally {
+			return null;
+		}
+	}
+
+	/**
+	 * 由商店名获取商店详情
+	 * 
+	 * @param shopName
+	 * @return
+	 * @throws IOException
+	 */
+	public String getShopByName() throws IOException {
+		String shopName = request.getParameter("shopName");
+		Shopinfo shop = shopService.search(shopName);
+		try {
+			if (shop != null) {
+				ShopinfoSend shopinfoSend = new ShopinfoSend(shop);
+				List<ShopComment> comments = shopService.getCommentsSplit(
+						shopName, 0, 10);
+				List<Orderinfo> orders = shopService.getOrdersSplit(shopName,
+						0, 10);
+				List<Priceinfo> prices = shopService.getTypePrice(shopName);
+				List<OrderinfoSend> orderSends = ListChange
+						.ParaseOrders(orders);
+				List<ShopCommentSend> commentsSend = ListChange
+						.ParaseComments(comments);
+				List<PriceinfoSend> pricesSend = ListChange
+						.ParasePrices(prices);
+				shopinfoSend.setPriceinfos(pricesSend);
+				shopinfoSend.setComments(commentsSend);
+				shopinfoSend.setOrders(orderSends);
+				request.setAttribute("shop", shopinfoSend);
+				Sender.sendOk(shopinfoSend, response);
+				return SUCCESS;
+			} else {
+				Sender.sendError("参数有错误", response);
+				return null;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			Sender.sendError("服务器错误", response);
+			return null;
+		}
+
+	}
 
 	public ShopService getShopService() {
 		return shopService;
@@ -36,8 +107,7 @@ public class ShopAction extends BaseAction {
 	public void setShopService(ShopService shopService) {
 		this.shopService = shopService;
 	}
-	
-	
+
 	public OrderService getOrderService() {
 		return orderService;
 	}
@@ -45,59 +115,4 @@ public class ShopAction extends BaseAction {
 	public void setOrderService(OrderService orderService) {
 		this.orderService = orderService;
 	}
-
-	/**
-	 * 获取商店列表
-	 * @throws IOException
-	 */
-	public  String getAllShops() throws IOException{
-		System.out.println("enter!");
-		List<Shopinfo> list=shopService.searchShop();
-		response.setContentType("text/plain");
-		response.setCharacterEncoding("utf-8");
-		request.setCharacterEncoding("utf-8");
-		if(list!=null&&!list.isEmpty()){
-			List<ShopinfoSend> listSend=ListChange.ParaseShops(list);
-			System.out.println(listSend.size());
-			Sender.sendOk(listSend, response);
-			return null;
-		}else{
-			Sender.sendError("请求错误", response);
-			return null;
-		}
-	}
-	
-	
-	/**  
-	 * 由商店名获取商店详情
-	 * @param shopName
-	 * @return
-	 * @throws IOException
-	 */
-	public String getShopByName() throws IOException{
-		String shopName=request.getParameter("shopName");
-		Shopinfo shop=shopService.search(shopName);
-		if(shop!=null){
-			ShopinfoSend shopinfoSend=new ShopinfoSend(shop);
-			List<ShopComment> comments=shopService.getCommentsSplit(shopName, 0, 10);
-			List<Orderinfo> orders=shopService.getOrdersSplit(shopName, 0, 10);
-			List<Priceinfo> prices=shopService.getTypePrice(shopName);
-			List<OrderinfoSend> orderSends=ListChange.ParaseOrders(orders);
-			List<ShopCommentSend>commentsSend=ListChange.ParaseComments(comments);
-			List<PriceinfoSend> pricesSend=ListChange.ParasePrices(prices);
-			shopinfoSend.setPriceinfos(pricesSend);
-			shopinfoSend.setComments(commentsSend);
-			shopinfoSend.setOrders(orderSends);
-			request.setAttribute("shop", shopinfoSend);
-			Sender.sendOk(shopinfoSend, response);
-			return SUCCESS;
-		}else{
-			Sender.sendError("不要着急哦", response);
-			return null;
-		}
-		
-	}
-	
-	
-
 }
