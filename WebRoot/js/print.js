@@ -71,11 +71,11 @@ function initDrag() {
 	}
 
 	holder.ondragover = function() {
-		this.className = 'hover';
+//		this.className = 'hover';
 		return false;
 	};
 	holder.ondragend = function() {
-		this.className = "";
+//		this.className = "";
 		return false;
 	};
 	// 松开鼠标
@@ -223,7 +223,7 @@ function addFileToTable(file, progressBar) {
 	var settingInfo = document.createElement("span");
 	tdSetting.style.verticalAlign = "middle";
 	settingInfo.className = "setting";
-	settingInfo.innerHTML = "黑白、单面、A4、全部";
+	settingInfo.innerHTML = "黑白、单面、A4";
 	settingBtn.href = "javascript:void(0)";
 	settingBtn.innerHTML = "设置";
 	settingBtn.style.marginLeft = "5px";
@@ -344,6 +344,7 @@ function showUserFile() {
 	var printCounts = $("#fileListTable").find(".printCounts");
 	for (var i = 0; i < userFiles.length; i++) {
 		var file = {};
+		file.fileId = userFiles[i].docId;
 		file.fileName = userFiles[i].name;
 		file.pageCounts = $(pageCounts[i]).html();
 		file.setting = $(setting[i]).html();
@@ -358,6 +359,8 @@ function showUserFile() {
  */
 function showOrder(shopName) {
 	var json = showUserFile();
+	json.shopName = shopName;
+	alert(JSON.stringify(json));
 	var table = document.getElementById("orderTable");
 	// 清空表格
 	table.tBodies[0].innerHTML = "";
@@ -470,18 +473,11 @@ function handleFile(file) {
 					xhr = new XMLHttpRequest();
 				}
 			}
-			// 获取用户名
-			var username = "";
-			try {
-				username = sessionStorage.getItem("username");
-			} catch (err) {
-				alert("浏览器不支持！请更换浏览器");
-			}
 			xhr.open(
 			// method
 			"POST",
 			// target url
-			"fileUpLoad.action?fileName=" + file.name + "&userName=" + username
+			"fileUpLoad.action?fileName=" + file.name
 			// , async, default to true
 			);
 			xhr.overrideMimeType("application/octet-stream");

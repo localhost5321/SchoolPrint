@@ -15,7 +15,6 @@ function login() {
 		var obj = JSON.parse(data);
 		if (obj.status == 1) {
 			// 登陆成功
-			sessionStorage.setItem("username", $("#loginUsername").val());
 			$("#navbarUserInfo").html(obj.message);
 			$("#loginModal").modal("hide");
 		} else {
@@ -38,7 +37,6 @@ function regist() {
 		var obj = JSON.parse(data);
 		if (obj.status == 1) {
 			// 注册成功
-			USERNAME = $("#loginUsername");
 			$("#navbarUserInfo").html(obj.message);
 			$("#registerModal").modal("hide");
 		}
@@ -50,7 +48,6 @@ function regist() {
  */
 function exit() {
 	$.post("userExit.action", function(data) {
-		sessionStorage.removeItem("username");
 		location.reload();
 	});
 }

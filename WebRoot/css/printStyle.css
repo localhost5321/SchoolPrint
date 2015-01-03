@@ -56,7 +56,7 @@ th {
 	background: transparent url("../images/wan.png") center center;
 }
 
-#holder.hover {
+#holder:hover {
 	border: 10px dashed #333;
 }
 
