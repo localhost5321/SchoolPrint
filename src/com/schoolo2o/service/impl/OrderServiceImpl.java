@@ -76,7 +76,6 @@ public class OrderServiceImpl implements OrderService {
 		Orderitem item;
 		Set<Orderstatus> setStatus = new HashSet<Orderstatus>();
 		Orderstatus status = new Orderstatus();
-		
 		Userinfo user = this.getUserInfoDao().searchUser( Osend.getUserName());
 		Shopinfo shop = this.getShopInfoDao().search(Osend.getShopName());
 		order.setUserinfo(user);
@@ -90,6 +89,9 @@ public class OrderServiceImpl implements OrderService {
 			item.setDocId(Osend.getDocId()[i]);
 			item.setFileCount(Osend.getFileCount()[i]);
 			item.setPageNumber(Osend.getPageCount()[i]);
+//			System.out.println(Osend.getPageCount()[i]);
+//			System.out.println(Osend.getPrice());
+//			System.out.println(Osend.getFileCount()[i]);
 			item.setFilePrice(Osend.getPageCount()[i] * Osend.getPrice()[i]*Osend.getFileCount()[i]);
 			item.setPrintRequire(Osend.getPrintRequire()[i]);
 			Osend.setItem(item.getFilePrice(), i);

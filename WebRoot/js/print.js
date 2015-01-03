@@ -345,7 +345,7 @@ function showUserFile() {
 	var printCounts = $("#fileListTable").find(".printCounts");
 	for (var i = 0; i < userFiles.length; i++) {
 		var file = {};
-		file.fileId = userFiles[i].docId;
+		file.docId = userFiles[i].docId;
 		file.fileName = userFiles[i].name;
 		file.pageCounts = $(pageCounts[i]).html();
 		file.setting = $(setting[i]).html();
@@ -361,7 +361,8 @@ function showUserFile() {
 function showOrder(shopName) {
 	var json = showUserFile();
 	json.shopName = shopName;
-	$.post("orderShow.action", JSON.stringify(json), function(data){
+	console.log("....................." + JSON.stringify(json));
+	$.post("showOrder.action", "data=" + JSON.stringify(json), function(data){
 		alert(data);
 	});
 	var table = document.getElementById("orderTable");
@@ -560,16 +561,14 @@ function createShop(json) {
 								+ shopAddr
 								+ "</p><p class=\"shopTel\">联系电话："
 								+ shopPhone
-								+ "</p><button id=\"shopDetail_"
+								+ "</p><button id=\""
 								+ shopName
 								+ "\" class=\"btn btn-info shopDetail\" >查看订单</button><form action=\"shop/getShopDetail.action?shopName="
 								+ shopName
 								+ "\" method=\"post\" target=\"_blank\" onsubmit = \"return enterShop();\"><input type=\"submit\"  class=\"btn btn-primary enterShop\" value=\"进入店铺\"></form></div>");
-
 		// 给店铺的订单详情按钮添加对应监听
-		$("#shopDetail_" + shopName).click(function() {
-			alert(shopName)
-			showOrder(shopName);
+		$("#" + shopName).click(function() {
+			showOrder($(this).attr("id"));
 		});
 	}
 }

@@ -2,8 +2,15 @@ package com.schoolo2o.pojo.send;
 
 
 import java.util.List;
-import java.util.Set;
+//import java.util.Set;
 
+
+
+
+import org.hibernate.collection.PersistentSet;
+import org.hibernate.mapping.Set;
+
+import com.schoolo2o.pojo.Priceinfo;
 import com.schoolo2o.pojo.ShopComment;
 import com.schoolo2o.pojo.Shopinfo;
 
@@ -26,12 +33,20 @@ public class ShopinfoSend{
 	private Double delivery;
 	private List<ShopCommentSend> comments;
 	private List<OrderinfoSend> orders;
-	private Set priceinfos;
+	private List<PriceinfoSend>  priceinfos;
 	
 	
 
 	
 	// Constructors
+
+	public List<PriceinfoSend> getPriceinfos() {
+		return priceinfos;
+	}
+
+	public void setPriceinfos(List<PriceinfoSend> priceinfos) {
+		this.priceinfos = priceinfos;
+	}
 
 	public List<ShopCommentSend> getComments() {
 		return comments;
@@ -55,7 +70,7 @@ public class ShopinfoSend{
 		this.delivery = sf.getDelivery();
 		this.shopDesc= sf.getShopDesc();
 		this.shopPic= sf.getShopPic();
-		this.priceinfos= sf.getPriceinfos();
+		
 	}
 
 	
@@ -67,13 +82,7 @@ public class ShopinfoSend{
 		this.orders = orders;
 	}
 
-	public Set getPriceinfos() {
-		return priceinfos;
-	}
-
-	public void setPriceinfos(Set priceinfos) {
-		this.priceinfos = priceinfos;
-	}
+	
 
 
 	public Long getShopId() {

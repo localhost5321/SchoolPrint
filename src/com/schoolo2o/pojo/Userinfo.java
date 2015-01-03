@@ -4,6 +4,9 @@ import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
+
+
+
 /**
  * Userinfo entity. @author MyEclipse Persistence Tools
  */
@@ -22,6 +25,7 @@ public class Userinfo implements java.io.Serializable {
 	private Set addressinfos = new HashSet(0);
 	private Set orderinfos = new HashSet(0);
 	private Set docinfos = new HashSet(0);
+
 
 	// Constructors
 
