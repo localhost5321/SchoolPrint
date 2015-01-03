@@ -97,7 +97,9 @@ public class OrderAction extends ActionSupport {
 					for(String str:typeSet){
 						setting+=str;
 					}
+					double price=shopService.getPrice(setting, shopName);
 					String printsCounts=orderItem.getString("printCounts");
+					order.getItemPrice().clone()[0]=price;
 					order.getPageCount()[i]=pageCounts;
 					order.setPrintRequire(typeSet);
 					order.getDocId()[i]=docId;
