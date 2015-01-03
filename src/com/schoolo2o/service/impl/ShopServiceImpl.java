@@ -176,4 +176,10 @@ public class ShopServiceImpl implements ShopService {
 		return shopinfoDao.getOrdersSplit(shopName, current, step);
 	}
 
+	@Override
+	public double getPrice(String type, String shopName) {
+		
+		return this.getShopinfoDao().getPrice(type, shopName);
+	}
+
 }
