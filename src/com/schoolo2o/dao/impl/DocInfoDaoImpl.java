@@ -21,7 +21,7 @@ public class DocInfoDaoImpl extends HibernateDaoSupport implements DocInfoDao {
 		if(doc!=null){
 			try{
 				this.getHibernateTemplate().save(doc);
-				doc.setDocId(2L);                      //问题，中午改
+				System.out.println(doc.getDocId());
 				return doc;
 			}catch(Exception e){
 				e.printStackTrace();
