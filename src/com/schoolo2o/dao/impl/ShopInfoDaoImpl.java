@@ -58,6 +58,7 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 	public List<Shopinfo> searchShop() { //查找所有商店,返回List
 		String hql = " from Shopinfo";
 		Session session=this.getSessionFactory().openSession();
+		//Session session=this.getSession();
 		List<Shopinfo> shopList=null;
 		try {
 			Query q=session.createQuery(hql);
@@ -93,6 +94,7 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 	public Shopinfo search(String name) {   //根据商店名查询商店是否存在,若存在,返回商店bean,不存在,返回null
 		Shopinfo shop = null;
 		Session session=this.getSessionFactory().openSession();
+		//Session session=this.getSession();
 		Query q=null;
 		try{
 		q=session.createQuery( "from Shopinfo where shopName =  '"+ name +"'");
@@ -237,6 +239,7 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 			int step) {
 		List<ShopComment> list=null;
 		Session session=this.getSessionFactory().openSession();
+		//Session session=this.getSession();
 		Query q=null;
 		try{
 			q=session.createQuery("from ShopComment where shopinfo.shopName = '" +shopName+"' ");
@@ -255,6 +258,7 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 	public List<Orderinfo> getOrdersSplit(String shopName, int current, int step) {
 		List<Orderinfo> list=null;
 		Session session=this.getSessionFactory().openSession();
+		//Session session=this.getSession();
 		Query q=null;
 		try{
 			q=session.createQuery("from Orderinfo where shopinfo.shopName = '" +shopName+"' ");

@@ -18,6 +18,7 @@ import com.schoolo2o.pojo.Priceinfo;
 import com.schoolo2o.pojo.ShopComment;
 import com.schoolo2o.pojo.Shopinfo;
 import com.schoolo2o.pojo.send.OrderinfoSend;
+import com.schoolo2o.pojo.send.PriceinfoSend;
 import com.schoolo2o.pojo.send.ShopCommentSend;
 import com.schoolo2o.pojo.send.ShopinfoSend;
 import com.schoolo2o.service.OrderService;
@@ -56,6 +57,7 @@ public class ShopAction extends ActionSupport {
 		List<Shopinfo> list=shopService.searchShop();
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("utf-8");
 		if(list!=null&&!list.isEmpty()){
 			List<ShopinfoSend> listSend=ListChange.ParaseShops(list);
 			System.out.println(listSend.size());
@@ -90,8 +92,11 @@ public class ShopAction extends ActionSupport {
 			ShopinfoSend shopinfoSend=new ShopinfoSend(shop);
 			List<ShopComment> comments=shopService.getCommentsSplit(shopName, 0, 10);
 			List<Orderinfo> orders=shopService.getOrdersSplit(shopName, 0, 10);
+			List<Priceinfo> prices=shopService.getTypePrice(shopName);
 			List<OrderinfoSend> orderSends=ListChange.ParaseOrders(orders);
 			List<ShopCommentSend>commentsSend=ListChange.ParaseComments(comments);
+			List<PriceinfoSend> pricesSend=ListChange.ParasePrices(prices);
+			shopinfoSend.setPriceinfos(pricesSend);
 			shopinfoSend.setComments(commentsSend);
 			shopinfoSend.setOrders(orderSends);
 			request.setAttribute("shop", shopinfoSend);

@@ -130,9 +130,9 @@
 				</table>
 			</div>
 			<!-- 文件总信息 -->
-			<div class="fileInfo"><span>共**个文件,总份数:**,总页数**</span></div>
+			<div class="fileInfo"><span>计算中...</span></div>
 			<div>
-				<a class="btn btn-info" id="selectPrint" href="#printShopContent">选择打印店</a>
+				<a class="btn btn-info" id="selectPrint" href="javascript:void(0)">选择打印店</a>
 			</div>
 		</div>
 	</div>
@@ -149,7 +149,7 @@
 			<h3 class="shopName">弘辰打印店</h3>
 			<p class="shopAddr">地址：弘辰桥洞小巷内10米左拐</p>
 			<p class="shopTel">联系电话：0728-8259807</p>
-			<button id="shopDetail_1" class="btn btn-info shopDetail" >查看订单</button>
+			<button id="shopDetail_1" class="btn btn-info shopDetail"  onclick="showOrder('')">查看订单</button>
 			<button id="enterShop_1" class="btn btn-primary enterShop">进入店铺</button>
 		</div>
 
@@ -158,7 +158,7 @@
 			<h3 class="shopName">弘辰食堂打印店</h3>
 			<p class="shopAddr">地址：弘辰食堂2楼</p>
 			<p class="shopTel">联系电话：0728-8259807/13027342004</p>
-			<button class="btn btn-info shopDetail" data-toggle="modal" data-target="#orderModal">查看订单</button>
+			<button class="btn btn-info shopDetail" onclick="showOrder('')">查看订单</button>
 			<button class="btn btn-primary enterShop">进入店铺</button>
 		</div>
 
@@ -167,7 +167,7 @@
 			<h3 class="shopName">南校打印店</h3>
 			<p class="shopAddr">地址：南校申通快递对面</p>
 			<p class="shopTel">联系电话：0728-8259807/18373425473</p>
-			<button class="btn btn-info shopDetail" data-toggle="modal" data-target="#orderModal">查看订单</button>
+			<button class="btn btn-info shopDetail" onclick="showOrder('')">查看订单</button>
 			<button class="btn btn-primary enterShop">进入店铺</button>
 		</div>
 
@@ -176,7 +176,7 @@
 			<h3 class="shopName">北校坑里打印店</h3>
 			<p class="shopAddr">地址：北校坑里</p>
 			<p class="shopTel">联系电话：0728-8259807/18373425473</p>
-			<button class="btn btn-info shopDetail" data-toggle="modal" data-target="#orderModal">查看订单</button>
+			<button class="btn btn-info shopDetail" onclick="showOrder('')">查看订单</button>
 			<button class="btn btn-primary enterShop">进入店铺</button>
 		</div>
 	</div>
@@ -214,11 +214,6 @@
 					</div>
 					<!-- 订单总信息 -->
 				<div class="orderInfo"><span>总价：</span></div>
-				<!-- 备注信息 -->
-				<br>
-				<div>
-					备注：<br><textarea class="form-control" rows="2"></textarea>
-				</div>
 				</div>
 				<!--窗口底部-->
 				<div class="modal-footer">
