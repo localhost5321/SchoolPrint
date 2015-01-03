@@ -24,13 +24,11 @@ import com.schoolo2o.pojo.send.ShopinfoSend;
 import com.schoolo2o.service.OrderService;
 import com.schoolo2o.service.ShopService;
 import com.schoolo2o.utils.ListChange;
-public class ShopAction extends ActionSupport {
+import com.schoolo2o.utils.Sender;
+public class ShopAction extends BaseAction {
 	private ShopService shopService;
 	private OrderService orderService;
-	private Map<String, Object> session = ServletActionContext.getContext().getSession();
-	private MyJSONObject jsonObject=new MyJSONObject();
-	private HttpServletResponse response=ServletActionContext.getResponse();
-	private HttpServletRequest request = ServletActionContext.getRequest();
+
 	public ShopService getShopService() {
 		return shopService;
 	}
@@ -61,19 +59,10 @@ public class ShopAction extends ActionSupport {
 		if(list!=null&&!list.isEmpty()){
 			List<ShopinfoSend> listSend=ListChange.ParaseShops(list);
 			System.out.println(listSend.size());
-			jsonObject.setStatus("1");
-			jsonObject.setMessage("null");
-			jsonObject.setData(listSend);
-			String jsonStr=JSON.toJSONString(jsonObject);
-			System.out.println(jsonStr);
-			response.getWriter().write(jsonStr);
+			Sender.sendOk(listSend, response);
 			return null;
 		}else{
-			jsonObject.setStatus("0");
-			jsonObject.setMessage(" 请求错误");
-			jsonObject.setData(null);
-			String jsonStr=JSON.toJSONString(jsonObject);
-			response.getWriter().write(jsonStr);
+			Sender.sendError("请求错误", response);
 			return null;
 		}
 	}
@@ -100,18 +89,10 @@ public class ShopAction extends ActionSupport {
 			shopinfoSend.setComments(commentsSend);
 			shopinfoSend.setOrders(orderSends);
 			request.setAttribute("shop", shopinfoSend);
-			jsonObject.setStatus("1");
-			jsonObject.setMessage("null");
-			jsonObject.setData(shopinfoSend);
-			String jsonStr=JSON.toJSONString(jsonObject);
-			System.out.println(jsonStr);
+			Sender.sendOk(shopinfoSend, response);
 			return SUCCESS;
 		}else{
-			jsonObject.setStatus("0");
-			jsonObject.setMessage(" 请求错误");
-			jsonObject.setData(null);
-			String jsonStr=JSON.toJSONString(jsonObject);
-			response.getWriter().write(jsonStr);
+			Sender.sendError("不要着急哦", response);
 			return null;
 		}
 		

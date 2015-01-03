@@ -1,5 +1,6 @@
 package com.schoolo2o.service.impl;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashSet;
@@ -92,14 +93,24 @@ public class OrderServiceImpl implements OrderService {
 //			System.out.println(Osend.getPageCount()[i]);
 //			System.out.println(Osend.getPrice());
 //			System.out.println(Osend.getFileCount()[i]);
-			item.setFilePrice(Osend.getPageCount()[i] * Osend.getPrice()[i]*Osend.getFileCount()[i]);
+			double price=Osend.getPageCount()[i] * Osend.getPrice()[i]*Osend.getFileCount()[i];
+			BigDecimal bg = new BigDecimal(price);
+	        double newPrice = bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+			item.setFilePrice(newPrice);
 			item.setPrintRequire(Osend.getPrintRequire()[i]);
 			Osend.setItem(item.getFilePrice(), i);
 			Osend.setTotal(Osend.getTotal() + item.getFilePrice());
 			item.setFileName(Osend.getFileName()[i]);
 			setItem.add(item);
 		}
-		
+		/**
+		 * 转换格式，小数点后一位
+		 */
+		double price=Osend.getTotal();
+		BigDecimal bg = new BigDecimal(price);
+        double newPrice = bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        Osend.setTotal(newPrice);
+        
 		order.setOrderitems(setItem);
 		status.setOrderinfo(order);
 		status.setChangeTime(new Timestamp(new Date().getTime()));

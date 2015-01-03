@@ -27,11 +27,10 @@ import com.schoolo2o.utils.Sender;
  * 
  */
 
-public class UpLoadFileAction extends ActionSupport {
+public class UpLoadFileAction extends BaseAction {
 
 	private DocService docService;
 	private UserService userService;
-	private Map<String, Object> session = ServletActionContext.getContext().getSession();
 	public UserService getUserService() {
 		return userService;
 	}

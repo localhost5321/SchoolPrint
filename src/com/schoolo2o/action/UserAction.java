@@ -16,14 +16,11 @@ import com.schoolo2o.pojo.Userinfo;
 import com.schoolo2o.service.UserService;
 import com.schoolo2o.utils.MD5;
 
-public class UserAction extends ActionSupport{
+public class UserAction extends BaseAction{
 	
 	private Userinfo user ;
 	private UserService userService ;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
-	private Map<String, Object> session = ServletActionContext.getContext().getSession();
 	private Logger log = Logger.getLogger(UserAction.class);
-	private HttpServletResponse response = ServletActionContext.getResponse();
-	private HttpServletRequest request = ServletActionContext.getRequest();
 	
 	public Userinfo getUser() {
 		return user;

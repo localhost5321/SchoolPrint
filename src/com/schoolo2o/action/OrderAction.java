@@ -18,10 +18,7 @@ import com.schoolo2o.utils.Sender;
 public class OrderAction extends BaseAction {
 	private ShopService shopService;
 	private OrderService orderService;
-//	private Map<String, Object> session = ServletActionContext.getContext().getSession();
-//	private MyJSONObject jsonObject=new MyJSONObject();
-//	private HttpServletResponse response=ServletActionContext.getResponse();
-//	private HttpServletRequest request = ServletActionContext.getRequest();
+	private String[] set;//用于保存打印原有设置的字符串，回传给浏览器
 	public ShopService getShopService() {
 		return shopService;
 	}
@@ -47,6 +44,7 @@ public class OrderAction extends BaseAction {
 	public OrderSend getOrderFromStr(String jsonStr){
 		
 		OrderSend order=new OrderSend();
+		System.out.println(jsonStr);
 		JSONObject orderObject=JSON.parseObject(jsonStr);
 		String data=orderObject.getString("data");
 		String shopName=orderObject.getString("shopName");
@@ -69,12 +67,15 @@ public class OrderAction extends BaseAction {
 		order.setPrice(new double[ja.size()]);
 		order.setPrintRequire(new String[ja.size()]);
 		order.setFileName(new String[ja.size()]);
+		set=new String[ja.size()];
 		for(int i=0;i<ja.size();i++){
 			JSONObject orderItem=ja.getJSONObject(i);
+			System.out.println("~~~~~~~~~~~~~~~");
 			System.out.print(orderItem.getString("docId"));
 			long docId=Long.parseLong(orderItem.getString("docId"));
 			Integer pageCounts=Integer.parseInt(orderItem.getString("pageCounts"));
 			String setting=orderItem.getString("setting");
+			set[i]=setting;
 			String[] typeSet=setting.split("、");
 			if(typeSet[0].equals("黑白")){
 				typeSet[0]="BK";	
@@ -104,8 +105,7 @@ public class OrderAction extends BaseAction {
 			order.getPrintRequire()[i]=setting;
 			order.getDocId()[i]=docId;
 		}
-		//调用服务层计费方式，待完成
-		System.out.println(orderService);
+//		System.out.println(orderService);
 		order=orderService.addOrder(order);
 		return order;
 	};
@@ -119,6 +119,7 @@ public class OrderAction extends BaseAction {
 		try{
 			if(jsonStr!=null&&!jsonStr.equals("null")){
 				OrderSend order=getOrderFromStr(jsonStr);
+				order.setPrintRequire(set);
 				Sender.sendOk(order, response);
 			}else{
 				Sender.sendError("参数有误哦", response);
