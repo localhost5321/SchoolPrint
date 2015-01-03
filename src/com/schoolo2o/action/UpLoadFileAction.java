@@ -126,9 +126,7 @@ class DocMessage {
 		this.docId = docId;
 		this.fileCount = fileCount;
 	}
-
 	public DocMessage() {
-
 	}
 
 	@Override

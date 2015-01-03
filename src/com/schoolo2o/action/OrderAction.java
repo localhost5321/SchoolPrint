@@ -37,7 +37,8 @@ public class OrderAction extends BaseAction {
 	}
 
 	/**
-	 * 从浏览器传来的参数封装成一个order,并且去服务层计算出每一项的价格，以及总价放在此order对象中
+	 * 从浏览器传来的参数封装成一个order,
+	 * 并且去服务层计算出每一项的价格，以及总价放在此order对象中
 	 * @param jsonStr
 	 * @return
 	 */
@@ -111,7 +112,8 @@ public class OrderAction extends BaseAction {
 	};
 	
 	/**
-	 * 需要请求总价以及每一订单条目价格对应Action所对应的请求方法
+	 * 需要请求总价以及每一订单条目价格
+	 * 其为相应应Action所对应的请求方法
 	 */
 	public String showOrder(){
 		String jsonStr=request.getParameter("data");
