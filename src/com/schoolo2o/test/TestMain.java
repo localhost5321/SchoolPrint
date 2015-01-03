@@ -37,8 +37,8 @@ public class TestMain {
 //		set.add(comment);listSend
 //		shop.setShopComments(set);
 		ShopService test = (ShopService) context.getBean("shopService");
-		test.add(shop);
-		test.addComment(comment,"zhangsan00");
+//		test.add(shop);
+//		test.addComment(comment,"zhangsan00");
 //		test.testAddComment(comment);
 //		test.testSearchComment(shop.getShopName());
 	//	comment.setShopReply("谢谢");
@@ -53,6 +53,7 @@ public class TestMain {
 //		pf.setPriceId(1L);
 //		test.testUpdateTypePrice(pf, shop.getShopName());
 //		test.testDeleteTypePrice(2L);
+		
 	}
 
 }

@@ -80,6 +80,6 @@
 		abstract="false" lazy-init="default" autowire="default">
 		<property name="docInfoDao" ref="DocinfoDao" />
 	</bean>
-
+	
 
 </beans>
