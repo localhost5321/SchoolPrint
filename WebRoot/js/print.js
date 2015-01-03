@@ -374,7 +374,7 @@ function showOrder(shopName) {
 	}
 	
 	$.post("showOrder.action", "data=" + JSON.stringify(json), function(response){
-		
+		console.log("``````````````" + response)
 		var obj = JSON.parse(response);
 		
 		if(obj.status == 0){
