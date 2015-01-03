@@ -568,6 +568,7 @@ function createShop(json) {
 
 		// 给店铺的订单详情按钮添加对应监听
 		$("#shopDetail_" + shopName).click(function() {
+			alert(shopName)
 			showOrder(shopName);
 		});
 	}
