@@ -21,7 +21,7 @@ public class DocInfoDaoImpl extends HibernateDaoSupport implements DocInfoDao {
 		if (doc != null) {
 			try {
 				this.getHibernateTemplate().save(doc);
-				doc.setDocId(2L); // 问题，中午改
+
 				return doc;
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -73,9 +73,9 @@ public class DocInfoDaoImpl extends HibernateDaoSupport implements DocInfoDao {
 	@Override
 	public Docinfo searchDoc(Long docId) {
 		try {
-			String hql = "from Docinfo where docId = '"+docId+"'";
+			String hql = "from Docinfo where docId = '" + docId + "'";
 			List<Docinfo> docList = this.getHibernateTemplate().find(hql);
-			if(!docList.isEmpty()){
+			if (!docList.isEmpty()) {
 				Iterator<Docinfo> it = docList.iterator();
 				Docinfo doc = it.next();
 				return doc;

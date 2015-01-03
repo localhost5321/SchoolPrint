@@ -3,6 +3,9 @@ package com.schoolo2o.test;
 import java.util.Iterator;
 import java.util.List;
 
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import com.schoolo2o.dao.ShopinfoDao;
 import com.schoolo2o.dao.impl.ShopInfoDaoImpl;
 import com.schoolo2o.pojo.Priceinfo;
@@ -115,5 +118,15 @@ public class TestHiberate {
 		}else{
 			System.out.println("删除失败");
 		}
+	}
+	public void testGetPrice(String type, String shopName){
+		double price = shopInfo.getPrice(type, shopName);
+		System.out.println(price);
+	}
+	
+	public static void main(String[] args){
+		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		TestHiberate test = (TestHiberate) context.getBean("TestHiberate");
+		test.testGetPrice("BKSLA4", "zhangsan");
 	}
 }
