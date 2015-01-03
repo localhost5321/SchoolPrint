@@ -100,9 +100,9 @@ public class OrderAction extends ActionSupport {
 					}
 					double price=shopService.getPrice(setting, shopName);
 					String printsCounts=orderItem.getString("printCounts");
-					order.getItemPrice().clone()[0]=price;
+					order.getItemPrice()[i]=price;
 					order.getPageCount()[i]=pageCounts;
-					order.setPrintRequire(typeSet);
+					order.getPrintRequire()[i]=setting;
 					order.getDocId()[i]=docId;
 				}
 				//调用服务层计费方式，待完成
