@@ -11,12 +11,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts2.ServletActionContext;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import com.schoolo2o.pojo.MyJSONObject;
 import com.schoolo2o.pojo.Orderinfo;
 import com.schoolo2o.pojo.Priceinfo;
 import com.schoolo2o.pojo.ShopComment;
 import com.schoolo2o.pojo.Shopinfo;
+import com.schoolo2o.pojo.Userinfo;
+import com.schoolo2o.pojo.send.OrderSend;
 import com.schoolo2o.pojo.send.OrderinfoSend;
 import com.schoolo2o.pojo.send.OrderstatusSend;
 import com.schoolo2o.pojo.send.ShopCommentSend;
@@ -24,6 +28,7 @@ import com.schoolo2o.pojo.send.ShopinfoSend;
 import com.schoolo2o.service.OrderService;
 import com.schoolo2o.service.ShopService;
 import com.schoolo2o.utils.ListChange;
+import com.schoolo2o.utils.Sender;
 public class OrderAction extends ActionSupport {
 	private ShopService shopService;
 	private OrderService orderService;
@@ -54,27 +59,57 @@ public class OrderAction extends ActionSupport {
 	 * 需要计算出每一份价格以及总价
 	 */
 	public String showOrder(){
-		String jsonStr=request.getParameter("");
+		String jsonStr=request.getParameter("data");
 		try{
 			if(jsonStr!=null&&!jsonStr.equals("null")){
-				OrderinfoSend order=JSON.parseObject(jsonStr,OrderinfoSend.class);
+				OrderSend order=new OrderSend();
+				JSONObject orderObject=JSON.parseObject(jsonStr);
+				String data=orderObject.getString("data");
+				String shopName=orderObject.getString("shopName");
+				JSONArray ja=JSON.parseArray(data);
+				String userName;
+				if (session.containsKey("user")) {
+					Userinfo userinfo=(Userinfo) session.get("user");
+					userName =userinfo.getUserName();
+				}else{
+					userName="herozhao";
+				}
+				order.setShopName(shopName);
+				order.setPayType(1);
+				order.setSendType(1);
+				order.setUserName(userName);
+				for(int i=0;i<ja.size();i++){
+					JSONObject orderItem=ja.getJSONObject(i);
+					long docId=orderItem.getLongValue("docId");
+					Integer pageCounts=orderItem.getInteger("pageCounts");
+					String setting=orderItem.getString("setting");
+					String[] typeSet=setting.split("、");
+					if(typeSet[0].equals("黑白")){
+						typeSet[0]="BK";	
+					}else{
+						typeSet[0]="CR";
+					}
+					if(typeSet[1].equals("单面")){
+						typeSet[1]="SL";
+					}else{
+						typeSet[1]="DL";
+					}
+					for(String str:typeSet){
+						setting+=str;
+					}
+					String printsCounts=orderItem.getString("printCounts");
+					order.getPageCount()[i]=pageCounts;
+					order.setPrintRequire(typeSet);
+					order.getDocId()[i]=docId;
+				}
 				//调用服务层计费方式，待完成
-				jsonObject.setMessage("null");
-				jsonObject.setData(order);
-				jsonStr=JSON.toJSONString(jsonObject);
-				response.getWriter().write(jsonStr);
+				Sender.sendOk(order, response);
 			}else{
-				jsonObject.setMessage("参数为空");
-				jsonObject.setData(null);
-				jsonStr=JSON.toJSONString(jsonObject);
-				response.getWriter().write(jsonStr);
+				Sender.sendError("参数有误哦", response);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
-			jsonObject.setStatus("0");
-			jsonObject.setMessage("服务器出现异常");
-			jsonStr=JSON.toJSONString(jsonObject);
-			response.getWriter().write(jsonStr);
+			Sender.sendError("服务器异常", response);
 		}finally{
 			return null;
 		}

@@ -12,12 +12,12 @@ public interface OrderService {
 	 * @param shopName 商店名
 	 * @param docId    文档ID
 	 * @param pageCount 文档页数
-	 * @param price    每页单价
+	 * @param price    每页单价　
 	 * @param fileCount 文件份数
 	 * @param addressId 送货地址ID
 	 * @param printRequire 打印要求
-	 * @param payType 支付方式
-	 * @param sendType 送货方式
+	 * @param payType 支付方式　　１线下支付　２线上支付
+	 * @param sendType 送货方式　１
 	 * @return 成功为 true,否则为false;
 	 */
 	public boolean addOrder(String userName,String shopName,Long[] docId, Integer[] pageCount,

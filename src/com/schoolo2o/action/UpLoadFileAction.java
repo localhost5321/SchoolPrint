@@ -2,6 +2,7 @@ package com.schoolo2o.action;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +18,7 @@ import com.schoolo2o.service.DocService;
 import com.schoolo2o.service.UserService;
 import com.schoolo2o.utils.DOMUtils;
 import com.schoolo2o.utils.MyFileUtils;
+import com.schoolo2o.utils.Sender;
 
 /**
  * 文件上传的操作
@@ -29,7 +31,7 @@ public class UpLoadFileAction extends ActionSupport {
 
 	private DocService docService;
 	private UserService userService;
-
+	private Map<String, Object> session = ServletActionContext.getContext().getSession();
 	public UserService getUserService() {
 		return userService;
 	}
@@ -58,31 +60,36 @@ public class UpLoadFileAction extends ActionSupport {
 	 */
 	public String upLoadFileSave() throws IOException {
 
-		System.out.println("*************************");
-		InputStream in = serletRequest.getInputStream();
-		serletRequest.setCharacterEncoding("UTF-8");
-		String fileName = serletRequest.getParameter("fileName");
-		// fileName = new String(fileName.getBytes("iso8859-1"),"utf-8");
-		String userName = serletRequest.getParameter("userName");
-		System.out.println(fileName);
-		response.setContentType("text/plain");
-		response.setCharacterEncoding("utf-8");
+		try {
+			System.out.println("*************************");
+			InputStream in = serletRequest.getInputStream();
+			serletRequest.setCharacterEncoding("UTF-8");
+			String fileName = serletRequest.getParameter("fileName");
+			String userName ;
+			response.setContentType("text/plain");
+			response.setCharacterEncoding("utf-8");
+			// 当是匿名用户时，就将文件的所属者设为管理员
+			if (session.containsKey("user")) {
+				Userinfo userinfo=(Userinfo) session.get("user");
+				userName =userinfo.getUserName();
+			}else{
+				userName="herozhao";
+			}
+			// 存储文件
+			String finalFilePath = MyFileUtils.Store(in, fileName);
 
-		// 存储文件
-		String finalFilePath = MyFileUtils.Store(in, fileName);
-
-		// *******************以下代码需要重构下＊＊＊＊＊＊＊＊＊＊＊＊＊＊ //
-		long docId = addDocument(fileName, finalFilePath, userName);
-		int fileCount = DOMUtils.getPageCount(finalFilePath);
-		DocMessage dm = new DocMessage(docId, fileCount);
-		MyJSONObject jsonObject = new MyJSONObject();
-		jsonObject.setStatus("1");
-		jsonObject.setMessage("null");
-		jsonObject.setData(dm);
-		String jsonStr = JSON.toJSONString(jsonObject);
-		response.getWriter().write(jsonStr);
-		System.out.println(jsonStr);
-		return null;
+			// *******************以下代码需要重构下＊＊＊＊＊＊＊＊＊＊＊＊＊＊ //
+			long docId = addDocument(fileName, finalFilePath, userName);
+			int fileCount = DOMUtils.getPageCount(finalFilePath);
+			DocMessage dm = new DocMessage(docId, fileCount);
+			Sender.sendOk(dm, response);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			Sender.sendError("不要急哦，问题还是会有的，万一解决了呢", response);
+		} finally {
+			return null;
+		}
 	}
 
 	/**
@@ -96,7 +103,9 @@ public class UpLoadFileAction extends ActionSupport {
 		doc.setIsShare(1);
 		doc.setBrowseNum(0L);
 		doc.setDownNum(0L);
+		System.out.println(userName);
 		Userinfo user = userService.searchUser(userName);
+		System.out.println(user);
 		doc.setUserinfo(user);
 		doc = docService.add(doc, user);
 		return doc.getDocId();
