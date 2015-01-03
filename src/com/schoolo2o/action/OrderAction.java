@@ -1,8 +1,4 @@
 package com.schoolo2o.action;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,19 +11,12 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import com.schoolo2o.pojo.MyJSONObject;
-import com.schoolo2o.pojo.Orderinfo;
-import com.schoolo2o.pojo.Priceinfo;
-import com.schoolo2o.pojo.ShopComment;
-import com.schoolo2o.pojo.Shopinfo;
 import com.schoolo2o.pojo.Userinfo;
 import com.schoolo2o.pojo.send.OrderSend;
 import com.schoolo2o.pojo.send.OrderinfoSend;
 import com.schoolo2o.pojo.send.OrderstatusSend;
-import com.schoolo2o.pojo.send.ShopCommentSend;
-import com.schoolo2o.pojo.send.ShopinfoSend;
 import com.schoolo2o.service.OrderService;
 import com.schoolo2o.service.ShopService;
-import com.schoolo2o.utils.ListChange;
 import com.schoolo2o.utils.Sender;
 public class OrderAction extends ActionSupport {
 	private ShopService shopService;
@@ -105,6 +94,7 @@ public class OrderAction extends ActionSupport {
 					order.getPrintRequire()[i]=setting;
 					order.getDocId()[i]=docId;
 				}
+				
 				//调用服务层计费方式，待完成
 				Sender.sendOk(order, response);
 			}else{
