@@ -43,7 +43,7 @@ public class OrderAction extends BaseAction {
 	 * @return
 	 */
 	public OrderSend getOrderFromStr(String jsonStr){
-		
+		System.out.println(jsonStr);
 		OrderSend order=new OrderSend();
 		System.out.println(jsonStr);
 		JSONObject orderObject=JSON.parseObject(jsonStr);
