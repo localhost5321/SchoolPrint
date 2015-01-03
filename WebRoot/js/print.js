@@ -584,7 +584,7 @@ function enterShop(obj) {
 	var json = showUserFile();
 	json.shopName = obj.name;
 	$.post("showOrder.action", "data=" + JSON.stringify(json), function(response){
-		console.log(reponse);
+		console.log(response);
 		sessionStorage.setItem("order", response);
 	});
 	return true;
