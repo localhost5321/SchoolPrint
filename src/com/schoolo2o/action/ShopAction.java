@@ -66,6 +66,9 @@ public class ShopAction extends BaseAction {
 	 * @throws IOException
 	 */
 	public String getShopByName() throws IOException {
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("utf-8");
+		request.setCharacterEncoding("utf-8");
 		String shopName = request.getParameter("shopName");
 		Shopinfo shop = shopService.search(shopName);
 		try {

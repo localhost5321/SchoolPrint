@@ -78,27 +78,42 @@
 						<th width="10%">总价</th>
 					</tr>
 				</thead>
-				<tbody></tbody>
+				<tbody>
+				
+				</tbody>
 			</table>
 			<!-- 订单总信息 -->
 			<div class="orderInfo">
-				<span>总价：</span>
+				<p>总价：</p>
 			</div>
-			<!-- 备注信息 -->
-			<br>
-			<div>
-				备注：<br>
-				<textarea class="form-control" rows="3"></textarea>
-			</div>
-
 			<div class="btnDiv">
-				<button class="btn btn-primary">确认订单</button>
+				<button class="btn btn-primary" onclick="make_sure.jsp">确认订单</button>
 			</div>
 		</div>
-
+		<ul class="nav nav-tabs" role="tablist">
+			<li class="active"><a href="#comment" role="tab" data-toggle="tab">评价</a></li>
+			<li><a href="#history" role="tab" data-toggle="tab">历史订单</a></li>
+		</ul>
+		
+		<div class="tab-content">
+			<div class="tab-pane active" id="comment">
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+			</div>
+			<div class="tab-pane active" id="history">
+			<br>
+				<br>
+				<br>
+				<br>
+				<br>
+			</div>
+		</div>
 	</div>
-	<!-- 店家大图轮播结束 -->
 
+	
 	<%@ include file="footer.jsp"%>
 	<script src="js/jquery-2.1.1.js"></script>
 	<script src="js/bootstrap.min.js"></script>

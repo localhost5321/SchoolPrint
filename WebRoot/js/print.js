@@ -37,6 +37,7 @@ $(document)
 					SCREEN_HEIGHT = document.body.offsetHeight;
 					GAP = (SCREEN_WIDTH - FILE_UPLOAD_WIDTH - SHOW_FILE_WIDTH) / 3;
 
+					$("#printShopContent").width(SCREEN_WIDTH);
 					// 将文件上传区域放置正中
 					document.getElementById("fileUploadContent").style.width = FILE_UPLOAD_WIDTH
 							+ "px";
@@ -75,12 +76,11 @@ function initDrag() {
 		return false;
 	};
 	holder.ondragend = function() {
-//		this.className = "";
+//		this.className = '';
 		return false;
 	};
 	// 松开鼠标
 	holder.ondrop = function(event) {
-		this.className = '';
 		// 获取拖拽的文件列表
 		var files = event.dataTransfer.files;
 		event.stopPropagation();
@@ -103,9 +103,20 @@ function initDrag() {
 			userFiles[userFiles.length] = files[i];
 			handleFile(files[i]);
 		}
-
 		return false;
 	};
+}
+
+function updateHoder(){
+	var holder = document.getElementById('holder');
+	var i = userFiles.length;
+	if(i == 0){
+		holder.className = "";
+	}else if(i <= 3){
+		holder.className = "state_" + i;
+	}else{
+		holder.className = "state_3";
+	}
 }
 
 /**
@@ -178,6 +189,8 @@ function updateFileInfo() {
 		allPage += (Number(printCount.get(i).value) * Number(pageCount.get(i).innerHTML));
 	}
 	$(".fileInfo").text("共" + num + "个文件, 总份数:" + count + ", 总页数:" + allPage);
+	//更新拖拽区
+	updateHoder();
 }
 
 /**
@@ -413,6 +426,7 @@ function showOrder(shopName) {
 		
 		}
 		$(".orderInfo").text("总价：" + obj.data.total + "元");
+		sessionStorage.setItem("order", response);
 	});
 
 	// 弹窗
@@ -581,9 +595,15 @@ function createShop(json) {
 function enterShop(obj) {
 	var json = showUserFile();
 	json.shopName = obj.name;
-	$.post("showOrder.action", "data=" + JSON.stringify(json), function(response){
-		console.log(response);
-		sessionStorage.setItem("order", response);
+	$.ajax({
+			url:"showOrder.action", 
+			data:"data=" + JSON.stringify(json),
+			success:function(response){
+				console.log(response);
+				sessionStorage.setItem("order", response);
+			},
+			type:"post",	
+			async:false
 	});
 	return true;
 }

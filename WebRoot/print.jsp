@@ -219,7 +219,7 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">
 						返回</button>
-					<button type="button" class="btn btn-primary">确认订单</button>
+					<button type="button" class="btn btn-primary" onclick="window.open('make_sure.jsp')">确认订单</button>
 				</div>
 			</div>
 		</div>

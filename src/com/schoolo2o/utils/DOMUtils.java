@@ -97,7 +97,7 @@ public class DOMUtils {
 			if (tofile.exists()) {
 				tofile.delete();
 			}
-			Dispatch.call(doc, "ExportAsFixedFormat", toFilePath, wdFormatPDF);
+			Dispatch.call(doc, "SavaAs", toFilePath, wdFormatPDF);
 			long end = System.currentTimeMillis();
 
 		} catch (Exception e) {

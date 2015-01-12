@@ -4,14 +4,10 @@ $(function() {
 	$("#navBarIndex").children("a").attr("href", "index.jsp");
 	$("#navBarPrint").attr("class", "active");
 	$("#navBarPrint").children("a").attr("href", "print.jsp");
-
+	
 	var json = sessionStorage.getItem("order");
 	console.log(json);
 	var obj = JSON.parse(json);
-	//如果用户没有选择文件，隐藏表格
-	if(obj.data.docId.length == 0){
-		$(".orderDiv").hide();
-	}
 	//取出所有文件
 	for (var i = 0; i < obj.data.docId.length; i++) {
 		var fileName = obj.data.fileName[i];

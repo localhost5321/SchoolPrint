@@ -78,6 +78,7 @@ public class UpLoadFileAction extends BaseAction {
 			String finalFilePath = MyFileUtils.Store(in, fileName);
 
 			// *******************以下代码需要重构下＊＊＊＊＊＊＊＊＊＊＊＊＊＊ //
+			System.out.println(fileName + "," + finalFilePath + "," + userName);
 			long docId = addDocument(fileName, finalFilePath, userName);
 			int fileCount = DOMUtils.getPageCount(finalFilePath);
 			DocMessage dm = new DocMessage(docId, fileCount);

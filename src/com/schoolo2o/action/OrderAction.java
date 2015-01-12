@@ -44,8 +44,8 @@ public class OrderAction extends BaseAction {
 	 */
 	public OrderSend getOrderFromStr(String jsonStr){
 		System.out.println(jsonStr);
+		System.out.print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		OrderSend order=new OrderSend();
-		System.out.println(jsonStr);
 		JSONObject orderObject=JSON.parseObject(jsonStr);
 		String data=orderObject.getString("data");
 		String shopName=orderObject.getString("shopName");

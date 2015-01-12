@@ -1,0 +1,9 @@
+#container{
+	margin: 30px auto;
+	width:900px;
+	height:auto;
+}
+
+#container h1{
+	text-align:center;
+}

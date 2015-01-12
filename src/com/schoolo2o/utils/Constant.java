@@ -15,7 +15,9 @@ public class Constant {
 	static {
 		String webName = serletRequest.getContextPath().toString()
 				.replace("/", "").trim();
+		String str = servletContext.getRealPath("/");
+		System.out.println("########" + str + "###################");
 		Constant.WebFilePath = servletContext.getRealPath("/")
-				.replace(webName, "files").toString();
+				.replace("ROOT", "files").toString();
 	}
 }

@@ -53,11 +53,21 @@ th {
 	width: 300px;
 	height: 300px;
 	margin: 20px auto;
-	background: transparent url("../images/wan.png") center center;
+	background: transparent url("../images/wan_0.png") center center;
 }
 
 #holder:hover {
 	border: 10px dashed #333;
+}
+
+#holder.state_1{
+	background: transparent url("../images/wan_1.png") center center;
+}
+#holder.state_2{
+	background: transparent url("../images/wan_2.png") center center;
+}
+#holder.state_3{
+	background: transparent url("../images/wan_3.png") center center;
 }
 
 #textfield {
@@ -93,6 +103,8 @@ th {
 }
 
 #printShopContent {
+	width:100%;
+	overflow:hidden;
 	background-image:url("../images/xuanze.png");
 	background-position:center;
 	height: 84px;
