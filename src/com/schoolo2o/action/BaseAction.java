@@ -9,7 +9,11 @@ import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.schoolo2o.pojo.MyJSONObject;
-
+/**
+ * 
+ * @author sun
+ *
+ */
 public class BaseAction extends ActionSupport {
 	protected Map<String, Object> session = ServletActionContext.getContext()
 			.getSession();
