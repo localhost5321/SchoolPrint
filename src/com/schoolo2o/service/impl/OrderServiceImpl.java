@@ -93,6 +93,8 @@ public class OrderServiceImpl implements OrderService {
 //			System.out.println(Osend.getPageCount()[i]);
 //			System.out.println(Osend.getPrice());
 //			System.out.println(Osend.getFileCount()[i]);
+			System.out.println("_______________________dfddg______");
+			System.out.println(Osend.getPrice()[i]);
 			double price=Osend.getPageCount()[i] * Osend.getPrice()[i]*Osend.getFileCount()[i];
 			BigDecimal bg = new BigDecimal(price);
 	        double newPrice = bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
@@ -100,6 +102,8 @@ public class OrderServiceImpl implements OrderService {
 			item.setPrintRequire(Osend.getPrintRequire()[i]);
 			Osend.setItem(item.getFilePrice(), i);
 			Osend.setTotal(Osend.getTotal() + item.getFilePrice());
+//			System.out.println("_____________________________");
+//			System.out.println(Osend.getTotal());
 			item.setFileName(Osend.getFileName()[i]);
 			setItem.add(item);
 		}

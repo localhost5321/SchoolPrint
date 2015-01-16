@@ -44,7 +44,6 @@ public class OrderAction extends BaseAction {
 	 */
 	public OrderSend getOrderFromStr(String jsonStr){
 		System.out.println(jsonStr);
-		System.out.print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		OrderSend order=new OrderSend();
 		JSONObject orderObject=JSON.parseObject(jsonStr);
 		String data=orderObject.getString("data");
@@ -93,8 +92,9 @@ public class OrderAction extends BaseAction {
 			for(String str:typeSet){
 				setting+=str;
 			}
-//			System.out.println(setting + "  " + shopName);
+			System.out.println(setting + "  " + shopName);
 			double price=shopService.getPrice(setting, shopName);
+			System.out.println("!!!!!!!!!!!!!!!");
 			System.out.println(price);
 			String printCounts=orderItem.getString("printCounts");
 			Integer printCount=Integer.parseInt(printCounts);

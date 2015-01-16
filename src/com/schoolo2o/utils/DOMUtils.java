@@ -86,9 +86,10 @@ public class DOMUtils {
 		String toFilePath = "";
 		try {
 			app = new ActiveXComponent("Word.Application");
+			System.out.println("99999999");
 			app.setProperty("Visible", new Variant(false));
 			Dispatch docs = app.getProperty("Documents").toDispatch();
-
+			System.out.println("888888");
 			toFilePath = wordPath2PdfPath(wordPath);
 
 			doc = Dispatch.call(docs, "Open", wordPath).toDispatch();
@@ -97,7 +98,7 @@ public class DOMUtils {
 			if (tofile.exists()) {
 				tofile.delete();
 			}
-			Dispatch.call(doc, "SavaAs", toFilePath, wdFormatPDF);
+			Dispatch.call(doc, "ExportAs", toFilePath, wdFormatPDF);
 			long end = System.currentTimeMillis();
 
 		} catch (Exception e) {
