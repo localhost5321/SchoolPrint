@@ -64,64 +64,22 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	/**
-	 * 添加一个订单
+	 * 计算一个临时订单的价格信息
 	 *@author herozhao
 	 *@param order(订单信息)
 	 *@return boolean （是否成功）
 	 *
 	 */
 	@Override
-	public OrderSend addOrder(OrderSend Osend) {
-		Orderinfo order = new Orderinfo();
-		Set<Orderitem> setItem = new HashSet<Orderitem>();
-		Orderitem item;
-		Set<Orderstatus> setStatus = new HashSet<Orderstatus>();
-		Orderstatus status = new Orderstatus();
-		Userinfo user = this.getUserInfoDao().searchUser( Osend.getUserName());
-		Shopinfo shop = this.getShopInfoDao().search(Osend.getShopName());
-		order.setUserinfo(user);
-		order.setShopinfo(shop);
-		order.setAddressId(Osend.getAddressId());
-		order.setSendType(Osend.getSendType());
-		order.setPayType(Osend.getPayType());
+	public OrderSend getOrderPrice(OrderSend Osend) {
 		for(int i=0; i<Osend.getDocId().length; i++){
-			item = new Orderitem();
-			item.setOrderinfo(order);
-			item.setDocId(Osend.getDocId()[i]);
-			item.setFileCount(Osend.getFileCount()[i]);
-			item.setPageNumber(Osend.getPageCount()[i]);
-//			System.out.println(Osend.getPageCount()[i]);
-//			System.out.println(Osend.getPrice());
-//			System.out.println(Osend.getFileCount()[i]);
-			System.out.println("_______________________dfddg______");
-			System.out.println(Osend.getPrice()[i]);
 			double price=Osend.getPageCount()[i] * Osend.getPrice()[i]*Osend.getFileCount()[i];
 			BigDecimal bg = new BigDecimal(price);
 	        double newPrice = bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-			item.setFilePrice(newPrice);
-			item.setPrintRequire(Osend.getPrintRequire()[i]);
-			Osend.setItem(item.getFilePrice(), i);
-			Osend.setTotal(Osend.getTotal() + item.getFilePrice());
-//			System.out.println("_____________________________");
-//			System.out.println(Osend.getTotal());
-			item.setFileName(Osend.getFileName()[i]);
-			setItem.add(item);
+	        Osend.setItemPrice(newPrice, i);
+	        Osend.setTotal(Osend.getTotal()+newPrice);
 		}
-		/**
-		 * 转换格式，小数点后一位
-		 */
-		double price=Osend.getTotal();
-		BigDecimal bg = new BigDecimal(price);
-        double newPrice = bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-        Osend.setTotal(newPrice);
-        
-		order.setOrderitems(setItem);
-		status.setOrderinfo(order);
-		status.setChangeTime(new Timestamp(new Date().getTime()));
-		status.setIsCurrent(1);
-		status.setStatus(1);
-		setStatus.add(status);  
-		this.getOrderInfoDao().addOrder(order);
+		 System.out.println(Osend.getTotal()+"!!!!!~~~~~~~~~~~!!!!!!!!!!!!!");
 		return Osend;
 	}
 
@@ -161,5 +119,13 @@ public class OrderServiceImpl implements OrderService {
 	public List<Orderinfo> shopSearch(String shopName) {
 		return orderInfoDao.shopSearch(shopName);
 	}
+
+	@Override
+	public OrderSend addOrder(OrderSend Osend) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	
 
 }

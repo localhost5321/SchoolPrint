@@ -149,7 +149,7 @@ public class OrderSend {
 	 * @param itemPrice
 	 * @param i
 	 */
-	public void setItem(double itemPrice, int  i){
+	public void setItemPrice(double itemPrice, int  i){
 		this.itemPrice[i] = itemPrice;
 	}
 }
