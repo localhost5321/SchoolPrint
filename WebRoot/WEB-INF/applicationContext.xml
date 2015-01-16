@@ -14,7 +14,7 @@
 		</property>
 
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="username" value="huazai"></property>
+		<property name="username" value="zl"></property>
 		<property name="password" value="123456"></property>
 
 	</bean>

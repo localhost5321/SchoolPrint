@@ -29,28 +29,28 @@
 <body>
 	<%@ include file="header.jsp"%>
 	<div class="content" id="container">
-	<h1>确认订单</h1>
+		<h1>确认订单</h1>
 		<div class="orderDiv">
-		<p>订单信息：</p>
-		<table class="table table-striped table-bordered table-hover">
-			<tr>
-				<td width="20%">店铺名：</td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>联系人：</td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>联系方式：</td>
-				<td></td>
-			</tr>
-			<tr>
-				<td>地址：</td>
-				<td></td>
-			</tr>
-		</table>
-		<p>文件列表：</p>
+
+
+
+			<form>
+				<h4>
+					店铺名：<span>赵龙打印店</span>
+				</h4>
+				<h4>确定收货地址：</h4>
+				<br>
+				<ul>
+					<li class="addrSelect"><span class="sendto">送至</span> <label
+						class="block"><input type="radio" name="radgroup"
+							value="A" class="addrInfo" style="margin-right: 10px;">南华大学弘辰公寓六栋301（蔡恒毅
+							收）13016196174</label> <span style="margin-left: 10px">默认地址</span> <a
+						href="" style="float: right;">修改本地址</a></li>
+				</ul>
+
+				<br>
+			</form>
+			<p>文件列表：</p>
 			<table class="table table-striped table-bordered table-hover"
 				id="orderTable">
 				<thead>

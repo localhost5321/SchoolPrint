@@ -23,4 +23,6 @@ $(function() {
 	}
 	
 	$(".orderInfo").text("总价：" + obj.data.total + "元");
+	
+	
 });

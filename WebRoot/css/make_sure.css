@@ -1,9 +1,34 @@
-#container{
+#container {
 	margin: 30px auto;
-	width:900px;
-	height:auto;
+	width: 900px;
+	height: auto;
 }
 
-#container h1{
-	text-align:center;
+#container h1 {
+	text-align: center;
+}
+
+#addrInfo td {
+	vertical-align: middle;
+}
+
+.addrSelect {
+	border-color: rgb(255, 85, 0);
+	border-style: solid;
+	border-width: 1px;
+	background-color: rgb(255, 240, 232);
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	list-style: none
+}
+
+.sendto {
+	color: rgb(255, 85, 0);
+	margin-right: 8px;
+}
+
+.addrInfo {
+	font-size: 20px;
 }
