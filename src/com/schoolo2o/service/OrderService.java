@@ -34,4 +34,11 @@ public interface OrderService {
 	 */
 	public List<Orderinfo> shopSearch(String shopName);
 	
+	/**
+	 * 根据一个临时订单计算订单价格信息
+	 * @param order
+	 * @return
+	 */
+	public OrderSend getOrderPrice(OrderSend order);
+
 }
