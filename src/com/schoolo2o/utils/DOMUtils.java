@@ -45,9 +45,14 @@ public class DOMUtils {
 	 * @return
 	 */
 	public static int getPageCountWord(String filepath) {
+		System.out.println("word文件路径是：" + filepath);
 		String pdfPath = word2pdf(filepath);
+		System.out.println(pdfPath);
 		if (!pdfPath.equals("")) {
-			return getPageCountPDF(pdfPath);
+			System.out.println(pdfPath);
+			int count = getPageCount(pdfPath);
+			System.out.println(count);
+			return count;
 		}
 		return 0;
 	}
@@ -81,15 +86,14 @@ public class DOMUtils {
 	 * @return pdfPath
 	 */
 	public static String word2pdf(String wordPath) {
+
 		ActiveXComponent app = null;
 		Dispatch doc = null;
 		String toFilePath = "";
 		try {
 			app = new ActiveXComponent("Word.Application");
-			System.out.println("99999999");
 			app.setProperty("Visible", new Variant(false));
 			Dispatch docs = app.getProperty("Documents").toDispatch();
-			System.out.println("888888");
 			toFilePath = wordPath2PdfPath(wordPath);
 
 			doc = Dispatch.call(docs, "Open", wordPath).toDispatch();
@@ -98,7 +102,7 @@ public class DOMUtils {
 			if (tofile.exists()) {
 				tofile.delete();
 			}
-			Dispatch.call(doc, "ExportAs", toFilePath, wdFormatPDF);
+			Dispatch.call(doc, "SaveAs", toFilePath, wdFormatPDF);
 			long end = System.currentTimeMillis();
 
 		} catch (Exception e) {
