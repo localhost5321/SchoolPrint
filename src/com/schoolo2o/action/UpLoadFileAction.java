@@ -31,6 +31,7 @@ public class UpLoadFileAction extends BaseAction {
 
 	private DocService docService;
 	private UserService userService;
+
 	public UserService getUserService() {
 		return userService;
 	}
@@ -64,15 +65,15 @@ public class UpLoadFileAction extends BaseAction {
 			InputStream in = serletRequest.getInputStream();
 			serletRequest.setCharacterEncoding("UTF-8");
 			String fileName = serletRequest.getParameter("fileName");
-			String userName ;
+			String userName;
 			response.setContentType("text/plain");
 			response.setCharacterEncoding("utf-8");
 			// 当是匿名用户时，就将文件的所属者设为管理员
 			if (session.containsKey("user")) {
-				Userinfo userinfo=(Userinfo) session.get("user");
-				userName =userinfo.getUserName();
-			}else{
-				userName="herozhao";
+				Userinfo userinfo = (Userinfo) session.get("user");
+				userName = userinfo.getUserName();
+			} else {
+				userName = "herozhao";
 			}
 			// 存储文件
 			String finalFilePath = MyFileUtils.Store(in, fileName);
@@ -80,10 +81,11 @@ public class UpLoadFileAction extends BaseAction {
 			// *******************以下代码需要重构下＊＊＊＊＊＊＊＊＊＊＊＊＊＊ //
 			System.out.println(fileName + "," + finalFilePath + "," + userName);
 			long docId = addDocument(fileName, finalFilePath, userName);
+			System.out.println("传入计算页数的文件的路径是：" + finalFilePath);
 			int fileCount = DOMUtils.getPageCount(finalFilePath);
 			DocMessage dm = new DocMessage(docId, fileCount);
 			Sender.sendOk(dm, response);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			Sender.sendError("不要急哦，问题还是会有的，万一解决了呢", response);
@@ -127,6 +129,7 @@ class DocMessage {
 		this.docId = docId;
 		this.fileCount = fileCount;
 	}
+
 	public DocMessage() {
 	}
 
