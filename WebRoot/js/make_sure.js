@@ -23,4 +23,8 @@ $(function() {
 	}
 	
 	$(".orderInfo").text("总价：" + obj.data.total + "元");
+	
+	var addrList = sessionStorage.getItem("addrList");
+	console.log(JSON.parse(addrList));
+	
 });
