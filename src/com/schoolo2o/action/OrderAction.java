@@ -154,7 +154,6 @@ public class OrderAction extends BaseAction {
 	 * @return
 	 */
 	public String getAllAddress(){
-		response.setCharacterEncoding("gbk");
 		try{
 			String strUserId=request.getParameter("userId");
 			if(strUserId==null||strUserId.equals("")){
