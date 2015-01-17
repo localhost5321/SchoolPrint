@@ -155,13 +155,14 @@ public class OrderAction extends BaseAction {
 	 */
 	public String getAllAddress(){
 		try{
-			String strUserId=request.getParameter("userId");
-			if(strUserId==null||strUserId.equals("")){
-				Sender.sendError("参数异常", response);
-				return null;
+			
+			long userId;
+			if(session.containsKey("user")){
+				Userinfo user=(Userinfo) session.get("user");
+				userId=user.getUserId();
+			}else{
+				userId=44L;
 			}
-			long userId=Long.parseLong(strUserId);
-			System.out.println(addressService);
 			List<Addressinfo> list=addressService.getAddresses(userId);
 			if(list!=null){
 				for(Addressinfo as:list){
