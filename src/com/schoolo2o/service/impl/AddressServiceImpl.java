@@ -34,4 +34,27 @@ public class AddressServiceImpl implements AddressService {
 		return addressDao.getAddresses(userId);
 	}
 
+	
+	@Override
+	public boolean changeTypes(long oldId, long newId) {
+		try{
+			Addressinfo newDeAddress=addressDao.getAddressById(newId);
+			Addressinfo oldDeAddress=addressDao.getAddressById(oldId);
+			if(newDeAddress!=null&&oldDeAddress!=null){
+				newDeAddress.setIsDefault(1);
+				oldDeAddress.setIsDefault(0);
+				return true;
+			}else{
+				return false;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+
+
+	
+
 }
