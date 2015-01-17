@@ -25,6 +25,10 @@ public interface AddressService {
 	public List<Addressinfo> getAddresses(long userId);
 	
 	
+	//修改默认地址
+	public boolean changeTypes(long oldId,long newId);
+	
+	
 	
 
 }
