@@ -33,11 +33,11 @@ function make_sure_order() {
 	// 保存当前最新的文件列表
 
 	// 请求地址并保存
-	$.post("getAllAddress.action?userId=" + '47', function(json_data) {
+	$.post("getAllAddress.action", function(json_data) {
 		console.log(json_data);
-		var addrList = json_data.data;
-		sessionStorage.setItem("addrList",addrList);
+		var json = JSON.parse(json_data);
+		sessionStorage.setItem("addrList", json_data);
 	});
 	// 保存店铺名
-
+	location.href = "make_sure.jsp";
 }

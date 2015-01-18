@@ -1,151 +1,19 @@
 package com.schoolo2o.test;
 
-import java.io.File;
-
-import com.jacob.activeX.ActiveXComponent;
-import com.jacob.com.ComThread;
-import com.jacob.com.Dispatch;
-import com.jacob.com.Variant;
 import com.schoolo2o.utils.DOMUtils;
 
-/*
- * 注意word转pdf要安装虚拟打印机，且要配置
- * 使用jacob框架，把dll文件放到jre/bin目录下
- */
 public class Word2PDF {
-	private ActiveXComponent wordCom = null;
-	private Object wordDoc = null;
-	private final Variant False = new Variant(false);
-	private final Variant True = new Variant(true);
-
-	/**
-	 * 打开word文档
-	 * 
-	 * @param filePath
-	 *            word文档
-	 * @return 返回word文档对象
-	 */
-	public boolean openWord(String filePath) {
-		// 建立ActiveX部件
-		wordCom = new ActiveXComponent("Word.Application");
-		try {
-			// 返回wrdCom.Documents的Dispatch
-			Dispatch wrdDocs = wordCom.getProperty("Documents").toDispatch();
-			// 调用wrdCom.Documents.Open方法打开指定的word文档，返回wordDoc
-			wordDoc = Dispatch.invoke(wrdDocs, "Open", Dispatch.Method,
-					new Object[] { filePath }, new int[1]).toDispatch();
-			return true;
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return false;
-	}
-
-	/**
-	 * 关闭word文档
-	 */
-	public void closeWord(boolean saveOnExit) {
-		if (wordCom != null) {
-			// 关闭word文件
-			// Dispatch.call(wordDoc, "Close", new Variant(saveOnExit));
-			wordCom.invoke("Quit", new Variant[] {});
-			// wordCom.invoke("Quit",new Variant[0]);
-			wordCom = null;
-			// 释放在程序线程中引用的其它com，比如Adobe PDFDistiller
-			ComThread.Release();
-		}
-	}
-
-	/**
-	 * 将word文档打印为PS文件后，使用Distiller将PS文件转换为PDF文件
-	 * 
-	 * @param sourceFilePath
-	 *            源文件路径
-	 * @param destinPSFilePath
-	 *            首先生成的PS文件路径
-	 * @param destinPDFFilePath
-	 *            生成PDF文件路径
-	 */
-	public void docToPDF(String sourceFilePath, String destinPSFilePath,
-			String destinPDFFilePath) {
-		if (!openWord(sourceFilePath)) {
-			closeWord(true);
-			return;
-		}
-		// 建立Adobe Distiller的com对象
-		ActiveXComponent distiller = new ActiveXComponent(
-				"PDFDistiller.PDFDistiller.1");
-		try {
-			// 设置当前使用的打印机，我的Adobe Distiller打印机名字为 "Adobe PDF"
-			wordCom.setProperty("ActivePrinter", new Variant("Adobe PDF"));
-			// 设置printout的参数，将word文档打印为postscript文档。现在只使用了前5个参数，假如要使用更多的话可以参考MSDN的office开发相关api
-			// 是否在后台运行
-			Variant Background = False;
-			// 是否追加打印
-			Variant Append = False;
-			// 打印所有文档
-			int wdPrintAllDocument = 0;
-			Variant Range = new Variant(wdPrintAllDocument);
-			// 输出的postscript文件的路径
-			Variant OutputFileName = new Variant(destinPSFilePath);
-			Dispatch.callN((Dispatch) wordDoc, "PrintOut", new Variant[] {
-					Background, Append, Range, OutputFileName });
-			System.out.println("由word文档打印为ps文档成功！");
-			// 调用Distiller对象的FileToPDF方法所用的参数，具体内容参考Distiller Api手册
-			// 作为输入的ps文档路径
-			Variant inputPostScriptFilePath = new Variant(destinPSFilePath);
-			// 作为输出的pdf文档的路径
-			Variant outputPDFFilePath = new Variant(destinPDFFilePath);
-			// 定义FileToPDF方法要使用adobe pdf设置文件的路径，在这里没有赋值表示并不使用pdf配置文件
-			Variant PDFOption = new Variant("");
-			// 调用FileToPDF方法将ps文档转换为pdf文档
-			Dispatch.callN(distiller, "FileToPDF", new Variant[] {
-					inputPostScriptFilePath, outputPDFFilePath, PDFOption });
-			System.out.println("由ps文档转换为pdf文档成功！");
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			closeWord(true);
-		}
-	}
 
 	public static void main(String[] argv) {
-		// Word2PDF d2p = new Word2PDF();
-		// d2p.docToPDF("D://test.doc", "D://test.ps", "D://test.pdf");
+		String wordPdf = "D:\\Users\\EclipseLib\\apache-tomcat-7.0.53\\webapps\\SchoolPrint\\2015\\01\\18\\doc\\c718adfbbd2ac665166c65c52e30af24.doc";
 
-		// System.out.println("启动Word...");
-//		long start = System.currentTimeMillis();
-//		ActiveXComponent app = null;
-//		try {
-//			app = new ActiveXComponent("Word.Application");
-//			app.setProperty("Visible", false);
-//			Dispatch docs = app.getProperty("Documents").toDispatch();
-//			Dispatch doc = Dispatch.call(docs,//
-//					"Open", //
-//					"D://test.doc",// FileName
-//					false,// ConfirmConversions
-//					true // ReadOnly
-//					).toDispatch();
-//			System.out.println("tttt");
-//			// System.out.println("转换文档到PDF..." + toFilename);
-//			File tofile = new File("D://test.pdf");
-//			if (tofile.exists()) {
-//				tofile.delete();
-//			}
-//			System.out.println("00000");
-//			Dispatch.call(doc,//
-//					"SaveAs", //
-//					"D://test.pdf", // FileName
-//					17);
-//			System.out.println("11111");
-//			Dispatch.call(doc, "Close", new Variant(false));
-//			System.out.println("22222");
-//			long end = System.currentTimeMillis();
-//			System.out.println("转换完成..用时：" + (end - start) + "ms.");
-//		} catch (Exception e) {
-//			System.out.println("========Error:文档转换失败：" + e.getMessage());
-//			e.printStackTrace();
-//		}
-		DOMUtils.word2pdf("D://test.doc");
+		String str = DOMUtils.word2pdf(wordPdf);
+
+		System.out.println(str);
+
+		// String wordPath =
+		// "D://Users//EclipseLib//apache-tomcat-7.0.53//webapps//SchoolPrint//2015//01//18//doc//ac66ae219686bdefdbf42e972339d362.doc";
+		// String pdfPath = DOMUtils.wordPath2PdfPath(wordPath);
+		// System.out.println(pdfPath);
 	}
 }

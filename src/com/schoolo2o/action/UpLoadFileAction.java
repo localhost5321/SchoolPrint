@@ -90,8 +90,8 @@ public class UpLoadFileAction extends BaseAction {
 			e.printStackTrace();
 			Sender.sendError("不要急哦，问题还是会有的，万一解决了呢", response);
 		} finally {
-			return null;
 		}
+		return null;
 	}
 
 	/**
