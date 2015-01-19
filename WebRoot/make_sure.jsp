@@ -40,14 +40,9 @@
 				</h4>
 				<h4>确定收货地址：</h4>
 				<br>
-				<ul>
-					<li class="addrSelect"><span class="sendto">送至</span> <label
-						class="block"><input type="radio" name="radgroup"
-							value="A" class="addrInfo" style="margin-right: 10px;">南华大学弘辰公寓六栋301（蔡恒毅
-							收）13016196174</label> <span style="margin-left: 10px">默认地址</span> <a
-						href="" style="float: right;">修改本地址</a></li>
+				<ul id="addr_ul">
 				</ul>
-
+				<button class="btn btn-danger" style="float: right;">添加地址</button>
 				<br>
 			</form>
 			<p>文件列表：</p>

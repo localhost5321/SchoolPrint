@@ -13,7 +13,7 @@ $(function() {
 		$(".orderDiv").hide();
 	}
 	// 取出所有文件
-	for (var i = 0; i < obj.data.docId.length; i++) {
+	for ( var i = 0; i < obj.data.docId.length; i++) {
 		var fileName = obj.data.fileName[i];
 		var pageCounts = obj.data.pageCount[i];
 		var setting = obj.data.printRequire[i];
@@ -33,11 +33,11 @@ function make_sure_order() {
 	// 保存当前最新的文件列表
 
 	// 请求地址并保存
-	$.post("getAllAddress.action?userId=" + '47', function(json_data) {
+	$.post("getAllAddress.action", function(json_data) {
 		console.log(json_data);
-		var addrList = json_data.data;
-		sessionStorage.setItem("addrList",addrList);
+		var json = JSON.parse(json_data);
+		sessionStorage.setItem("addrList", json_data);
 	});
 	// 保存店铺名
-
+	location.href = "make_sure.jsp";
 }

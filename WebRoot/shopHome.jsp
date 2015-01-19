@@ -79,7 +79,7 @@
 					</tr>
 				</thead>
 				<tbody>
-				
+
 				</tbody>
 			</table>
 			<!-- 订单总信息 -->
@@ -91,29 +91,22 @@
 			</div>
 		</div>
 		<ul class="nav nav-tabs" role="tablist">
-			<li class="active"><a href="#comment" role="tab" data-toggle="tab">评价</a></li>
+			<li class="active"><a href="#comment" role="tab"
+				data-toggle="tab">评价</a></li>
 			<li><a href="#history" role="tab" data-toggle="tab">历史订单</a></li>
 		</ul>
-		
+
 		<div class="tab-content">
 			<div class="tab-pane active" id="comment">
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
+				<br> <br> <br> <br> <br>
 			</div>
 			<div class="tab-pane active" id="history">
-			<br>
-				<br>
-				<br>
-				<br>
-				<br>
+				<br> <br> <br> <br> <br>
 			</div>
 		</div>
 	</div>
 
-	
+
 	<%@ include file="footer.jsp"%>
 	<script src="js/jquery-2.1.1.js"></script>
 	<script src="js/bootstrap.min.js"></script>

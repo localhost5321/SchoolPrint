@@ -17,6 +17,9 @@
 	border-style: solid;
 	border-width: 1px;
 	background-color: rgb(255, 240, 232);
+}
+
+.basic {
 	padding-left: 15px;
 	padding-right: 15px;
 	padding-top: 5px;
