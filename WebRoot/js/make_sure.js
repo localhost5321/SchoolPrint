@@ -1,3 +1,5 @@
+var USER_ID;
+
 $(function() {
 	// 将打印页面的导航高亮改变
 	$("#navBarIndex").attr("class", "");
@@ -55,12 +57,56 @@ function setDefaultAddr(span_this) {
 
 }
 
+function addAddrInfo() {
+
+	var contactor = $("#newUserName").val();
+	var sendAddress = $("#newAddrInfo").val();
+	var callPhone = $("#newPhone").val();
+	var secPhone = $("#newSecPhone").val();
+	if(USER_ID)
+	
+	$
+			.post(
+					"addOrUpdateAddressinfo?=contactor" + contactor
+							+ "&sendAddress=" + sendAddress + "&callPhone="
+							+ callPhone + "&secPhone=" + secPhone,
+
+					function(data) {
+						console.log(data);
+						var obj = JSON.parse(data);
+						if (obj.status == 1) {
+							// 添加成功，局部更新界面
+							var fileName = obj.data["fileName"];
+							var fileId = obj.data["fileId"];
+							$("#plusFile")
+									.before(
+											"<div class='col-xs-6 col-lg-4 teatile'><h2 id="
+													+ fileId
+													+ ">"
+													+ fileName
+													+ "</h2><p>"
+													+ chapter_des
+													+ "</p><p><a href='javascript:void(0)' class='btn btn-default viewdetail' role='button' onclick='viewDetail(this)'>查看详情&raquo;</a>"
+													+ "&nbsp<a href='javascript:void(0)' class='btn btn-default btn-danger deleteTile' role='button' onclick='deleteTile(this)'>删除 &raquo;</a>"
+													+ "</p></div>");
+							$("#addFile").modal("hide");
+						} else {
+							// 添加失败
+							$("#addFileInfo").text(obj.message);
+						}
+					});
+
+}
+
 function addLi(value) {
 	var user_phone = value["callPhone"];
 	var user_name = value["contactor"];
 	var user_addr = value["sendAddress"];
 	var is_default = value["isDefault"];
 	var user_phone_sec = value["secPhone"];
+	USER_ID = value["userId"];
+	
+	
 	if (is_default == 0) {
 		$("#addr_ul")
 				.append(

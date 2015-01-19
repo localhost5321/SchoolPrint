@@ -39,7 +39,8 @@
 				<br>
 				<ul id="addr_ul">
 				</ul>
-				<button class="btn btn-danger" style="float: right;">添加地址</button>
+				<button class="btn btn-danger" style="float: right;"
+					data-toggle="modal" data-target="#addAddr" id="btn_addAddr">添加地址</button>
 				<br>
 			</form>
 			<p>文件列表：</p>
@@ -78,7 +79,7 @@
 	<br>
 
 	<!-- 添加新地址 -->
-	<div class="modal fade" id="addFile" tabindex="-1" role="dialog"
+	<div class="modal fade" id="addAddr" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -132,7 +133,7 @@
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">
 							取消</button>
-						<button type="button" class="btn btn-primary" onclick="addFile();">添加</button>
+						<button type="button" class="btn btn-primary" onclick="addAddrInfo()">添加</button>
 					</div>
 				</form>
 			</div>
