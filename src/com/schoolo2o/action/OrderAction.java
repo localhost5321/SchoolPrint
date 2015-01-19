@@ -238,6 +238,8 @@ public class OrderAction extends BaseAction {
 			if(!addressId.equals("none")){
 				long addId=Long.parseLong(addressId);
 				address.setAddressId(addId);
+			}else{
+				address.setAddressId(new Date().getTime());
 			}
 			//如果当前用户登录，则取登录用户地址，如果没有登录则不会进入此页面
 			Userinfo userinfo=(Userinfo) session.get("user");
@@ -248,7 +250,7 @@ public class OrderAction extends BaseAction {
 			address.setUserinfo(userinfo);
 			boolean flag=addressService.addOrUpdateAddress(address);
 			if(flag){
-				Sender.sendOk("保存成功", response);
+				Sender.sendOk(address, response);
 			}else{
 				Sender.sendError("保存失败", response);
 			}
