@@ -122,6 +122,7 @@ public class OrderAction extends BaseAction {
 		}
 //		System.out.println(orderService);
 		order=orderService.getOrderPrice(order);
+		//session.put("order", order);
 		return order;
 	};
 	
