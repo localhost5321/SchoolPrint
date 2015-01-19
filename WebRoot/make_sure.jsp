@@ -31,9 +31,6 @@
 	<div class="content" id="container">
 		<h1>确认订单</h1>
 		<div class="orderDiv">
-
-
-
 			<form>
 				<h4>
 					店铺名：<span>赵龙打印店</span>

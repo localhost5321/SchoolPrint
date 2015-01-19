@@ -33,6 +33,15 @@ $(function() {
 
 });
 
+function changeSelect(){
+	//将所有的条目设为未选状态+设为默认地址
+	$("#addr_ul>li").removeClass();
+	$("#addr_ul>li").addClass("basic");
+	
+	//将当前条目设为高亮状态+默认地址提示
+}
+
+
 function addLi(value) {
 	var user_phone = value["callPhone"];
 	var user_name = value["contactor"];
@@ -41,7 +50,7 @@ function addLi(value) {
 	if (is_default == 0) {
 		$("#addr_ul")
 				.append(
-						"<li class='basic' >"
+						"<li class='basic' onclick='changeSelect(this)' >"
 								+ "<span class='sendto'>送至</span>"
 								+ " <label class='block'>"
 								+ "<input type='radio' name='radgroup' value='A' class='addrInfo' style='margin-right: 10px;'>"
@@ -51,12 +60,12 @@ function addLi(value) {
 								+ "收）"
 								+ user_phone
 								+ "</label>"
-								+ " <span style='margin-left: 10px' id='setDefault'></span>"
+								+ " <span style='margin-left: 10px' id='setDefault' onclick='setDefaultAddr(this)'>设为默认地址</span>"
 								+ " <a  href='' style='float: right;'>修改本地址</a></li>");
 	} else if (is_default == 1) {
 		$("#addr_ul")
 				.append(
-						"<li class='basic addrSelect'>"
+						"<li class='basic addrSelect' onclick='changeSelect(this)'>"
 								+ "<span class='sendto'>送至</span>"
 								+ " <label class='block'>"
 								+ "<input type='radio' name='radgroup' value='A' class='addrInfo' style='margin-right: 10px;'>"
