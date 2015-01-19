@@ -1,12 +1,9 @@
 package com.schoolo2o.test;
 
-import java.io.File;
-
 import com.jacob.activeX.ActiveXComponent;
 import com.jacob.com.ComThread;
 import com.jacob.com.Dispatch;
 import com.jacob.com.Variant;
-import com.schoolo2o.utils.DOMUtils;
 
 /*
  * 注意word转pdf要安装虚拟打印机，且要配置
@@ -110,42 +107,6 @@ public class Word2PDF {
 	}
 
 	public static void main(String[] argv) {
-		// Word2PDF d2p = new Word2PDF();
-		// d2p.docToPDF("D://test.doc", "D://test.ps", "D://test.pdf");
 
-		// System.out.println("启动Word...");
-//		long start = System.currentTimeMillis();
-//		ActiveXComponent app = null;
-//		try {
-//			app = new ActiveXComponent("Word.Application");
-//			app.setProperty("Visible", false);
-//			Dispatch docs = app.getProperty("Documents").toDispatch();
-//			Dispatch doc = Dispatch.call(docs,//
-//					"Open", //
-//					"D://test.doc",// FileName
-//					false,// ConfirmConversions
-//					true // ReadOnly
-//					).toDispatch();
-//			System.out.println("tttt");
-//			// System.out.println("转换文档到PDF..." + toFilename);
-//			File tofile = new File("D://test.pdf");
-//			if (tofile.exists()) {
-//				tofile.delete();
-//			}
-//			System.out.println("00000");
-//			Dispatch.call(doc,//
-//					"SaveAs", //
-//					"D://test.pdf", // FileName
-//					17);
-//			System.out.println("11111");
-//			Dispatch.call(doc, "Close", new Variant(false));
-//			System.out.println("22222");
-//			long end = System.currentTimeMillis();
-//			System.out.println("转换完成..用时：" + (end - start) + "ms.");
-//		} catch (Exception e) {
-//			System.out.println("========Error:文档转换失败：" + e.getMessage());
-//			e.printStackTrace();
-//		}
-		DOMUtils.word2pdf("D://test.doc");
 	}
 }
