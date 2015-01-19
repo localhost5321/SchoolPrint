@@ -7,15 +7,13 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 
 
-		<property name="url"
-
-			value="jdbc:mysql://192.168.1.100:3306/schoolo2o">
+		<property name="url" value="jdbc:mysql://localhost:3306/schoolo2o">
 
 		</property>
 
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="username" value="zl"></property>
-		<property name="password" value="123456"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="ailisa1314"></property>
 
 	</bean>
 	<bean id="sessionFactory"
@@ -59,7 +57,7 @@
 	<!-- OrderInfoDao 的依赖注入 -->
 	<bean id="OrderInfoDao" class="com.schoolo2o.dao.impl.OrderInfoDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
-		
+
 	</bean><!-- OrderService 的依赖注入 -->
 	<bean id="orderService" class="com.schoolo2o.service.impl.OrderServiceImpl"
 		abstract="false" lazy-init="default" autowire="default">
@@ -68,7 +66,7 @@
 		<property name="shopInfoDao" ref="ShopInfoDao"></property>
 		<property name="docInfoDao" ref="DocinfoDao"></property>
 	</bean>
-	
+
 	<!-- ShopInfoDao's add -->
 	<bean id="ShopInfoDao" class="com.schoolo2o.dao.impl.ShopInfoDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
@@ -90,6 +88,14 @@
 	<bean id="docService" class="com.schoolo2o.service.impl.DocServiceImpl"
 		abstract="false" lazy-init="default" autowire="default">
 		<property name="docInfoDao" ref="DocinfoDao" />
+	</bean>
+	<!--请求地址列表的DAO -->
+	<bean id="addressDao" class="com.schoolo2o.dao.impl.AddressDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 请求地址列表的服务 -->
+	<bean id="addressService" class="com.schoolo2o.service.impl.AddressServiceImpl">
+		<property name="addressDao" ref="addressDao"></property>
 	</bean>
 
 

@@ -14,6 +14,19 @@
 		<action name="editOrderStatus" class="com.schoolo2o.action.OrderAction"
 			method="editOrderStatus">
 		</action>
+		<!-- 获得一个用户的地址列表 -->
+		<action name="getAllAddress" class="com.schoolo2o.action.OrderAction"
+		method="getAllAddress"></action>
+		
+		
+		<!-- 根据一个地址Id删除其地址信息 -->
+		<action name="deleteAddressinfo" class="com.schoolo2o.action.OrderAction"
+		method="deleteAddressinfo"></action>
+		
+		
+		<!--更新或者新增一个地址信息  -->
+		<action name="addOrUpdateAddressinfo" class="com.schoolo2o.action.OrderAction"
+		method="addOrUpdateAddressinfo"></action>
 		
 	</package>
 </struts>

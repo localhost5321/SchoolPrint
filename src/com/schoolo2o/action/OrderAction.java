@@ -1,23 +1,31 @@
 package com.schoolo2o.action;
+import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import org.apache.struts2.ServletActionContext;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
+import com.schoolo2o.pojo.Addressinfo;
 import com.schoolo2o.pojo.MyJSONObject;
 import com.schoolo2o.pojo.Userinfo;
 import com.schoolo2o.pojo.send.OrderSend;
 import com.schoolo2o.pojo.send.OrderinfoSend;
 import com.schoolo2o.pojo.send.OrderstatusSend;
+import com.schoolo2o.service.AddressService;
 import com.schoolo2o.service.OrderService;
 import com.schoolo2o.service.ShopService;
 import com.schoolo2o.utils.Sender;
 public class OrderAction extends BaseAction {
 	private ShopService shopService;
 	private OrderService orderService;
+	private AddressService addressService;
 	private String[] set;//用于保存打印原有设置的字符串，回传给浏览器
 	public ShopService getShopService() {
 		return shopService;
@@ -36,6 +44,15 @@ public class OrderAction extends BaseAction {
 		this.orderService = orderService;
 	}
 
+	
+	public AddressService getAddressService() {
+		return addressService;
+	}
+
+	public void setAddressService(AddressService addressService) {
+		this.addressService = addressService;
+	}
+
 	/**
 	 * 从浏览器传来的参数封装成一个order,
 	 * 并且去服务层计算出每一项的价格，以及总价放在此order对象中
@@ -44,7 +61,6 @@ public class OrderAction extends BaseAction {
 	 */
 	public OrderSend getOrderFromStr(String jsonStr){
 		System.out.println(jsonStr);
-		System.out.print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
 		OrderSend order=new OrderSend();
 		JSONObject orderObject=JSON.parseObject(jsonStr);
 		String data=orderObject.getString("data");
@@ -71,7 +87,6 @@ public class OrderAction extends BaseAction {
 		set=new String[ja.size()];
 		for(int i=0;i<ja.size();i++){
 			JSONObject orderItem=ja.getJSONObject(i);
-			System.out.println("~~~~~~~~~~~~~~~");
 			System.out.print(orderItem.getString("docId"));
 			long docId=Long.parseLong(orderItem.getString("docId"));
 			Integer pageCounts=Integer.parseInt(orderItem.getString("pageCounts"));
@@ -93,9 +108,8 @@ public class OrderAction extends BaseAction {
 			for(String str:typeSet){
 				setting+=str;
 			}
-//			System.out.println(setting + "  " + shopName);
+			System.out.println(setting + "  " + shopName);
 			double price=shopService.getPrice(setting, shopName);
-			System.out.println(price);
 			String printCounts=orderItem.getString("printCounts");
 			Integer printCount=Integer.parseInt(printCounts);
 			String fileName=orderItem.getString("fileName");
@@ -107,7 +121,7 @@ public class OrderAction extends BaseAction {
 			order.getDocId()[i]=docId;
 		}
 //		System.out.println(orderService);
-		order=orderService.addOrder(order);
+		order=orderService.getOrderPrice(order);
 		return order;
 	};
 	
@@ -122,10 +136,10 @@ public class OrderAction extends BaseAction {
 			if(jsonStr!=null&&!jsonStr.equals("null")){
 				OrderSend order=getOrderFromStr(jsonStr);
 				order.setPrintRequire(set);
+				
 				Sender.sendOk(order, response);
 			}else{
 				Sender.sendError("参数有误哦", response);
-				System.out.print("!!!!!!!!!!!!!");
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -135,6 +149,94 @@ public class OrderAction extends BaseAction {
 		}
 	}
 	
+	/**
+	 * 返还所有的地址信息给浏览器
+	 * @return
+	 */
+	public String getAllAddress(){
+		try{
+			
+			long userId;
+			if(session.containsKey("user")){
+				Userinfo user=(Userinfo) session.get("user");
+				userId=user.getUserId();
+			}else{
+				userId=44L;
+			}
+			List<Addressinfo> list=addressService.getAddresses(userId);
+			if(list!=null){
+				for(Addressinfo as:list){
+					as.setUserinfo(null);
+				}
+				Sender.sendOk(list, response);
+			}else{
+				Sender.sendError("当前没有地址信息", response);
+			}
+		}catch(Exception e){
+			Sender.sendError("服务器异常", response);
+			e.printStackTrace();
+		}finally{
+			return null;
+		}
+	}
+	
+	/**
+	 * 接受一个要删除的地址Id
+	 * 删除一个地址信息
+	 * @return
+	 */
+	public String deleteAddressinfo(){
+		response.setCharacterEncoding("gbk");
+		try{
+			String strAddId=request.getParameter("addId");
+			if(strAddId==null||strAddId.equals("")){
+				Sender.sendError("参数为空", response);
+				return null;
+			}
+			long addId=Long.parseLong(strAddId);
+			boolean flag=addressService.deleteAddress(addId);
+			if(flag){
+				Sender.sendOk("删除成功", response);
+			}else{
+				Sender.sendError("删除失败", response);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			Sender.sendError("服务器异常", response);
+		}finally{
+			return null;
+		}
+	}
+	/**
+	 * 添加或者更新一个地址信息
+	 * @return
+	 */
+	public String addOrUpdateAddressinfo(){
+		String JsonStr=request.getParameter("JsonStr");
+		try{
+			if(JsonStr==null||JsonStr.equals("")){
+				Sender.sendError("参数为空", response);
+				return null;
+			}
+			Addressinfo address=JSON.parseObject(JsonStr, Addressinfo.class);
+			Userinfo userinfo=(Userinfo) session.get("user");
+			if(userinfo==null){
+				userinfo=new Userinfo();
+				userinfo.setUserId(47L);
+			}
+			address.setUserinfo(userinfo);
+			boolean flag=addressService.addOrUpdateAddress(address);
+			if(flag){
+				Sender.sendOk("保存成功", response);
+			}else{
+				Sender.sendError("保存失败", response);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}finally{
+			return null;
+		}
+	}
 	/**
 	 * 存储订单
 	 * 需要传递订单信息

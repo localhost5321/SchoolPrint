@@ -4,7 +4,6 @@ import com.jacob.activeX.ActiveXComponent;
 import com.jacob.com.ComThread;
 import com.jacob.com.Dispatch;
 import com.jacob.com.Variant;
-import com.schoolo2o.utils.DOMUtils;
 
 /*
  * 注意word转pdf要安装虚拟打印机，且要配置
@@ -108,6 +107,6 @@ public class Word2PDF {
 	}
 
 	public static void main(String[] argv) {
-		DOMUtils.word2pdf("/home/hengyi/temp/test.doc");
+
 	}
 }
