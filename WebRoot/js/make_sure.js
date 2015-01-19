@@ -1,4 +1,5 @@
-var changeAddrId;
+
+var changeAddrId; // 用户当前正在修改的地址条目ID
 
 
 $(function() {
@@ -36,6 +37,9 @@ $(function() {
 
 });
 
+/**
+ * 响应用户改变地址事件
+ */
 function changeSelect(li_this) {
 	// 将所有的条目设为未选状态
 	$("#addr_ul>li").removeClass();
@@ -61,10 +65,17 @@ function changeSelect(li_this) {
 	
 }
 
+/**
+ * 设置默认地址
+ */
 function setDefaultAddr(span_this,e) {
 	
+	/**
+	 * 停止冒泡
+	 */
 	stopBubble(e);
-	// 请求服务器，更改默认地址
+	/** 请求服务器，更改默认地址 * */
+		
 	// 当前默认地址的id
 	var preDefaultId = $(".isDefault").closest("li").attr("id");
 	// 当前选择地址的ID
@@ -92,6 +103,9 @@ function setDefaultAddr(span_this,e) {
 
 }
 
+/**
+ * 停止冒泡
+ */
 function stopBubble(e) {
     // 如果提供了事件对象，则这是一个非IE浏览器
     if(e && e.stopPropagation) {
@@ -104,6 +118,9 @@ function stopBubble(e) {
 
 
 
+/**
+ * 用户增加地址
+ */
 function addAddrInfo() {
 
 	var contactor = $("#newUserName").val();
@@ -134,13 +151,13 @@ function addAddrInfo() {
 									.append("<li class='basic' onclick='changeSelect(this)' id="+ addressId +" >"
 									+ "<span class='sendto icon_hidden'>送至</span>"
 									+ "<img src='./images/send_icon.png' class='send_icon icon_hidden'></img>"
-									+ user_addr
+									+ "<span class='user_addr'>" + user_addr + "</span>"
 									+ "("
-									+ user_name
+									+ "<span class='user_name'>" + user_name + "</span>"
 									+ "&nbsp收）"
-									+ user_phone
+									+ "<span class='user_phone'>" + user_phone + "</span>"
 									+ "&nbsp备用电话："
-									+ user_phone_sec
+									+ "<span class='user_phone_sec'>" + user_phone_sec + "</span>"
 									+ " <span style='margin-left: 10px' class='setDefault' onclick='setDefaultAddr(this,event)'><a href='javascript:void(0)'>设为默认地址</a></span>"
 									+ " <a class='changAddress icon_hidden' href='javascript:void(0)' style='float: right;' data-toggle='modal'"
 									+ "data-target='#changeAddr'>修改本地址</a></li>"
@@ -154,9 +171,11 @@ function addAddrInfo() {
 
 }
 
+
+/**
+ * 用户修改地址
+ */
 function changeAddrInfo(){
-
-
 var contactor = $("#changeUserName").val();
 var sendAddress = $("#changeAddrInfo").val();
 var callPhone = $("#changePhone").val();
@@ -175,19 +194,10 @@ $
 					var obj = JSON.parse(data);
 					if (obj.status == 1) {
 						// 修改成功，局部更新界面
-						var fileName = obj.data["fileName"];
-						var fileId = obj.data["fileId"];
-						$("#plusFile")
-								.before(
-										"<div class='col-xs-6 col-lg-4 teatile'><h2 id="
-												+ fileId
-												+ ">"
-												+ fileName
-												+ "</h2><p>"
-												+ chapter_des
-												+ "</p><p><a href='javascript:void(0)' class='btn btn-default viewdetail' role='button' onclick='viewDetail(this)'>查看详情&raquo;</a>"
-												+ "&nbsp<a href='javascript:void(0)' class='btn btn-default btn-danger deleteTile' role='button' onclick='deleteTile(this)'>删除 &raquo;</a>"
-												+ "</p></div>");
+						$('#' + changeAddrId ).children(".user_name").html(contactor);
+						$('#' + changeAddrId ).children(".user_addr").html(sendAddress);
+						$('#' + changeAddrId ).children(".user_phone").html(callPhone);
+						$('#' + changeAddrId ).children(".user_phone_sec").html(secPhone);
 						$("#changeAddr").modal("hide");
 					} else {
 						// 添加失败
@@ -199,6 +209,9 @@ $
 	
 }
 
+/**
+ * 添加一条地址信息
+ */
 function addLi(value) {
 	var user_phone = value["callPhone"];
 	var user_name = value["contactor"];
@@ -213,13 +226,13 @@ function addLi(value) {
 						"<li class='basic' onclick='changeSelect(this)' id="+ addressId +" >"
 								+ "<span class='sendto icon_hidden'>送至</span>"
 								+ "<img src='./images/send_icon.png' class='send_icon icon_hidden'></img>"
-								+ user_addr
+								+ "<span class='user_addr'>" + user_addr + "</span>"
 								+ "("
-								+ user_name
+								+ "<span class='user_name'>" + user_name + "</span>"
 								+ "&nbsp收）"
-								+ user_phone
+								+ "<span class='user_phone'>" + user_phone + "</span>"
 								+ "&nbsp备用电话："
-								+ user_phone_sec
+								+ "<span class='user_phone_sec'>" + user_phone_sec + "</span>"
 								+ " <span style='margin-left: 10px' class='setDefault' onclick='setDefaultAddr(this,event)'><a href='javascript:void(0)'>设为默认地址</a></span>"
 								+ " <a class='changAddress icon_hidden' href='javascript:void(0)' style='float: right;' data-toggle='modal'"
 								+ "data-target='#changeAddr'>修改本地址</a></li>");
@@ -229,13 +242,13 @@ function addLi(value) {
 						"<li class='basic addrSelect' onclick='changeSelect(this)' id=" + addressId +">"
 								+ "<span class='sendto'>送至</span>"
 								+ "<img src='./images/send_icon.png' class='send_icon'></img>"
-								+ user_addr
+								+ "<span class='user_addr'>" + user_addr + "</span>"
 								+ "("
-								+ user_name
+								+ "<span class='user_name'>" + user_name + "</span>"
 								+ "&nbsp收）"
-								+ user_phone
+								+ "<span class='user_phone'>" + user_phone + "</span>"
 								+ "&nbsp备用电话："
-								+ user_phone_sec
+								+ "<span class='user_phone_sec'>" + user_phone_sec + "</span>"
 								+ " <span style='margin-left: 10px' class='setDefault isDefault'>默认地址</span>"
 								+ "  <a  class='changAddress' href='javascript:void(0)' style='float: right;' data-toggle='modal'"
 								+ "data-target='#changeAddr'>修改本地址</a></li>");
