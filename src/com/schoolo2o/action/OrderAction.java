@@ -1,5 +1,7 @@
 package com.schoolo2o.action;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -139,7 +141,6 @@ public class OrderAction extends BaseAction {
 			if(jsonStr!=null&&!jsonStr.equals("null")){
 				OrderSend order=getOrderFromStr(jsonStr);
 				order.setPrintRequire(set);
-				
 				Sender.sendOk(order, response);
 			}else{
 				Sender.sendError("参数有误哦", response);
@@ -261,9 +262,11 @@ public class OrderAction extends BaseAction {
 	 * 需要传递订单信息
 	 */
 	public String saveOrder(){
-		String jsonStr=request.getParameter("hh");
+		String jsonStr=request.getParameter("order");
 		try{
 			System.out.println(jsonStr);
+			JSONObject jo=JSON.parseObject(jsonStr);
+			
 			response.setCharacterEncoding("utf-8");
 			if(jsonStr!=null&&!jsonStr.equals("")){
 				
@@ -291,8 +294,30 @@ public class OrderAction extends BaseAction {
 	}
 	
 	/**
+	 * 修改地址状态是否为当前地址
+	 * @throws IOException 
+	 */
+	public String setDefault() throws IOException{
+		String oldId=request.getParameter("oldId");
+		String newId=request.getParameter("newId");
+		if(oldId==null||newId==null){
+			Sender.sendError("参数有误", response);
+		}else{
+			long oldIdL=Long.parseLong(oldId);
+			long newIdL=Long.parseLong(newId);
+			boolean flag=addressService.changeTypes(oldIdL, newIdL);
+			if(flag)
+				Sender.sendOk("修改成功", response);
+			else
+				Sender.sendError("修改失败", response);
+		}
+		return null;
+	}
+	
+	
+	/**
 	 * 修改订单状态
-	 * 需要获取新状态，以及原有状态信息
+	 * 需要获取新状态Id，以及原有状态Id
 	 */
 	public String editOrderStatus(){
 		String oldStatusIdStr=request.getParameter("");

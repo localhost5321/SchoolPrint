@@ -22,7 +22,7 @@ public class OrderinfoSend implements java.io.Serializable {
 	private Integer payType;
 	private Integer sendType;
 	private List <OrderitemSend> items;
-	private OrderstatusSend status;;
+	private OrderstatusSend status;
 
 	// Constructors
 	public OrderinfoSend(){
