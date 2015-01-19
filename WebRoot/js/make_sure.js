@@ -33,15 +33,38 @@ $(function() {
 
 });
 
+function changeSelect(li_this) {
+	// 将所有的条目设为未选状态+设为默认地址
+	$("#addr_ul>li").removeClass();
+	$("#addr_ul>li").addClass("basic");
+	$(".setDefault").html("设为默认地址");
+	$(".setDefault").attr("onclick", "setDefaultAddr(this)");
+
+	// 将当前条目设为高亮状态+默认地址提示
+	$(li_this).addClass("basic addrSelect");
+	$(li_this).children(".setDefault").removeAttr("onclick");
+	$(li_this).children(".setDefault").html("默认地址");
+}
+
+function setDefaultAddr(span_this) {
+	// 请求服务器，更改默认地址
+	$(".setDefault").html("设为默认地址");
+	$(".setDefault").attr("onclick", "setDefaultAddr(this)");
+	$(span_this).removeAttr("onclick");
+	$(span_this).html("默认地址");
+
+}
+
 function addLi(value) {
 	var user_phone = value["callPhone"];
 	var user_name = value["contactor"];
 	var user_addr = value["sendAddress"];
 	var is_default = value["isDefault"];
+	var user_phone_sec = value["secPhone"];
 	if (is_default == 0) {
 		$("#addr_ul")
 				.append(
-						"<li class='basic' >"
+						"<li class='basic' onclick='changeSelect(this)' >"
 								+ "<span class='sendto'>送至</span>"
 								+ " <label class='block'>"
 								+ "<input type='radio' name='radgroup' value='A' class='addrInfo' style='margin-right: 10px;'>"
@@ -50,13 +73,15 @@ function addLi(value) {
 								+ user_name
 								+ "收）"
 								+ user_phone
+								+ "&nbsp备用："
+								+ user_phone_sec
 								+ "</label>"
-								+ " <span style='margin-left: 10px' id='setDefault'></span>"
+								+ " <span style='margin-left: 10px' class='setDefault' onclick='setDefaultAddr(this)'>设为默认地址</span>"
 								+ " <a  href='' style='float: right;'>修改本地址</a></li>");
 	} else if (is_default == 1) {
 		$("#addr_ul")
 				.append(
-						"<li class='basic addrSelect'>"
+						"<li class='basic addrSelect' onclick='changeSelect(this)'>"
 								+ "<span class='sendto'>送至</span>"
 								+ " <label class='block'>"
 								+ "<input type='radio' name='radgroup' value='A' class='addrInfo' style='margin-right: 10px;'>"
@@ -65,8 +90,10 @@ function addLi(value) {
 								+ user_name
 								+ "收）"
 								+ user_phone
+								+ "&nbsp备用："
+								+ user_phone_sec
 								+ "</label>"
-								+ " <span style='margin-left: 10px' id='setDefault'>默认地址</span>"
+								+ " <span style='margin-left: 10px' class='setDefault'>默认地址</span>"
 								+ " <a  href='' style='float: right;'>修改本地址</a></li>");
 	}
 

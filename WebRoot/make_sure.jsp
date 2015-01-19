@@ -31,9 +31,6 @@
 	<div class="content" id="container">
 		<h1>确认订单</h1>
 		<div class="orderDiv">
-
-
-
 			<form>
 				<h4>
 					店铺名：<span>赵龙打印店</span>
@@ -79,6 +76,68 @@
 		</div>
 	</div>
 	<br>
+
+	<!-- 添加新地址 -->
+	<div class="modal fade" id="addFile" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">添加新地址</h4>
+				</div>
+				<!--添加新地址内容-->
+				<!--表单-->
+				<form class="form-horizontal" role="form" action="" method="post"
+					id="addAddrForm">
+					<div class="modal-body">
+						<!--联系人-->
+						<div class="form-group">
+							<label for="addUserName" class="col-sm-2 control-label">联系人：</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="newUserName"
+									name="userName" placeholder="默认联系人">
+							</div>
+						</div>
+						<!--详细地址-->
+						<div class="form-group">
+							<label for="addAddrInfo" class="col-sm-2 control-label">详细地址：</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="newAddrInfo"
+									name="addrInfo" placeholder="默认详细地址">
+							</div>
+						</div>
+
+						<!--电话-->
+						<div class="form-group">
+							<label for="addPhone" class="col-sm-2 control-label">电话：</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="newPhone"
+									name="phone" placeholder="默认电话">
+							</div>
+						</div>
+
+						<!--备用电话-->
+						<div class="form-group">
+							<label for="addSecPhone" class="col-sm-2 control-label">备用电话：</label>
+							<div class="col-sm-10">
+								<input type="text" class="form-control" id="newSecPhone"
+									name="secPhone" placeholder="默认备用电话">
+							</div>
+						</div>
+					</div>
+					<!--添加信息窗口底部-->
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">
+							取消</button>
+						<button type="button" class="btn btn-primary" onclick="addFile();">添加</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
 	<%@ include file="footer.jsp"%>
 	<script src="js/jquery-2.1.1.js"></script>
 	<script src="js/bootstrap.min.js"></script>
