@@ -6,7 +6,7 @@
 
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-		<property name="url" value="jdbc:mysql://localhost:3306/schoolo2o">
+		<property name="url" value="jdbc:mysql://192.168.1.131/schoolo2o">
 		</property>
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="username" value="root"></property>

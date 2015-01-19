@@ -582,7 +582,7 @@ function createShop(json) {
 								+ shopPhone
 								+ "</p><button id=\""
 								+ shopName
-								+ "\" class=\"btn btn-info shopDetail\" >查看订单</button><form action=\"shop/getShopDetail.action?shopName="
+								+ "\" class=\"btn btn-info shopDetail\" >查看订单</button><form action=\"shopHome.jsp?shopName="
 								+ shopName
 								+ "\" method=\"post\" target=\"_blank\" onsubmit = \"return enterShop(this);\" name=\""+shopName+"\"><input type=\"submit\"  class=\"btn btn-primary enterShop\" value=\"进入店铺\"></form></div>");
 		// 给店铺的订单详情按钮添加对应监听
@@ -593,17 +593,9 @@ function createShop(json) {
 }
 
 function enterShop(obj) {
+	//将订单信息存储在sessionStorage中
 	var json = showUserFile();
 	json.shopName = obj.name;
-	$.ajax({
-			url:"showOrder.action", 
-			data:"data=" + JSON.stringify(json),
-			success:function(response){
-				console.log(response);
-				sessionStorage.setItem("order", response);
-			},
-			type:"post",	
-			async:false
-	});
+	sessionStorage.setItem("orderList", JSON.stringify(json));
 	return true;
 }
