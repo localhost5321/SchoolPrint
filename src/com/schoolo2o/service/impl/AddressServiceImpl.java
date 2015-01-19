@@ -43,6 +43,8 @@ public class AddressServiceImpl implements AddressService {
 			if(newDeAddress!=null&&oldDeAddress!=null){
 				newDeAddress.setIsDefault(1);
 				oldDeAddress.setIsDefault(0);
+				addressDao.addOrUpdateAddress(newDeAddress);
+				addressDao.addOrUpdateAddress(oldDeAddress);
 				return true;
 			}else{
 				return false;

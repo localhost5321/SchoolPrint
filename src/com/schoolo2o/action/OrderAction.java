@@ -18,6 +18,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import com.schoolo2o.pojo.Addressinfo;
 import com.schoolo2o.pojo.MyJSONObject;
+import com.schoolo2o.pojo.Shopinfo;
 import com.schoolo2o.pojo.Userinfo;
 import com.schoolo2o.pojo.send.OrderSend;
 import com.schoolo2o.pojo.send.OrderinfoSend;
@@ -266,6 +267,16 @@ public class OrderAction extends BaseAction {
 		try{
 			System.out.println(jsonStr);
 			JSONObject jo=JSON.parseObject(jsonStr);
+			String shopName=jo.getString("shopName");
+			long addressId=jo.getLong("addressId");
+			double totalCost=jo.getDoubleValue("totalCost");
+			int payType=jo.getIntValue("payType");
+			int sendType=jo.getIntValue("sendType");
+			JSONArray ja=jo.getJSONArray("orderItems");
+			for(int i=0;i<ja.size();i++){
+				ja.get(i);
+			}
+			Shopinfo shopinfo=shopService.search(shopName);
 			
 			response.setCharacterEncoding("utf-8");
 			if(jsonStr!=null&&!jsonStr.equals("")){
