@@ -50,6 +50,7 @@ public class UserAction extends BaseAction{
 			response.getWriter().write("{\"status\":\"0\",\"message\":\"用户名不存在\"}");
 			return null;
 		}else if(us.getUserPwd().equals(MD5Psw)){
+			
 			session.put("user", user);
 			String userInfo = "<li><a href='javascript:void(0)' class='dropdown-toggle' data-toggle='dropdown'>欢迎你："+user.getUserName()+"<span class='caret'></span></a><ul class='dropdown-menu' role='menu'><li><a href='javascript:void(0)' data-tab='tab-chrome' onclick='exit();'>退出</a></li></ul></li>";
 			response.getWriter().write("{\"status\":\"1\",\"message\":\""+userInfo+"\"}");

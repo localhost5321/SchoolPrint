@@ -75,9 +75,7 @@ public class UpLoadFileAction extends BaseAction {
 			String finalFilePath = MyFileUtils.Store(in, fileName);
 
 			// *******************以下代码需要重构下＊＊＊＊＊＊＊＊＊＊＊＊＊＊ //
-			System.out.println(fileName + "," + finalFilePath + "," + userName);
 			long docId = addDocument(fileName, finalFilePath, userName);
-			System.out.println("传入计算页数的文件的路径是：" + finalFilePath);
 			int fileCount = DOMUtils.getPageCount(finalFilePath);
 			DocMessage dm = new DocMessage(docId, fileCount);
 			Sender.sendOk(dm, response);

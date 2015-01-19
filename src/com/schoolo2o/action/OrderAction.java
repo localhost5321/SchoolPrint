@@ -6,6 +6,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.cglib.transform.impl.AddDelegateTransformer;
+
 import org.apache.struts2.ServletActionContext;
 
 import com.alibaba.fastjson.JSON;
@@ -213,13 +215,29 @@ public class OrderAction extends BaseAction {
 	 * @return
 	 */
 	public String addOrUpdateAddressinfo(){
-		String JsonStr=request.getParameter("JsonStr");
+		String contactor=request.getParameter("contactor");
+		String sendAddress=request.getParameter("sendAddress");
+		String callPhone=request.getParameter("callPhone");
+		String secPhone=request.getParameter("secPhone");
+		String addressId=request.getParameter("addressId");
 		try{
-			if(JsonStr==null||JsonStr.equals("")){
-				Sender.sendError("参数为空", response);
+			if(callPhone==null||secPhone==null||sendAddress==null||addressId==null){
+				Sender.sendError("必要参数为空", response);
 				return null;
 			}
-			Addressinfo address=JSON.parseObject(JsonStr, Addressinfo.class);
+			Addressinfo address=new Addressinfo();
+			address.setCallPhone(callPhone);
+			address.setContactor(contactor);
+			//默认为0表示不是默认地址
+			address.setIsDefault(0);
+			address.setSecPhone(secPhone);
+			address.setSendAddress(sendAddress);
+			//如果传过来有Id,表示修改
+			if(!addressId.equals("none")){
+				long addId=Long.parseLong(addressId);
+				address.setAddressId(addId);
+			}
+			//如果当前用户登录，则取登录用户地址，如果没有登录则不会进入此页面
 			Userinfo userinfo=(Userinfo) session.get("user");
 			if(userinfo==null){
 				userinfo=new Userinfo();
@@ -248,10 +266,11 @@ public class OrderAction extends BaseAction {
 			System.out.println(jsonStr);
 			response.setCharacterEncoding("utf-8");
 			if(jsonStr!=null&&!jsonStr.equals("")){
-				OrderinfoSend order=JSON.parseObject(jsonStr,OrderinfoSend.class);
+				
+				
 				//调用服务层计费 保存
 				jsonObject.setMessage("null");
-				jsonObject.setData(order);
+				//jsonObject.setData(order);
 				jsonStr=JSON.toJSONString(jsonObject);
 				response.getWriter().write(jsonStr);
 			}else{
