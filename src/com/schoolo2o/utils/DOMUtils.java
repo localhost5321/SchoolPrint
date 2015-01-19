@@ -46,8 +46,12 @@ public class DOMUtils {
 	 */
 	public static int getPageCountWord(String filepath) {
 		System.out.println("word文件路径是：" + filepath);
+
+		String path = "D:\\Users\\EclipseLib\\apache-tomcat-7.0.53\\webapps\\SchoolPrint\\2015\\01\\18\\doc\\ba7e84bf3109f0c5e02b0c68ac6bfca1.doc";
+		filepath = filepath.replace('/', '\\');
+		System.out.println("最终传入word2pdf的文件路径是：" + filepath);
 		String pdfPath = word2pdf(filepath);
-		System.out.println(pdfPath);
+		System.out.println("pdf的路径" + pdfPath);
 		if (!pdfPath.equals("")) {
 			System.out.println(pdfPath);
 			int count = getPageCount(pdfPath);
@@ -68,6 +72,7 @@ public class DOMUtils {
 		Matcher matcher = pattern.matcher(filePath);
 		if (matcher.find()) {
 			String str = matcher.group();
+			System.out.println("正则式匹配的str是" + str);
 			if (str.contains("doc")) {
 				// 计算word页码
 				return getPageCountWord(filePath);
@@ -103,13 +108,10 @@ public class DOMUtils {
 				tofile.delete();
 			}
 			Dispatch.call(doc, "SaveAs", toFilePath, wdFormatPDF);
-			long end = System.currentTimeMillis();
-
+			Dispatch.call(doc, "Close", false);
 		} catch (Exception e) {
-			System.out.println("对不起，此转换工作只能在windows环境下执行，万恶的巨硬。。。。。。。");
 			e.printStackTrace();
 		} finally {
-			Dispatch.call(doc, "Close", false);
 			System.out.println("文档关闭");
 			if (app != null) {
 				app.invoke("Quit", new Variant[] {});
@@ -120,10 +122,15 @@ public class DOMUtils {
 		return toFilePath;
 	}
 
-	private static String wordPath2PdfPath(String wordPath) {
-		String[] strs = wordPath.split("\\.");
-		return strs[0] + ".pdf";
-
+	public static String wordPath2PdfPath(String wordPath) {
+		String pdfPath = "";
+		String tmp = wordPath;
+		if (wordPath.contains(".docx")) {
+			pdfPath = tmp.replace(".docx", ".pdf");
+		} else {
+			pdfPath = tmp.replace(".doc", ".pdf");
+		}
+		return pdfPath;
 	}
 
 }

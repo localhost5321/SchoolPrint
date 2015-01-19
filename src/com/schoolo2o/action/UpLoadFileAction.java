@@ -2,17 +2,13 @@ package com.schoolo2o.action;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 
-import com.alibaba.fastjson.JSON;
-import com.opensymphony.xwork2.ActionSupport;
 import com.schoolo2o.pojo.Docinfo;
-import com.schoolo2o.pojo.MyJSONObject;
 import com.schoolo2o.pojo.Userinfo;
 import com.schoolo2o.service.DocService;
 import com.schoolo2o.service.UserService;
@@ -90,8 +86,8 @@ public class UpLoadFileAction extends BaseAction {
 			e.printStackTrace();
 			Sender.sendError("不要急哦，问题还是会有的，万一解决了呢", response);
 		} finally {
-			return null;
 		}
+		return null;
 	}
 
 	/**
