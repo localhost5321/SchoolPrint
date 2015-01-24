@@ -12,9 +12,6 @@
 		<!-- 请求店铺详情 -->
 		<action name="getShopDetail" class="com.schoolo2o.action.ShopAction"
 			method="getShopByName">
-			<result name="success">
-				/shopHome.jsp
-			</result>
 		</action>
 	</package>
 </struts>

@@ -9,11 +9,10 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
-<base href="../">
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${requestScope.shop.shopNick }</title>
+<title>校园云打印</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/indexStyle.css" rel="stylesheet">
 <link href="css/footerStyle.css" rel="stylesheet">
@@ -59,9 +58,9 @@
 				class="glyphicon glyphicon-chevron-right"></span></a>
 		</div>
 		<div class="shopInfoDiv">
-			<h1>${requestScope.shop.shopNick }</h1>
-			<p>店家地址：${requestScope.shop.shopAddress }</p>
-			<p>店家介绍：${requestScope.shop.shopDesc }</p>
+			<h1 class="shopNick"></h1>
+			<p class=" shopAddr"></p>
+			<p class=" shopDesc"></p>
 			<hr>
 		</div>
 
@@ -79,7 +78,7 @@
 					</tr>
 				</thead>
 				<tbody>
-				
+
 				</tbody>
 			</table>
 			<!-- 订单总信息 -->
@@ -91,29 +90,22 @@
 			</div>
 		</div>
 		<ul class="nav nav-tabs" role="tablist">
-			<li class="active"><a href="#comment" role="tab" data-toggle="tab">评价</a></li>
+			<li class="active"><a href="#comment" role="tab"
+				data-toggle="tab">评价</a></li>
 			<li><a href="#history" role="tab" data-toggle="tab">历史订单</a></li>
 		</ul>
-		
+
 		<div class="tab-content">
 			<div class="tab-pane active" id="comment">
-				<br>
-				<br>
-				<br>
-				<br>
-				<br>
+				<br> <br> <br> <br> <br>
 			</div>
 			<div class="tab-pane active" id="history">
-			<br>
-				<br>
-				<br>
-				<br>
-				<br>
+				<br> <br> <br> <br> <br>
 			</div>
 		</div>
 	</div>
 
-	
+
 	<%@ include file="footer.jsp"%>
 	<script src="js/jquery-2.1.1.js"></script>
 	<script src="js/bootstrap.min.js"></script>

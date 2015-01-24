@@ -1,10 +1,14 @@
 package com.schoolo2o.action;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import net.sf.cglib.transform.impl.AddDelegateTransformer;
 
 import org.apache.struts2.ServletActionContext;
 
@@ -14,6 +18,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import com.schoolo2o.pojo.Addressinfo;
 import com.schoolo2o.pojo.MyJSONObject;
+import com.schoolo2o.pojo.Shopinfo;
 import com.schoolo2o.pojo.Userinfo;
 import com.schoolo2o.pojo.send.OrderSend;
 import com.schoolo2o.pojo.send.OrderinfoSend;
@@ -122,6 +127,7 @@ public class OrderAction extends BaseAction {
 		}
 //		System.out.println(orderService);
 		order=orderService.getOrderPrice(order);
+		//session.put("order", order);
 		return order;
 	};
 	
@@ -136,7 +142,6 @@ public class OrderAction extends BaseAction {
 			if(jsonStr!=null&&!jsonStr.equals("null")){
 				OrderSend order=getOrderFromStr(jsonStr);
 				order.setPrintRequire(set);
-				
 				Sender.sendOk(order, response);
 			}else{
 				Sender.sendError("参数有误哦", response);
@@ -212,13 +217,31 @@ public class OrderAction extends BaseAction {
 	 * @return
 	 */
 	public String addOrUpdateAddressinfo(){
-		String JsonStr=request.getParameter("JsonStr");
+		String contactor=request.getParameter("contactor");
+		String sendAddress=request.getParameter("sendAddress");
+		String callPhone=request.getParameter("callPhone");
+		String secPhone=request.getParameter("secPhone");
+		String addressId=request.getParameter("addressId");
 		try{
-			if(JsonStr==null||JsonStr.equals("")){
-				Sender.sendError("参数为空", response);
+			if(callPhone==null||secPhone==null||sendAddress==null||addressId==null){
+				Sender.sendError("必要参数为空", response);
 				return null;
 			}
-			Addressinfo address=JSON.parseObject(JsonStr, Addressinfo.class);
+			Addressinfo address=new Addressinfo();
+			address.setCallPhone(callPhone);
+			address.setContactor(contactor);
+			//默认为0表示不是默认地址
+			address.setIsDefault(0);
+			address.setSecPhone(secPhone);
+			address.setSendAddress(sendAddress);
+			//如果传过来有Id,表示修改
+			if(!addressId.equals("none")){
+				long addId=Long.parseLong(addressId);
+				address.setAddressId(addId);
+			}else{
+				address.setAddressId(new Date().getTime());
+			}
+			//如果当前用户登录，则取登录用户地址，如果没有登录则不会进入此页面
 			Userinfo userinfo=(Userinfo) session.get("user");
 			if(userinfo==null){
 				userinfo=new Userinfo();
@@ -227,7 +250,7 @@ public class OrderAction extends BaseAction {
 			address.setUserinfo(userinfo);
 			boolean flag=addressService.addOrUpdateAddress(address);
 			if(flag){
-				Sender.sendOk("保存成功", response);
+				Sender.sendOk(address, response);
 			}else{
 				Sender.sendError("保存失败", response);
 			}
@@ -242,15 +265,28 @@ public class OrderAction extends BaseAction {
 	 * 需要传递订单信息
 	 */
 	public String saveOrder(){
-		String jsonStr=request.getParameter("hh");
+		String jsonStr=request.getParameter("order");
 		try{
 			System.out.println(jsonStr);
+			JSONObject jo=JSON.parseObject(jsonStr);
+			String shopName=jo.getString("shopName");
+			long addressId=jo.getLong("addressId");
+			double totalCost=jo.getDoubleValue("totalCost");
+			int payType=jo.getIntValue("payType");
+			int sendType=jo.getIntValue("sendType");
+			JSONArray ja=jo.getJSONArray("orderItems");
+			for(int i=0;i<ja.size();i++){
+				ja.get(i);
+			}
+			Shopinfo shopinfo=shopService.search(shopName);
+			
 			response.setCharacterEncoding("utf-8");
 			if(jsonStr!=null&&!jsonStr.equals("")){
-				OrderinfoSend order=JSON.parseObject(jsonStr,OrderinfoSend.class);
+				
+				
 				//调用服务层计费 保存
 				jsonObject.setMessage("null");
-				jsonObject.setData(order);
+				//jsonObject.setData(order);
 				jsonStr=JSON.toJSONString(jsonObject);
 				response.getWriter().write(jsonStr);
 			}else{
@@ -271,8 +307,30 @@ public class OrderAction extends BaseAction {
 	}
 	
 	/**
+	 * 修改地址状态是否为当前地址
+	 * @throws IOException 
+	 */
+	public String setDefault() throws IOException{
+		String oldId=request.getParameter("oldId");
+		String newId=request.getParameter("newId");
+		if(oldId==null||newId==null){
+			Sender.sendError("参数有误", response);
+		}else{
+			long oldIdL=Long.parseLong(oldId);
+			long newIdL=Long.parseLong(newId);
+			boolean flag=addressService.changeTypes(oldIdL, newIdL);
+			if(flag)
+				Sender.sendOk("修改成功", response);
+			else
+				Sender.sendError("修改失败", response);
+		}
+		return null;
+	}
+	
+	
+	/**
 	 * 修改订单状态
-	 * 需要获取新状态，以及原有状态信息
+	 * 需要获取新状态Id，以及原有状态Id
 	 */
 	public String editOrderStatus(){
 		String oldStatusIdStr=request.getParameter("");

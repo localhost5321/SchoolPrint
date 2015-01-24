@@ -2,17 +2,13 @@ package com.schoolo2o.action;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts2.ServletActionContext;
 
-import com.alibaba.fastjson.JSON;
-import com.opensymphony.xwork2.ActionSupport;
 import com.schoolo2o.pojo.Docinfo;
-import com.schoolo2o.pojo.MyJSONObject;
 import com.schoolo2o.pojo.Userinfo;
 import com.schoolo2o.service.DocService;
 import com.schoolo2o.service.UserService;
@@ -79,9 +75,7 @@ public class UpLoadFileAction extends BaseAction {
 			String finalFilePath = MyFileUtils.Store(in, fileName);
 
 			// *******************以下代码需要重构下＊＊＊＊＊＊＊＊＊＊＊＊＊＊ //
-			System.out.println(fileName + "," + finalFilePath + "," + userName);
 			long docId = addDocument(fileName, finalFilePath, userName);
-			System.out.println("传入计算页数的文件的路径是：" + finalFilePath);
 			int fileCount = DOMUtils.getPageCount(finalFilePath);
 			DocMessage dm = new DocMessage(docId, fileCount);
 			Sender.sendOk(dm, response);

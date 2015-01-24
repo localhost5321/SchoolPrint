@@ -90,7 +90,7 @@ public class ShopAction extends BaseAction {
 				shopinfoSend.setOrders(orderSends);
 				request.setAttribute("shop", shopinfoSend);
 				Sender.sendOk(shopinfoSend, response);
-				return SUCCESS;
+				return null;
 			} else {
 				Sender.sendError("参数有错误", response);
 				return null;
