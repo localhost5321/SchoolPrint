@@ -72,5 +72,16 @@
         <filter-name>encodingFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+    <listener>
+        <listener-class>com.schoolo2o.listener.MyListener</listener-class>
+    </listener>
+    
+    <session-config>
+        <session-timeout>2</session-timeout>
+      
+    </session-config>
+    <listener>
+        <listener-class>com.schoolo2o.listener.CountHistroyCome</listener-class>
+    </listener>
   
 </web-app>
