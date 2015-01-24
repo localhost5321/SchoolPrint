@@ -1,6 +1,13 @@
+<<<<<<< HEAD
 /struts_UserOperate.xml
+=======
+>>>>>>> branch 'master' of https://github.com/hengyicai/SchoolPrint.git
 /applicationContext.xml
 /com/
 /struts.xml
 /strutsShop.xml
 /struts_OrderOperate.xml
+<<<<<<< HEAD
+=======
+/struts_UserOperate.xml
+>>>>>>> branch 'master' of https://github.com/hengyicai/SchoolPrint.git
