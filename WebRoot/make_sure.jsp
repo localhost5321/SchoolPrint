@@ -39,13 +39,9 @@
 				<br>
 				<ul id="addr_ul">
 				</ul>
-<<<<<<< HEAD
-				<button class="btn btn-danger" style="float: right;">添加地址</button>
-				<br>
-=======
+
 				<a class="btn btn-danger" style="float: right;" data-toggle="modal"
 					data-target="#addAddr" id="btn_addAddr">添加地址</a> <br>
->>>>>>> branch 'master' of https://github.com/hengyicai/SchoolPrint.git
 			</form>
 			<p>文件列表：</p>
 			<table class="table table-striped table-bordered table-hover"
