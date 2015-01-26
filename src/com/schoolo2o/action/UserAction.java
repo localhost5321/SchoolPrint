@@ -67,14 +67,14 @@ public class UserAction extends BaseAction{
 				request.getServletContext().setAttribute("userName", userOnLine);
 			}
 			userOnLine.put(userName, userName);
-			session.put("user", user);
+			session.put("user", us);
 			String userInfo = "<li><a href='javascript:void(0)' class='dropdown-toggle' data-toggle='dropdown'>欢迎你："+user.getUserName()+"<span class='caret'></span></a><ul class='dropdown-menu' role='menu'><li><a href='javascript:void(0)' data-tab='tab-chrome' onclick='exit();'>退出</a></li></ul></li>";
 			response.getWriter().write("{\"status\":\"1\",\"message\":\""+userInfo+"\"}");
 			return null;
 		}else{
 			this.user = null;
 			response.getWriter().write("{\"status\":\"0\",\"message\":\"密码错误\"}");
-			session.put("user", user);
+			///session.put("user", user);
 			return null;
 		}
 		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     

@@ -115,6 +115,10 @@ function setDefaultAddr(span_this, e) {
 	var preDefaultId = $(".isDefault").closest("li").attr("id");
 	// 当前选择地址的ID
 	var currentId = $(span_this).closest("li").attr("id");
+	console.log(preDefaultId);
+	if(preDefaultId == undefined){
+		preDefaultId == "null";
+	}
 
 	$.post("setDefault.action?oldId=" + preDefaultId + "&newId=" + currentId,
 
@@ -212,7 +216,8 @@ function addAddrInfo() {
 /**
  * 用户修改地址
  */
-function changeAddrInfo() {
+function changeAddressInfo() {
+	alert("修改地址");
 	var contactor = $("#changeUserName").val();
 	var sendAddress = $("#changeAddrInfo").val();
 	var callPhone = $("#changePhone").val();

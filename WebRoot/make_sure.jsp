@@ -140,7 +140,7 @@
 						<button type="button" class="btn btn-default" data-dismiss="modal">
 							取消</button>
 						<button type="button" class="btn btn-primary"
-							onclick="changeAddrInfo()">修改</button>
+							onclick="changeAddressInfo()">修改</button>
 					</div>
 				</form>
 			</div>

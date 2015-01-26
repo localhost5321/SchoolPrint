@@ -13,7 +13,7 @@
 
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="username" value="root"></property>
-		<property name="password" value="1014187702abc"></property>
+		<property name="password" value="ailisa1314"></property>
 
 	</bean>
 	<bean id="sessionFactory"

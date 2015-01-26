@@ -1,7 +1,6 @@
 package com.schoolo2o.listener;
 
 import java.util.Map;
-
 import javax.servlet.annotation.WebListener;
 import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
