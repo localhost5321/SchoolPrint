@@ -79,7 +79,6 @@ public class OrderServiceImpl implements OrderService {
 	        Osend.setItemPrice(newPrice, i);
 	        Osend.setTotal(Osend.getTotal()+newPrice);
 		}
-		 System.out.println(Osend.getTotal()+"!!!!!~~~~~~~~~~~!!!!!!!!!!!!!");
 		return Osend;
 	}
 

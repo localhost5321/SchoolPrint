@@ -8,8 +8,6 @@ import com.schoolo2o.service.AddressService;
 
 public class AddressServiceImpl implements AddressService {
 	private AddressDao addressDao;
-	
-	
 
 	public AddressDao getAddressDao() {
 		return addressDao;
@@ -34,27 +32,33 @@ public class AddressServiceImpl implements AddressService {
 		return addressDao.getAddresses(userId);
 	}
 
-	
 	@Override
 	public boolean changeTypes(long oldId, long newId) {
-		try{
-			Addressinfo newDeAddress=addressDao.getAddressById(newId);
-			Addressinfo oldDeAddress=addressDao.getAddressById(oldId);
-			if(newDeAddress!=null&&oldDeAddress!=null){
+
+		try {
+			if (oldId == -1) {
+				Addressinfo newDeAddress = addressDao.getAddressById(newId);
+				if (newDeAddress != null) {
+					newDeAddress.setIsDefault(1);
+					return addressDao.addOrUpdateAddress(newDeAddress);
+				} else {
+					return false;
+				}
+			}
+			Addressinfo newDeAddress = addressDao.getAddressById(newId);
+			Addressinfo oldDeAddress = addressDao.getAddressById(oldId);
+			if (newDeAddress != null && oldDeAddress != null) {
 				newDeAddress.setIsDefault(1);
 				oldDeAddress.setIsDefault(0);
-				return true;
-			}else{
+				return addressDao.addOrUpdateAddress(oldDeAddress)
+						&& addressDao.addOrUpdateAddress(newDeAddress);
+			} else {
 				return false;
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
 	}
-
-
-
-	
 
 }

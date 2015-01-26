@@ -88,6 +88,7 @@ function make_sure_order() {
 	$.post("getAllAddress.action", function(json_data) {
 		console.log(json_data);
 		var json = JSON.parse(json_data);
+		console.log("getAllAddress.action的返回结果是：" + json);
 		sessionStorage.setItem("addrList", json_data);
 	});
 	// 保存店铺名

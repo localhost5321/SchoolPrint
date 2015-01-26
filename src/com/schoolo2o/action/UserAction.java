@@ -2,8 +2,12 @@ package com.schoolo2o.action;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,20 +49,32 @@ public class UserAction extends BaseAction{
 		response.setCharacterEncoding("utf-8");
 		Userinfo us = this.userService.searchUser(user.getUserName());
 		String MD5Psw = MD5.md5(user.getUserPwd().getBytes());
+		//如果当前用户已经在线，则给出提醒
+		String userName = user.getUserName();
+		Map userOnLine=(Map) request
+				.getServletContext().getAttribute("userName");
+		if(userOnLine!=null&&userOnLine.containsKey(userName)){
+			System.out.println("当前用户:"+userName+"已经在线+++++++++++++++");
+		}
 		if(us == null){
 			//返回一段json数据
 			response.getWriter().write("{\"status\":\"0\",\"message\":\"用户名不存在\"}");
 			return null;
 		}else if(us.getUserPwd().equals(MD5Psw)){
-			
-			session.put("user", user);
+			//先将当前用户名放入在线用户名列表，如果用户名列表不存在则创建
+			if(userOnLine==null){
+				userOnLine=new HashMap();
+				request.getServletContext().setAttribute("userName", userOnLine);
+			}
+			userOnLine.put(userName, userName);
+			session.put("user", us);
 			String userInfo = "<li><a href='javascript:void(0)' class='dropdown-toggle' data-toggle='dropdown'>欢迎你："+user.getUserName()+"<span class='caret'></span></a><ul class='dropdown-menu' role='menu'><li><a href='javascript:void(0)' data-tab='tab-chrome' onclick='exit();'>退出</a></li></ul></li>";
 			response.getWriter().write("{\"status\":\"1\",\"message\":\""+userInfo+"\"}");
 			return null;
 		}else{
 			this.user = null;
 			response.getWriter().write("{\"status\":\"0\",\"message\":\"密码错误\"}");
-			session.put("user", user);
+			///session.put("user", user);
 			return null;
 		}
 		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
@@ -107,6 +123,11 @@ public class UserAction extends BaseAction{
 	 */
 	public String verifyUserName() throws IOException{
 		String userName = request.getParameter("userName");
+		Map userOnLine=(Map) request
+				.getServletContext().getAttribute("userName");
+		if(userOnLine!=null&&userOnLine.containsKey(userName)){
+			System.out.println("当前用户:"+userName+"已经在线+++++++++++++++");
+		}
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("utf-8");
 		Userinfo user = this.userService.searchUser(userName);
@@ -124,8 +145,15 @@ public class UserAction extends BaseAction{
 	 * @return
 	 */
 	public String exit(){
+		Map userOnLine=(Map) request
+				.getServletContext().getAttribute("userName");
+		Userinfo localUser=(Userinfo) session.get("user");
+		System.out.println("用户"+localUser.getUserName()+"已经退出");
+		userOnLine.remove(localUser.getUserName());
 		session.clear();
 		user=null;
 		return null;
 	}
+	
+	
 }
