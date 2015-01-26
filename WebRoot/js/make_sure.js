@@ -7,7 +7,7 @@ $(function() {
 	$("#navBarPrint").attr("class", "active");
 	$("#navBarPrint").children("a").attr("href", "print.jsp");
 
-	var json = sessionStorage.getItem("order");
+	var json = sessionStorage.getItem("orderList");
 	console.log(json);
 	var obj = JSON.parse(json);
 
@@ -18,7 +18,7 @@ $(function() {
 		addLi(value);
 	});
 	// 取出所有文件
-	for ( var i = 0; i < obj.data.docId.length; i++) {
+	for ( var i = 0; i < obj.data.length; i++) {
 		var fileName = obj.data.fileName[i];
 		var pageCounts = obj.data.pageCount[i];
 		var setting = obj.data.printRequire[i];

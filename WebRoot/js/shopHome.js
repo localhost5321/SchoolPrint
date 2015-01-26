@@ -49,6 +49,7 @@ $(function() {
 		data : "data=" + orderList,
 		success : function(response) {
 			var obj = JSON.parse(response);
+			var orderListObj = JSON.parse(orderList);
 			// 如果用户没有选择文件，隐藏表格
 			if (obj.data.docId.length == 0) {
 				$(".orderDiv").hide();
@@ -65,9 +66,15 @@ $(function() {
 						"<tr><td>" + fileName + "</td><td>" + pageCounts + "</td><td>"
 								+ setting + "</td><td>" + printCounts + "</td><td>"
 								+ price + "</td><td>" + itemPrice + "</td></tr>");
+				//向订单列表添加钱数
+				orderListObj.data[i].price = price;
+				orderListObj.data[i].itemPrice = itemPrice;
 			}
 
 			$(".orderInfo").text("总价：" + obj.data.total + "元");
+			//将含单价和总价的数据存储
+			orderListObj.total = obj.data.total;
+			sessionStorage.setItem("orderList", JSON.stringify(orderListObj));
 		},
 		type : "post",
 	});

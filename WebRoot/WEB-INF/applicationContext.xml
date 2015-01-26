@@ -7,13 +7,13 @@
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 
 
-		<property name="url" value="jdbc:mysql://192.168.1.131:3306/schoolo2o">
+		<property name="url" value="jdbc:mysql://118.244.151.176:10001/schoolo2o">
 
 		</property>
 
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="username" value="root"></property>
-		<property name="password" value="1014187702abc"></property>
+		<property name="username" value="hua"></property>
+		<property name="password" value="12302014"></property>
 
 	</bean>
 	<bean id="sessionFactory"
