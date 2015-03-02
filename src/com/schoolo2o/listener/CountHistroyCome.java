@@ -13,10 +13,12 @@ public class CountHistroyCome implements ServletRequestListener {
 	@Override
 	public void requestDestroyed(ServletRequestEvent arg0) {
 		history++;
-		System.out.println();
 		Console.LOG(getClass(), "到目前为止，本网站点击率已经突破" + history + "人次");
-		int onLine = (int) arg0.getServletContext().getAttribute("countOnLine");
-		Console.LOG(getClass(), "当前在线人数为:" + onLine);
+//		if(arg0 != null && arg0.getServletContext() != null)
+//		{
+//			int onLine = (int) arg0.getServletContext().getAttribute("countOnLine");
+//			Console.LOG(getClass(), "当前在线人数为:" + onLine);
+//		}
 	}
 
 	@Override

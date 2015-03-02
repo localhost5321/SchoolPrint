@@ -33,7 +33,8 @@ public class UserAction extends BaseAction{
 
 	public void setUser(Userinfo user) {
 		this.user= user;
-		log.info(user.toString());
+		if(this.user != null)
+			log.info(user.toString());
 	}
 	
 	public UserService getUserService() {

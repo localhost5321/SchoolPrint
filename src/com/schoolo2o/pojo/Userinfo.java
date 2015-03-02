@@ -15,6 +15,7 @@ public class Userinfo implements java.io.Serializable {
 
 	// Fields
 
+
 	private Long userId;
 	private String userName;
 	private String userPwd;
@@ -139,6 +140,15 @@ public class Userinfo implements java.io.Serializable {
 
 	public void setDocinfos(Set docinfos) {
 		this.docinfos = docinfos;
+	}
+	
+
+	@Override
+	public String toString() {
+		return "Userinfo [userId=" + userId + ", userName=" + userName
+				+ ", userPwd=" + userPwd + ", email=" + email + ", regTime="
+				+ regTime + ", userPhone=" + userPhone + ", emailChecked="
+				+ emailChecked + "]";
 	}
 
 }

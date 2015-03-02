@@ -239,6 +239,7 @@ public class OrderAction extends BaseAction {
 		String secPhone = request.getParameter("secPhone");
 		String addressId = request.getParameter("addressId");
 		try {
+			//这里应该前台保证这些参数不为空
 			if (callPhone == null || secPhone == null || sendAddress == null
 					|| addressId == null) {
 				Sender.sendError("必要参数为空", response);

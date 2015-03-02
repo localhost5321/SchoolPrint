@@ -10,6 +10,7 @@ import com.schoolo2o.pojo.Addressinfo;
 import com.schoolo2o.pojo.Docinfo;
 import com.schoolo2o.pojo.Orderinfo;
 import com.schoolo2o.pojo.Userinfo;
+import com.schoolo2o.utils.Console;
 /*
  * for the UserInfoDao's implement
  * @zhaolong
@@ -21,7 +22,8 @@ public class UserInfoDaoImpl extends HibernateDaoSupport implements UserinfoDao 
 	//添加一个用户
 	@Override
 	public boolean addUser(Userinfo user) {
-		if(user!=null){
+		Console.LOG(getClass(), user);
+		if(user != null){
 			try{
 				this.getHibernateTemplate().save(user);
 				return true;
