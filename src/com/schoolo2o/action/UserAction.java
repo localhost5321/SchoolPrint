@@ -146,13 +146,19 @@ public class UserAction extends BaseAction{
 	 * @return
 	 */
 	public String exit(){
+		//当前已经登录的用户名集合
 		Map userOnLine=(Map) request
 				.getServletContext().getAttribute("userName");
+		
+		//当前登录用户
 		Userinfo localUser=(Userinfo) session.get("user");
+		
 		Console.LOG(getClass(), "用户"+localUser.getUserName()+"已经退出");
+		
 		userOnLine.remove(localUser.getUserName());
 		session.clear();
 		user=null;
+		
 		return null;
 	}
 	

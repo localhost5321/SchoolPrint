@@ -162,7 +162,6 @@ public class OrderAction extends BaseAction {
 	 */
 	public String getAllAddress() {
 		try {
-
 			long userId;
 			if (session.containsKey("user")) {
 				Userinfo user = (Userinfo) session.get("user");
@@ -248,8 +247,12 @@ public class OrderAction extends BaseAction {
 			Addressinfo address = new Addressinfo();
 			address.setCallPhone(callPhone);
 			address.setContactor(contactor);
-			// 默认为0表示不是默认地址
-			address.setIsDefault(0);
+			
+			List<Addressinfo> list = addressService.getAddresses(userinfo.getUserId());
+			if( list == null )
+				address.setIsDefault(1); // 首次添加的地址缺省为默认地址
+			else
+				address.setIsDefault(0); // 默认为0表示不是默认地址
 			address.setSecPhone(secPhone);
 			address.setSendAddress(sendAddress);
 			// 如果传过来有Id,表示修改
@@ -327,7 +330,6 @@ public class OrderAction extends BaseAction {
 		String newId = request.getParameter("newId");
 
 		if ("null".equals(oldId) && newId != null) {
-
 			// 没有默认地址，设置默认地址
 			long newIdL = Long.parseLong(newId);
 			boolean flag = addressService.changeTypes(-1, newIdL);
