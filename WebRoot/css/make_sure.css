@@ -1,3 +1,11 @@
+a:hover{
+	text-decoration: none;
+}
+
+li{
+	list-style: none
+}
+
 #container {
 	margin: 30px auto;
 	width: 900px;
@@ -12,6 +20,11 @@
 	vertical-align: middle;
 }
 
+.changeAddr {
+	float: right;
+	line-height: 35px;
+}
+
 .addrSelect {
 	border-color: rgb(255, 85, 0);
 	border-style: solid;
@@ -24,7 +37,6 @@
 	padding-right: 15px;
 	padding-top: 5px;
 	padding-bottom: 5px;
-	list-style: none
 }
 
 .send_icon {

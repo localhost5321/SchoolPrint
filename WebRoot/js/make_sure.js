@@ -10,29 +10,35 @@ $(function() {
 	var json = sessionStorage.getItem("orderList");
 	console.log(json);
 	var obj = JSON.parse(json);
-
-	var addrList = sessionStorage.getItem("addrList");
-	console.log(addrList);
-	var addr = JSON.parse(addrList).data;
-	$.each(addr, function(key, value) {
-		addLi(value);
+	
+	// 请求地址并保存
+	$.post("getAllAddress.action", function(json_data) {
+		var obj = JSON.parse(json_data);
+		if(obj.status == "1"){
+			$.each(obj.data, function(key, value) {
+				console.log(value);
+				addLi(value);
+			});
+		}else{
+			$("#addr_ul").append("<li id='addr_tip'>您还没有任何地址，请先添加地址！</li>");
+		}
 	});
+	
 	// 取出所有文件
 	for ( var i = 0; i < obj.data.length; i++) {
-
-		var fileName = obj.data.fileName[i];
-		var pageCounts = obj.data.pageCount[i];
-		var setting = obj.data.printRequire[i];
-		var printCounts = obj.data.fileCount[i];
-		var price = obj.data.price[i];
-		var itemPrice = obj.data.itemPrice[i];
+		var fileName = obj.data[i].fileName;
+		var pageCounts = obj.data[i].pageCounts;
+		var setting = obj.data[i].setting;
+		var printCounts = obj.data[i].printCounts;
+		var price = obj.data[i].price;
+		var itemPrice = obj.data[i].itemPrice;
 		$("#orderTable").append(
 				"<tr><td>" + fileName + "</td><td>" + pageCounts + "</td><td>"
 						+ setting + "</td><td>" + printCounts + "</td><td>"
 						+ price + "</td><td>" + itemPrice + "</td></tr>");
 	}
 
-	$(".orderInfo").text("总价：" + obj.data.total + "元");
+	$(".orderInfo").text("总价：" + obj.total + "元");
 
 });
 
@@ -55,7 +61,7 @@ function addLi(value) {
 								+ user_phone
 								+ "</label>"
 								+ " <span style='margin-left: 10px' id='setDefault'></span>"
-								+ " <a  href='' style='float: right;'>修改本地址</a></li>");
+								+ " <a  href='' class='changeAddr'>修改本地址</a></li>");
 	} else if (is_default == 1) {
 		$("#addr_ul")
 				.append(
@@ -70,7 +76,7 @@ function addLi(value) {
 								+ user_phone
 								+ "</label>"
 								+ " <span style='margin-left: 10px' id='setDefault'>默认地址</span>"
-								+ " <a  href='' style='float: right;'>修改本地址</a></li>");
+								+ " <a  href='' class='changeAddr'>修改本地址</a></li>");
 
 	}
 }
@@ -156,7 +162,7 @@ function stopBubble(e) {
  * 用户增加地址
  */
 function addAddrInfo() {
-
+	$("#addr_tip").hide();
 	var contactor = $("#newUserName").val();
 	var sendAddress = $("#newAddrInfo").val();
 	var callPhone = $("#newPhone").val();
@@ -203,7 +209,7 @@ function addAddrInfo() {
 													+ user_phone_sec
 													+ "</span>"
 													+ " <span style='margin-left: 10px' class='setDefault' onclick='setDefaultAddr(this,event)'><a href='javascript:void(0)'>设为默认地址</a></span>"
-													+ " <a class='changAddress icon_hidden' href='javascript:void(0)' style='float: right;' data-toggle='modal'"
+													+ " <a class='changAddress icon_hidden changeAddr' href='javascript:void(0)'  data-toggle='modal'"
 													+ "data-target='#changeAddr'>修改本地址</a></li>");
 							$("#addAddr").modal("hide");
 						} else {
@@ -281,7 +287,7 @@ function addLi(value) {
 								+ user_phone_sec
 								+ "</span>"
 								+ " <span style='margin-left: 10px' class='setDefault' onclick='setDefaultAddr(this,event)'><a href='javascript:void(0)'>设为默认地址</a></span>"
-								+ " <a class='changAddress icon_hidden' href='javascript:void(0)' style='float: right;' data-toggle='modal'"
+								+ " <a class='changAddress icon_hidden changeAddr' href='javascript:void(0)'  data-toggle='modal'"
 								+ "data-target='#changeAddr'>修改本地址</a></li>");
 	} else if (is_default == 1) {
 		$("#addr_ul")
@@ -307,7 +313,7 @@ function addLi(value) {
 								+ user_phone_sec
 								+ "</span>"
 								+ " <span style='margin-left: 10px' class='setDefault isDefault'>默认地址</span>"
-								+ "  <a  class='changAddress' href='javascript:void(0)' style='float: right;' data-toggle='modal'"
+								+ "  <a  class='changAddress changeAddr' href='javascript:void(0)' data-toggle='modal'"
 								+ "data-target='#changeAddr'>修改本地址</a></li>");
 	}
 

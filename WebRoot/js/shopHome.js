@@ -80,17 +80,3 @@ $(function() {
 	});
 	
 });
-
-function make_sure_order() {
-	// 保存当前最新的文件列表
-
-	// 请求地址并保存
-	$.post("getAllAddress.action", function(json_data) {
-		console.log(json_data);
-		var json = JSON.parse(json_data);
-		console.log("getAllAddress.action的返回结果是：" + json);
-		sessionStorage.setItem("addrList", json_data);
-	});
-	// 保存店铺名
-	location.href = "make_sure.jsp";
-}
