@@ -386,6 +386,9 @@ function showOrder(shopName) {
 	}
 	
 	$.post("showOrder.action", "data=" + JSON.stringify(json), function(response){
+		//需要存储的订单信息
+		var info = showUserFile();
+		
 		var obj = JSON.parse(response);
 		if(obj.status == 0){
 			alert(obj.message);
@@ -415,18 +418,23 @@ function showOrder(shopName) {
 			var tdPrice = document.createElement("td");
 			tdPrice.innerHTML = obj.data.price[i];
 			tr.appendChild(tdPrice);
+			info.data[i].price = obj.data.price[i];
 			// 创建总价列
 			var sumPrice = document.createElement("td");
 			sumPrice.className = "sumPrice";
 			sumPrice.innerHTML = obj.data.itemPrice[i];
 			tr.appendChild(sumPrice);
+			info.data[i].itemPrice = obj.data.itemPrice[i];
 			
 			// 添加此行
 			table.tBodies[0].appendChild(tr);
 		
 		}
 		$(".orderInfo").text("总价：" + obj.data.total + "元");
-		sessionStorage.setItem("order", response);
+		
+		info.shopName = obj.data.shopName;
+		info.total = obj.data.total;
+		sessionStorage.setItem("orderList", JSON.stringify(info));
 	});
 
 	// 弹窗
