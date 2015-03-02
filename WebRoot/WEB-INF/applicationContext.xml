@@ -98,5 +98,4 @@
 		<property name="addressDao" ref="addressDao"></property>
 	</bean>
 
-
 </beans>
