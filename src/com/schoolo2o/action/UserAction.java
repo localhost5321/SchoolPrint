@@ -18,6 +18,7 @@ import org.apache.struts2.ServletActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.schoolo2o.pojo.Userinfo;
 import com.schoolo2o.service.UserService;
+import com.schoolo2o.utils.Console;
 import com.schoolo2o.utils.MD5;
 
 public class UserAction extends BaseAction{
@@ -54,7 +55,7 @@ public class UserAction extends BaseAction{
 		Map userOnLine=(Map) request
 				.getServletContext().getAttribute("userName");
 		if(userOnLine!=null&&userOnLine.containsKey(userName)){
-			System.out.println("当前用户:"+userName+"已经在线+++++++++++++++");
+			Console.LOG(getClass(), "当前用户:"+userName+"已经在线+++++++++++++++");
 		}
 		if(us == null){
 			//返回一段json数据
@@ -80,7 +81,6 @@ public class UserAction extends BaseAction{
 		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 	}
 	public String userRegist() throws IOException{
-		System.out.println(user.getUserName());
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("utf-8");
 		user.setUserPwd(MD5.md5(user.getUserPwd().getBytes()));
@@ -126,7 +126,7 @@ public class UserAction extends BaseAction{
 		Map userOnLine=(Map) request
 				.getServletContext().getAttribute("userName");
 		if(userOnLine!=null&&userOnLine.containsKey(userName)){
-			System.out.println("当前用户:"+userName+"已经在线+++++++++++++++");
+			Console.LOG(getClass(), "当前用户:"+userName+"已经在线+++++++++++++++");
 		}
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("utf-8");
@@ -148,7 +148,7 @@ public class UserAction extends BaseAction{
 		Map userOnLine=(Map) request
 				.getServletContext().getAttribute("userName");
 		Userinfo localUser=(Userinfo) session.get("user");
-		System.out.println("用户"+localUser.getUserName()+"已经退出");
+		Console.LOG(getClass(), "用户"+localUser.getUserName()+"已经退出");
 		userOnLine.remove(localUser.getUserName());
 		session.clear();
 		user=null;

@@ -21,7 +21,6 @@ public class CharSetFilter implements Filter {
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/plain");
-		System.out.println("utf-8"+"!!!!!!!!!!!!!!!!!!");
 		chain.doFilter(request, response);
 	}
 

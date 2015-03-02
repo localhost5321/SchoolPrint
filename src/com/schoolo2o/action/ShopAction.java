@@ -24,6 +24,7 @@ import com.schoolo2o.pojo.send.ShopCommentSend;
 import com.schoolo2o.pojo.send.ShopinfoSend;
 import com.schoolo2o.service.OrderService;
 import com.schoolo2o.service.ShopService;
+import com.schoolo2o.utils.Console;
 import com.schoolo2o.utils.ListChange;
 import com.schoolo2o.utils.Sender;
 
@@ -37,7 +38,6 @@ public class ShopAction extends BaseAction {
 	 * @throws IOException
 	 */
 	public String getAllShops() {
-		// System.out.println("enter!");
 		try {
 			List<Shopinfo> list = shopService.searchShop();
 			response.setContentType("text/plain");
@@ -45,7 +45,7 @@ public class ShopAction extends BaseAction {
 			request.setCharacterEncoding("utf-8");
 			if (list != null && !list.isEmpty()) {
 				List<ShopinfoSend> listSend = ListChange.ParaseShops(list);
-				System.out.println(listSend.size());
+				Console.LOG(getClass(), listSend.size());
 				Sender.sendOk(listSend, response);
 			} else {
 				Sender.sendError("请求错误", response);

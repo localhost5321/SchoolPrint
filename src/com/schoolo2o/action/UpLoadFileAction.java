@@ -57,7 +57,6 @@ public class UpLoadFileAction extends BaseAction {
 	public String upLoadFileSave() throws IOException {
 
 		try {
-			System.out.println("*************************");
 			InputStream in = serletRequest.getInputStream();
 			serletRequest.setCharacterEncoding("UTF-8");
 			String fileName = serletRequest.getParameter("fileName");
@@ -74,7 +73,6 @@ public class UpLoadFileAction extends BaseAction {
 			// 存储文件
 			String finalFilePath = MyFileUtils.Store(in, fileName);
 
-			// *******************以下代码需要重构下＊＊＊＊＊＊＊＊＊＊＊＊＊＊ //
 			long docId = addDocument(fileName, finalFilePath, userName);
 			int fileCount = DOMUtils.getPageCount(finalFilePath);
 			DocMessage dm = new DocMessage(docId, fileCount);
@@ -92,16 +90,13 @@ public class UpLoadFileAction extends BaseAction {
 	 * 添加到文件表中
 	 */
 	public long addDocument(String fileName, String filePath, String userName) {
-		System.out.println("...." + userService);
 		Docinfo doc = new Docinfo();
 		doc.setFileName(fileName);
 		doc.setFilePath(filePath);
 		doc.setIsShare(1);
 		doc.setBrowseNum(0L);
 		doc.setDownNum(0L);
-		System.out.println(userName);
 		Userinfo user = userService.searchUser(userName);
-		System.out.println(user);
 		doc.setUserinfo(user);
 		doc = docService.add(doc, user);
 		return doc.getDocId();

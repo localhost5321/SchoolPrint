@@ -21,7 +21,7 @@ public class Sender {
 		mj.setMessage("");
 		mj.setData(data);
 		String jsonStr = JSON.toJSONString(mj);
-		System.out.println(jsonStr);
+		Console.LOG(Sender.class, jsonStr);
 		response.getWriter().write(jsonStr);
 	}
 	/**

@@ -6,6 +6,7 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.schoolo2o.dao.AddressDao;
 import com.schoolo2o.pojo.Addressinfo;
+import com.schoolo2o.utils.Console;
 
 /**
  * 添加或者更新一个地址信息
@@ -37,7 +38,7 @@ public class AddressDaoImpl extends HibernateDaoSupport implements AddressDao {
 				this.getHibernateTemplate().delete(ai);
 				return true;
 			}else{
-				System.out.println("当前地址不存在");
+				Console.LOG(getClass(), "要删除的地址不存在");
 				return false;
 			}
 		}catch(Exception e){

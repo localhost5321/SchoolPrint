@@ -49,13 +49,9 @@ public class DOMUtils {
 
 		String path = "D:\\Users\\EclipseLib\\apache-tomcat-7.0.53\\webapps\\SchoolPrint\\2015\\01\\18\\doc\\ba7e84bf3109f0c5e02b0c68ac6bfca1.doc";
 		filepath = filepath.replace('/', '\\');
-		System.out.println("最终传入word2pdf的文件路径是：" + filepath);
 		String pdfPath = word2pdf(filepath);
-		System.out.println("pdf的路径" + pdfPath);
 		if (!pdfPath.equals("")) {
-			System.out.println(pdfPath);
 			int count = getPageCount(pdfPath);
-			System.out.println(count);
 			return count;
 		}
 		return 0;
@@ -72,7 +68,6 @@ public class DOMUtils {
 		Matcher matcher = pattern.matcher(filePath);
 		if (matcher.find()) {
 			String str = matcher.group();
-			System.out.println("正则式匹配的str是" + str);
 			if (str.contains("doc")) {
 				// 计算word页码
 				return getPageCountWord(filePath);
@@ -112,11 +107,10 @@ public class DOMUtils {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			System.out.println("文档关闭");
 			if (app != null) {
+				Console.LOG(DOMUtils.class, "文档关闭");
 				app.invoke("Quit", new Variant[] {});
 			}
-
 			ComThread.Release();
 		}
 		return toFilePath;

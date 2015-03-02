@@ -63,7 +63,6 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 		try {
 			Query q=session.createQuery(hql);
 			shopList=q.list();
-			System.out.print("come in");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
