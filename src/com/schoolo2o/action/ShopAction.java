@@ -30,26 +30,28 @@ import com.schoolo2o.utils.Sender;
 
 /**
  * 商店端的操作
+ * 
  * @author hua
- *
+ * 
  */
-public class ShopAction extends ActionSupport{
-	
-	private ShopService shopService ;
+public class ShopAction extends ActionSupport {
+
+	private ShopService shopService;
 	private OrderService orderService;
 	private Shopinfo shopInfo;
-	private Map<String, Object> session = ServletActionContext.getContext().getSession();
+	private Map<String, Object> session = ServletActionContext.getContext()
+			.getSession();
 	private HttpServletResponse response = ServletActionContext.getResponse();
 	private HttpServletRequest request = ServletActionContext.getRequest();
-	
+
 	public ShopService getShopService() {
 		return shopService;
 	}
-	
+
 	public void setShopService(ShopService shopService) {
 		this.shopService = shopService;
 	}
-	
+
 	public OrderService getOrderService() {
 		return orderService;
 	}
@@ -57,15 +59,15 @@ public class ShopAction extends ActionSupport{
 	public void setOrderService(OrderService orderService) {
 		this.orderService = orderService;
 	}
-	
+
 	public Shopinfo getShopInfo() {
 		return shopInfo;
 	}
-	
+
 	public void setShopInfo(Shopinfo shopInfo) {
 		this.shopInfo = shopInfo;
 	}
-	
+
 	/**
 	 * 获取商店列表
 	 * 
@@ -91,8 +93,7 @@ public class ShopAction extends ActionSupport{
 			return null;
 		}
 	}
-	
-	
+
 	/**
 	 * 由商店名获取商店详情
 	 * 
@@ -137,64 +138,80 @@ public class ShopAction extends ActionSupport{
 		}
 
 	}
-	
+
 	/**
 	 * 店家登录
+	 * 
 	 * @return
 	 * @throws IOException
 	 */
-	public String shopLogin() throws IOException{
+	public String shopLogin() throws IOException {
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("utf8");
-		System.out.println("shopInfo = "+shopInfo);
-		System.out.println("shopInfo.shopName = "+shopInfo.getShopName());
-		System.out.println("shopPwd = "+shopInfo.getShopPwd());
-		System.out.println("this = "+this);
-		System.out.println("this.shopService = "+this.shopService);//null
-		System.out.println("shop = "+this.shopService.search(shopInfo.getShopName()));
+		System.out.println("shopInfo = " + shopInfo);
+		System.out.println("shopInfo.shopName = " + shopInfo.getShopName());
+		System.out.println("shopPwd = " + shopInfo.getShopPwd());
+		System.out.println("this = " + this);
+		System.out.println("this.shopService = " + this.shopService);// null
+		System.out.println("shop = "
+				+ this.shopService.search(shopInfo.getShopName()));
 		Shopinfo shop = this.shopService.search(shopInfo.getShopName());
 		Console.LOG(getClass(), shop.getShopPwd());
-		
-		if(shop == null){
-			response.getWriter().write("{\"status\":\"0\",\"message\":\"商店不存在\"}");
+
+		if (shop == null) {
+			response.getWriter().write(
+					"{\"status\":\"0\",\"message\":\"商店不存在\"}");
 			return null;
-		}
-		else if(shop.getShopPwd().equals(shopInfo.getShopPwd())){
+		} else if (shop.getShopPwd().equals(shopInfo.getShopPwd())) {
 			session.put("shopInfo", shop);
-			response.getWriter().write("{\"status\":\"1\",\"message\":\"\"}");
+			String shopRt = shop.toString();
+			response.getWriter().write(
+					"{\"status\":\"1\",\"message\":\"\",\"shop\":"+shopRt+"}");
 			return null;
-		}
-		else{
-			response.getWriter().write("{\"status\":\"0\",\"message\":\"密码错误\"}");
+		} else {
+			response.getWriter().write(
+					"{\"status\":\"0\",\"message\":\"密码错误\"}");
 			return null;
 		}
 	}
-	
-	
+
 	/**
 	 * 店家注册
+	 * 
 	 * @return
-	 * @throws IOException 
+	 * @throws IOException
 	 */
-	public String shopRegist() throws IOException{
+	public String shopRegist() throws IOException {
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("utf-8");
 		shopInfo.setShopPwd(MD5.md5(shopInfo.getShopPwd().getBytes()));
 		String priceKVs = request.getParameter("priceKV");
 		boolean addSucc = shopService.add(shopInfo);
-		
-		if(addSucc){
-			//反序列化价格列表的JSON，依次重组并添加到对应店铺
-			if(!priceKVs .equals("null")){
-				ArrayList<PriceKV> priceList = (ArrayList<PriceKV>) JSON.parseArray(priceKVs, PriceKV.class);
-				for(PriceKV p : priceList){
-					Priceinfo pi = new Priceinfo(shopService.search(shopInfo.getShopName()),
-							p.getPriceK(), Double.parseDouble(p.getPriceV()));
+
+		if (addSucc) {
+			// 反序列化价格列表的JSON，依次重组并添加到对应店铺
+			if (!priceKVs.equals("null")) {
+				ArrayList<PriceKV> priceList = (ArrayList<PriceKV>) JSON
+						.parseArray(priceKVs, PriceKV.class);
+				for (PriceKV p : priceList) {
+					Priceinfo pi = new Priceinfo(shopService.search(shopInfo
+							.getShopName()), p.getPriceK(),
+							Double.parseDouble(p.getPriceV()));
 					shopService.addTypePrice(pi, shopInfo.getShopName());
 				}
 			}
 			
-			response.getWriter().write("{\"status\":\"1\",\"message\":\"\"}");
+			Shopinfo shop = this.shopService.search(shopInfo.getShopName());
+			session.put("shopInfo", shop);
+			String shopRt = "<li><a href='javascript:void(0)' class='dropdown-toggle' data-toggle='dropdown'>"
+					+ "欢迎你："
+					+ shopInfo.getShopName()
+					+ "<span class='caret'></span></a>"
+					+ "<ul class='dropdown-menu' role='menu'>"
+					+ "<li><a href='javascript:void(0)' data-tab='tab-chrome'"
+					+ " onclick='exit();'>退出</a></li></ul></li>";
+			response.getWriter().write(
+					"{\"status\":\"1\",\"message\":\"" + shopRt + "\"}");
 			return null;
 		}
 		response.getWriter().write("{\"status\":\"0\",\"message\":\"注册失败\"}");
