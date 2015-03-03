@@ -3,21 +3,21 @@
 <struts>
 	<package name="shopPackge" extends="struts-default" namespace="/shop">
 		<!-- 店家登录 -->
-		<action name="shopLogin" class="com.schoolo2o.shop.action.ShopAction"
+		<action name="shopLogin" class="com.schoolo2o.action.ShopAction"
 			method="shopLogin">
 		</action>
 		
 		<!-- 店家注册 -->
-		<action name="shopRegist" class="com.schoolo2o.shop.action.ShopAction"
+		<action name="shopRegist" class="com.schoolo2o.action.ShopAction"
 			method="shopRegist">
 		</action>
 		
 		<!-- 获取所有店铺列表 -->
-		<action name="getShopList" class="com.schoolo2o.action.ShopAction"
+		<action name="getShopList" class="com.schoolo2o.ShopAction"
 			method="getAllShops">
 		</action>
 		<!-- 请求店铺详情 -->
-		<action name="getShopDetail" class="com.schoolo2o.action.ShopAction"
+		<action name="getShopDetail" class="com.schoolo2o.ShopAction"
 			method="getShopByName">
 		</action>
 	</package>
