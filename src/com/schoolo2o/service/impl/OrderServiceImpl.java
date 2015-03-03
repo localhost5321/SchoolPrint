@@ -26,7 +26,7 @@ import com.schoolo2o.service.OrderService;
  */
 
 public class OrderServiceImpl implements OrderService {
-	private OrderInfoDao orderInfoDao;//依赖注入一个
+	private OrderInfoDao orderInfoDao;
 	private UserinfoDao userInfoDao;
 	private ShopinfoDao shopInfoDao;
 	private DocInfoDao docInfoDao;
@@ -121,7 +121,7 @@ public class OrderServiceImpl implements OrderService {
 
 	@Override
 	public OrderSend addOrder(OrderSend Osend) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 

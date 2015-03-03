@@ -7,6 +7,7 @@ import com.schoolo2o.pojo.Orderstatus;
 import com.schoolo2o.pojo.send.OrderSend;
 
 public interface OrderService {
+	
 	/**
 	 * 生成一个订单
 	 * @param Osend 订单对象

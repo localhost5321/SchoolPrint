@@ -30,11 +30,18 @@ $(function() {
 	var json = sessionStorage.getItem("orderList");
 	console.log("sessionStorage存储的orderList为:"+json);
 	var obj = JSON.parse(json);
+	var shopNick_1 = obj.shopNick;
 
 	//设置本页店铺名
-	var shopNick = unescape($.getUrlVar("shopNick"));
-	console.log("店铺名为：" + shopNick);
-	$("#curr_shop_nick").text(shopNick);
+	var shopNick_2 = unescape($.getUrlVar("shopNick"));
+	
+	console.log("shopNick_1:" + shopNick_1);
+	console.log("shopNick_2:" + shopNick_2);
+	
+	if( shopNick_2 === "undefined")
+		$("#curr_shop_nick").text(shopNick_1);
+	else
+		$("#curr_shop_nick").text(shopNick_2);
 	
 	// 取出所有文件
 	for (var i = 0; i < obj.data.length; i++) {

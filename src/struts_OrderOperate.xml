@@ -2,7 +2,7 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
 		<package name="order" extends="struts-default">
-		<!-- 计算订单价格信息 展示订单的Action-->
+		<!-- 计算订单价格信息 -->
 		<action name="showOrder" class="com.schoolo2o.action.OrderAction"
 			method="showOrder">
 		</action>
@@ -22,15 +22,17 @@
 		<action name="setDefault" class="com.schoolo2o.action.OrderAction"
 		method="setDefault"></action>
 		
-		
 		<!-- 根据一个地址Id删除其地址信息 -->
 		<action name="deleteAddressinfo" class="com.schoolo2o.action.OrderAction"
 		method="deleteAddressinfo"></action>
 		
-		
 		<!--更新或者新增一个地址信息  -->
 		<action name="addOrUpdateAddressinfo" class="com.schoolo2o.action.OrderAction"
 		method="addOrUpdateAddressinfo"></action>
+		
+		<!-- 获取所有订单信息 -->
+		<action name="getAllOrder" class="com.schoolo2o.action.OrderAction"
+		method="getAllOrder"></action>
 		
 	</package>
 </struts>

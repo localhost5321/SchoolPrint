@@ -34,12 +34,8 @@ public class ShopinfoSend{
 	private List<ShopCommentSend> comments;
 	private List<OrderinfoSend> orders;
 	private List<PriceinfoSend>  priceinfos;
-	
-	
 
-	
-	// Constructors
-
+	//Constructors
 	public List<PriceinfoSend> getPriceinfos() {
 		return priceinfos;
 	}
@@ -173,7 +169,5 @@ public class ShopinfoSend{
 	public void setDelivery(Double delivery) {
 		this.delivery = delivery;
 	}
-
-
 
 }

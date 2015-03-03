@@ -385,5 +385,14 @@ public class OrderAction extends BaseAction {
 			return null;
 		}
 	}
+	
+	/**
+	 * 返回所有订单信息
+	 * @return
+	 */
+	public String getAllOrder(){
+		
+		return null;
+	}
 
 }
