@@ -187,5 +187,16 @@ public class Shopinfo implements java.io.Serializable {
 	public void setShopComments(PersistentSet shopComments) {
 		this.shopComments = shopComments;
 	}
+	
+	@Override
+	public String toString() {
+		return "{\"shopId\":\"" + shopId + "\",\"shopName\":\"" + shopName
+				+ "\",\"shopPwd\":\"" + shopPwd + "\",\"shopNick\":\""
+				+ shopNick + "\",\"shopPhone\":\"" + shopPhone
+				+ "\",\"shopAddress\":\"" + shopAddress + "\",\"shopPic\":\""
+				+ shopPic + "\",\"shopDesc\":\"" + shopDesc
+				+ "\",\"delivery\":\"" + delivery + "\"}";
+	}
+
 
 }

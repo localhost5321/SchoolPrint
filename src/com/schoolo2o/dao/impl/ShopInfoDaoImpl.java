@@ -26,6 +26,7 @@ import com.schoolo2o.pojo.Shopinfo;
 public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao {
 
 	private static final Logger log = Logger.getLogger(ShopInfoDaoImpl.class);
+	
 	@Override
 	public boolean add(Shopinfo shopinfo) {   //添加一个商店
 		if (shopinfo != null) {
@@ -183,7 +184,7 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 		return null;
 	}
 
-	/*添加一个商店的类目*/
+	/*添加一个商店的价格类目*/
 	@Override
 	public boolean addTypePrice(Priceinfo priceinfo, String shopName) {
 		try {

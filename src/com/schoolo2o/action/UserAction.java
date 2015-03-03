@@ -81,6 +81,12 @@ public class UserAction extends BaseAction{
 		}
 		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 	}
+	
+	/**
+	 * 用户注册
+	 * @return
+	 * @throws IOException
+	 */
 	public String userRegist() throws IOException{
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("utf-8");

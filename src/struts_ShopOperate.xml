@@ -2,10 +2,17 @@
 <!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 <struts>
 	<package name="shopPackge" extends="struts-default" namespace="/shop">
+		<!-- 店家登录 -->
 		<action name="shopLogin" class="com.schoolo2o.shop.action.ShopAction"
 			method="shopLogin">
-
 		</action>
+		
+		<!-- 店家注册 -->
+		<action name="shopRegist" class="com.schoolo2o.shop.action.ShopAction"
+			method="shopRegist">
+		</action>
+		
+		<!-- 获取所有店铺列表 -->
 		<action name="getShopList" class="com.schoolo2o.action.ShopAction"
 			method="getAllShops">
 		</action>
