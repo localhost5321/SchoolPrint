@@ -6,6 +6,20 @@ li{
 	list-style: none
 }
 
+.sms_resend {
+	float: right;
+	width: 20%;
+}
+
+.sms_input{
+	float: left;
+	width: 75%;
+}
+
+.sms_content {
+	width: 100%;
+}
+
 #container {
 	margin: 30px auto;
 	width: 900px;

@@ -70,9 +70,9 @@
 				<p>备注：</p>
 				<textarea class="form-control" rows="3"></textarea>
 			</div>
-
 			<div class="btnDiv">
-				<button class="btn btn-primary">立即下单</button>
+				<a class="btn btn-primary" data-toggle="modal"
+					data-target="#smsVerify" id="btn_make_order">立即下单</a>
 			</div>
 		</div>
 	</div>
@@ -216,6 +216,39 @@
 			</div>
 		</div>
 	</div>
+
+
+	<!-- 短信验证 -->
+	<div class="modal fade" id="smsVerify" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span><span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">短信验证</h4>
+				</div>
+				<!--短信验证内容-->
+				<div class="modal-body  sms_content">
+					<input type="text" class="form-control sms_input col-sm-9" placeholder="输入短信中的验证码">
+					<button type="button" class="btn btn-warning sms_resend"
+							onclick="">重新发送验证码</button>
+							<p></p>
+				</div>
+				<!--窗口底部-->
+				<div class="modal-footer">
+				<br>
+					<button type="button" class="btn btn-primary" onclick="">
+						货到付款</button>
+					<button type="button" class="btn btn-primary" onclick="">在线支付更优惠</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
 	<%@ include file="footer.jsp"%>
 	<script src="js/jquery-2.1.1.js"></script>
 	<script src="js/bootstrap.min.js"></script>
