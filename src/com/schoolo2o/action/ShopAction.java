@@ -161,7 +161,7 @@ public class ShopAction extends ActionSupport{
 		}
 		else if(shop.getShopPwd().equals(shopInfo.getShopPwd())){
 			session.put("shopInfo", shop);
-			response.getWriter().write("{\"status\":\"1\",\"message\":\"\",\"shop\":"+ shop +"}");
+			response.getWriter().write("{\"status\":\"1\",\"message\":\"\"}");
 			return null;
 		}
 		else{
