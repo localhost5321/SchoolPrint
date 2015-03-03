@@ -1,29 +1,41 @@
 var changeAddrId; // 用户当前正在修改的地址条目ID
 
 $(function() {
+	
+	$.extend({
+		getUrlVars : function() {
+			var vars = [], hash;
+			var hashes = window.location.href.slice(
+					window.location.href.indexOf('?') + 1).split('&');
+			for (var i = 0; i < hashes.length; i++) {
+				hash = hashes[i].split('=');
+				vars.push(hash[0]);
+				vars[hash[0]] = hash[1];
+			}
+			return vars;
+		},
+		getUrlVar : function(name) {
+			return $.getUrlVars()[name];
+		}
+	});
+	
 	// 将打印页面的导航高亮改变
 	$("#navBarIndex").attr("class", "");
 	$("#navBarIndex").children("a").attr("href", "index.jsp");
 	$("#navBarPrint").attr("class", "active");
 	$("#navBarPrint").children("a").attr("href", "print.jsp");
 
+
+	
 	var json = sessionStorage.getItem("orderList");
-	console.log(json);
+	console.log("sessionStorage存储的orderList为:"+json);
 	var obj = JSON.parse(json);
 
-	// 请求地址并保存
-	$.post("getAllAddress.action", function(json_data) {
-		var obj = JSON.parse(json_data);
-		if (obj.status == "1") {
-			$.each(obj.data, function(key, value) {
-				console.log(value);
-				addLi(value);
-			});
-		} else {
-			$("#addr_ul").append("<li id='addr_tip'>您还没有任何地址，请先添加地址！</li>");
-		}
-	});
-
+	//设置本页店铺名
+	var shopNick = unescape($.getUrlVar("shopNick"));
+	console.log("店铺名为：" + shopNick);
+	$("#curr_shop_nick").text(shopNick);
+	
 	// 取出所有文件
 	for (var i = 0; i < obj.data.length; i++) {
 		var fileName = obj.data[i].fileName;
@@ -40,6 +52,20 @@ $(function() {
 
 	$(".orderInfo").text("总价：" + obj.total + "元");
 
+
+	// 请求地址并保存
+	$.post("getAllAddress.action", function(json_data) {
+		var obj = JSON.parse(json_data);
+		if (obj.status == "1") {
+			$.each(obj.data, function(key, value) {
+				console.log(value);
+				addLi(value);
+			});
+		} else {
+			$("#addr_ul").append("<li id='addr_tip'>您还没有任何地址，请先添加地址！</li>");
+		}
+	});
+	
 });
 
 /**

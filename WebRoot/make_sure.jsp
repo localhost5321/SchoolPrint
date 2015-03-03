@@ -33,7 +33,7 @@
 		<div class="orderDiv">
 			<form>
 				<h4>
-					店铺名：<span>赵龙打印店</span>
+					店铺名：<span id="curr_shop_nick"></span>
 				</h4>
 				<h4>确定收货地址：</h4>
 				<br>

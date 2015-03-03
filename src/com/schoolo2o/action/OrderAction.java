@@ -134,7 +134,7 @@ public class OrderAction extends BaseAction {
 	};
 
 	/**
-	 * 需要请求总价以及每一订单条目价格 其为相应应Action所对应的请求方法
+	 * 需要请求总价以及每一订单条目价格 其为相应Action所对应的请求方法
 	 */
 	public String showOrder() {
 		String jsonStr = request.getParameter("data");
@@ -145,7 +145,7 @@ public class OrderAction extends BaseAction {
 				order.setPrintRequire(set);
 				Sender.sendOk(order, response);
 			} else {
-				Sender.sendError("参数有误哦", response);
+				Sender.sendError("参数有误", response);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

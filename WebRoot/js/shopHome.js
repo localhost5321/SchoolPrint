@@ -30,8 +30,9 @@ $(function() {
 			// 获取店铺详细信息
 			var obj = JSON.parse(response);
 			// 店铺名
-			var shopNick = obj.data.shopNick;
+			shopNick = obj.data.shopNick;
 			$("title, h1.shopNick").text(shopNick);
+			$("#make_sure").attr("href","make_sure.jsp?shopNick=" + escape(shopNick));
 			// 店铺地址
 			var shopAddr = obj.data.shopAddress;
 			$("p.shopAddr").text("商家地址：" + shopAddr);
@@ -74,6 +75,7 @@ $(function() {
 			$(".orderInfo").text("总价：" + obj.data.total + "元");
 			//将含单价和总价的数据存储
 			orderListObj.total = obj.data.total;
+			console.log("orderListObj：" + orderListObj);
 			sessionStorage.setItem("orderList", JSON.stringify(orderListObj));
 		},
 		type : "post",

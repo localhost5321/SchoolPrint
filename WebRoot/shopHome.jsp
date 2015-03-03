@@ -86,7 +86,7 @@
 				<p>总价：</p>
 			</div>
 			<div class="btnDiv">
-				<a class="btn btn-primary" href="make_sure.jsp">确认订单</a>
+				<a class="btn btn-primary" id="make_sure" >确认订单</a>
 			</div>
 		</div>
 		<ul class="nav nav-tabs" role="tablist">

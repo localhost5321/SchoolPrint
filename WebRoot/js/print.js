@@ -375,7 +375,7 @@ function showUserFile() {
 /**
  * 显示订单详情
  */
-function showOrder(shopName) {
+function showOrder(shopName,shopNick) {
 	var json = showUserFile();
 	json.shopName = shopName;
 	var table = document.getElementById("orderTable");
@@ -435,6 +435,7 @@ function showOrder(shopName) {
 		
 		info.shopName = obj.data.shopName;
 		info.total = obj.data.total;
+		info.shopNick = shopNick;
 		sessionStorage.setItem("orderList", JSON.stringify(info));
 	});
 
@@ -583,7 +584,7 @@ function createShop(json) {
 				.append(
 						"<div class=\"shopInfo\"><img src=\""
 								+ imageSrc
-								+ "\" class=\"img-circle\" /><h3 class=\"shopName\">"
+								+ "\" class=\"img-circle\" /><h3 class=\"shopName\" id="+shopNick+">"
 								+ shopNick
 								+ "</h3><p class=\"shopAddr\">"
 								+ shopAddr
@@ -593,10 +594,11 @@ function createShop(json) {
 								+ shopName
 								+ "\" class=\"btn btn-info shopDetail\" >查看订单</button><form action=\"shopHome.jsp?shopName="
 								+ shopName
-								+ "\" method=\"post\" target=\"_blank\" onsubmit = \"return enterShop(this);\" name=\""+shopName+"\"><input type=\"submit\"  class=\"btn btn-primary enterShop\" value=\"进入店铺\"></form></div>");
+								+ "\" method=\"post\" target=\"_blank\" onsubmit = \"return (this);\" name=\""+shopName+"\"><input type=\"submit\"  class=\"btn btn-primary enterShop\" value=\"进入店铺\"></form></div>");
+		
 		// 给店铺的订单详情按钮添加对应监听
 		$("#" + shopName).click(function() {
-			showOrder($(this).attr("id"));
+			showOrder($(this).attr("id"),$(this).siblings(".shopName").attr("id"));
 		});
 	}
 }
