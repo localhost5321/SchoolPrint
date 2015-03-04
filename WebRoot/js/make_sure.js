@@ -1,7 +1,7 @@
 var changeAddrId; // 用户当前正在修改的地址条目ID
 
 $(function() {
-	
+
 	$.extend({
 		getUrlVars : function() {
 			var vars = [], hash;
@@ -18,31 +18,29 @@ $(function() {
 			return $.getUrlVars()[name];
 		}
 	});
-	
+
 	// 将打印页面的导航高亮改变
 	$("#navBarIndex").attr("class", "");
 	$("#navBarIndex").children("a").attr("href", "index.jsp");
 	$("#navBarPrint").attr("class", "active");
 	$("#navBarPrint").children("a").attr("href", "print.jsp");
 
-
-	
 	var json = sessionStorage.getItem("orderList");
-	console.log("sessionStorage存储的orderList为:"+json);
+	console.log("sessionStorage存储的orderList为:" + json);
 	var obj = JSON.parse(json);
-	var shopNick_1 = obj.shopNick;
+	var shopNick_1 = sessionStorage.getItem("currentShopNick");
 
-	//设置本页店铺名
+	// 设置本页店铺名
 	var shopNick_2 = unescape($.getUrlVar("shopNick"));
-	
+
 	console.log("shopNick_1:" + shopNick_1);
 	console.log("shopNick_2:" + shopNick_2);
-	
-	if( shopNick_2 === "undefined")
+
+	if (shopNick_2 === "undefined")
 		$("#curr_shop_nick").text(shopNick_1);
 	else
 		$("#curr_shop_nick").text(shopNick_2);
-	
+
 	// 取出所有文件
 	for (var i = 0; i < obj.data.length; i++) {
 		var fileName = obj.data[i].fileName;
@@ -59,7 +57,6 @@ $(function() {
 
 	$(".orderInfo").text("总价：" + obj.total + "元");
 
-
 	// 请求地址并保存
 	$.post("getAllAddress.action", function(json_data) {
 		var obj = JSON.parse(json_data);
@@ -72,9 +69,138 @@ $(function() {
 			$("#addr_ul").append("<li id='addr_tip'>您还没有任何地址，请先添加地址！</li>");
 		}
 	});
+
+	/**
+	 * 用户下单
+	 */
+	$("#btn_make_order").click(function() {
+		
+		var addressId = $(".addrSelect").attr("id");
+		
+		console.log(addressId);
+		
+		// 未添加地址的时候提示添加地址信息
+		if ( typeof(addressId) == "undefined" ) {
+			$("#alertContent").text("请先添加地址  ^_^ ");
+			$("#alertTip").text("去添加");
+			$('#alertModal').modal('show');
+		} else {
+			// 弹出短信验证
+			$('#smsVerify').modal('show');
+		}
+		// 取得配送方式和付款方式和addressId 添加到orderList中
+		
+		//selfGet-->上门自取
+		//sendToMe-->送货上门
+		var sendType = $("input[name=sendType]:checked").val(); 
+		if(sendType == "selfGet"){
+			addItemToOrderList("sendType",0);
+		}else{
+			addItemToOrderList("sendType",1);
+		}
+		addItemToOrderList("addressId",addressId);
+		
+		console.log("最终的JSON:" + sessionStorage.getItem("orderList"));
+	});
 	
+	/**
+	 * 添加地址
+	 */
+	$("#btn_addAddr").click(function() {
+		$.ajax({
+			url : "verifyLogin.action",
+			type : "GET",
+			success : function(response) {
+				// 保存订单之后的回传json
+				var json = JSON.parse(response);
+				if(json.data === "YES"){
+					$('#addAddr').modal('show');
+				}else{
+					$("#alertContent").text("请先登录 ^_^ ");
+					$("#alertTip").text("去登录");
+					$('#alertModal').modal('show');
+				}
+			}
+		});
+		
+	});
+
 });
 
+/**
+ * 向orderList中添加新的条目(和shopName同级)
+ * @param key
+ * @param value
+ */
+function addItemToOrderList(key,value){
+	var order = JSON.parse(sessionStorage.getItem("orderList"));
+	order[key] = value;
+	sessionStorage.setItem("orderList",JSON.stringify(order));
+}
+
+/**
+ * 短信验证码是否正确
+ */
+function smsVerify() {
+	// 正确(这里需要实际代码来进行短信验证！)
+	return 1;
+}
+
+/**
+ * 选择货到付款
+ */
+function cashOnDelivery() {
+	if (1 === smsVerify()) {
+		// 正确通过验证，保存订单
+		
+		// 向orderList中添加支付方式
+		addItemToOrderList("payType", "1")
+		
+		saveOrder();
+		// 提示用户已经完成交易，跳回主页
+
+	} else {
+		// 显示验证失败，提醒用户重新发送验证码进行验证
+
+	}
+
+}
+
+/**
+ * 选择线上支付
+ */
+function payOnline() {
+	if (1 === smsVerify()) {
+		// 正确通过验证，保存订单,并转往支付宝页面完成支付
+		
+		// 向orderList中添加支付方式
+		addItemToOrderList("payType", "0")
+		
+		saveOrder();
+	} else {
+		// 显示验证失败，提醒用户重新发送验证码进行验证
+
+	}
+}
+
+/**
+ * 保存订单
+ */
+function saveOrder() {
+	// 此处保存订单（本应短信验证之后再保存）
+	var orderList = sessionStorage.getItem("orderList");
+	console.log("传往后台的orderlist为：" + orderList);
+
+	$.ajax({
+		url : "saveOrder.action",
+		data : "order=" + orderList,
+		type : "post",
+		success : function(response) {
+			// 保存订单之后的回传json
+			var json = JSON.parse(response);
+		}
+	});
+}
 /**
  * 响应用户选择地址事件
  */
@@ -101,7 +227,7 @@ function changeSelect(li_this) {
 /**
  * 设置默认地址
  */
-function setDefaultAddr(a_this,event) {
+function setDefaultAddr(a_this, event) {
 
 	var span_this = $(a_this).parent();
 	/**
@@ -120,19 +246,24 @@ function setDefaultAddr(a_this,event) {
 		preDefaultId == "null";
 	}
 
-	$.post("setDefault.action?oldId=" + preDefaultId + "&newId=" + currentId,
+	$
+			.post(
+					"setDefault.action?oldId=" + preDefaultId + "&newId="
+							+ currentId,
 
-	function(data) {
-		console.log("更改默认地址：" + data);
-		var obj = JSON.parse(data);
-		if (obj.status == 1) {
-			$(".setDefault").html("<a id='a_set_def'  href='#' onClick='setDefaultAddr(this,event)'>设为默认地址</a>");
-			$(span_this).html("默认地址");
-		} else {
-			// 更改失败
-			console.log("更改默认地址失败！！！");
-		}
-	});
+					function(data) {
+						console.log("更改默认地址：" + data);
+						var obj = JSON.parse(data);
+						if (obj.status == 1) {
+							$(".setDefault")
+									.html(
+											"<a id='a_set_def'  href='#' onClick='setDefaultAddr(this,event)'>设为默认地址</a>");
+							$(span_this).html("默认地址");
+						} else {
+							// 更改失败
+							console.log("更改默认地址失败！！！");
+						}
+					});
 
 }
 
@@ -159,24 +290,21 @@ function addAddrInfo() {
 	var callPhone = $("#newPhone").val();
 	var secPhone = $("#newSecPhone").val();
 
-	$
-			.post(
-					"addOrUpdateAddressinfo?contactor=" + contactor
-							+ "&sendAddress=" + sendAddress + "&callPhone="
-							+ callPhone + "&secPhone=" + secPhone
-							+ "&addressId=" + "none",
+	$.post("addOrUpdateAddressinfo?contactor=" + contactor + "&sendAddress="
+			+ sendAddress + "&callPhone=" + callPhone + "&secPhone=" + secPhone
+			+ "&addressId=" + "none",
 
-					function(data) {
-						console.log("添加完地址之后回送过来的消息：" + data);
-						var obj = JSON.parse(data);
-						if (obj.status == 1) {
-							addLi(obj.data);
-							$("#addAddr").modal("hide");
-						} else {
-							// 添加失败
-							$("#addAddrInfo").text(obj.message);
-						}
-					});
+	function(data) {
+		console.log("添加完地址之后回送过来的消息：" + data);
+		var obj = JSON.parse(data);
+		if (obj.status == 1) {
+			addLi(obj.data);
+			$("#addAddr").modal("hide");
+		} else {
+			// 添加失败
+			$("#addAddrInfo").text(obj.message);
+		}
+	});
 }
 
 /**

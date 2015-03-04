@@ -1,4 +1,3 @@
-
 var SCREEN_WIDTH;
 var SCREEN_HEIGHT;
 var FILE_UPLOAD_WIDTH = 500;
@@ -73,11 +72,11 @@ function initDrag() {
 	}
 
 	holder.ondragover = function() {
-//		this.className = 'hover';
+		// this.className = 'hover';
 		return false;
 	};
 	holder.ondragend = function() {
-//		this.className = '';
+		// this.className = '';
 		return false;
 	};
 	// 松开鼠标
@@ -108,14 +107,14 @@ function initDrag() {
 	};
 }
 
-function updateHoder(){
+function updateHoder() {
 	var holder = document.getElementById('holder');
 	var i = userFiles.length;
-	if(i == 0){
+	if (i == 0) {
 		holder.className = "";
-	}else if(i <= 3){
+	} else if (i <= 3) {
 		holder.className = "state_" + i;
-	}else{
+	} else {
 		holder.className = "state_3";
 	}
 }
@@ -190,7 +189,7 @@ function updateFileInfo() {
 		allPage += (Number(printCount.get(i).value) * Number(pageCount.get(i).innerHTML));
 	}
 	$(".fileInfo").text("共" + num + "个文件, 总份数:" + count + ", 总页数:" + allPage);
-	//更新拖拽区
+	// 更新拖拽区
 	updateHoder();
 }
 
@@ -302,10 +301,10 @@ function removeRow(rowIndex) {
 			"tbody")[0];
 	var row = tbody.childNodes[rowIndex - 1];
 	tbody.removeChild(row);
-	
+
 	// 更新文件信息
 	updateFileInfo();
-	
+
 	// 当表格没有文件时，隐藏表格区域
 	if (document.getElementById("fileListTable").rows.length == 1) {
 		// 移动两个div
@@ -375,7 +374,7 @@ function showUserFile() {
 /**
  * 显示订单详情
  */
-function showOrder(shopName,shopNick) {
+function showOrder(shopName, shopNick) {
 	var json = showUserFile();
 	json.shopName = shopName;
 	var table = document.getElementById("orderTable");
@@ -385,17 +384,18 @@ function showOrder(shopName,shopNick) {
 		alert("请先选择文件");
 		return;
 	}
-	
-	$.post("showOrder.action", "data=" + JSON.stringify(json), function(response){
-		//需要存储的订单信息
+
+	$.post("showOrder.action", "data=" + JSON.stringify(json), function(
+			response) {
+		// 需要存储的订单信息
 		var info = showUserFile();
-		
+
 		var obj = JSON.parse(response);
-		if(obj.status == 0){
+		if (obj.status == 0) {
 			alert(obj.message);
 			return;
 		}
-		
+
 		for (var i = 0; i < json.data.length; i++) {
 			var tr = document.createElement("tr");
 			tr.style.textAlign = "center";
@@ -426,17 +426,18 @@ function showOrder(shopName,shopNick) {
 			sumPrice.innerHTML = obj.data.itemPrice[i];
 			tr.appendChild(sumPrice);
 			info.data[i].itemPrice = obj.data.itemPrice[i];
-			
+
 			// 添加此行
 			table.tBodies[0].appendChild(tr);
-		
+
 		}
 		$(".orderInfo").text("总价：" + obj.data.total + "元");
-		
+
 		info.shopName = obj.data.shopName;
 		info.total = obj.data.total;
-		info.shopNick = shopNick;
+//		info.shopNick = shopNick;
 		sessionStorage.setItem("orderList", JSON.stringify(info));
+		sessionStorage.setItem("currentShopNick",shopNick);
 	});
 
 	// 弹窗
@@ -447,10 +448,10 @@ function showOrder(shopName,shopNick) {
  * 确认订单
  */
 function commitOrder() {
-//	var json = JSON.stringify(showUserFile());
-//	$.post("orderShow.action", json, function(data){
-//		alert(data);
-//	});
+	// var json = JSON.stringify(showUserFile());
+	// $.post("orderShow.action", json, function(data){
+	// alert(data);
+	// });
 }
 
 /**
@@ -537,8 +538,8 @@ function handleFile(file) {
 						var json = JSON.parse(xhr.responseText);
 						file.docId = json.data.docId;
 						file.fileCount = json.data.fileCount;
-						for(var i = 0; i < userFiles.length; i ++){
-							if(userFiles[i] == file){
+						for (var i = 0; i < userFiles.length; i++) {
+							if (userFiles[i] == file) {
 								$(".pageCounts").get(i).innerHTML = json.data.fileCount;
 								break;
 							}
@@ -575,7 +576,7 @@ function handleFile(file) {
  */
 function createShop(json) {
 	for (var i = 0; i < json.data.length; i++) {
-		var imageSrc = "images/s"+(i + 1)+".png";
+		var imageSrc = "images/s" + (i + 1) + ".png";
 		var shopNick = json.data[i].shopNick;
 		var shopName = json.data[i].shopName;
 		var shopAddr = json.data[i].shopAddress;
@@ -584,7 +585,9 @@ function createShop(json) {
 				.append(
 						"<div class=\"shopInfo\"><img src=\""
 								+ imageSrc
-								+ "\" class=\"img-circle\" /><h3 class=\"shopName\" id="+shopNick+">"
+								+ "\" class=\"img-circle\" /><h3 class=\"shopName\" id="
+								+ shopNick
+								+ ">"
 								+ shopNick
 								+ "</h3><p class=\"shopAddr\">"
 								+ shopAddr
@@ -594,17 +597,22 @@ function createShop(json) {
 								+ shopName
 								+ "\" class=\"btn btn-info shopDetail\" >查看订单</button><form action=\"shopHome.jsp?shopName="
 								+ shopName
-								+ "\" method=\"post\" target=\"_blank\" onsubmit = \"return (this);\" name=\""+shopName+"\"><input type=\"submit\"  class=\"btn btn-primary enterShop\" value=\"进入店铺\"></form></div>");
-		
+								+ "\" method=\"post\" target=\"_blank\" onsubmit = \"return enterShop(this);\" name=\""
+								+ shopName
+								+ "\">"
+								+ "<input type=\"submit\"  class=\"btn btn-primary enterShop\" value=\"进入店铺\"></form></div>");
+
 		// 给店铺的订单详情按钮添加对应监听
-		$("#" + shopName).click(function() {
-			showOrder($(this).attr("id"),$(this).siblings(".shopName").attr("id"));
-		});
+		$("#" + shopName).click(
+				function() {
+					showOrder($(this).attr("id"), $(this).siblings(".shopName")
+							.attr("id"));
+				});
 	}
 }
 
 function enterShop(obj) {
-	//将订单信息存储在sessionStorage中
+	// 将订单信息存储在sessionStorage中
 	var json = showUserFile();
 	json.shopName = obj.name;
 	sessionStorage.setItem("orderList", JSON.stringify(json));

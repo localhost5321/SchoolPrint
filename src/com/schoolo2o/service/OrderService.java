@@ -9,11 +9,11 @@ import com.schoolo2o.pojo.send.OrderSend;
 public interface OrderService {
 	
 	/**
-	 * 生成一个订单
+	 * 保存一个订单
 	 * @param Osend 订单对象
 	 * @return
 	 */
-	public OrderSend addOrder(OrderSend Osend);
+	public boolean saveOrder(Orderinfo orderinfo);
 	/**
 	 * 更新订单状态
 	 * @param orderId 订单ID

@@ -16,10 +16,10 @@ public class Orderinfo implements java.io.Serializable {
 	private Userinfo userinfo;
 	private Long addressId;
 	private Double totalCost;
-	private Integer payType;//支付方式，1代表在线支付，2代表货到付款
-	private Integer sendType;//送货方式，1代表配送到家，2代表上门自取
-	private Set orderitems = new HashSet(0);
-	private Set orderstatuses = new HashSet(0);
+	private Integer payType;//支付方式，0代表在线支付，1代表货到付款
+	private Integer sendType;//送货方式，1代表配送到家，0代表上门自取
+	private Set orderitems = new HashSet();
+	private Set orderstatuses = new HashSet();
 
 	// Constructors
 

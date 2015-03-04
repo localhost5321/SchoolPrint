@@ -120,9 +120,8 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 	@Override
-	public OrderSend addOrder(OrderSend Osend) {
-		
-		return null;
+	public boolean saveOrder(Orderinfo orderinfo) {
+		return orderInfoDao.addOrder(orderinfo);
 	}
 
 	

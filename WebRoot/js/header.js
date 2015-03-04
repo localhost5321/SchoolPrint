@@ -17,6 +17,7 @@ function login() {
 			// 登陆成功
 			$("#navbarUserInfo").html(obj.message);
 			$("#loginModal").modal("hide");
+			location.reload();
 		} else {
 			// 登陆失败
 			$("#loginInfo").text(obj.message);

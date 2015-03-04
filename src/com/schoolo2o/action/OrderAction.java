@@ -2,9 +2,12 @@ package com.schoolo2o.action;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.sql.Timestamp;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +22,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.opensymphony.xwork2.ActionSupport;
 import com.schoolo2o.pojo.Addressinfo;
 import com.schoolo2o.pojo.MyJSONObject;
+import com.schoolo2o.pojo.Orderinfo;
+import com.schoolo2o.pojo.Orderitem;
+import com.schoolo2o.pojo.Orderstatus;
 import com.schoolo2o.pojo.Shopinfo;
 import com.schoolo2o.pojo.Userinfo;
 import com.schoolo2o.pojo.send.OrderSend;
@@ -27,6 +33,7 @@ import com.schoolo2o.pojo.send.OrderstatusSend;
 import com.schoolo2o.service.AddressService;
 import com.schoolo2o.service.OrderService;
 import com.schoolo2o.service.ShopService;
+import com.schoolo2o.utils.Console;
 import com.schoolo2o.utils.Sender;
 
 public class OrderAction extends BaseAction {
@@ -278,44 +285,80 @@ public class OrderAction extends BaseAction {
 
 	/**
 	 * 存储订单 需要传递订单信息
+	 * @throws IOException 
 	 */
-	public String saveOrder() {
+	public String saveOrder() throws IOException {
 		String jsonStr = request.getParameter("order");
 		try {
-			System.out.println(jsonStr);
+			Console.LOG(getClass(), "前台传送过来的order的JSON为：" + jsonStr);
+			
 			JSONObject jo = JSON.parseObject(jsonStr);
 			String shopName = jo.getString("shopName");
+			double totalCost = jo.getDoubleValue("total");
 			long addressId = jo.getLong("addressId");
-			double totalCost = jo.getDoubleValue("totalCost");
 			int payType = jo.getIntValue("payType");
 			int sendType = jo.getIntValue("sendType");
-			JSONArray ja = jo.getJSONArray("orderItems");
+			JSONArray ja = jo.getJSONArray("data");
+			
+			Orderinfo orderinfo = new Orderinfo();
+			Set<Orderitem> orderitems = new HashSet<>();
+			
+			//获取每一条订单条目
 			for (int i = 0; i < ja.size(); i++) {
-				ja.get(i);
+				JSONObject orderItem = JSON.parseObject(ja.get(i).toString());
+				long docId = orderItem.getLongValue("docId");
+				String fileName = orderItem.getString("fileName");
+				int pageNumber = Integer.parseInt(orderItem.getString("pageCounts"));
+				int fileCount = Integer.parseInt(orderItem.getString("printCounts"));
+				String printRequire = orderItem.getString("setting");
+				double filePrice = orderItem.getDoubleValue("price");
+				Orderitem order = new Orderitem(orderinfo, docId, fileCount, pageNumber, filePrice, printRequire);
+				orderitems.add(order);
 			}
+			
 			Shopinfo shopinfo = shopService.search(shopName);
-
+			Userinfo userinfo = (Userinfo) session.get("user");
+			
+			orderinfo.setAddressId(addressId);
+			orderinfo.setOrderitems(orderitems);
+			orderinfo.setPayType(payType);
+			orderinfo.setSendType(sendType);
+			orderinfo.setShopinfo(shopinfo);
+			orderinfo.setTotalCost(totalCost);
+			orderinfo.setUserinfo(userinfo);
+			
+			Orderstatus orderstatus = new Orderstatus();
+			orderstatus.setChangeTime(new Timestamp(new Date().getTime()));
+			orderstatus.setIsCurrent(1);
+			orderstatus.setOrderinfo(orderinfo);
+			orderstatus.setStatus(0);
+			Set<Orderstatus> statusSet = new HashSet<>();
+			statusSet.add(orderstatus);
+			orderinfo.setOrderstatuses(statusSet);
+			
 			response.setCharacterEncoding("utf-8");
 			if (jsonStr != null && !jsonStr.equals("")) {
-
-				// 调用服务层计费 保存
-				jsonObject.setMessage("null");
-				// jsonObject.setData(order);
-				jsonStr = JSON.toJSONString(jsonObject);
-				response.getWriter().write(jsonStr);
+				// 保存
+				if(orderService.saveOrder(orderinfo)){
+					jsonObject.setStatus("1");
+					jsonObject.setMessage("");
+					jsonObject.setData(null);
+				}else{
+					jsonObject.setStatus("0");
+					jsonObject.setMessage("保存失败");
+					jsonObject.setData(null);
+				}
 			} else {
+				jsonObject.setStatus("0");
 				jsonObject.setMessage("参数为空");
 				jsonObject.setData(null);
-				jsonStr = JSON.toJSONString(jsonObject);
-				response.getWriter().write(jsonStr);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			jsonObject.setStatus("0");
 			jsonObject.setMessage("服务器出现异常");
-			jsonStr = JSON.toJSONString(jsonObject);
-			response.getWriter().write(jsonStr);
 		} finally {
+			response.getWriter().write(JSON.toJSONString(jsonObject));
 			return null;
 		}
 	}

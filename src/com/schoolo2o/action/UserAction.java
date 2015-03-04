@@ -20,6 +20,7 @@ import com.schoolo2o.pojo.Userinfo;
 import com.schoolo2o.service.UserService;
 import com.schoolo2o.utils.Console;
 import com.schoolo2o.utils.MD5;
+import com.schoolo2o.utils.Sender;
 
 public class UserAction extends BaseAction{
 	
@@ -165,6 +166,23 @@ public class UserAction extends BaseAction{
 		session.clear();
 		user=null;
 		
+		return null;
+	}
+	
+	/**
+	 * 返回用户是否已经登录的信息
+	 * @return
+	 * @throws IOException 
+	 */
+	public String verifyLogin() throws IOException{
+		Userinfo userinfo = (Userinfo) session.get("user");
+
+		if (userinfo == null) {
+			Sender.sendOk("No", response);
+			return null;
+		}
+		
+		Sender.sendOk("YES", response);
 		return null;
 	}
 	

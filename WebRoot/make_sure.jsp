@@ -41,7 +41,7 @@
 				</ul>
 
 				<a class="btn btn-danger" style="float: right;" data-toggle="modal"
-					data-target="#addAddr" id="btn_addAddr">添加地址</a> <br>
+					id="btn_addAddr">添加地址</a> <br>
 			</form>
 			<p>文件列表：</p>
 			<table class="table table-striped table-bordered table-hover"
@@ -70,9 +70,16 @@
 				<p>备注：</p>
 				<textarea class="form-control" rows="3"></textarea>
 			</div>
+			<br/>
+			<div>
+				<label class="btn btn-default"> <input name="sendType"
+					id="selfGet" value="selfGet"  checked
+					type="radio">自己取货
+				</label> <label class="btn btn-default"> <input name="sendType"
+					id="sendToMe" value="sendToMe" type="radio">送货上门
+			</div>
 			<div class="btnDiv">
-				<a class="btn btn-primary" data-toggle="modal"
-					data-target="#smsVerify" id="btn_make_order">立即下单</a>
+				<a class="btn btn-primary" data-toggle="modal" id="btn_make_order">立即下单</a>
 			</div>
 		</div>
 	</div>
@@ -231,19 +238,40 @@
 				</div>
 				<!--短信验证内容-->
 				<div class="modal-body  sms_content">
-					<input type="text" class="form-control sms_input col-sm-9" placeholder="输入短信中的验证码">
-					<button type="button" class="btn btn-warning sms_resend"
-							onclick="">重新发送验证码</button>
-							<p></p>
+					<input type="text" class="form-control sms_input col-sm-9"
+						placeholder="输入短信中的验证码">
+					<button type="button" class="btn btn-warning sms_resend" onclick="">重新发送验证码</button>
+					<p></p>
 				</div>
 				<!--窗口底部-->
 				<div class="modal-footer">
-				<br>
-					<button type="button" class="btn btn-primary" onclick="">
-						货到付款</button>
-					<button type="button" class="btn btn-primary" onclick="">在线支付更优惠</button>
+					<br>
+					<button type="button" class="btn btn-primary"
+						onclick="cashOnDelivery()">货到付款</button>
+					<button type="button" class="btn btn-primary" onclick="payOnline()">在线支付更优惠</button>
 				</div>
 
+			</div>
+		</div>
+	</div>
+
+
+	<div class="modal fade" id="alertModal" tabindex="-1" role="dialog"
+		aria-labelledby="basicModal" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">注意</h4>
+				</div>
+				<div class="modal-body" id="alertContent">
+					<h3></h3>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal"
+						id="alertTip"></button>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -22,5 +22,8 @@
 		<action name="verifyEmail" class="com.schoolo2o.action.UserAction"
 			method="verifyEmail">
 		</action>
+		<action name="verifyLogin" class="com.schoolo2o.action.UserAction"
+			method="verifyLogin">
+		</action>
 	</package>
 </struts>
