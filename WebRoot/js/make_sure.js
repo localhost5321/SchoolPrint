@@ -142,7 +142,7 @@ function addItemToOrderList(key,value){
  * 短信验证码是否正确
  */
 function smsVerify() {
-	// 正确(这里需要实际代码来进行短信验证！)
+	// 短信验证通过(这里需要实际代码来进行短信验证！)
 	return 1;
 }
 
