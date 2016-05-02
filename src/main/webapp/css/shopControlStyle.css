@@ -1,0 +1,29 @@
+@CHARSET "UTF-8";
+
+
+.shopInfoTable{
+	text-align: center;	
+}
+
+.shopInfoDiv{
+	margin: 40px auto ;
+	width: 60%
+}
+
+.shopInfoTable td{
+	
+}
+
+.btnSaveHidden{
+	visibility: hidden;
+}
+
+.btnSaveVisible{
+	visibility: visible;
+}
+
+tr td{
+	vertical-align: middle;
+	line-height:100%;
+	
+}

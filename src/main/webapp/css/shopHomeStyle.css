@@ -1,0 +1,44 @@
+.carouselDiv {
+	width: 70%;
+	margin: 20px auto 20px;
+}
+
+.carousel {
+	height: 300px;
+}
+
+.carousel .item {
+	height: 300px;
+	background-color: #000;
+}
+
+.carousel .item img {
+	width: 100%;
+}
+
+.carousel-caption {
+	z-index: 10;
+	color: black;
+}
+
+.orderInfo{
+	text-align: right;
+}
+
+.shopInfoDiv h1{
+	text-align: center;
+}
+
+.btnDiv{
+	margin-top:10px;
+	text-align: right;
+}
+
+th, td{
+	text-align: center;
+}
+
+td:first-child{
+	text-align: left;
+}
+

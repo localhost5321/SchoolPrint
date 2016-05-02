@@ -1,0 +1,30 @@
+
+#container{
+	padding-top: 50px;
+    padding-bottom: 40px;
+    color: #5a5a5a;
+    margin: auto;
+}
+
+#index_shop_body{
+	width: 90%;
+	margin: auto;
+}
+
+#order_div{
+	margin-top:20px;
+	margin: auto;
+}
+
+#shop_msg_detail{
+	height: 100px;
+	margin-bottom: 20px;
+}
+
+.details_ul{
+	display:none;
+}
+
+#order_table{
+	margin: auto;
+}

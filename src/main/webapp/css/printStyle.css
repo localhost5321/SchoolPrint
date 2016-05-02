@@ -1,0 +1,117 @@
+body{
+	background: #ddd;
+}
+
+#print-content {
+	position: relative;
+	height: 535px;
+}
+
+th {
+	text-align: center;
+}
+
+#fileUploadContent {
+	width: 500px;
+	padding-top: 20px;
+	background: url("../images/file_drag_bg.jpg") center center;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	border-top: 1px solid #fff;
+	padding-bottom: 20px;
+	position: absolute;
+	top: 20px;
+	-webkit-box-shadow: #666 0px 0px 10px;
+	-moz-box-shadow: #666 0px 0px 10px;
+	box-shadow: #666 0px 0px 10px;
+}
+
+#fileUploadContent p {
+	margin-top: 20px;
+}
+
+#showFilesContent {
+	padding-top: 20px;
+	background: #eee center bottom;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	border-top: 1px solid #fff;
+	display: none;
+	position: absolute;
+	top: 20px;
+	padding-bottom: 20px;
+	-webkit-box-shadow: #666 0px 0px 10px;
+	-moz-box-shadow: #666 0px 0px 10px;
+	box-shadow: #666 0px 0px 10px;
+	font-size: 12px;
+}
+
+#holder {
+	border: 10px dashed #ccc;
+	width: 300px;
+	height: 300px;
+	margin: 20px auto;
+	background: transparent url("../images/wan_0.png") center center;
+}
+
+#holder:hover {
+	border: 10px dashed #333;
+}
+
+#holder.state_1{
+	background: transparent url("../images/wan_1.png") center center;
+}
+#holder.state_2{
+	background: transparent url("../images/wan_2.png") center center;
+}
+#holder.state_3{
+	background: transparent url("../images/wan_3.png") center center;
+}
+
+#textfield {
+	vertical-align: middle;
+	margin: 0;
+	padding: 0;
+	height: 35px;
+	border: 1px solid #cdcdcd;
+	width: 180px;
+}
+
+.file-box {
+	position: relative;
+	width: 340px
+}
+
+#fileInput {
+	position: absolute;
+	top: 0;
+	right: 80px;
+	height: 24px;
+	filter: alpha(opacity : 0);
+	opacity: 0;
+	width: 260px
+}
+
+#fileListTable a {
+	text-decoration: none;
+}
+
+.fileInfo,.orderInfo {
+	text-align: right;
+}
+
+#printShopContent {
+	width:100%;
+	overflow:hidden;
+	background-image:url("../images/xuanze.png");
+	background-position:center;
+	height: 84px;
+}
+
+#printShopContent span {
+	color: white;
+	line-height: 60px;
+	font-size: 25px;;
+}

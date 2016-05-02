@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+		<package name="user" extends="struts-default">
+		<action name="fileUpLoad" class="com.schoolo2o.action.UpLoadFileAction"
+			method="upLoadFileSave">
+		</action>
+		<action name="userLogin" class="com.schoolo2o.action.UserAction"
+			method="userLogin">
+		</action>
+		<action name="userExit" class="com.schoolo2o.action.UserAction"
+			method="exit">
+		</action>
+		<action name="userRegist" class="com.schoolo2o.action.UserAction"
+			method="userRegist">
+			<result name="success" type="redirect"> /index.jsp</result>
+			<result name="error" type="redirect"> /print.jsp</result>
+		</action>
+		<action name="verifyUserName" class="com.schoolo2o.action.UserAction"
+			method="verifyUserName">
+		</action>
+		<action name="verifyEmail" class="com.schoolo2o.action.UserAction"
+			method="verifyEmail">
+		</action>
+		<action name="verifyLogin" class="com.schoolo2o.action.UserAction"
+			method="verifyLogin">
+		</action>
+	</package>
+</struts>

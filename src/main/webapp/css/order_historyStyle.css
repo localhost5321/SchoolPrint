@@ -1,0 +1,36 @@
+
+
+#order_total{
+	margin-top:100px;
+	width:800px;
+	height:100px;
+	margin: auto;
+}
+
+#total{
+	margin-top:80px;
+	width:400px;
+	float: left;
+	background-color: red;
+}
+
+#turnover{
+	margin-top:80px;
+	width:400px;
+	float: left;
+	background-color: gray;
+} 
+
+#order_div{
+	width: 90%;
+	margin:auto;
+}
+
+#total_table{
+	margin: auto;
+	margin-top: 80px;
+}
+
+#details_ul{
+	display: none;
+}
