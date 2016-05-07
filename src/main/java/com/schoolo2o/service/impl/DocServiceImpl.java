@@ -18,23 +18,19 @@ public class DocServiceImpl implements DocService{
 		this.docInfoDao = docInfoDao;
 	}
 
-	@Override
 	public Docinfo add(Docinfo doc, Userinfo user) {
 		doc.setUserinfo(user);
 		return docInfoDao.add(doc);
 	}
 
-	@Override
 	public boolean update(Docinfo doc) {
 		return docInfoDao.update(doc);
 	}
 
-	@Override
 	public List<Docinfo> search(Long userId) {
 		return docInfoDao.search(userId);
 	}
 
-	@Override
 	public boolean delete(Long id) {
 		return docInfoDao.delete(id);
 	}

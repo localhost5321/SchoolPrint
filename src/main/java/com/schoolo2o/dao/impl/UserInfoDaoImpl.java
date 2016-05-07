@@ -20,7 +20,6 @@ import com.schoolo2o.utils.Console;
 public class UserInfoDaoImpl extends HibernateDaoSupport implements UserinfoDao {
 
 	//添加一个用户
-	@Override
 	public boolean addUser(Userinfo user) {
 		Console.LOG(getClass(), user);
 		if(user != null){
@@ -35,7 +34,6 @@ public class UserInfoDaoImpl extends HibernateDaoSupport implements UserinfoDao 
 	}
 
 	//更新一个用户信息
-	@Override
 	public boolean updateUser(Userinfo user) {
 		if(user!=null){
 			String hql="from Userinfo where userName='"+user.getUserName()+"'";
@@ -57,7 +55,6 @@ public class UserInfoDaoImpl extends HibernateDaoSupport implements UserinfoDao 
 		return false;
 	}
 	//查找是否存在此用户
-	@Override
 	public Userinfo searchUser(String userName) {
 		String hql="from Userinfo where userName='"+userName+"'";
 		try{
@@ -73,7 +70,6 @@ public class UserInfoDaoImpl extends HibernateDaoSupport implements UserinfoDao 
 		return null;
 	}
 	//给用户增加地址信息
-	@Override
 	public boolean addAddress(Addressinfo address) {
 		if(address!=null){
 			try{
@@ -88,7 +84,6 @@ public class UserInfoDaoImpl extends HibernateDaoSupport implements UserinfoDao 
 		return false;
 	}
 	//更新用户地址信息
-	@Override
 	public boolean updateAddress(Addressinfo address) {
 		String hql="from Addressinfo where addressId='"+address.getAddressId()+"'";
 		try{
@@ -108,7 +103,6 @@ public class UserInfoDaoImpl extends HibernateDaoSupport implements UserinfoDao 
 		
 	}
 	//删除用户地址信息
-	@Override
 	public boolean deleteAddress(Addressinfo address) {
 		if(address!=null){
 			String hql="from Addressinfo where addressId="+address.getAddressId();
@@ -124,7 +118,6 @@ public class UserInfoDaoImpl extends HibernateDaoSupport implements UserinfoDao 
 		
 	}
 	//查找用户所有地址
-	@Override
 	public List<Addressinfo> searchAddress(Long userId) {
 		String hql="from Addressinfo where userId="+userId;
 		try{
@@ -141,7 +134,6 @@ public class UserInfoDaoImpl extends HibernateDaoSupport implements UserinfoDao 
 		}
 	}
 	//查找当前用户所有地址
-	@Override
 	public List<Docinfo> searchDocs(Long userId) {
 		try{
 			String hql="from Docinfo where userId="+userId;
@@ -153,7 +145,6 @@ public class UserInfoDaoImpl extends HibernateDaoSupport implements UserinfoDao 
 		}
 	}
 	//查找当前用户所有订单
-	@Override
 	public List<Orderinfo> getOrders(Long userId) {
 		try{
 			String hql="from Orderinfo where userId="+userId;
@@ -165,7 +156,6 @@ public class UserInfoDaoImpl extends HibernateDaoSupport implements UserinfoDao 
 		}
 	}
 
-	@Override
 	public boolean checkEmail(String email) {
 		if(email!=null){
 			String hql="from Userinfo where email='"+email+"'";

@@ -10,7 +10,6 @@ import com.schoolo2o.utils.Console;
 public class CountHistroyCome implements ServletRequestListener {
 	private int history = 0;
 
-	@Override
 	public void requestDestroyed(ServletRequestEvent arg0) {
 		history++;
 		Console.LOG(getClass(), "到目前为止，本网站点击率已经突破" + history + "人次");
@@ -21,7 +20,6 @@ public class CountHistroyCome implements ServletRequestListener {
 //		}
 	}
 
-	@Override
 	public void requestInitialized(ServletRequestEvent arg0) {
 
 	}

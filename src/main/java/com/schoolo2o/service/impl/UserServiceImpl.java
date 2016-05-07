@@ -21,19 +21,16 @@ public class UserServiceImpl implements UserService {
 		this.userinfoDao = userinfoDao;
 	}
 	/*添加一个用户*/
-	@Override
 	public boolean addUser(Userinfo user) {
 		return userinfoDao.addUser(user);
 	}
 
 	/*用户信息更新*/
-	@Override
 	public boolean updateUser(Userinfo user) {
 		return userinfoDao.updateUser(user);
 	}
 
 	/*根据用户名查询用户是否存在*/
-	@Override
 	public Userinfo searchUser(String userName) {
 		return userinfoDao.searchUser(userName);
 	}

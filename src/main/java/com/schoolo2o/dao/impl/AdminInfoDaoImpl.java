@@ -16,7 +16,6 @@ import com.schoolo2o.pojo.Admininfo;
 public class AdminInfoDaoImpl extends HibernateDaoSupport implements AdminInfoDao {
 
 	//增加一个管理员，添加成功返回true,添加失败返回false
-	@Override
 	public boolean add(Admininfo admin) {
 		if(admin!=null){
 			try{
@@ -31,7 +30,6 @@ public class AdminInfoDaoImpl extends HibernateDaoSupport implements AdminInfoDa
 		}
 	}
 	//更新一个管理员信息，更新成功返回
-	@Override
 	public boolean update(Admininfo admin) {
 		if(admin==null)
 			return false;
@@ -51,7 +49,6 @@ public class AdminInfoDaoImpl extends HibernateDaoSupport implements AdminInfoDa
 	}
 
 	//删除一个管理元信息
-	@Override
 	public boolean delete(String adminName) {
 		Admininfo admin=search(adminName);
 		if(admin!=null){
@@ -68,7 +65,6 @@ public class AdminInfoDaoImpl extends HibernateDaoSupport implements AdminInfoDa
 	}
 
 	//检查管理员名是否存在，如果不存在返回null.如果存在返回一个管理员
-		@Override
 		public Admininfo search(String adminName) {
 			if(adminName!=null){
 				String hql="from Admininfo where adminName='"+adminName+"'";

@@ -301,7 +301,7 @@ public class OrderAction extends BaseAction {
 			JSONArray ja = jo.getJSONArray("data");
 			
 			Orderinfo orderinfo = new Orderinfo();
-			Set<Orderitem> orderitems = new HashSet<>();
+			Set<Orderitem> orderitems = new HashSet<Orderitem>();
 			
 			//获取每一条订单条目
 			for (int i = 0; i < ja.size(); i++) {
@@ -332,7 +332,7 @@ public class OrderAction extends BaseAction {
 			orderstatus.setIsCurrent(1);
 			orderstatus.setOrderinfo(orderinfo);
 			orderstatus.setStatus(0);
-			Set<Orderstatus> statusSet = new HashSet<>();
+			Set<Orderstatus> statusSet = new HashSet<Orderstatus>();
 			statusSet.add(orderstatus);
 			orderinfo.setOrderstatuses(statusSet);
 			

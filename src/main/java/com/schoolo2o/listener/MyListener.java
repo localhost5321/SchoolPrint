@@ -11,7 +11,6 @@ import com.schoolo2o.utils.Console;
 @WebListener("监听session的动态")
 public class MyListener implements HttpSessionListener{
 	private int countOnLine=0;
-	@Override
 	public void sessionCreated(HttpSessionEvent se) {
 		System.out.println("Session create");
 		countOnLine++;
@@ -19,7 +18,6 @@ public class MyListener implements HttpSessionListener{
 		se.getSession().getServletContext().setAttribute("countOnLine", countOnLine);
 	}
 
-	@Override
 	public void sessionDestroyed(HttpSessionEvent se) {
 		System.out.println("Session destroy");
 		countOnLine--;

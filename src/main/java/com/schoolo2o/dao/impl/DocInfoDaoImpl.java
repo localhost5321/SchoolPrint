@@ -16,7 +16,6 @@ import com.schoolo2o.pojo.Docinfo;
 //增加一个文档
 public class DocInfoDaoImpl extends HibernateDaoSupport implements DocInfoDao {
 
-	@Override
 	public Docinfo add(Docinfo doc) { // 有问题，doc主键无法取到
 		if (doc != null) {
 			try {
@@ -31,7 +30,6 @@ public class DocInfoDaoImpl extends HibernateDaoSupport implements DocInfoDao {
 	}
 
 	// 删除一个文档
-	@Override
 	public boolean delete(Long id) {
 		try {
 			String hql = "from Docinfo where docId=" + id;
@@ -47,7 +45,6 @@ public class DocInfoDaoImpl extends HibernateDaoSupport implements DocInfoDao {
 	}
 
 	// 更新一份文档
-	@Override
 	public boolean update(Docinfo doc) {
 		try {
 			this.getHibernateTemplate().update(doc);
@@ -58,7 +55,6 @@ public class DocInfoDaoImpl extends HibernateDaoSupport implements DocInfoDao {
 		}
 	}
 
-	@Override
 	public List<Docinfo> search(Long userId) {
 		try {
 			String hql = "from Docinfo where userId=" + userId;
@@ -70,7 +66,6 @@ public class DocInfoDaoImpl extends HibernateDaoSupport implements DocInfoDao {
 		}
 	}
 
-	@Override
 	public Docinfo searchDoc(Long docId) {
 		try {
 			String hql = "from Docinfo where docId = '" + docId + "'";

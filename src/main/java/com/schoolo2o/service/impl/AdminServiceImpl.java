@@ -18,19 +18,15 @@ public class AdminServiceImpl implements AdminService{
 		this.adminInfoDao = adminInfoDao;
 	}
 	
-	@Override
 	public boolean add(Admininfo admin) {
 		return adminInfoDao.add(admin);
 	}
-	@Override
 	public boolean update(Admininfo admin) {
 		return adminInfoDao.update(admin);
 	}
-	@Override
 	public boolean delete(String adminName) {
 		return adminInfoDao.delete(adminName);
 	}
-	@Override
 	public Admininfo search(String adminName) {
 		return adminInfoDao.search(adminName);
 	}

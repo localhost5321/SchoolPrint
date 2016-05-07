@@ -17,22 +17,18 @@ public class AddressServiceImpl implements AddressService {
 		this.addressDao = addressDao;
 	}
 
-	@Override
 	public boolean addOrUpdateAddress(Addressinfo address) {
 		return addressDao.addOrUpdateAddress(address);
 	}
 
-	@Override
 	public boolean deleteAddress(long addId) {
 		return addressDao.deleteAddress(addId);
 	}
 
-	@Override
 	public List<Addressinfo> getAddresses(long userId) {
 		return addressDao.getAddresses(userId);
 	}
 
-	@Override
 	public boolean changeTypes(long oldId, long newId) {
 
 		try {

@@ -30,7 +30,6 @@ public class ShopServiceImpl implements ShopService {
 	 * @param shopinfo
 	 * @return boolean 
 	 */
-	@Override
 	public boolean add(Shopinfo shopinfo) {
 		return shopinfoDao.add(shopinfo);
 	}
@@ -40,7 +39,6 @@ public class ShopServiceImpl implements ShopService {
 	 * @param shopinfo
 	 * @return boolean
 	 */
-	@Override
 	public boolean update(Shopinfo shopinfo) {
 		return shopinfoDao.update(shopinfo);
 	}
@@ -50,7 +48,6 @@ public class ShopServiceImpl implements ShopService {
 	 * @param null
 	 * @return List
 	 */
-	@Override
 	public List<Shopinfo> searchShop() {
 		return shopinfoDao.searchShop();
 	}
@@ -60,7 +57,6 @@ public class ShopServiceImpl implements ShopService {
 	 * @param shopinfo
 	 * @return boolean
 	 */
-	@Override
 	public boolean deleteShop(Shopinfo shopinfo) {
 		return shopinfoDao.deleteShop(shopinfo);
 	}
@@ -70,7 +66,6 @@ public class ShopServiceImpl implements ShopService {
 	 * @param shopName
 	 * @return shopinfo
 	 */
-	@Override
 	public Shopinfo search(String name) {
 		// TODO Auto-generated method stub
 		return shopinfoDao.search(name);
@@ -81,7 +76,6 @@ public class ShopServiceImpl implements ShopService {
 	 * @param shopId
 	 * @return list of Comments
 	 */
-	@Override
 	public List<ShopComment> getComments(Long shopId) {
 		return shopinfoDao.getComments(shopId);
 	}
@@ -91,7 +85,6 @@ public class ShopServiceImpl implements ShopService {
 	 * @param shopname
 	 * @return list of Comments
 	 */
-	@Override
 	public List<ShopComment> getComments(String shopName) {
 		return shopinfoDao.getComments(shopName);
 	}
@@ -100,7 +93,6 @@ public class ShopServiceImpl implements ShopService {
 	 * @param comment ShopName
 	 * @return boolean 
 	 */
-	@Override
 	public boolean addComment(ShopComment comment, String ShopName) {
 		return shopinfoDao.addComment(comment, ShopName);
 	}
@@ -110,7 +102,6 @@ public class ShopServiceImpl implements ShopService {
 	 * @param comment comment shopname
 	 * @return boolean
 	 */
-	@Override
 	public boolean updateComment(ShopComment comment, String ShopName) {
 		return shopinfoDao.updateComment(comment, ShopName);
 	}
@@ -120,7 +111,6 @@ public class ShopServiceImpl implements ShopService {
 	 * @param commentId
 	 * @return boolean
 	 */
-	@Override
 	public boolean daleteComment(Long commentId) {
 		return shopinfoDao.daleteComment(commentId);
 	}
@@ -130,7 +120,6 @@ public class ShopServiceImpl implements ShopService {
 	 * @param shopname
 	 * @return list
 	 */
-	@Override
 	public List<Priceinfo> getTypePrice(String shopName) {
 		return shopinfoDao.getTypePrice(shopName);
 	}
@@ -140,7 +129,6 @@ public class ShopServiceImpl implements ShopService {
 	 * @param priceinfo shopName
 	 * @return boolean
 	 */
-	@Override
 	public boolean addTypePrice(Priceinfo priceinfo, String shopName) {
 		return shopinfoDao.addTypePrice(priceinfo, shopName);
 	}
@@ -150,7 +138,6 @@ public class ShopServiceImpl implements ShopService {
 	 * @return boolean
 	 */
 
-	@Override
 	public boolean deleteTypePrice(Long priceId) {
 		return shopinfoDao.deleteTypePrice(priceId);
 	}
@@ -160,23 +147,19 @@ public class ShopServiceImpl implements ShopService {
 	 * @param priceinfo shopname
 	 * @return boolean
 	 */
-	@Override
 	public boolean updateTypePrice(Priceinfo priceinfo, String shopName) {
 		return shopinfoDao.updateTypePrice(priceinfo, shopName);
 	}
 
-	@Override
 	public List<ShopComment> getCommentsSplit(String shopName, int current,
 			int step) {
 		return shopinfoDao.getCommentsSplit(shopName, current, step);
 	}
 
-	@Override
 	public List<Orderinfo> getOrdersSplit(String shopName, int current, int step) {
 		return shopinfoDao.getOrdersSplit(shopName, current, step);
 	}
 
-	@Override
 	public double getPrice(String type, String shopName) {
 		
 		return this.getShopinfoDao().getPrice(type, shopName);

@@ -17,7 +17,6 @@ import com.schoolo2o.pojo.Shopinfo;
 public class OrderInfoDaoImpl extends HibernateDaoSupport implements OrderInfoDao {
 
 	/*增加一条订单*/
-	@Override
 	public boolean addOrder(Orderinfo order) {
 		try {
 			if(!order.getOrderstatuses().isEmpty() && !order.getOrderitems().isEmpty()){
@@ -30,7 +29,6 @@ public class OrderInfoDaoImpl extends HibernateDaoSupport implements OrderInfoDa
 		return false;
 	}
 	/*更新订单状态*/
-	@Override
 	public boolean updateStatus(Long orderId, Orderstatus status) {
 		try {
 			String hql = "from Orderstatus where orderinfo.orderId = '"+orderId+"'";
@@ -54,7 +52,6 @@ public class OrderInfoDaoImpl extends HibernateDaoSupport implements OrderInfoDa
 	}
 
 	/*根据用户名来获取用户订单*/
-	@Override
 	public List<Orderinfo> userSearch(String userName) {
 		List<Orderinfo> orderList = null;
 		try {
@@ -68,7 +65,6 @@ public class OrderInfoDaoImpl extends HibernateDaoSupport implements OrderInfoDa
 	}
 
 	/*根据商店名来获取商店订单*/
-	@Override
 	public List<Orderinfo> shopSearch(String shopName) {
 		List<Orderinfo> shopList = null;
 		try {

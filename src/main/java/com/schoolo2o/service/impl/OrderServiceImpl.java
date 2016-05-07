@@ -70,7 +70,6 @@ public class OrderServiceImpl implements OrderService {
 	 *@return boolean （是否成功）
 	 *
 	 */
-	@Override
 	public OrderSend getOrderPrice(OrderSend Osend) {
 		for(int i=0; i<Osend.getDocId().length; i++){
 			double price=Osend.getPageCount()[i] * Osend.getPrice()[i]*Osend.getFileCount()[i];
@@ -88,7 +87,6 @@ public class OrderServiceImpl implements OrderService {
 	 * ＠param 订单id ,订单状态
 	 * ＠return boolean 是否成功
 	 */
-	@Override
 	public boolean updateStatus(Long orderId, Integer status) {
 		Orderstatus ot = new Orderstatus();
 		ot.setIsCurrent(1);
@@ -104,7 +102,6 @@ public class OrderServiceImpl implements OrderService {
 	 * @return List订单列表
 	 * 
 	 */
-	@Override
 	public List<Orderinfo> userSearch(String userName) {
 		return orderInfoDao.userSearch(userName);
 	}
@@ -114,12 +111,10 @@ public class OrderServiceImpl implements OrderService {
 	 * @param　商店名
 	 * ＠return List订单列表 
 	 */
-	@Override
 	public List<Orderinfo> shopSearch(String shopName) {
 		return orderInfoDao.shopSearch(shopName);
 	}
 
-	@Override
 	public boolean saveOrder(Orderinfo orderinfo) {
 		return orderInfoDao.addOrder(orderinfo);
 	}

@@ -15,7 +15,6 @@ import com.schoolo2o.utils.Console;
  */
 public class AddressDaoImpl extends HibernateDaoSupport implements AddressDao {
 
-	@Override
 	public boolean addOrUpdateAddress(Addressinfo address) {
 		try{
 			this.getHibernateTemplate().saveOrUpdate(address);
@@ -30,7 +29,6 @@ public class AddressDaoImpl extends HibernateDaoSupport implements AddressDao {
 	/**
 	 * 删除一个地址信息
 	 */
-	@Override
 	public boolean deleteAddress(long id) {
 		try{
 			Addressinfo ai=this.getAddressById(id);
@@ -49,7 +47,6 @@ public class AddressDaoImpl extends HibernateDaoSupport implements AddressDao {
 	/**
 	 * 获得所有的地址信息
 	 */
-	@Override
 	public List<Addressinfo> getAddresses(long userId) {
 		try{
 			String hql="from Addressinfo where userinfo.userId='"+userId+"'";
@@ -65,7 +62,6 @@ public class AddressDaoImpl extends HibernateDaoSupport implements AddressDao {
 		}
 	}
 
-	@Override
 	public Addressinfo getAddressById(long addressId) {
 		try{
 			String hql="from Addressinfo where addressId='"+addressId+"'";

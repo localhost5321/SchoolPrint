@@ -28,7 +28,6 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 
 	private static final Logger log = LogManager.getLogger(ShopInfoDaoImpl.class);
 	
-	@Override
 	public boolean add(Shopinfo shopinfo) {   //添加一个商店
 		if (shopinfo != null) {
 			try {
@@ -42,7 +41,6 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 			return false;
 	}
 
-	@Override
 	public boolean update(Shopinfo shopinfo) {  //更新商店信息
 		if (shopinfo != null) {
 			try {
@@ -56,7 +54,6 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 			return false;
 	}
 
-	@Override
 	public List<Shopinfo> searchShop() { //查找所有商店,返回List
 		String hql = " from Shopinfo";
 		Session session=this.getSessionFactory().openSession();
@@ -73,7 +70,6 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 		return shopList;
 	}
 
-	@Override
 	public boolean deleteShop(Shopinfo shopinfo) {  //删除一个商店
 		if(shopinfo.getShopId() == null){
 			String hql = "from Shopinfo where shopName =  '"+shopinfo.getShopName()+"' ";
@@ -91,7 +87,6 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 		}
 	}
 
-	@Override
 	public Shopinfo search(String name) {   //根据商店名查询商店是否存在,若存在,返回商店bean,不存在,返回null
 		Shopinfo shop = null;
 		Session session=this.getSessionFactory().openSession();
@@ -112,21 +107,18 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 		
 	}
 
-	@Override
 	public List<ShopComment> getComments(Long shopId) { //根据本店id获取所有评论
 		String hql = "from ShopComment where shopinfo.shopId = '" +shopId+"' ";
 		List<ShopComment> commentList = (List<ShopComment>) this.getHibernateTemplate().find(hql); 
 		return commentList;
 	}
 	
-	@Override
 	public List<ShopComment> getComments(String shopName) {//获取店铺所有评论
 		String hql = "from ShopComment where shopinfo.shopName = '" +shopName+"' ";
 		List<ShopComment> commentList = (List<ShopComment>) this.getHibernateTemplate().find(hql); 
 		return commentList;
 	}
 	/*添加评论*/
-	@Override
 	public boolean addComment(ShopComment comment ,String ShopName) { 
 		try {
 			String hql = "from Shopinfo where shopName = " +
@@ -144,7 +136,6 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 		return false;
 	}
 
-	@Override
 	public boolean updateComment(ShopComment comment, String ShopName) { //更新评论信息
 		try {
 			String hql = "from Shopinfo where shopName = " +
@@ -160,7 +151,6 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 	}
 
 	/*删除评论信息*/
-	@Override
 	public boolean daleteComment(Long commentId) {
 		try {
 			String hql = " from ShopComment where commentId = '"+commentId+"'";
@@ -173,7 +163,6 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 		return false;
 	}
 	/*获取一个商店所有的打印类型*/
-	@Override
 	public List<Priceinfo> getTypePrice(String shopName) {
 		try {
 			String hql = "from Priceinfo where shopinfo.shopName = '"+shopName+"'";
@@ -186,7 +175,6 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 	}
 
 	/*添加一个商店的价格类目*/
-	@Override
 	public boolean addTypePrice(Priceinfo priceinfo, String shopName) {
 		try {
 			String hql = "from Shopinfo where shopName = " +
@@ -203,7 +191,6 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 		return false;
 	}
 
-	@Override
 	public boolean deleteTypePrice(Long priceId) {
 		try {
 			String hql = "from Priceinfo where priceId = '"+priceId+"'";
@@ -219,7 +206,6 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 	}
 
 	/*更新商店价格信息表,需要更新内容和店铺名字*/
-	@Override
 	public boolean updateTypePrice(Priceinfo priceinfo, String shopName) {
 		try {
 			String hql = "from Shopinfo where shopName = '"+shopName+"' ";
@@ -235,7 +221,6 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 		return false;
 	}
 
-	@Override
 	public List<ShopComment> getCommentsSplit(String shopName, int current,
 			int step) {
 		List<ShopComment> list=null;
@@ -255,7 +240,6 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 		}
 	}
 
-	@Override
 	public List<Orderinfo> getOrdersSplit(String shopName, int current, int step) {
 		List<Orderinfo> list=null;
 		Session session=this.getSessionFactory().openSession();
@@ -274,7 +258,6 @@ public class ShopInfoDaoImpl extends HibernateDaoSupport implements ShopinfoDao 
 		}
 	}
 
-	@Override
 	public double getPrice(String type, String shopName) {
 		try {
 			String hql = "from Priceinfo where shopinfo.shopName = '"+shopName+"' and " +
